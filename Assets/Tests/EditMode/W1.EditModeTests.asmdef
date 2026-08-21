@@ -1,0 +1,6 @@
+{
+  "name": "W1.EditModeTests",
+  "references": ["W1.Runtime", "Unity.InputSystem"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "includePlatforms": ["Editor"]
+}

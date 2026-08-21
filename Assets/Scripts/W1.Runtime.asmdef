@@ -1,0 +1,5 @@
+{
+  "name": "W1.Runtime",
+  "references": ["Unity.InputSystem"],
+  "autoReferenced": true
+}

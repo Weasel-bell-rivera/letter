@@ -1,0 +1,31 @@
+{
+  "name": "InputSystem_Actions",
+  "maps": [{
+    "name": "Player",
+    "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
+    "actions": [
+      {"name":"Move","type":"Value","id":"351f2ccd-1f9f-44bf-9bec-d62ac5c5f408","expectedControlType":"Axis"},
+      {"name":"Jump","type":"Button","id":"f1ba0d36-48eb-4cd5-b651-1c94a6531f70","expectedControlType":"Button"},
+      {"name":"PlaceMirror","type":"Button","id":"a1111111-1111-4111-8111-111111111111","expectedControlType":"Button"},
+      {"name":"RecallMirror","type":"Button","id":"a2222222-2222-4222-8222-222222222222","expectedControlType":"Button"},
+      {"name":"ResetRoom","type":"Button","id":"a3333333-3333-4333-8333-333333333333","expectedControlType":"Button"},
+      {"name":"Interact","type":"Button","id":"852140f2-7766-474d-8707-702459ba45f3","expectedControlType":"Button"},
+      {"name":"Pause","type":"Button","id":"a4444444-4444-4444-8444-444444444444","expectedControlType":"Button"}
+    ],
+    "bindings": [
+      {"name":"Horizontal","id":"b1000000-0000-4000-8000-000000000001","path":"1DAxis","action":"Move","isComposite":true},
+      {"name":"negative","id":"b1000000-0000-4000-8000-000000000002","path":"<Keyboard>/a","action":"Move","isPartOfComposite":true},
+      {"name":"positive","id":"b1000000-0000-4000-8000-000000000003","path":"<Keyboard>/d","action":"Move","isPartOfComposite":true},
+      {"name":"Arrows","id":"b1000000-0000-4000-8000-000000000004","path":"1DAxis","action":"Move","isComposite":true},
+      {"name":"negative","id":"b1000000-0000-4000-8000-000000000005","path":"<Keyboard>/leftArrow","action":"Move","isPartOfComposite":true},
+      {"name":"positive","id":"b1000000-0000-4000-8000-000000000006","path":"<Keyboard>/rightArrow","action":"Move","isPartOfComposite":true},
+      {"id":"b2000000-0000-4000-8000-000000000001","path":"<Keyboard>/space","action":"Jump"},
+      {"id":"b2000000-0000-4000-8000-000000000002","path":"<Mouse>/leftButton","action":"PlaceMirror"},
+      {"id":"b2000000-0000-4000-8000-000000000003","path":"<Mouse>/rightButton","action":"RecallMirror"},
+      {"id":"b2000000-0000-4000-8000-000000000004","path":"<Keyboard>/r","action":"ResetRoom"},
+      {"id":"b2000000-0000-4000-8000-000000000005","path":"<Keyboard>/e","action":"Interact"},
+      {"id":"b2000000-0000-4000-8000-000000000006","path":"<Keyboard>/escape","action":"Pause"}
+    ]
+  }],
+  "controlSchemes": [{"name":"Keyboard&Mouse","bindingGroup":"Keyboard&Mouse","devices":[{"devicePath":"<Keyboard>","isOptional":false,"isOR":false},{"devicePath":"<Mouse>","isOptional":false,"isOR":false}]}]
+}

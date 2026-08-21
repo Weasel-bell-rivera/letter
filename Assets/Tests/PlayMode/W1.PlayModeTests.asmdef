@@ -1,0 +1,5 @@
+{
+  "name": "W1.PlayModeTests",
+  "references": ["W1.Runtime", "Unity.InputSystem"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}
