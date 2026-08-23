@@ -25,6 +25,8 @@
 - 基础移动参数：`Assets/Settings/Player/DefaultPlayerMovement.asset`
 - 输入动作：`Assets/Settings/InputSystem_Actions.inputactions`
 - 角色图片目录：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Characters/Double/`
+- 放置镜图片：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Coin/coin_gold_side.png`
+- 放置镜视觉Prefab：`Assets/Prefabs/Gameplay/Mirrors/PlacedMirror.prefab`
 
 使用以下Kenney Double角色图片：
 
@@ -42,8 +44,7 @@
 
 ```text
 Player
-├─ Visual
-└─ HeldMirrorVisual（由镜子状态控制）
+└─ Visual
 ```
 
 Player根对象包含：
@@ -55,6 +56,8 @@ Player根对象包含：
 - `MirrorPlayer2D`
 
 `Visual`包含一个`SpriteRenderer`和`PlayerVisual2D`。Player和MirrorClone必须复用同一视觉尺寸、Pivot、基础Sprite轮廓和朝向规则；MirrorClone只通过透明度、颜色、材质、排序或已批准特效区分身份。
+
+Player Prefab不包含常驻的手持镜子子对象。镜子处于`Held`状态时只保留逻辑持有状态，不显示镜子；左键成功放置后由`MirrorPlayer2D`实例化统一的`PlacedMirror.prefab`，回收、死亡重置或场景切换时立即销毁该视觉。
 
 ## 固定物理与输入配置
 
@@ -168,6 +171,7 @@ Player根对象包含：
 - 从一个房间出口进入另一个房间后，旧Player销毁，新Player在目标入口生成。
 - 移动、跳跃、可变跳跃高度、朝向和动画状态正确。
 - 镜子未解锁与已解锁两种存档状态均正确恢复；放置、回收和重复放置不变。
+- `Held`和`Unobtained`状态不显示镜子，成功放置后显示`coin_gold_side`镜子视觉，回收后再次隐藏。
 - MirrorClone继续复用Player Collider、移动参数和视觉尺寸。
 - 手动重置、Player死亡、MirrorClone死亡和场景切换不残留Trigger、压力板、支撑Collider、表面速度或输入订阅。
 - Camera和RoomReset绑定新Player，不保留旧房间Player引用。

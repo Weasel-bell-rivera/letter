@@ -285,6 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: W1.Runtime::MirrorPlayer2D
   player: {fileID: 6222223618308208636}
   playerCollider: {fileID: 1482101246329654329}
-  mirrorVisualPrefab: {fileID: 0}
+  mirrorVisualPrefab: {fileID: 1000000000000000001, guid: 516f303156ad405db995691d2aeda56f, type: 3}
   heldMirrorVisual: {fileID: 0}
   initiallyUnlocked: 0

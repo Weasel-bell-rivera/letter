@@ -20,10 +20,15 @@ public sealed class MirrorPlayer2D : MonoBehaviour
     public PlacementFailure LastFailure { get; private set; }
     public MirrorCloneController2D Clone { get; private set; }
     public GameObject PlacedMirror => placedMirror;
+    public GameObject MirrorVisualPrefab => mirrorVisualPrefab;
     public GameObject HeldMirrorVisual => heldMirrorVisual;
     public bool RecallInputReady => unpairedRecallAction != null && unpairedRecallAction.enabled;
     public float RecallInputValue => unpairedRecallAction?.ReadValue<float>() ?? 0f;
-    private void Awake() => State = initiallyUnlocked || MirrorAbilityState.UnlockedThisRun ? MirrorState.Held : MirrorState.Unobtained;
+    private void Awake()
+    {
+        State = initiallyUnlocked || MirrorAbilityState.UnlockedThisRun ? MirrorState.Held : MirrorState.Unobtained;
+        RefreshHeldVisual();
+    }
     private void OnEnable()
     {
         BindInputActions();
@@ -114,6 +119,7 @@ public sealed class MirrorPlayer2D : MonoBehaviour
         rightMousePressed = nextRight;
     }
     public void Configure(PlayerController2D target) { player = target; playerCollider = target.GetComponent<BoxCollider2D>(); }
+    public void ConfigureVisualPrefab(GameObject visualPrefab) => mirrorVisualPrefab = visualPrefab;
     public void SetInitiallyUnlocked(bool unlocked) { initiallyUnlocked = unlocked; State = unlocked || MirrorAbilityState.UnlockedThisRun ? MirrorState.Held : MirrorState.Unobtained; RefreshHeldVisual(); }
     public void Unlock() { if (State == MirrorState.Unobtained) State = MirrorState.Held; RefreshHeldVisual(); }
     public void OnPlaceMirror(InputValue value) { if (value.isPressed) HandlePlaceInput(); }
@@ -178,8 +184,9 @@ public sealed class MirrorPlayer2D : MonoBehaviour
             if (surface != null && surface.kind == MirrorSurface2D.SurfaceKind.Ground) continue;
             LastFailure = PlacementFailure.Blocked; return false;
         }
-        const float mirrorHeight = 2.1f;
+        const float mirrorHeight = .6f;
         placedMirror = mirrorVisualPrefab != null ? Instantiate(mirrorVisualPrefab) : CreateVisual("Placed Mirror", new Vector2(.18f, mirrorHeight), new Color(.2f,.9f,1f,.7f));
+        placedMirror.name = "Placed Mirror";
         placedMirror.transform.SetPositionAndRotation(mirrorPosition + Vector2.up * (mirrorHeight * .5f), Quaternion.Euler(0f,0f,rotation));
         foreach (SpriteRenderer renderer in placedMirror.GetComponentsInChildren<SpriteRenderer>()) renderer.sortingOrder = 20;
         cloneObject = new GameObject("MirrorClone"); cloneObject.transform.position = clonePosition;
@@ -197,14 +204,7 @@ public sealed class MirrorPlayer2D : MonoBehaviour
     { GameObject go = new(name); go.transform.SetParent(parent, false); SpriteRenderer r = go.AddComponent<SpriteRenderer>(); r.sprite = Sprite.Create(Texture2D.whiteTexture, new Rect(0,0,1,1), new Vector2(.5f,.5f), 1f); r.color = color; go.transform.localScale = size; return go; }
     private void RefreshHeldVisual()
     {
-        if (State == MirrorState.Held && heldMirrorVisual == null)
-        {
-            heldMirrorVisual = CreateVisual("Held Mirror", new Vector2(.16f, 1.15f), new Color(.2f, .9f, 1f, .85f), transform);
-            heldMirrorVisual.transform.localPosition = new Vector3(.58f, 0f, 0f);
-            SpriteRenderer renderer = heldMirrorVisual.GetComponent<SpriteRenderer>();
-            if (renderer != null) renderer.sortingOrder = 20;
-        }
-        if (heldMirrorVisual != null) heldMirrorVisual.SetActive(State == MirrorState.Held);
+        if (heldMirrorVisual != null) heldMirrorVisual.SetActive(false);
     }
     private void OnCloneDied() { RecallImmediate(); }
     public void RecallImmediate()

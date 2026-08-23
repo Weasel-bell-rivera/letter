@@ -13,6 +13,8 @@
 Assets/Prefabs/Gameplay/
 ├─ Characters/
 │  └─ Player.prefab
+├─ Mirrors/
+│  └─ PlacedMirror.prefab
 ├─ Platforms/
 │  └─ MovingPlatform2D.prefab
 ├─ Surfaces/
@@ -37,6 +39,7 @@ Assets/Prefabs/Gameplay/
 - `VerticalWallPatrolEnemy2D.prefab`已经创建；正式房间只允许覆盖已批准的墙面侧别、竖直路径、速度、等待和视觉参数。
 - `WindRayEnemy2D.prefab`已经创建并用于`WIND_001`灰盒；统一数值已确认，仍需在Unity许可证恢复后完成独立EditMode与PlayMode测试。
 - `Player.prefab`由通用房间生成系统管理，不作为房间Scene中的重复Prefab实例；完整结构、视觉、入口绑定和生命周期规则见`docs/systems/PLAYER_PREFAB.md`。
+- `PlacedMirror.prefab`只由`MirrorPlayer2D`在成功放置时生成；`Held`和`Unobtained`状态不在Player下保留镜子视觉。
 - 静态墙壁、台阶、低顶、固定平台和返回通道使用标准Tilemap结构，不创建房间专用Prefab。
 - 固定岩浆等静态危险区使用`Hazard` Tilemap及统一危险组件，不为单个房间创建岩浆Prefab。
 - 静态寒冰地面使用`FrozenGround` Tilemap，不把单块寒冰制作成Prefab；移动寒冰平台仍使用移动平台Prefab。
@@ -46,6 +49,12 @@ Assets/Prefabs/Gameplay/
 资产路径：`Assets/Prefabs/Gameplay/Characters/Player.prefab`
 
 Player Prefab的组件结构、角色图片、入口生成、重置、场景切换和迁移规则统一见`docs/systems/PLAYER_PREFAB.md`。房间Scene只保存`RoomEntrance2D`和通用生成组件，不保存Player实例，也不得制作房间专用Player变体。
+
+## `PlacedMirror.prefab`
+
+资产路径：`Assets/Prefabs/Gameplay/Mirrors/PlacedMirror.prefab`
+
+Prefab使用`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Coin/coin_gold_side.png`，保持原始宽高比并显示在Player和MirrorClone前层。它不包含实体Collider，不作为平台或阻挡物；位置、旋转、生成、回收和销毁完全由`MirrorPlayer2D`及`docs/MIRROR_MECHANIC.md`统一控制。房间不得直接放置该Prefab，也不得覆盖镜子图片、尺寸或生命周期。
 
 ## `GroundConveyor2D.prefab`
 

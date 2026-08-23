@@ -10,6 +10,20 @@ public sealed class PlayerPrefabAssetTests
 {
     private const string PlayerPrefabPath = "Assets/Prefabs/Gameplay/Characters/Player.prefab";
     private const string RegistryPath = "Assets/Resources/PlayerPrefabRegistry.asset";
+    private const string MirrorVisualPrefabPath = "Assets/Prefabs/Gameplay/Mirrors/PlacedMirror.prefab";
+
+    [Test]
+    public void PlacedMirrorVisualUsesApprovedSpriteAndHasNoPhysicalCollider()
+    {
+        GameObject mirrorVisual = AssetDatabase.LoadAssetAtPath<GameObject>(MirrorVisualPrefabPath);
+        Assert.That(mirrorVisual, Is.Not.Null);
+        SpriteRenderer renderer = mirrorVisual.GetComponentInChildren<SpriteRenderer>(true);
+        Assert.That(renderer, Is.Not.Null);
+        Assert.That(renderer.sprite?.name, Is.EqualTo("coin_gold_side"));
+        Assert.That(renderer.sortingOrder, Is.EqualTo(20));
+        Assert.That(renderer.transform.localScale, Is.EqualTo(new Vector3(.96f, .96f, 1f)));
+        Assert.That(mirrorVisual.GetComponentsInChildren<Collider2D>(true), Is.Empty);
+    }
 
     [Test]
     public void CanonicalPrefabContainsMovementInputMirrorAndAllApprovedSprites()
@@ -20,7 +34,12 @@ public sealed class PlayerPrefabAssetTests
         Assert.That(player.GetComponent<BoxCollider2D>()?.size, Is.EqualTo(new Vector2(.8f, 1.8f)));
         Assert.That(player.GetComponent<PlayerController2D>(), Is.Not.Null);
         Assert.That(player.GetComponent<PlayerInput>()?.defaultActionMap, Is.EqualTo("Player"));
-        Assert.That(player.GetComponent<MirrorPlayer2D>(), Is.Not.Null);
+        MirrorPlayer2D mirror = player.GetComponent<MirrorPlayer2D>();
+        Assert.That(mirror, Is.Not.Null);
+        Assert.That(mirror.MirrorVisualPrefab,
+            Is.SameAs(AssetDatabase.LoadAssetAtPath<GameObject>(MirrorVisualPrefabPath)));
+        SpriteRenderer mirrorRenderer = mirror.MirrorVisualPrefab.GetComponentInChildren<SpriteRenderer>();
+        Assert.That(mirrorRenderer?.sprite?.name, Is.EqualTo("coin_gold_side"));
 
         PlayerVisual2D visual = player.GetComponentInChildren<PlayerVisual2D>(true);
         Assert.That(visual, Is.Not.Null);

@@ -12,6 +12,9 @@ public static class PlayerPrefabBuilder
 {
     public const string PlayerPrefabPath = "Assets/Prefabs/Gameplay/Characters/Player.prefab";
     public const string RegistryPath = "Assets/Resources/PlayerPrefabRegistry.asset";
+    public const string MirrorVisualPrefabPath = "Assets/Prefabs/Gameplay/Mirrors/PlacedMirror.prefab";
+    public const string MirrorSpritePath =
+        "Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Coin/coin_gold_side.png";
     public const string SpriteDirectory =
         "Assets/Art/Kenney/NewPlatformerPack/Sprites/Characters/Double";
 
@@ -24,8 +27,10 @@ public static class PlayerPrefabBuilder
     public static void BuildFromCommandLine()
     {
         EnsureDirectories();
-        ConfigureSpriteImports();
-        GameObject playerPrefab = BuildPlayerPrefab();
+        ConfigurePlayerSpriteImports();
+        ConfigureMirrorSpriteImport();
+        GameObject mirrorVisualPrefab = BuildMirrorVisualPrefab();
+        GameObject playerPrefab = BuildPlayerPrefab(mirrorVisualPrefab);
         BuildRegistry(playerPrefab);
         MigrateLevelScenes();
         AssetDatabase.SaveAssets();
@@ -33,13 +38,39 @@ public static class PlayerPrefabBuilder
         Debug.Log("Player prefab built and level scenes migrated successfully.");
     }
 
+    [MenuItem("Tools/W1/Build Mirror Visual Asset %#&m")]
+    public static void BuildMirrorVisualFromMenu()
+    {
+        EnsureDirectories();
+        ConfigureMirrorSpriteImport();
+        GameObject mirrorVisualPrefab = BuildMirrorVisualPrefab();
+        GameObject playerRoot = PrefabUtility.LoadPrefabContents(PlayerPrefabPath);
+        try
+        {
+            MirrorPlayer2D mirror = playerRoot.GetComponent<MirrorPlayer2D>();
+            Require(mirror != null, "Player.prefab is missing MirrorPlayer2D.");
+            mirror.ConfigureVisualPrefab(mirrorVisualPrefab);
+            EditorUtility.SetDirty(mirror);
+            Require(PrefabUtility.SaveAsPrefabAsset(playerRoot, PlayerPrefabPath) != null,
+                "Failed to assign the placed mirror visual to Player.prefab.");
+        }
+        finally
+        {
+            PrefabUtility.UnloadPrefabContents(playerRoot);
+        }
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        Debug.Log("Placed mirror visual built and assigned to Player.prefab.");
+    }
+
     private static void EnsureDirectories()
     {
         Directory.CreateDirectory("Assets/Prefabs/Gameplay/Characters");
+        Directory.CreateDirectory("Assets/Prefabs/Gameplay/Mirrors");
         Directory.CreateDirectory("Assets/Resources");
     }
 
-    private static void ConfigureSpriteImports()
+    private static void ConfigurePlayerSpriteImports()
     {
         foreach (string path in SpritePaths())
         {
@@ -62,7 +93,46 @@ public static class PlayerPrefabBuilder
         }
     }
 
-    private static GameObject BuildPlayerPrefab()
+    private static void ConfigureMirrorSpriteImport()
+    {
+        AssetDatabase.ImportAsset(MirrorSpritePath,
+            ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+        TextureImporter importer = AssetImporter.GetAtPath(MirrorSpritePath) as TextureImporter;
+        Require(importer != null, $"Missing mirror sprite: {MirrorSpritePath}");
+        importer.textureType = TextureImporterType.Sprite;
+        importer.spriteImportMode = SpriteImportMode.Single;
+        importer.spritePixelsPerUnit = 128f;
+        importer.spritePivot = new Vector2(.5f, .5f);
+        TextureImporterSettings textureSettings = new();
+        importer.ReadTextureSettings(textureSettings);
+        textureSettings.spriteMeshType = SpriteMeshType.FullRect;
+        importer.SetTextureSettings(textureSettings);
+        importer.mipmapEnabled = false;
+        importer.filterMode = FilterMode.Point;
+        importer.textureCompression = TextureImporterCompression.Uncompressed;
+        importer.alphaIsTransparency = true;
+        importer.SaveAndReimport();
+    }
+
+    private static GameObject BuildMirrorVisualPrefab()
+    {
+        Sprite sprite = LoadSprite(MirrorSpritePath);
+        GameObject root = new("PlacedMirror");
+        GameObject visual = new("Visual");
+        visual.transform.SetParent(root.transform, false);
+        // The source image uses a 128px transparent canvas around an 80px-high glyph.
+        // Scaling the child to .96 keeps the visible glyph at .6 units: one third of Player height.
+        visual.transform.localScale = new Vector3(.96f, .96f, 1f);
+        SpriteRenderer renderer = visual.AddComponent<SpriteRenderer>();
+        renderer.sprite = sprite;
+        renderer.sortingOrder = 20;
+        GameObject prefab = PrefabUtility.SaveAsPrefabAsset(root, MirrorVisualPrefabPath);
+        UnityEngine.Object.DestroyImmediate(root);
+        Require(prefab != null, "Failed to save PlacedMirror.prefab.");
+        return prefab;
+    }
+
+    private static GameObject BuildPlayerPrefab(GameObject mirrorVisualPrefab)
     {
         AssetDatabase.ImportAsset(MovementSettingsPath,
             ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
@@ -107,6 +177,7 @@ public static class PlayerPrefabBuilder
 
         MirrorPlayer2D mirror = root.AddComponent<MirrorPlayer2D>();
         mirror.Configure(controller);
+        mirror.ConfigureVisualPrefab(mirrorVisualPrefab);
         mirror.SetInitiallyUnlocked(false);
 
         GameObject prefab = PrefabUtility.SaveAsPrefabAsset(root, PlayerPrefabPath);

@@ -11,7 +11,28 @@ using System.Collections.Generic;
 
 public sealed class LifecyclePlayModeTests
 {
+    private readonly List<Mouse> testMice = new();
+    private readonly List<InputDevice> temporaryInputDevices = new();
+
     [SetUp] public void ResetRunState() => MirrorAbilityState.ResetForTests();
+
+    [TearDown]
+    public void RestoreInputDevices()
+    {
+        foreach (Mouse mouse in testMice)
+        {
+            if (mouse != null && mouse.added)
+                InputSystem.QueueStateEvent(mouse, new MouseState());
+        }
+        if (testMice.Count > 0) InputSystem.Update();
+        for (int i = temporaryInputDevices.Count - 1; i >= 0; i--)
+        {
+            InputDevice device = temporaryInputDevices[i];
+            if (device != null && device.added) InputSystem.RemoveDevice(device);
+        }
+        testMice.Clear();
+        temporaryInputDevices.Clear();
+    }
 
     [UnityTest] public IEnumerator ResetReturnsPlayerAndClearsVelocity()
     {
@@ -31,8 +52,40 @@ public sealed class LifecyclePlayModeTests
         Assert.That(mirror.TryPlace(), Is.False); Assert.That(mirror.LastFailure, Is.EqualTo(MirrorPlayer2D.PlacementFailure.NotUnlocked));
         Assert.That(pickup.TryCollect(controller), Is.True); Assert.That(MirrorAbilityState.UnlockedThisRun, Is.True);
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
-        Assert.That(mirror.HeldMirrorVisual, Is.Not.Null); Assert.That(mirror.HeldMirrorVisual.activeSelf, Is.True);
+        AssertHeldMirrorHidden(mirror);
         Object.Destroy(ground); Object.Destroy(player); Object.Destroy(pickupObject);
+    }
+
+    [UnityTest] public IEnumerator HeldMirrorStaysHiddenUntilSuccessfulPlacementAndHidesAgainOnRecall()
+    {
+        GameObject ground = new("Ground");
+        ground.transform.position = new Vector3(0f, -1.4f, 0f);
+        ground.AddComponent<BoxCollider2D>().size = new Vector2(8f, 1f);
+        ground.AddComponent<MirrorSurface2D>();
+
+        GameObject player = new("Player");
+        player.AddComponent<BoxCollider2D>().size = new Vector2(.8f, 1.8f);
+        player.AddComponent<Rigidbody2D>();
+        PlayerController2D controller = player.AddComponent<PlayerController2D>();
+        MirrorPlayer2D mirror = player.AddComponent<MirrorPlayer2D>();
+        mirror.Configure(controller);
+        mirror.SetInitiallyUnlocked(true);
+
+        Physics2D.SyncTransforms();
+        yield return new WaitForFixedUpdate();
+        Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
+        AssertHeldMirrorHidden(mirror);
+        Assert.That(mirror.TryPlace(), Is.True, mirror.LastFailure.ToString());
+        Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Placed));
+        Assert.That(mirror.PlacedMirror, Is.Not.Null);
+        Assert.That(mirror.PlacedMirror.activeSelf, Is.True);
+
+        mirror.RecallImmediate();
+        Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
+        Assert.That(mirror.PlacedMirror, Is.Null);
+        AssertHeldMirrorHidden(mirror);
+        Object.Destroy(ground);
+        Object.Destroy(player);
     }
 
     [UnityTest] public IEnumerator PermanentPickupCannotRewardTwice()
@@ -192,7 +245,9 @@ public sealed class LifecyclePlayModeTests
         Assert.That(cloneRenderer.bounds.size.x, Is.EqualTo(playerRenderer.bounds.size.x).Within(.001f));
         Assert.That(cloneRenderer.bounds.size.y, Is.EqualTo(playerRenderer.bounds.size.y).Within(.001f));
         SpriteRenderer mirrorRenderer = mirror.PlacedMirror.GetComponentInChildren<SpriteRenderer>();
-        Assert.That(mirrorRenderer.bounds.min.y, Is.EqualTo(player.GetComponent<BoxCollider2D>().bounds.min.y).Within(.02f));
+        Assert.That(mirrorRenderer.sprite.name, Is.EqualTo("coin_gold_side"));
+        Assert.That(mirror.PlacedMirror.transform.position.y - .3f,
+            Is.EqualTo(player.GetComponent<BoxCollider2D>().bounds.min.y).Within(.02f));
         Assert.That(mirror.TryPlace(), Is.False);
         mirror.RecallImmediate();
         yield return null;
@@ -212,17 +267,14 @@ public sealed class LifecyclePlayModeTests
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
         Assert.That(mirror.Clone, Is.Null); Assert.That(mirror.PlacedMirror, Is.Null);
         Assert.That(clone.activeSelf, Is.False); Assert.That(placedMirror.activeSelf, Is.False);
-        Assert.That(mirror.HeldMirrorVisual, Is.Not.Null); Assert.That(mirror.HeldMirrorVisual.activeSelf, Is.True);
+        AssertHeldMirrorHidden(mirror);
         yield return null;
     }
 
     [UnityTest] public IEnumerator RecallActionRightMouseReturnsMirrorToHeldState()
     {
         UnlockMirrorForTests();
-        List<InputDevice> oldMice = new();
-        foreach (InputDevice device in InputSystem.devices) if (device is Mouse) oldMice.Add(device);
-        foreach (InputDevice device in oldMice) InputSystem.RemoveDevice(device);
-        Mouse mouse = InputSystem.AddDevice<Mouse>();
+        Mouse mouse = GetTestMouse();
         SceneManager.LoadScene("Fire_001"); yield return new WaitForFixedUpdate(); yield return new WaitForFixedUpdate();
         MirrorPlayer2D mirror = Object.FindFirstObjectByType<MirrorPlayer2D>();
         Assert.That(mirror.TryPlace(), Is.True, mirror.LastFailure.ToString());
@@ -236,23 +288,21 @@ public sealed class LifecyclePlayModeTests
         yield return null;
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
         Assert.That(mirror.Clone, Is.Null); Assert.That(mirror.PlacedMirror, Is.Null);
-        Assert.That(mirror.HeldMirrorVisual, Is.Not.Null); Assert.That(mirror.HeldMirrorVisual.activeSelf, Is.True);
+        AssertHeldMirrorHidden(mirror);
         InputSystem.QueueStateEvent(mouse, new MouseState()); InputSystem.Update();
     }
 
     [UnityTest] public IEnumerator PlaceActionLeftMouseCreatesMirrorClone()
     {
         UnlockMirrorForTests();
-        List<InputDevice> oldMice = new();
-        foreach (InputDevice device in InputSystem.devices) if (device is Mouse) oldMice.Add(device);
-        foreach (InputDevice device in oldMice) InputSystem.RemoveDevice(device);
-        Mouse mouse = InputSystem.AddDevice<Mouse>();
+        Mouse mouse = GetTestMouse();
         SceneManager.LoadScene("Fire_001");
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
 
         MirrorPlayer2D mirror = Object.FindFirstObjectByType<MirrorPlayer2D>();
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
+        AssertHeldMirrorHidden(mirror);
 
         InputSystem.QueueStateEvent(mouse, new MouseState());
         InputSystem.Update();
@@ -265,6 +315,8 @@ public sealed class LifecyclePlayModeTests
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Placed), mirror.LastFailure.ToString());
         Assert.That(mirror.Clone, Is.Not.Null);
         Assert.That(mirror.PlacedMirror, Is.Not.Null);
+        Assert.That(mirror.PlacedMirror.GetComponentInChildren<SpriteRenderer>().sprite.name,
+            Is.EqualTo("coin_gold_side"));
         InputSystem.QueueStateEvent(mouse, new MouseState());
         InputSystem.Update();
         mirror.RecallImmediate();
@@ -276,5 +328,23 @@ public sealed class LifecyclePlayModeTests
         data.unlockedAbilities.Add(SaveIds.MirrorAbility);
         data.collectedPermanentIds.Add(SaveIds.MirrorPickup);
         SaveService.Instance.ReplaceStateForTests(data);
+    }
+
+    private Mouse GetTestMouse()
+    {
+        Mouse mouse = Mouse.current;
+        if (mouse == null)
+        {
+            mouse = InputSystem.AddDevice<Mouse>();
+            temporaryInputDevices.Add(mouse);
+        }
+        testMice.Add(mouse);
+        return mouse;
+    }
+
+    private static void AssertHeldMirrorHidden(MirrorPlayer2D mirror)
+    {
+        Assert.That(mirror.HeldMirrorVisual == null || !mirror.HeldMirrorVisual.activeSelf, Is.True,
+            "Held mirror must remain visually hidden until a successful placement.");
     }
 }
