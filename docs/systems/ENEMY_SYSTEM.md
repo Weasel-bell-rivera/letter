@@ -6,8 +6,10 @@
 - 本文定义敌人的通用状态、移动、碰撞、伤害、冻结、重置和场景切换规则。
 - 雪区寒冰地面的区域规则见`docs/regions/SNOW_REGION.md`。
 - 风区逐风鳐的详细规则见`docs/systems/WIND_RAY_ENEMY.md`。
+- 运行时创建敌人时，出生点、Spawner、房间注册、空间安全、重置和场景卸载规则见`docs/systems/ENEMY_SPAWN_SYSTEM.md`。
 - Prefab结构和可配置字段见`docs/systems/GAMEPLAY_PREFAB_CATALOG.md`。
 - 具体房间只配置敌人实例，不得重新定义通用敌人行为。
+- 现有直接放置在Scene中的固定敌人不要求迁移到出生点系统；敌人出生点只管理出生空间，不定义敌人行为或死亡条件。
 
 ## 已批准敌人类型
 

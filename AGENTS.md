@@ -157,6 +157,18 @@ PROJECT_PATH="$(git rev-parse --show-toplevel)"
 - Scene与房间文档不一致时，必须同步更新。
 - 新房间先按 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md` 使用标准Tilemap结构完成静态地形灰盒，动态玩法对象使用基础Sprite和通用Prefab验证，再添加正式美术。
 
+## Enemy spawning
+
+- 设计或实现包含运行时生成敌人的房间前，必须阅读`docs/systems/ENEMY_SPAWN_SYSTEM.md`。
+- 房间文档必须区分直接放置在Scene中的固定敌人Prefab实例，以及通过Spawner运行时创建的敌人。
+- 使用Spawner时，房间文档必须分别记录：
+  - `SpawnPointId`、网格位置、出生Pose和安全空间。
+  - `SpawnerId`、敌人Prefab或定义、出生点引用、生成条件、重生策略、数量上限和出生点被占用时的处理。
+- `EnemySpawnPoint2D`只定义敌人的出生ID与Pose，不得包含敌人行为、死亡条件、计时、波次或重生策略。
+- 不得通过Tile、Sprite、GameObject、Tilemap名称、房间编号或Collider边界推断敌人出生点。
+- 固定Scene敌人不要求为了统一形式迁移到Spawner。
+- 生成条件、重生策略或重置结果仍标记为“待确定”或“待确认”时，不得自行选择方案或开始对应房间实现。
+
 ## Level geometry and Tilemap
 
 - 关卡几何、Tilemap分层、碰撞和表面语义以 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md` 为权威来源。
