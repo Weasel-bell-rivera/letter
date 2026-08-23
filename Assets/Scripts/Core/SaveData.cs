@@ -15,6 +15,7 @@ public sealed class SaveData
     public List<string> collectedPermanentIds = new();
     public List<string> completedRoomIds = new();
     public List<string> unlockedRegionIds = new();
+    public List<string> latchedDoorGroupIds = new();
     public List<RegionProgressData> regionProgress = new();
     public List<string> progressionFlags = new();
 
@@ -44,11 +45,15 @@ public static class SaveIds
     public const string MirrorPickup = "CENTER_001:ABILITY:01";
     public const string DefaultRoom = "CENTER_001";
     public const string DefaultEntrance = "DEFAULT";
+    public const string Fire007DoorGroup = "FIRE_007:DOOR_GROUP:01";
+    public const string Fire008DoorGroup01 = "FIRE_008:DOOR_GROUP:01";
+    public const string Fire008DoorGroup02 = "FIRE_008:DOOR_GROUP:02";
+    public const string Fire008DoorGroup03 = "FIRE_008:DOOR_GROUP:03";
 }
 
 public static class SaveDataMigration
 {
-    public const int CurrentSchemaVersion = 1;
+    public const int CurrentSchemaVersion = 2;
 
     public static bool TryMigrate(SaveData data, out bool changed, out string error)
     {
@@ -66,12 +71,18 @@ public static class SaveDataMigration
             data.schemaVersion = 1;
             changed = true;
         }
+        if (data.schemaVersion == 1)
+        {
+            data.schemaVersion = 2;
+            changed = true;
+        }
 
         EnsureCollections(data);
         changed |= NormalizeSet(data.unlockedAbilities);
         changed |= NormalizeSet(data.collectedPermanentIds);
         changed |= NormalizeSet(data.completedRoomIds);
         changed |= NormalizeSet(data.unlockedRegionIds);
+        changed |= NormalizeSet(data.latchedDoorGroupIds);
         changed |= NormalizeSet(data.progressionFlags);
 
         bool hasAbility = data.unlockedAbilities.Contains(SaveIds.MirrorAbility);
@@ -105,6 +116,7 @@ public static class SaveDataMigration
         data.collectedPermanentIds ??= new List<string>();
         data.completedRoomIds ??= new List<string>();
         data.unlockedRegionIds ??= new List<string>();
+        data.latchedDoorGroupIds ??= new List<string>();
         data.regionProgress ??= new List<RegionProgressData>();
         data.progressionFlags ??= new List<string>();
     }

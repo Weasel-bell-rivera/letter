@@ -30,6 +30,15 @@ Center是游戏教学区，`CENTER_001`是新游戏开始时的起点房间。
 
 - 正式房间采用“一房间一Unity Scene”。
 - 场景路径遵循 `Assets/Scenes/Levels/<Region>/<RoomId>.unity`。
+- 正式内容采用“Tilemap静态地形与Prefab动态玩法对象”组合的房间架构；现有原型可以在迁移完成前保留当前灰盒实现。
+- Tilemap分层、碰撞、表面语义和动态玩法对象的职责边界以 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md` 为准。
+- 每份正式房间设计文档必须列出该房间使用的通用Prefab及实例配置；所需Prefab尚不存在时，必须先实现并验证通用Prefab，再将其实例加入房间Scene。
 - 统一的房间加载器负责入口、出口、场景切换和目标房间生成点。
 - 房间Scene只配置房间实例和通用Prefab，不复制玩家、镜子、存档或全局状态系统。
 - 场景切换时遵循 `docs/systems/RESET_SYSTEM.md`，不携带已放置镜子、镜像或临时机关状态。
+
+## 相机与玩法信息
+
+镜头首先服务于玩法信息传达。常规情况下，Player可见主体高度约占`16:9`屏幕高度的`12%–14%`。镜头必须为环境观察、跳跃路线以及Player与MirrorClone的同时控制提供足够空间。
+
+镜头比例、跟随构图、房间相机边界、固定单屏构图、死亡重置和场景切换规则以`docs/systems/CAMERA_SYSTEM.md`为权威来源。

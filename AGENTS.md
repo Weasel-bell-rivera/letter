@@ -85,11 +85,42 @@
 
 # Commands
 
-- Unity version: `6000.5.8f1`
-- Unity executable: `/Applications/Unity/Hub/Editor/6000.5.8f1/Unity.app/Contents/MacOS/Unity`
-- Batch compile check: `"/Applications/Unity/Hub/Editor/6000.5.8f1/Unity.app/Contents/MacOS/Unity" -batchmode -nographics -quit -projectPath /Users/liuxingliang/W1 -logFile /tmp/w1-unity-compile.log`
-- EditMode tests: `"/Applications/Unity/Hub/Editor/6000.5.8f1/Unity.app/Contents/MacOS/Unity" -batchmode -nographics -quit -projectPath /Users/liuxingliang/W1 -runTests -testPlatform EditMode -testResults /tmp/w1-editmode-results.xml -logFile /tmp/w1-editmode.log`
-- PlayMode tests: `"/Applications/Unity/Hub/Editor/6000.5.8f1/Unity.app/Contents/MacOS/Unity" -batchmode -nographics -quit -projectPath /Users/liuxingliang/W1 -runTests -testPlatform PlayMode -testResults /tmp/w1-playmode-results.xml -logFile /tmp/w1-playmode.log`
+- Unity version: `6000.5.7f1`（以 `ProjectSettings/ProjectVersion.txt` 为准）
+- 项目路径不得写死为某台机器的绝对路径；运行命令时从Git仓库根目录解析。
+
+### Windows PowerShell
+
+```powershell
+$UnityEditor = 'D:\03_Game\20_Unity\0_Editor\6000.5.7f1\Editor\Unity.exe'
+$ProjectPath = (Resolve-Path (git rev-parse --show-toplevel)).Path
+
+# Batch compile check
+& $UnityEditor -batchmode -nographics -quit -projectPath $ProjectPath -logFile "$env:TEMP\letter-unity-compile.log"
+
+# EditMode tests
+& $UnityEditor -batchmode -nographics -quit -projectPath $ProjectPath -runTests -testPlatform EditMode -testResults "$env:TEMP\letter-editmode-results.xml" -logFile "$env:TEMP\letter-editmode.log"
+
+# PlayMode tests
+& $UnityEditor -batchmode -nographics -quit -projectPath $ProjectPath -runTests -testPlatform PlayMode -testResults "$env:TEMP\letter-playmode-results.xml" -logFile "$env:TEMP\letter-playmode.log"
+```
+
+### macOS shell
+
+```bash
+UNITY_EDITOR="/Applications/Unity/Hub/Editor/6000.5.7f1/Unity.app/Contents/MacOS/Unity"
+PROJECT_PATH="$(git rev-parse --show-toplevel)"
+
+# Batch compile check
+"$UNITY_EDITOR" -batchmode -nographics -quit -projectPath "$PROJECT_PATH" -logFile /tmp/letter-unity-compile.log
+
+# EditMode tests
+"$UNITY_EDITOR" -batchmode -nographics -quit -projectPath "$PROJECT_PATH" -runTests -testPlatform EditMode -testResults /tmp/letter-editmode-results.xml -logFile /tmp/letter-editmode.log
+
+# PlayMode tests
+"$UNITY_EDITOR" -batchmode -nographics -quit -projectPath "$PROJECT_PATH" -runTests -testPlatform PlayMode -testResults /tmp/letter-playmode-results.xml -logFile /tmp/letter-playmode.log
+```
+
+如果某台机器没有安装在上述默认位置，只调整该平台命令中的 `UnityEditor` 或 `UNITY_EDITOR` 本地变量，不修改Unity项目版本。
 
 # Definition of done
 任务只有在满足以下条件时才算完成：
@@ -124,11 +155,31 @@
   对应 `docs/rooms/fire/FIRE_012.md`。
 - 实现房间前，必须阅读对应的区域文档和房间文档。
 - Scene与房间文档不一致时，必须同步更新。
-- 新房间先使用基础Sprite和Collider完成灰盒验证，再添加正式美术。
+- 新房间先按 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md` 使用标准Tilemap结构完成静态地形灰盒，动态玩法对象使用基础Sprite和通用Prefab验证，再添加正式美术。
+
+## Level geometry and Tilemap
+
+- 关卡几何、Tilemap分层、碰撞和表面语义以 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md` 为权威来源。
+- 创建或修改正式房间的静态地形前，必须阅读该文档。
+- 正式房间采用Tilemap静态地形与Prefab动态玩法对象组合的架构；现有原型允许按权威文档规定逐步迁移。
+- 动态玩法对象的类型不局限于当前已有机关；凡具有运行时状态、交互、移动、重置、生命周期或持久化行为的对象，原则上使用通用组件和Prefab实现。
+- 不得根据Tile名称、Sprite名称、GameObject名称、具体Tilemap名称或房间编号推断碰撞、危险或镜子放置规则。
+- 新增运行时修改Tilemap的机制前，必须先明确其碰撞、表面语义、镜子与镜像交互、重置、存档和场景切换规则，并更新权威设计文档及测试。
+- 不得为了单个房间直接修改Tilemap来实现未批准的全局或区域机制。
+
+## Camera system
+
+- 镜头比例、跟随构图、房间相机边界、固定单屏构图、重置和场景切换规则以`docs/systems/CAMERA_SYSTEM.md`为权威来源。
+- 设计或实现正式房间、修改相机组件或调整房间镜头前，必须阅读该文档。
+- 每个正式房间文档必须记录镜头模式、相机可显示边界、必须同时可见的玩法对象和经过批准的例外。
+- 相机边界必须显式配置，不得根据Tile名称、Tilemap名称、GameObject名称或房间编号推断。
+- 不得在单个房间脚本中复制或修改通用相机行为，不得通过改变Player尺寸满足房间构图。
+- 修改通用相机规则时，必须同步更新权威文档和相关测试，并验证Player、MirrorClone、死亡重置、房间边缘停止跟随和场景切换。
 
 ## Player movement
 
 - 玩家移动设计标准见 `docs/PLAYER_MOVEMENT.md`。
+- Player Prefab结构、视觉资源、房间生成和场景切换生命周期见 `docs/systems/PLAYER_PREFAB.md`；修改Player Prefab、入口或生成系统前必须阅读该文档。
 - 实际移动参数保存在
   `Assets/Settings/Player/DefaultPlayerMovement.asset`。
 - 不得在具体房间Scene、Prefab或机关脚本中复制或覆盖基础移动参数。

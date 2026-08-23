@@ -3,7 +3,8 @@
 ## 基础单位
 
 - 1个标准地形格为1×1 Unity unit。
-- 地面和墙壁优先使用Grid与Tilemap搭建。
+- 正式房间的静态地面、墙壁和固定平台必须使用标准Grid与Tilemap搭建；现有原型仅可在迁移完成前暂时保留Sprite与独立Collider灰盒。
+- Tilemap分层、碰撞、表面语义以及动态玩法对象的职责边界以 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md` 为准。
 - 玩家尺寸、跳跃高度和通道宽度必须使用同一套尺度。
 - 玩家Collider宽度为：`0.8 Unity unit`。
 - 玩家Collider高度为：`1.8 Unity units`。

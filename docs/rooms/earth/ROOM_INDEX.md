@@ -4,7 +4,7 @@
 
 | 房间 | 状态 | 设计文档 | Unity Scene | 主要目标 |
 |---|---|---|---|---|
-| EARTH_001 | 占位 | `docs/rooms/earth/EARTH_001.md` | 尚未创建 | 待设计 |
+| EARTH_001 | 灰盒已创建，待试玩 | `docs/rooms/earth/EARTH_001.md` | `Assets/Scenes/Levels/Earth/Earth_001.unity` | 观察竖直爬墙敌人并验证通用Prefab |
 | EARTH_002 | 占位 | `docs/rooms/earth/EARTH_002.md` | 尚未创建 | 待设计 |
 | EARTH_003 | 占位 | `docs/rooms/earth/EARTH_003.md` | 尚未创建 | 待设计 |
 | EARTH_004 | 占位 | `docs/rooms/earth/EARTH_004.md` | 尚未创建 | 待设计 |

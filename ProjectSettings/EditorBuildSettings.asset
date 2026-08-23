@@ -9,10 +9,28 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Fire/Fire_001.unity
     guid: 8c0064976cbab4baeb94e0fa0a1e8ac4
   - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_007.unity
+    guid: ae2aec0dcc6f60b4f92089fee9e62d12
+  - enabled: 1
     path: Assets/Scenes/Levels/Center/Center_001.unity
     guid: cff64aa8db0604f8193b214c56a6b6e2
   - enabled: 1
     path: Assets/Scenes/Levels/Center/Center_002.unity
     guid: 300afb6b91037401f855bb5d9ffc62af
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_008.unity
+    guid: 1fda1bfbf057ccb49807483e4e82254b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_001.unity
+    guid: 7cebb8f8c26d3074aa08987eeb2154a3
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_002.unity
+    guid: 85a9232097f076f47aeb1a409a39a809
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_001.unity
+    guid: 98152cb6c03b88b438d97394a032e4ad
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_001.unity
+    guid: 43590f5c3ba047743a0906e6d7b90675
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -9,11 +9,12 @@ public sealed class MirrorAbilityPickup2D : PermanentPickup2D
     {
         Configure(SaveIds.MirrorPickup, PermanentPickupType.Ability, SaveIds.MirrorAbility);
         base.Awake();
-        if (mirror == null) mirror = FindFirstObjectByType<MirrorPlayer2D>();
+        if (mirror == null) mirror = FindAnyObjectByType<MirrorPlayer2D>();
     }
 
     protected override void Start()
     {
+        ResolveMirror();
         if (MirrorAbilityState.UnlockedThisRun) mirror?.Unlock();
         base.Start();
     }
@@ -23,5 +24,14 @@ public sealed class MirrorAbilityPickup2D : PermanentPickup2D
         return base.TryCollect(player);
     }
 
-    protected override void ApplyReward(PlayerController2D player) => mirror?.Unlock();
+    protected override void ApplyReward(PlayerController2D player)
+    {
+        ResolveMirror();
+        mirror?.Unlock();
+    }
+
+    private void ResolveMirror()
+    {
+        if (mirror == null) mirror = FindAnyObjectByType<MirrorPlayer2D>();
+    }
 }

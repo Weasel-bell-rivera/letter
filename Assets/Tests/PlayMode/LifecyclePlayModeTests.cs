@@ -62,11 +62,110 @@ public sealed class LifecyclePlayModeTests
     [UnityTest] public IEnumerator Center001LoadsLockedAndExitsToCenter002AfterPickup()
     {
         SceneManager.LoadScene("Center_001"); yield return null; yield return new WaitForFixedUpdate();
+        MirrorSurface2D[] grounds = Object.FindObjectsByType<MirrorSurface2D>(FindObjectsSortMode.None);
+        Assert.That(grounds, Has.Length.EqualTo(1), "CENTER_001 must use one continuous active ground.");
+        BoxCollider2D groundCollider = grounds[0].GetComponent<BoxCollider2D>();
+        Assert.That(groundCollider.bounds.min.x, Is.LessThanOrEqualTo(-14f));
+        Assert.That(groundCollider.bounds.max.x, Is.GreaterThanOrEqualTo(14f));
         MirrorPlayer2D mirror = Object.FindFirstObjectByType<MirrorPlayer2D>(); MirrorAbilityPickup2D pickup = Object.FindFirstObjectByType<MirrorAbilityPickup2D>();
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Unobtained));
         Assert.That(pickup.TryCollect(Object.FindFirstObjectByType<PlayerController2D>()), Is.True);
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
         RoomExit2D exit = Object.FindFirstObjectByType<RoomExit2D>(); Assert.That(exit.TargetScene, Is.EqualTo("Center_002"));
+    }
+
+    [UnityTest] public IEnumerator Center001PlayerCanJumpAfterMirrorPickup()
+    {
+        InputSettings.BackgroundBehavior previousBackgroundBehavior = InputSystem.settings.backgroundBehavior;
+        InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+        Keyboard keyboard = Keyboard.current;
+        bool addedKeyboard = keyboard == null;
+        if (addedKeyboard) keyboard = InputSystem.AddDevice<Keyboard>();
+        Mouse mouse = Mouse.current;
+        bool addedMouse = mouse == null;
+        if (addedMouse) mouse = InputSystem.AddDevice<Mouse>();
+
+        SceneManager.LoadScene("Center_001");
+        yield return null;
+        yield return new WaitForFixedUpdate();
+
+        PlayerController2D player = Object.FindFirstObjectByType<PlayerController2D>();
+        MirrorAbilityPickup2D pickup = Object.FindFirstObjectByType<MirrorAbilityPickup2D>();
+        Assert.That(player.IsGroundedNow, Is.True, "Player must start grounded for the jump regression check.");
+        PressJump(keyboard);
+        yield return new WaitForFixedUpdate();
+        ReleaseJump(keyboard);
+        player.TeleportTo(new Vector3(-13f, -2.1f, 0f));
+        Physics2D.SyncTransforms();
+        yield return new WaitForFixedUpdate();
+
+        Assert.That(pickup.TryCollect(player), Is.True);
+        int jumpSequenceBefore = player.JumpSequence;
+        PressJump(keyboard);
+        yield return new WaitForFixedUpdate();
+
+        Assert.That(player.JumpSequence, Is.EqualTo(jumpSequenceBefore + 1));
+        Assert.That(player.GetComponent<Rigidbody2D>().linearVelocity.y, Is.GreaterThan(0f));
+
+        ReleaseJump(keyboard);
+        if (addedKeyboard) InputSystem.RemoveDevice(keyboard);
+        if (addedMouse) InputSystem.RemoveDevice(mouse);
+        InputSystem.settings.backgroundBehavior = previousBackgroundBehavior;
+    }
+
+    [UnityTest] public IEnumerator Center001PlayerCanJumpAfterTriggerPickupAndMirrorPlacement()
+    {
+        InputSettings.BackgroundBehavior previousBackgroundBehavior = InputSystem.settings.backgroundBehavior;
+        InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+        Keyboard keyboard = Keyboard.current;
+        bool addedKeyboard = keyboard == null;
+        if (addedKeyboard) keyboard = InputSystem.AddDevice<Keyboard>();
+        Mouse mouse = Mouse.current;
+        bool addedMouse = mouse == null;
+        if (addedMouse) mouse = InputSystem.AddDevice<Mouse>();
+
+        SceneManager.LoadScene("Center_001");
+        yield return null;
+        yield return new WaitForFixedUpdate();
+
+        PlayerController2D player = Object.FindFirstObjectByType<PlayerController2D>();
+        MirrorPlayer2D mirror = Object.FindFirstObjectByType<MirrorPlayer2D>();
+        MirrorAbilityPickup2D pickup = Object.FindFirstObjectByType<MirrorAbilityPickup2D>();
+        player.TeleportTo(pickup.transform.position);
+        Physics2D.SyncTransforms();
+        yield return new WaitForFixedUpdate();
+        Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
+
+        player.TeleportTo(new Vector3(5f, -2.1f, 0f));
+        Physics2D.SyncTransforms();
+        yield return new WaitForFixedUpdate();
+        Assert.That(player.IsGroundedNow, Is.True);
+        Assert.That(mirror.TryPlace(), Is.True, mirror.LastFailure.ToString());
+
+        int playerJumpBefore = player.JumpSequence;
+        PressJump(keyboard);
+        yield return new WaitForFixedUpdate();
+
+        Assert.That(player.JumpSequence, Is.EqualTo(playerJumpBefore + 1));
+        Assert.That(player.GetComponent<Rigidbody2D>().linearVelocity.y, Is.GreaterThan(0f));
+
+        ReleaseJump(keyboard);
+        mirror.RecallImmediate();
+        if (addedKeyboard) InputSystem.RemoveDevice(keyboard);
+        if (addedMouse) InputSystem.RemoveDevice(mouse);
+        InputSystem.settings.backgroundBehavior = previousBackgroundBehavior;
+    }
+
+    private static void PressJump(Keyboard keyboard)
+    {
+        InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.Space));
+        InputSystem.Update();
+    }
+
+    private static void ReleaseJump(Keyboard keyboard)
+    {
+        InputSystem.QueueStateEvent(keyboard, new KeyboardState());
+        InputSystem.Update();
     }
     [UnityTest] public IEnumerator HazardKillsCloneWithoutDestroyingPlayer()
     {
@@ -78,6 +177,7 @@ public sealed class LifecyclePlayModeTests
 
     [UnityTest] public IEnumerator Fire001LoadsAndMirrorRejectsRepeatedPlacement()
     {
+        UnlockMirrorForTests();
         SceneManager.LoadScene("Fire_001");
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
@@ -103,6 +203,7 @@ public sealed class LifecyclePlayModeTests
 
     [UnityTest] public IEnumerator RecallImmediatelyDisablesCloneAndMirrorVisual()
     {
+        UnlockMirrorForTests();
         SceneManager.LoadScene("Fire_001"); yield return new WaitForFixedUpdate(); yield return new WaitForFixedUpdate();
         MirrorPlayer2D mirror = Object.FindFirstObjectByType<MirrorPlayer2D>();
         Assert.That(mirror.TryPlace(), Is.True, mirror.LastFailure.ToString());
@@ -117,6 +218,7 @@ public sealed class LifecyclePlayModeTests
 
     [UnityTest] public IEnumerator RecallActionRightMouseReturnsMirrorToHeldState()
     {
+        UnlockMirrorForTests();
         List<InputDevice> oldMice = new();
         foreach (InputDevice device in InputSystem.devices) if (device is Mouse) oldMice.Add(device);
         foreach (InputDevice device in oldMice) InputSystem.RemoveDevice(device);
@@ -136,5 +238,43 @@ public sealed class LifecyclePlayModeTests
         Assert.That(mirror.Clone, Is.Null); Assert.That(mirror.PlacedMirror, Is.Null);
         Assert.That(mirror.HeldMirrorVisual, Is.Not.Null); Assert.That(mirror.HeldMirrorVisual.activeSelf, Is.True);
         InputSystem.QueueStateEvent(mouse, new MouseState()); InputSystem.Update();
+    }
+
+    [UnityTest] public IEnumerator PlaceActionLeftMouseCreatesMirrorClone()
+    {
+        UnlockMirrorForTests();
+        List<InputDevice> oldMice = new();
+        foreach (InputDevice device in InputSystem.devices) if (device is Mouse) oldMice.Add(device);
+        foreach (InputDevice device in oldMice) InputSystem.RemoveDevice(device);
+        Mouse mouse = InputSystem.AddDevice<Mouse>();
+        SceneManager.LoadScene("Fire_001");
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
+
+        MirrorPlayer2D mirror = Object.FindFirstObjectByType<MirrorPlayer2D>();
+        Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
+
+        InputSystem.QueueStateEvent(mouse, new MouseState());
+        InputSystem.Update();
+        yield return null;
+        InputSystem.QueueStateEvent(mouse, new MouseState().WithButton(MouseButton.Left));
+        InputSystem.Update();
+        Assert.That(mouse.leftButton.isPressed, Is.True, "Synthetic left mouse state was not applied.");
+        yield return null;
+
+        Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Placed), mirror.LastFailure.ToString());
+        Assert.That(mirror.Clone, Is.Not.Null);
+        Assert.That(mirror.PlacedMirror, Is.Not.Null);
+        InputSystem.QueueStateEvent(mouse, new MouseState());
+        InputSystem.Update();
+        mirror.RecallImmediate();
+    }
+
+    private static void UnlockMirrorForTests()
+    {
+        SaveData data = SaveData.CreateNew();
+        data.unlockedAbilities.Add(SaveIds.MirrorAbility);
+        data.collectedPermanentIds.Add(SaveIds.MirrorPickup);
+        SaveService.Instance.ReplaceStateForTests(data);
     }
 }

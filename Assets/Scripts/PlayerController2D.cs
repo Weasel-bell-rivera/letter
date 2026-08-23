@@ -14,6 +14,10 @@ public sealed class PlayerController2D : MonoBehaviour
     private float lastJumpPressed = float.NegativeInfinity;
     private bool jumpHeld;
     private bool controlEnabled = true;
+    private InputAction jumpAction;
+    private Collider2D supportCollider;
+    private Collider2D surfaceMotionCollider;
+    private Vector2 appliedSurfaceVelocity;
     public float HorizontalInput => input;
     public bool JumpHeld => jumpHeld;
     public int JumpSequence { get; private set; }
@@ -22,13 +26,17 @@ public sealed class PlayerController2D : MonoBehaviour
     public Transform VisualRoot => visualRoot;
     public bool FacingRight { get; private set; } = true;
     public bool IsGroundedNow => IsGrounded(Vector2.down);
+    public bool IsOnFrozenGround => IsGroundedOnFrozenSurface(Vector2.down);
     public bool ControlEnabled => controlEnabled;
+    public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>(); bodyCollider = GetComponent<BoxCollider2D>(); body.freezeRotation = true; body.gravityScale = 0f;
         NormalizeVisualToCollider();
     }
+    private void OnEnable() => BindJumpAction();
+    private void Start() => BindJumpAction();
     public void Configure(Transform visual, PlayerMovementSettings movement) { visualRoot = visual; settings = movement; }
     private void NormalizeVisualToCollider()
     {
@@ -39,43 +47,115 @@ public sealed class PlayerController2D : MonoBehaviour
         if (renderer == null || renderer.sprite == null) return;
         Vector2 currentSize = renderer.bounds.size;
         if (currentSize.x <= 0f || currentSize.y <= 0f) return;
-        Vector3 scale = visualRoot.localScale;
-        scale.x *= bodyCollider.bounds.size.x / currentSize.x;
-        scale.y *= bodyCollider.bounds.size.y / currentSize.y;
-        visualRoot.localScale = scale;
+        float facing = Mathf.Sign(visualRoot.localScale.x);
+        if (Mathf.Approximately(facing, 0f)) facing = 1f;
+        float uniformScale = bodyCollider.bounds.size.y / currentSize.y;
+        visualRoot.localScale = new Vector3(facing * uniformScale, uniformScale, 1f);
     }
     public void OnMove(InputValue value) => input = controlEnabled ? value.Get<float>() : 0f;
     public void OnJump(InputValue value)
     {
-        bool pressed = value.isPressed && controlEnabled;
-        if (pressed && !jumpHeld) { lastJumpPressed = Time.time; JumpInputSequence++; }
-        jumpHeld = pressed;
+        // PlayerInput's SendMessages mode does not send the canceled phase for Button
+        // actions. Keep its performed notification for compatibility and recover the
+        // release state through the direct action callbacks and polling below.
+        SetJumpInput(value.isPressed);
     }
-    public void OnResetRoom(InputValue value) { if (value.isPressed && controlEnabled) FindFirstObjectByType<RoomResetSystem>()?.ResetRoom(); }
-    private void Update() { if (input != 0f) { FacingRight = input > 0f; Face(input); } if (IsGroundedNow) lastGrounded = Time.time; }
+    public void OnResetRoom(InputValue value) { if (value.isPressed && controlEnabled) FindAnyObjectByType<RoomResetSystem>()?.ResetRoom(); }
+    private void Update()
+    {
+        BindJumpAction();
+        if (jumpAction != null && jumpHeld && !jumpAction.IsPressed()) jumpHeld = false;
+        if (input != 0f) { FacingRight = input > 0f; Face(input); }
+        if (IsGroundedNow) lastGrounded = Time.time;
+    }
     private void FixedUpdate()
     {
         if (settings == null || !controlEnabled) return;
         Vector2 velocity = body.linearVelocity;
+        bool grounded = TryGetGroundSurface(Vector2.down, out SurfaceSemantic2D groundSurface,
+            out RaycastHit2D supportHit);
+        supportCollider = grounded ? supportHit.collider : null;
+        bool onFrozenGround = IsFrozenGround(groundSurface);
+        Vector2 nextSurfaceVelocity = SurfaceMotion2D.Resolve(supportHit, grounded, out Collider2D nextMotionCollider);
+        Vector2 relativeVelocity = SurfaceMotion2D.RemoveRepeatedContribution(velocity,
+            surfaceMotionCollider, nextMotionCollider, appliedSurfaceVelocity);
         float target = input * settings.maxSpeed;
-        float accel = Mathf.Abs(target) > 0.01f ? settings.groundAcceleration : settings.groundDeceleration;
-        if (!IsGroundedNow) accel *= settings.airControl;
-        velocity.x = Mathf.MoveTowards(velocity.x, target, accel * Time.fixedDeltaTime);
-        velocity.y = Mathf.Max(velocity.y - settings.Gravity * Time.fixedDeltaTime, -settings.maxFallSpeed);
+        float accel = onFrozenGround
+            ? 0f
+            : Mathf.Abs(target) > 0.01f ? settings.groundAcceleration : settings.groundDeceleration;
+        if (!grounded) accel *= settings.airControl;
+        float relativeHorizontal = relativeVelocity.x;
+        relativeHorizontal = Mathf.MoveTowards(relativeHorizontal, target, accel * Time.fixedDeltaTime);
+        relativeVelocity.x = relativeHorizontal;
+        surfaceMotionCollider = grounded ? nextMotionCollider : null;
+        appliedSurfaceVelocity = grounded ? nextSurfaceVelocity : Vector2.zero;
+        relativeVelocity.y = Mathf.Max(relativeVelocity.y - settings.Gravity * Time.fixedDeltaTime,
+            -settings.maxFallSpeed);
         if (Time.time - lastJumpPressed <= settings.jumpBuffer && Time.time - lastGrounded <= settings.coyoteTime)
-        { velocity.y = settings.JumpSpeed; lastJumpPressed = float.NegativeInfinity; lastGrounded = float.NegativeInfinity; JumpSequence++; }
-        if (!jumpHeld && velocity.y > 0f) velocity.y *= settings.jumpCutMultiplier;
-        body.linearVelocity = velocity;
+        { relativeVelocity.y = settings.JumpSpeed; lastJumpPressed = float.NegativeInfinity; lastGrounded = float.NegativeInfinity; JumpSequence++; }
+        if (!jumpHeld && relativeVelocity.y > 0f) relativeVelocity.y *= settings.jumpCutMultiplier;
+        body.linearVelocity = relativeVelocity + (grounded ? nextSurfaceVelocity : Vector2.zero);
     }
     private void Face(float direction) { if (visualRoot == null) return; Vector3 s = visualRoot.localScale; s.x = Mathf.Abs(s.x) * Mathf.Sign(direction); visualRoot.localScale = s; }
-    public bool IsGrounded(Vector2 direction)
+    public void SetFacing(bool right)
     {
-        if (bodyCollider == null) return false;
-        Bounds b = bodyCollider.bounds;
-        foreach (RaycastHit2D hit in Physics2D.BoxCastAll(b.center, b.size * new Vector2(0.8f, 0.9f), 0f, direction, 0.15f, groundMask))
-            if (hit.collider != null && hit.collider.gameObject != gameObject && !hit.collider.isTrigger) return true;
-        return false;
+        FacingRight = right;
+        Face(right ? 1f : -1f);
     }
-    public void SetControlEnabled(bool value) { controlEnabled = value; if (!value) input = 0f; }
-    public void TeleportTo(Vector3 position) { transform.position = position; body.position = position; body.linearVelocity = Vector2.zero; }
+    private void BindJumpAction()
+    {
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        InputAction nextJump = playerInput?.currentActionMap?.FindAction("Jump", false)
+            ?? playerInput?.actions?.FindAction("Jump", false);
+        if (jumpAction == nextJump) return;
+        UnbindJumpAction();
+        jumpAction = nextJump;
+        if (jumpAction == null) return;
+        jumpAction.performed += OnJumpPerformed;
+        jumpAction.canceled += OnJumpCanceled;
+    }
+    private void UnbindJumpAction()
+    {
+        if (jumpAction == null) return;
+        jumpAction.performed -= OnJumpPerformed;
+        jumpAction.canceled -= OnJumpCanceled;
+        jumpAction = null;
+    }
+    private void OnDisable()
+    {
+        UnbindJumpAction();
+        jumpHeld = false;
+    }
+    private void OnJumpPerformed(InputAction.CallbackContext _) => SetJumpInput(true);
+    private void OnJumpCanceled(InputAction.CallbackContext _) => SetJumpInput(false);
+    private void SetJumpInput(bool pressed)
+    {
+        pressed &= controlEnabled;
+        if (pressed && !jumpHeld) { lastJumpPressed = Time.time; JumpInputSequence++; }
+        jumpHeld = pressed;
+    }
+    public bool IsGrounded(Vector2 direction)
+        => TryGetGroundSurface(direction, out _, out _);
+
+    private bool IsGroundedOnFrozenSurface(Vector2 direction)
+        => TryGetGroundSurface(direction, out SurfaceSemantic2D surface, out _) && IsFrozenGround(surface);
+
+    private bool TryGetGroundSurface(Vector2 direction, out SurfaceSemantic2D surface, out RaycastHit2D supportHit)
+    {
+        return SurfaceSupport2D.TryResolve(bodyCollider, gameObject, direction, .15f, groundMask,
+            supportCollider, out surface, out supportHit);
+    }
+
+    private static bool IsFrozenGround(SurfaceSemantic2D surface)
+        => surface != null && surface.Type == SurfaceSemantic2D.SurfaceType.FrozenGround && surface.IsSafe;
+    public void SetControlEnabled(bool value) { controlEnabled = value; if (!value) { input = 0f; jumpHeld = false; } }
+    public void TeleportTo(Vector3 position)
+    {
+        transform.position = position;
+        body.position = position;
+        body.linearVelocity = Vector2.zero;
+        supportCollider = null;
+        surfaceMotionCollider = null;
+        appliedSurfaceVelocity = Vector2.zero;
+    }
 }

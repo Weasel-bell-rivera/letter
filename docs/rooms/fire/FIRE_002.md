@@ -1,4 +1,4 @@
-# FIRE-002：另一侧也会灼伤
+# FIRE_002：另一侧也会灼伤
 
 ## 状态
 
@@ -49,6 +49,16 @@ S 入口    E 出口    M 建议放置区    ~ 岩浆
 | 建议放置区 | 1 | 用地面纹理提示安全放镜位置，不改变规则 |
 | 岩浆Trigger | 1 | 展示MirrorClone死亡联动 |
 | 静态地面 | 若干 | 主路线和岩浆两侧安全区域 |
+
+### Prefab需求
+
+| 实例或对象 | 通用Prefab或实现方式 | 资产路径 | 状态与房间配置 |
+|---|---|---|---|
+| Exit-A | `RoomExit` Prefab | `Assets/Prefabs/Gameplay/Exits/RoomExit.prefab` | 待创建；配置为本房间出口 |
+| 固定岩浆区 | `Hazard` Tilemap | 不适用 | 正式内容使用固定危险Tilemap，不创建岩浆Prefab |
+| 建议放置区 | `Decoration` Tilemap | 不适用 | 只提供静态视觉提示，不改变表面语义 |
+
+- 实现本房间Scene前必须先保证`RoomExit`通用Prefab存在并通过场景切换与重置验证；不得以内嵌出口对象代替。
 
 ### 初始状态
 

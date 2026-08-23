@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public sealed class MirrorPlayer2D : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public sealed class MirrorPlayer2D : MonoBehaviour
     [SerializeField] private bool initiallyUnlocked = true;
     private GameObject placedMirror, cloneObject;
     private bool gravityDisabled;
+    private bool leftMousePressed, rightMousePressed;
     private InputAction placeAction, recallAction, unpairedRecallAction;
     private int lastPlaceFrame = -1, lastRecallFrame = -1;
     public MirrorState State { get; private set; }
@@ -22,7 +24,13 @@ public sealed class MirrorPlayer2D : MonoBehaviour
     public bool RecallInputReady => unpairedRecallAction != null && unpairedRecallAction.enabled;
     public float RecallInputValue => unpairedRecallAction?.ReadValue<float>() ?? 0f;
     private void Awake() => State = initiallyUnlocked || MirrorAbilityState.UnlockedThisRun ? MirrorState.Held : MirrorState.Unobtained;
-    private void OnEnable() { BindInputActions(); InputSystem.onAfterUpdate += ProcessInputAfterUpdate; }
+    private void OnEnable()
+    {
+        BindInputActions();
+        CacheMouseButtonState();
+        InputSystem.onEvent += ProcessRawInputEvent;
+        InputSystem.onAfterUpdate += ProcessInputAfterUpdate;
+    }
     private void Start() { BindInputActions(); RefreshHeldVisual(); }
     private void Update()
     {
@@ -58,15 +66,52 @@ public sealed class MirrorPlayer2D : MonoBehaviour
     }
     private void OnDisable()
     {
+        InputSystem.onEvent -= ProcessRawInputEvent;
         InputSystem.onAfterUpdate -= ProcessInputAfterUpdate;
         if (placeAction != null) placeAction.performed -= OnPlacePerformed;
         if (recallAction != null) recallAction.performed -= OnRecallPerformed;
         if (unpairedRecallAction != null) { unpairedRecallAction.performed -= OnRecallPerformed; unpairedRecallAction.Dispose(); }
         placeAction = null; recallAction = null; unpairedRecallAction = null;
+        leftMousePressed = false; rightMousePressed = false;
+    }
+    private void ProcessRawInputEvent(InputEventPtr eventPtr, InputDevice device)
+    {
+        if (device is not Mouse mouse) return;
+
+        if (mouse.leftButton.ReadValueFromEvent(eventPtr, out float nextLeftValue))
+        {
+            bool nextLeft = nextLeftValue >= InputSystem.settings.defaultButtonPressPoint;
+            if (nextLeft && !leftMousePressed) HandlePlaceInput();
+            leftMousePressed = nextLeft;
+        }
+
+        if (mouse.rightButton.ReadValueFromEvent(eventPtr, out float nextRightValue))
+        {
+            bool nextRight = nextRightValue >= InputSystem.settings.defaultButtonPressPoint;
+            if (nextRight && !rightMousePressed) HandleRecallInput();
+            rightMousePressed = nextRight;
+        }
     }
     private void ProcessInputAfterUpdate()
     {
+        PollMouseButtons();
         if (unpairedRecallAction != null && unpairedRecallAction.WasPressedThisFrame()) HandleRecallInput();
+    }
+    private void CacheMouseButtonState()
+    {
+        Mouse mouse = Mouse.current;
+        leftMousePressed = mouse != null && mouse.leftButton.isPressed;
+        rightMousePressed = mouse != null && mouse.rightButton.isPressed;
+    }
+    private void PollMouseButtons()
+    {
+        Mouse mouse = Mouse.current;
+        bool nextLeft = mouse != null && mouse.leftButton.isPressed;
+        bool nextRight = mouse != null && mouse.rightButton.isPressed;
+        if (nextLeft && !leftMousePressed) HandlePlaceInput();
+        if (nextRight && !rightMousePressed) HandleRecallInput();
+        leftMousePressed = nextLeft;
+        rightMousePressed = nextRight;
     }
     public void Configure(PlayerController2D target) { player = target; playerCollider = target.GetComponent<BoxCollider2D>(); }
     public void SetInitiallyUnlocked(bool unlocked) { initiallyUnlocked = unlocked; State = unlocked || MirrorAbilityState.UnlockedThisRun ? MirrorState.Held : MirrorState.Unobtained; RefreshHeldVisual(); }
@@ -75,7 +120,16 @@ public sealed class MirrorPlayer2D : MonoBehaviour
     public void OnRecallMirror(InputValue value) { if (value.isPressed) HandleRecallInput(); }
     private void OnPlacePerformed(InputAction.CallbackContext _) => HandlePlaceInput();
     private void OnRecallPerformed(InputAction.CallbackContext _) => HandleRecallInput();
-    private void HandlePlaceInput() { if (lastPlaceFrame == Time.frameCount) return; lastPlaceFrame = Time.frameCount; TryPlace(); }
+    private void HandlePlaceInput()
+    {
+        if (lastPlaceFrame == Time.frameCount) return;
+        lastPlaceFrame = Time.frameCount;
+        bool placed = TryPlace();
+#if UNITY_EDITOR
+        Debug.Log($"[MirrorInput] placed={placed} state={State} failure={LastFailure} " +
+                  $"grounded={(player != null && player.IsGroundedNow)} frame={Time.frameCount}", this);
+#endif
+    }
     private void HandleRecallInput() { if (lastRecallFrame == Time.frameCount) return; lastRecallFrame = Time.frameCount; RecallImmediate(); }
 
     public bool TryPlace()

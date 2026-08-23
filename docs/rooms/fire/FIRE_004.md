@@ -1,4 +1,4 @@
-# FIRE-004：留在另一边
+# FIRE_004：留在另一边
 
 ## 状态
 
@@ -17,7 +17,7 @@
 - 希望玩家想到的关键解法：在中央放镜，让反向移动的MirrorClone走向左侧压力板，同时Player走向右侧门
 - 难度：简单
 - 预计完成时间：1～2分钟
-- 其他要求：压力板、连线和门必须同时可见
+- 其他要求：压力板和门必须同时可见，不绘制两者之间的连线
 
 ## Codex补充
 
@@ -48,6 +48,17 @@ P 压力板    M 建议放置区    D 门    E 出口
 | Exit-A | 出口 | 被门阻挡 | 完成房间 |
 
 控制关系：`Plate-A → Door-A`，使用持续占用逻辑。
+
+### Prefab需求
+
+| 实例ID | 通用Prefab或实现方式 | 资产路径 | 状态与房间配置 |
+|---|---|---|---|
+| Plate-A | `PressurePlate` | `Assets/Prefabs/Gameplay/Switches/PressurePlate.prefab` | 待创建；允许Player和MirrorClone占用 |
+| Door-A | `Door` | `Assets/Prefabs/Gameplay/Doors/Door.prefab` | 待创建；初始关闭，控制源为Plate-A |
+| Exit-A | `RoomExit` | `Assets/Prefabs/Gameplay/Exits/RoomExit.prefab` | 待创建；被Door-A阻挡 |
+| MirrorHint-A | `Decoration` Tilemap | 不适用 | 静态视觉提示，不改变镜子放置规则 |
+
+- 创建本房间灰盒前必须先实现并验证`PressurePlate`、`Door`和`RoomExit`通用Prefab，再以Prefab实例配置控制关系；不得把门控逻辑写入本房间Scene。
 
 ### 初始状态
 
@@ -91,4 +102,4 @@ P 压力板    M 建议放置区    D 门    E 出口
 - MirrorClone占用时Door-A保持开启，离开或消失后关闭。
 - Door-A不会压死、推出或穿过角色。
 - 房间无需跳跃即可完成。
-- 首次测试者能理解压力板、连线和门的因果关系。
+- 首次测试者能通过压力板和门的状态变化理解因果关系。

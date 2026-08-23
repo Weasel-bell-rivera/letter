@@ -1,0 +1,272 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
+public static class PlayerPrefabBuilder
+{
+    public const string PlayerPrefabPath = "Assets/Prefabs/Gameplay/Characters/Player.prefab";
+    public const string RegistryPath = "Assets/Resources/PlayerPrefabRegistry.asset";
+    public const string SpriteDirectory =
+        "Assets/Art/Kenney/NewPlatformerPack/Sprites/Characters/Double";
+
+    private const string MovementSettingsPath = "Assets/Settings/Player/DefaultPlayerMovement.asset";
+    private const string InputActionsPath = "Assets/Settings/InputSystem_Actions.inputactions";
+
+    [MenuItem("Tools/W1/Build and Migrate Player Prefab")]
+    public static void BuildFromMenu() => BuildFromCommandLine();
+
+    public static void BuildFromCommandLine()
+    {
+        EnsureDirectories();
+        ConfigureSpriteImports();
+        GameObject playerPrefab = BuildPlayerPrefab();
+        BuildRegistry(playerPrefab);
+        MigrateLevelScenes();
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        Debug.Log("Player prefab built and level scenes migrated successfully.");
+    }
+
+    private static void EnsureDirectories()
+    {
+        Directory.CreateDirectory("Assets/Prefabs/Gameplay/Characters");
+        Directory.CreateDirectory("Assets/Resources");
+    }
+
+    private static void ConfigureSpriteImports()
+    {
+        foreach (string path in SpritePaths())
+        {
+            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+            TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            Require(importer != null, $"Missing Player sprite: {path}");
+            importer.textureType = TextureImporterType.Sprite;
+            importer.spriteImportMode = SpriteImportMode.Single;
+            importer.spritePixelsPerUnit = 128f;
+            importer.spritePivot = new Vector2(.5f, .5f);
+            TextureImporterSettings textureSettings = new();
+            importer.ReadTextureSettings(textureSettings);
+            textureSettings.spriteMeshType = SpriteMeshType.FullRect;
+            importer.SetTextureSettings(textureSettings);
+            importer.mipmapEnabled = false;
+            importer.filterMode = FilterMode.Point;
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.alphaIsTransparency = true;
+            importer.SaveAndReimport();
+        }
+    }
+
+    private static GameObject BuildPlayerPrefab()
+    {
+        AssetDatabase.ImportAsset(MovementSettingsPath,
+            ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+        AssetDatabase.ImportAsset(InputActionsPath,
+            ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+        PlayerMovementSettings movement = AssetDatabase.LoadAssetAtPath<PlayerMovementSettings>(MovementSettingsPath);
+        InputActionAsset inputActions = AssetDatabase.LoadAssetAtPath<InputActionAsset>(InputActionsPath);
+        Sprite[] sprites = SpritePaths().Select(LoadSprite).ToArray();
+        Require(movement != null, "DefaultPlayerMovement.asset is required.");
+        Require(inputActions != null, "InputSystem_Actions.inputactions is required.");
+
+        GameObject root = new("Player");
+        root.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        root.transform.localScale = Vector3.one;
+
+        Rigidbody2D body = root.AddComponent<Rigidbody2D>();
+        body.bodyType = RigidbodyType2D.Dynamic;
+        body.gravityScale = 0f;
+        body.freezeRotation = true;
+        body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        body.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+        BoxCollider2D collider = root.AddComponent<BoxCollider2D>();
+        collider.size = new Vector2(.8f, 1.8f);
+
+        GameObject visualObject = new("Visual");
+        visualObject.transform.SetParent(root.transform, false);
+        SpriteRenderer renderer = visualObject.AddComponent<SpriteRenderer>();
+        renderer.sprite = sprites[0];
+        renderer.sortingOrder = 10;
+        PlayerVisual2D visual = visualObject.AddComponent<PlayerVisual2D>();
+        visual.Configure(renderer, sprites[0], sprites[1], sprites[2], sprites[3], sprites[4], sprites[5],
+            sprites[6]);
+
+        PlayerController2D controller = root.AddComponent<PlayerController2D>();
+        controller.Configure(visualObject.transform, movement);
+
+        PlayerInput input = root.AddComponent<PlayerInput>();
+        input.actions = inputActions;
+        input.defaultActionMap = "Player";
+        input.notificationBehavior = PlayerNotifications.SendMessages;
+
+        MirrorPlayer2D mirror = root.AddComponent<MirrorPlayer2D>();
+        mirror.Configure(controller);
+        mirror.SetInitiallyUnlocked(false);
+
+        GameObject prefab = PrefabUtility.SaveAsPrefabAsset(root, PlayerPrefabPath);
+        UnityEngine.Object.DestroyImmediate(root);
+        Require(prefab != null, "Failed to save Player.prefab.");
+        return prefab;
+    }
+
+    private static void BuildRegistry(GameObject playerPrefab)
+    {
+        PlayerPrefabRegistry registry = AssetDatabase.LoadAssetAtPath<PlayerPrefabRegistry>(RegistryPath);
+        if (registry == null)
+        {
+            registry = ScriptableObject.CreateInstance<PlayerPrefabRegistry>();
+            AssetDatabase.CreateAsset(registry, RegistryPath);
+        }
+        registry.Configure(playerPrefab);
+        EditorUtility.SetDirty(registry);
+    }
+
+    private static void MigrateLevelScenes()
+    {
+        SceneSetup[] previousSetup = EditorSceneManager.GetSceneManagerSetup();
+        try
+        {
+            string[] scenePaths = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Levels" })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .OrderBy(path => path)
+                .ToArray();
+            foreach (string scenePath in scenePaths) MigrateScene(scenePath);
+        }
+        finally
+        {
+            if (previousSetup.Length > 0) EditorSceneManager.RestoreSceneManagerSetup(previousSetup);
+        }
+    }
+
+    private static void MigrateScene(string scenePath)
+    {
+        Scene scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+        GameObject[] roots = scene.GetRootGameObjects();
+        PlayerController2D[] players = roots.SelectMany(root =>
+            root.GetComponentsInChildren<PlayerController2D>(true)).ToArray();
+        if (players.Length == 0 && roots.SelectMany(root =>
+                root.GetComponentsInChildren<RoomResetSystem>(true)).Any() == false)
+            return;
+        Require(players.Length <= 1, $"{scenePath} contains more than one serialized Player.");
+
+        Vector3 spawnPosition = players.Length == 1
+            ? players[0].transform.position
+            : ExistingEntrancePosition(roots);
+        RoomEntrance2D existingDefault = roots.SelectMany(root =>
+            root.GetComponentsInChildren<RoomEntrance2D>(true)).FirstOrDefault(candidate => candidate.IsDefault);
+        bool facingRight = players.Length == 1 ? players[0].FacingRight : existingDefault?.FacingRight ?? true;
+        Transform entrance = ConfigureEntrances(scene, spawnPosition, facingRight);
+
+        foreach (RoomResetSystem reset in roots.SelectMany(root =>
+                     root.GetComponentsInChildren<RoomResetSystem>(true)))
+        {
+            CameraFollow2D camera = roots.SelectMany(root =>
+                root.GetComponentsInChildren<CameraFollow2D>(true)).FirstOrDefault();
+            reset.Configure(null, null, entrance, camera);
+        }
+
+        foreach (CameraFollow2D follow in roots.SelectMany(root =>
+                     root.GetComponentsInChildren<CameraFollow2D>(true)))
+            follow.Configure(null, follow.FollowsVertical);
+
+        GameObject host = roots.FirstOrDefault(root => root.name == "RoomSystems")
+            ?? roots.FirstOrDefault(root => root.name.Contains("Room", StringComparison.OrdinalIgnoreCase))
+            ?? roots.First();
+        RoomPlayerSpawner2D[] spawners = roots.SelectMany(root =>
+            root.GetComponentsInChildren<RoomPlayerSpawner2D>(true)).ToArray();
+        RoomPlayerSpawner2D keeper = spawners.FirstOrDefault(candidate => candidate.gameObject.name == "RoomSystems")
+            ?? spawners.FirstOrDefault();
+        if (keeper == null) keeper = host.AddComponent<RoomPlayerSpawner2D>();
+        foreach (RoomPlayerSpawner2D duplicate in spawners.Where(candidate => candidate != keeper))
+            UnityEngine.Object.DestroyImmediate(duplicate);
+
+        foreach (PlayerController2D player in players) UnityEngine.Object.DestroyImmediate(player.gameObject);
+        EditorSceneManager.MarkSceneDirty(scene);
+        Require(EditorSceneManager.SaveScene(scene), $"Failed to save migrated scene: {scenePath}");
+    }
+
+    private static Transform ConfigureEntrances(Scene scene, Vector3 spawnPosition, bool facingRight)
+    {
+        Transform[] transforms = scene.GetRootGameObjects()
+            .SelectMany(root => root.GetComponentsInChildren<Transform>(true))
+            .ToArray();
+        Transform entranceParent = transforms.FirstOrDefault(candidate => candidate.name == "Entrances");
+        if (entranceParent == null)
+        {
+            GameObject parent = new("Entrances");
+            SceneManager.MoveGameObjectToScene(parent, scene);
+            entranceParent = parent.transform;
+        }
+
+        Transform[] candidates = entranceParent.Cast<Transform>().ToArray();
+        Transform selected = candidates.OrderBy(candidate =>
+            Vector3.SqrMagnitude(candidate.position - spawnPosition)).FirstOrDefault();
+        if (selected == null || Vector3.Distance(selected.position, spawnPosition) > .2f)
+        {
+            GameObject marker = new("DefaultEntrance");
+            marker.transform.SetParent(entranceParent, false);
+            marker.transform.position = spawnPosition;
+            selected = marker.transform;
+            candidates = entranceParent.Cast<Transform>().ToArray();
+        }
+
+        foreach (Transform candidate in candidates)
+        {
+            RoomEntrance2D component = candidate.GetComponent<RoomEntrance2D>();
+            bool existingFacing = component == null || component.FacingRight;
+            component ??= candidate.gameObject.AddComponent<RoomEntrance2D>();
+            bool isDefault = candidate == selected;
+            string id = InferEntranceId(candidate.name, isDefault);
+            component.Configure(id, isDefault, isDefault ? facingRight : existingFacing);
+        }
+        return selected;
+    }
+
+    private static Vector3 ExistingEntrancePosition(GameObject[] roots)
+    {
+        RoomResetSystem reset = roots.SelectMany(root =>
+            root.GetComponentsInChildren<RoomResetSystem>(true)).FirstOrDefault();
+        if (reset != null && reset.Entrance != null) return reset.Entrance.position;
+        RoomEntrance2D entrance = roots.SelectMany(root =>
+            root.GetComponentsInChildren<RoomEntrance2D>(true)).FirstOrDefault(candidate => candidate.IsDefault);
+        return entrance != null ? entrance.transform.position : Vector3.zero;
+    }
+
+    private static string InferEntranceId(string objectName, bool isDefault)
+    {
+        if (isDefault) return SaveIds.DefaultEntrance;
+        Match match = Regex.Match(objectName.ToUpperInvariant(), @"(CENTER|FIRE|SNOW|WIND|EARTH)[-_ ]?(\d{3})");
+        return match.Success ? $"FROM_{match.Groups[1].Value}_{match.Groups[2].Value}" :
+            objectName.Trim().Replace(' ', '_').ToUpperInvariant();
+    }
+
+    private static Sprite LoadSprite(string path)
+    {
+        Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+        Require(sprite != null, $"Player sprite did not import as Sprite: {path}");
+        return sprite;
+    }
+
+    private static string[] SpritePaths() => new[]
+    {
+        $"{SpriteDirectory}/character_green_idle.png",
+        $"{SpriteDirectory}/character_green_jump.png",
+        $"{SpriteDirectory}/character_green_walk_a.png",
+        $"{SpriteDirectory}/character_green_walk_b.png",
+        $"{SpriteDirectory}/character_green_duck.png",
+        $"{SpriteDirectory}/character_green_front.png",
+        $"{SpriteDirectory}/character_green_hit.png"
+    };
+
+    private static void Require(bool condition, string message)
+    {
+        if (!condition) throw new InvalidOperationException(message);
+    }
+
+}

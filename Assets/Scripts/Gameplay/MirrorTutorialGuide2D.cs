@@ -14,6 +14,7 @@ public sealed class MirrorTutorialGuide2D : MonoBehaviour
 
     private void Update()
     {
+        if (mirror == null) mirror = FindAnyObjectByType<MirrorPlayer2D>();
         if (mirror == null) return;
         if (mirror.State == MirrorPlayer2D.MirrorState.Placed) sawPlaced = true;
         if (sawPlaced && mirror.State == MirrorPlayer2D.MirrorState.Held) PracticeCompleted = true;

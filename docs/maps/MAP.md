@@ -3,6 +3,7 @@
 - 连线仅表示两个房间之间存在通路，不代表强制访问顺序。
 - 房间在图中的左右、上下位置仅用于表达连通关系，不代表先后、难度或推荐路线。
 - Center是教学区，`CENTER_001`是新游戏起点。
+- 本文件只定义世界结构和房间连接，不定义房间内部布局，也不直接对应Unity Tilemap；正式房间内部的静态地形与空间布局必须按 `docs/LEVEL_DESIGN.md` 和 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md` 使用标准Grid与Tilemap设计、制作。
 
 ```text
                                       [WIND_001]                                              [SNOW_001]

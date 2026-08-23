@@ -4,8 +4,8 @@
 
 | 房间 | 状态 | 设计文档 | Unity Scene | 主要目标 |
 |---|---|---|---|---|
-| SNOW_001 | 占位 | `docs/rooms/snow/SNOW_001.md` | 尚未创建 | 待设计 |
-| SNOW_002 | 占位 | `docs/rooms/snow/SNOW_002.md` | 尚未创建 | 待设计 |
+| SNOW_001 | 灰盒已搭建 | `docs/rooms/snow/SNOW_001.md` | `Assets/Scenes/Levels/Snow/Snow_001.unity` | 镜像踩板开门，使巡逻敌人走上寒冰冻结并成为踏板 |
+| SNOW_002 | 灰盒中（仅横向寒冰原型） | `docs/rooms/snow/SNOW_002.md` | `Assets/Scenes/Levels/Snow/Snow_002.unity` | 验证从左到右连续铺设的静态`FrozenGround`冰面 |
 | SNOW_003 | 占位 | `docs/rooms/snow/SNOW_003.md` | 尚未创建 | 待设计 |
 | SNOW_004 | 占位 | `docs/rooms/snow/SNOW_004.md` | 尚未创建 | 待设计 |
 | SNOW_005 | 占位 | `docs/rooms/snow/SNOW_005.md` | 尚未创建 | 待设计 |

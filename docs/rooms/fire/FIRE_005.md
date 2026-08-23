@@ -1,10 +1,10 @@
-# FIRE-005：双线穿越
+# FIRE_005：双线穿越
 
 ## 状态
 
 - 当前状态：已批准
 - 是否允许制作灰盒：是
-- 主要目标：组合FIRE-001至FIRE-004的知识
+- 主要目标：组合FIRE_001至FIRE_004的知识
 
 ## 你填写
 
@@ -27,7 +27,7 @@
 - 玩家从左侧进入后到达中央安全放置区。
 - 放置区左侧是MirrorClone路线：短岩浆沟后设置Plate-A。
 - 放置区右侧是Player路线：单个周期喷发器、Door-A和出口。
-- Plate-A与Door-A使用清晰连线；喷发器前设置安全等待区。
+- Plate-A与Door-A不绘制连线，通过状态变化和空间布局表达因果；喷发器前设置安全等待区。
 
 ```text
 ┌──────────────────────────────────────────┐
@@ -52,6 +52,19 @@ P 入口方向  ~ 岩浆  M 放置区  F 喷发器  D 门  E 出口
 | MirrorHint-A | 建议放置区 | 静态提示 | 建立左右任务分工 |
 
 控制关系：`Plate-A → Door-A`，使用持续占用逻辑。
+
+### Prefab需求
+
+| 实例ID | 通用Prefab或实现方式 | 资产路径 | 状态与房间配置 |
+|---|---|---|---|
+| Plate-A | `PressurePlate` | `Assets/Prefabs/Gameplay/Switches/PressurePlate.prefab` | 待创建；允许Player和MirrorClone占用 |
+| Door-A | `Door` | `Assets/Prefabs/Gameplay/Doors/Door.prefab` | 待创建；初始关闭，控制源为Plate-A |
+| Eruption-A | `EruptionHazard` | `Assets/Prefabs/Gameplay/Hazards/EruptionHazard.prefab` | 待创建；使用本房记录的固定周期并从预警阶段开始 |
+| Exit-A | `RoomExit` | `Assets/Prefabs/Gameplay/Exits/RoomExit.prefab` | 待创建；被Door-A阻挡 |
+| Lava-A | `Hazard` Tilemap | 不适用 | 固定持续危险区，不创建岩浆Prefab |
+| MirrorHint-A | `Decoration` Tilemap | 不适用 | 静态视觉提示，不改变镜子放置规则 |
+
+- 创建本房间灰盒前必须先实现并分别验证上表通用Prefab，再通过Prefab实例组合；本房间只配置位置、周期、初始状态和`Plate-A → Door-A`关系。
 
 ### 初始状态
 

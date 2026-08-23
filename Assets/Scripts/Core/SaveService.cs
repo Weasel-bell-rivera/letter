@@ -67,6 +67,15 @@ public sealed class SaveService : MonoBehaviour
 
     public bool HasAbility(string abilityId) => data != null && data.unlockedAbilities.Contains(abilityId);
     public bool HasCollected(string pickupId) => data != null && data.collectedPermanentIds.Contains(pickupId);
+    public bool HasLatchedDoorGroup(string doorGroupId) => data != null && data.latchedDoorGroupIds.Contains(doorGroupId);
+
+    public bool TryLatchDoorGroup(string doorGroupId)
+    {
+        if (data == null || !DoorGroupId.IsValid(doorGroupId) || HasLatchedDoorGroup(doorGroupId)) return false;
+        data.latchedDoorGroupIds.Add(doorGroupId);
+        MarkDirtyAndSave();
+        return true;
+    }
 
     public bool TryCollectPermanent(string pickupId, PermanentPickupType type, string rewardId = null)
     {
@@ -107,7 +116,7 @@ public sealed class SaveService : MonoBehaviour
 
     public bool StartNewGame(bool confirmedOverwrite)
     {
-        bool hasExistingProgress = data != null && (data.collectedPermanentIds.Count > 0 || data.playTimeSeconds > 1);
+        bool hasExistingProgress = data != null && (data.collectedPermanentIds.Count > 0 || data.latchedDoorGroupIds.Count > 0 || data.playTimeSeconds > 1);
         if (hasExistingProgress && !confirmedOverwrite) return false;
         store.PreserveAndDeleteForNewGame();
         data = SaveData.CreateNew();

@@ -4,8 +4,8 @@
 
 | 房间 | 状态 | 设计文档 | Unity Scene | 主要目标 |
 |---|---|---|---|---|
-| WIND_001 | 占位 | `docs/rooms/wind/WIND_001.md` | 尚未创建 | 待设计 |
-| WIND_002 | 占位 | `docs/rooms/wind/WIND_002.md` | 尚未创建 | 待设计 |
+| WIND_001 | 灰盒已实现 | `docs/rooms/wind/WIND_001.md` | `Assets/Scenes/Levels/Wind/Wind_001.unity` | 使用MirrorClone将右上方逐风鳐引离守卫点 |
+| WIND_002 | 灰盒中 | `docs/rooms/wind/WIND_002.md` | `Assets/Scenes/Levels/Wind/Wind_002.unity` | 教学传送带单独运输镜像与地形卡位 |
 | WIND_003 | 占位 | `docs/rooms/wind/WIND_003.md` | 尚未创建 | 待设计 |
 | WIND_004 | 占位 | `docs/rooms/wind/WIND_004.md` | 尚未创建 | 待设计 |
 | WIND_005 | 占位 | `docs/rooms/wind/WIND_005.md` | 尚未创建 | 待设计 |

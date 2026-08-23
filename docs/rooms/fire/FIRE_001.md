@@ -1,4 +1,4 @@
-# FIRE-001：第一道热沟
+# FIRE_001：第一道热沟
 
 ## 状态
 
@@ -47,6 +47,15 @@ S 入口    E 出口    ~ 岩浆
 | 出口 | 1 | 完成房间 |
 | 静态地面 | 2段 | 助跑区和落地区 |
 | 岩浆Trigger | 1 | Player或MirrorClone进入后死亡 |
+
+### Prefab需求
+
+| 实例或对象 | 通用Prefab或实现方式 | 资产路径 | 状态与房间配置 |
+|---|---|---|---|
+| Exit-A | `RoomExit` Prefab | `Assets/Prefabs/Gameplay/Exits/RoomExit.prefab` | 待创建；配置为本房间出口 |
+| 固定岩浆区 | `Hazard` Tilemap | 不适用 | 正式内容使用固定危险Tilemap，不创建岩浆Prefab |
+
+- 当前灰盒中的出口和岩浆是Scene内嵌对象。正式迁移时必须先创建并验证`RoomExit` Prefab，以Prefab实例替换出口；固定岩浆迁移到标准`Hazard` Tilemap。
 
 ### 初始状态
 
@@ -99,3 +108,4 @@ S 入口    E 出口    ~ 岩浆
 - Unity批量编译通过；EditMode测试`2/2`、PlayMode测试`3/3`通过。
 - 自动测试已验证Scene可加载、镜子重复放置被拒绝、回收恢复Held状态、镜像死亡不销毁Player、重置返回入口并清空速度。
 - 尚需人工试玩验证危险与出口的无文字可读性、跳跃手感和一分钟完成目标。
+- 当前动态玩法对象尚未完成Prefab化，现有Scene结构仅作为灰盒保留。

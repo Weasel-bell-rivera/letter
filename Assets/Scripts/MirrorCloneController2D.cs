@@ -8,35 +8,52 @@ public sealed class MirrorCloneController2D : MonoBehaviour
     private Vector2 moveAxis = Vector2.left, gravityAxis = Vector2.down; private int observedJumpInput; private bool gravityDisabled;
     private float lastGrounded = float.NegativeInfinity, lastJumpPressed = float.NegativeInfinity;
     private Transform visualRoot;
+    private Collider2D supportCollider;
+    private Collider2D surfaceMotionCollider;
+    private Vector2 appliedSurfaceVelocity;
+    public Vector2 GravityAxis => gravityAxis;
+    public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
+    public float MovementInput => source != null ? source.HorizontalInput : 0f;
+    public bool IsGroundedNow => box != null && TryGetGroundSurface(out _, out _);
+    public bool IsOnFrozenGround => TryGetGroundSurface(out SurfaceSemantic2D surface, out _) && IsFrozenGround(surface);
     public event Action Died;
     public void Configure(PlayerController2D player, Vector2 transformedMoveAxis, Vector2 localGravity)
-    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); }
+    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); supportCollider = null; surfaceMotionCollider = null; appliedSurfaceVelocity = Vector2.zero; }
     private void FixedUpdate()
     {
         if (source == null || settings == null) return;
         Vector2 velocity = body.linearVelocity;
-        bool grounded = IsGrounded(); if (grounded) lastGrounded = Time.time;
+        bool grounded = TryGetGroundSurface(out SurfaceSemantic2D groundSurface, out RaycastHit2D supportHit);
+        supportCollider = grounded ? supportHit.collider : null;
+        if (grounded) lastGrounded = Time.time;
+        Vector2 nextSurfaceVelocity = SurfaceMotion2D.Resolve(supportHit, grounded, out Collider2D nextMotionCollider);
         if (observedJumpInput != source.JumpInputSequence) { observedJumpInput = source.JumpInputSequence; lastJumpPressed = Time.time; }
-        float along = Vector2.Dot(velocity, moveAxis), target = source.HorizontalInput * settings.maxSpeed;
-        float accel = (Mathf.Abs(target) > .01f ? settings.groundAcceleration : settings.groundDeceleration) * (grounded ? 1f : settings.airControl);
-        velocity += moveAxis * (Mathf.MoveTowards(along, target, accel * Time.fixedDeltaTime) - along);
-        if (!gravityDisabled) velocity += gravityAxis * settings.Gravity * Time.fixedDeltaTime;
-        float falling = Vector2.Dot(velocity, gravityAxis);
-        if (falling > settings.maxFallSpeed) velocity -= gravityAxis * (falling - settings.maxFallSpeed);
+        Vector2 relativeVelocity = SurfaceMotion2D.RemoveRepeatedContribution(velocity,
+            surfaceMotionCollider, nextMotionCollider, appliedSurfaceVelocity);
+        float along = Vector2.Dot(relativeVelocity, moveAxis), target = source.HorizontalInput * settings.maxSpeed;
+        float accel = IsFrozenGround(groundSurface)
+            ? 0f
+            : (Mathf.Abs(target) > .01f ? settings.groundAcceleration : settings.groundDeceleration) * (grounded ? 1f : settings.airControl);
+        relativeVelocity += moveAxis * (Mathf.MoveTowards(along, target, accel * Time.fixedDeltaTime) - along);
+        if (!gravityDisabled) relativeVelocity += gravityAxis * settings.Gravity * Time.fixedDeltaTime;
+        float falling = Vector2.Dot(relativeVelocity, gravityAxis);
+        if (falling > settings.maxFallSpeed) relativeVelocity -= gravityAxis * (falling - settings.maxFallSpeed);
         if (Time.time - lastJumpPressed <= settings.jumpBuffer && Time.time - lastGrounded <= settings.coyoteTime)
-        { velocity -= gravityAxis * settings.JumpSpeed; lastJumpPressed = float.NegativeInfinity; lastGrounded = float.NegativeInfinity; }
-        if (!source.JumpHeld && Vector2.Dot(velocity, -gravityAxis) > 0f)
-        { float upward = Vector2.Dot(velocity, -gravityAxis); velocity += gravityAxis * upward * (1f - settings.jumpCutMultiplier); }
+        { relativeVelocity -= gravityAxis * settings.JumpSpeed; lastJumpPressed = float.NegativeInfinity; lastGrounded = float.NegativeInfinity; }
+        if (!source.JumpHeld && Vector2.Dot(relativeVelocity, -gravityAxis) > 0f)
+        { float upward = Vector2.Dot(relativeVelocity, -gravityAxis); relativeVelocity += gravityAxis * upward * (1f - settings.jumpCutMultiplier); }
         if (Mathf.Abs(target) > .01f && visualRoot != null) { Vector3 s = visualRoot.localScale; s.x = Mathf.Abs(s.x) * Mathf.Sign(target); visualRoot.localScale = s; }
-        body.linearVelocity = velocity;
+        surfaceMotionCollider = grounded ? nextMotionCollider : null;
+        appliedSurfaceVelocity = grounded ? nextSurfaceVelocity : Vector2.zero;
+        body.linearVelocity = relativeVelocity + (grounded ? nextSurfaceVelocity : Vector2.zero);
     }
-    private bool IsGrounded()
+    private bool TryGetGroundSurface(out SurfaceSemantic2D surface, out RaycastHit2D supportHit)
     {
-        Bounds b = box.bounds;
-        foreach (RaycastHit2D hit in Physics2D.BoxCastAll(b.center, b.size * new Vector2(.8f,.9f), 0f, gravityAxis, .15f))
-            if (hit.collider != null && hit.collider.gameObject != gameObject && !hit.collider.isTrigger && hit.collider.GetComponent<MirrorCloneController2D>() == null && hit.collider.GetComponent<PlayerController2D>() == null) return true;
-        return false;
+        return SurfaceSupport2D.TryResolve(box, gameObject, gravityAxis, .15f, ~0,
+            supportCollider, out surface, out supportHit);
     }
+    private static bool IsFrozenGround(SurfaceSemantic2D surface)
+        => surface != null && surface.Type == SurfaceSemantic2D.SurfaceType.FrozenGround && surface.IsSafe;
     public void SetGravityDisabled(bool value) { gravityDisabled = value; if (value && body != null) body.linearVelocity -= gravityAxis * Vector2.Dot(body.linearVelocity, gravityAxis); }
     public void Die() { Died?.Invoke(); Destroy(gameObject); }
 }

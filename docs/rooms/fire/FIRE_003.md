@@ -1,4 +1,4 @@
-# FIRE-003：等待火息
+# FIRE_003：等待火息
 
 ## 状态
 
@@ -45,6 +45,15 @@ F 周期喷发器    ↑ 危险方向
 | 出口 | 1 | 完成房间 |
 | 周期喷发器 | 1 | 教学预警、危险和冷却阶段 |
 | 安全观察区 | 2 | 喷发器两侧等待区域 |
+
+### Prefab需求
+
+| 实例或对象 | 通用Prefab | 资产路径 | 状态与房间配置 |
+|---|---|---|---|
+| Eruption-A | `EruptionHazard` | `Assets/Prefabs/Gameplay/Hazards/EruptionHazard.prefab` | 待创建；配置预警`1.0s`、危险`1.0s`、冷却`2.0s`，初始阶段为预警 |
+| Exit-A | `RoomExit` | `Assets/Prefabs/Gameplay/Exits/RoomExit.prefab` | 待创建；配置为本房间出口 |
+
+- 创建本房间灰盒前必须先实现并验证上述通用Prefab，包括周期重置、Player与MirrorClone死亡分流和场景切换；不得在Scene中临时拼装喷发器核心行为。
 
 ### 初始状态
 
