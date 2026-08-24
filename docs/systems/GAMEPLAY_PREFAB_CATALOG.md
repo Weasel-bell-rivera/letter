@@ -18,11 +18,15 @@ Assets/Prefabs/Gameplay/
 ├─ Platforms/
 │  └─ MovingPlatform2D.prefab
 ├─ Surfaces/
-│  └─ GroundConveyor2D.prefab
+│  ├─ GroundConveyor2D.prefab
+│  └─ FreezingGroundCell2D.prefab
 ├─ Enemies/
 │  ├─ FreezablePatrolEnemy2D.prefab
 │  ├─ VerticalWallPatrolEnemy2D.prefab
-│  └─ WindRayEnemy2D.prefab
+│  ├─ WindRayEnemy2D.prefab
+│  ├─ HorizontalFireballEnemy2D.prefab
+│  └─ Projectiles/
+│     └─ HorizontalFireballProjectile2D.prefab
 ├─ Doors/
 │  ├─ Door2D.prefab
 │  └─ PermanentLatchDoorGroup2D.prefab
@@ -34,15 +38,41 @@ Assets/Prefabs/Gameplay/
    └─ RoomExit2D.prefab
 ```
 
-- 移动平台、地面传送带、门、压力板、检查点和出口路径已经创建；继续通过自动测试和代表性房间试玩验证其通用行为。
+- 移动平台、地面传送带、门、压力板、检查点和出口路径已经创建。
+- **非必须：除非用户明确要求，否则不自动追加代表性房间试玩、PlayMode测试或完整自动测试。**未执行时记录未验证风险；公共机制发生变化时只维护与变化直接相关的最小测试定义。
 - `FreezablePatrolEnemy2D.prefab`已经创建并通过独立EditMode与PlayMode测试；正式房间只允许覆盖已批准的巡逻实例参数。
 - `VerticalWallPatrolEnemy2D.prefab`已经创建；正式房间只允许覆盖已批准的墙面侧别、竖直路径、速度、等待和视觉参数。
-- `WindRayEnemy2D.prefab`已经创建并用于`WIND_001`灰盒；统一数值已确认，仍需在Unity许可证恢复后完成独立EditMode与PlayMode测试。
+- `WindRayEnemy2D.prefab`已经创建并用于`WIND_001`灰盒；统一数值已确认。**非必须：除非用户明确要求，否则不运行其独立EditMode与PlayMode测试**，未运行状态作为风险记录。
+- `HorizontalFireballEnemy2D.prefab`与其火球Prefab已有已确认规则、运行时代码和可重复构建器，并已由Unity Editor生成；尚未获准进入正式房间。**非必须：除非用户明确要求，否则不进行PlayMode试玩验证。**
 - `Player.prefab`由通用房间生成系统管理，不作为房间Scene中的重复Prefab实例；完整结构、视觉、入口绑定和生命周期规则见`docs/systems/PLAYER_PREFAB.md`。
 - `PlacedMirror.prefab`只由`MirrorPlayer2D`在成功放置时生成；`Held`和`Unobtained`状态不在Player下保留镜子视觉。
 - 静态墙壁、台阶、低顶、固定平台和返回通道使用标准Tilemap结构，不创建房间专用Prefab。
 - 固定岩浆等静态危险区使用`Hazard` Tilemap及统一危险组件，不为单个房间创建岩浆Prefab。
 - 静态寒冰地面使用`FrozenGround` Tilemap，不把单块寒冰制作成Prefab；移动寒冰平台仍使用移动平台Prefab。
+- 新增冻结地面使用`FreezingGroundCell2D.prefab`按整数格位置组合；房间不得覆盖统一冻结参数。
+
+## 敌人Prefab原型与Variant登记
+
+敌人原型的判定、Prefab Variant适用条件和禁止覆盖项以`docs/systems/ENEMY_SYSTEM.md`为准。本目录负责记录每个基础Prefab、其Variant资产以及允许覆盖的具体字段。
+
+当前敌人Prefab关系如下：
+
+| 敌人原型 | 基础Prefab | Variant | 关系状态 |
+|---|---|---|---|
+| 可冻结地面巡逻敌人 | `FreezablePatrolEnemy2D.prefab` | 无 | 独立基础Prefab |
+| 竖直墙面巡逻敌人 | `VerticalWallPatrolEnemy2D.prefab` | 无 | 独立基础Prefab |
+| 风区逐风鳐 | `WindRayEnemy2D.prefab` | 无 | 独立基础Prefab |
+| 火区投火者 | `HorizontalFireballEnemy2D.prefab` | 无 | 独立基础Prefab，等待PlayMode试玩验证 |
+
+上述基础Prefab互不构成Variant关系。以后新增Variant时，必须在对应原型条目中记录：
+
+- Variant资产路径及其基础Prefab。
+- 复用目的和允许使用的区域或房间范围。
+- 相对于基础Prefab的全部批准覆盖项。
+- 共享配置资产及不得由Variant覆盖的字段。
+- 对基础Prefab与全部既有Variant执行的兼容性验证。
+
+Scene中的单个敌人实例不是Variant。位置、巡逻端点、初始方向、守卫点等房间专用配置应保留为Scene实例覆盖，不得为每个房间创建敌人Variant。房间文档使用Variant时，必须同时记录敌人原型、实际Variant资产路径和房间实例覆盖；未使用Variant时记录对应基础Prefab。
 
 ## `Player.prefab`
 

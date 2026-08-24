@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
+public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGroundActor2D
 {
-    public enum EnemyState { Guarding, Windup, Dashing, Recovering, Returning }
+    public enum EnemyState { Guarding, Windup, Dashing, Recovering, Returning, Frozen }
     public enum TargetKind { None, Player, MirrorClone }
 
     [Header("Shared configuration")]
@@ -32,6 +32,7 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
     private AudioClip windupClip;
     private AudioClip dashClip;
     private AudioClip recoveryClip;
+    private float freezingMovementMultiplier = 1f;
 
     public EnemyState State { get; private set; } = EnemyState.Guarding;
     public TargetKind CurrentTarget { get; private set; } = TargetKind.None;
@@ -41,10 +42,14 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
     public bool HasLockedPoint => CurrentTarget != TargetKind.None;
     public float PhaseRemaining => phaseRemaining;
     public bool IsDamaging => enabled && gameObject.activeInHierarchy && damageCollider != null && damageCollider.enabled;
+    public Rigidbody2D FreezingBody => body;
+    public Collider2D FreezingCollider => damageCollider;
+    public Vector2 FreezingUpAxis => Vector2.up;
 
     private void Awake()
     {
         ResolveReferences();
+        FreezingGroundActor2D.Ensure(gameObject);
         guardPoint = transform.position;
         initialized = true;
         EnsureFeedbackAudio();
@@ -87,6 +92,9 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
                 break;
             case EnemyState.Returning:
                 AdvanceReturn();
+                break;
+            case EnemyState.Frozen:
+                StopBody();
                 break;
         }
         RefreshDynamicFeedback();
@@ -145,6 +153,7 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
         dashDirection = Vector2.zero;
         dashRemaining = 0f;
         phaseRemaining = 0f;
+        freezingMovementMultiplier = 1f;
         transform.position = guardPoint;
         if (body != null)
         {
@@ -157,6 +166,21 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
         RefreshStaticFeedback();
         RefreshStateVisuals();
         Physics2D.SyncTransforms();
+    }
+
+    public void SetFreezingMovementMultiplier(float multiplier)
+        => freezingMovementMultiplier = Mathf.Clamp01(multiplier);
+
+    public void CompleteFreezingGround()
+    {
+        State = EnemyState.Frozen;
+        CurrentTarget = TargetKind.None;
+        dashDirection = Vector2.zero;
+        dashRemaining = 0f;
+        phaseRemaining = 0f;
+        StopBody();
+        if (damageCollider != null) damageCollider.enabled = false;
+        RefreshStateVisuals();
     }
 
     private void ResolveReferences()
@@ -276,7 +300,8 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
 
     private void AdvanceDash()
     {
-        float requested = Mathf.Min(settings.DashSpeed * Time.fixedDeltaTime, dashRemaining);
+        float requested = Mathf.Min(settings.DashSpeed * freezingMovementMultiplier * Time.fixedDeltaTime,
+            dashRemaining);
         float allowed = DistanceBeforeBlock(dashDirection, requested);
         if (allowed > 0f) body.MovePosition(body.position + dashDirection * allowed);
         dashRemaining = Mathf.Max(0f, dashRemaining - allowed);
@@ -321,7 +346,8 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
 
         Vector2 direction = delta / distance;
         Face(direction);
-        float requested = Mathf.Min(settings.ReturnSpeed * Time.fixedDeltaTime, distance);
+        float requested = Mathf.Min(settings.ReturnSpeed * freezingMovementMultiplier * Time.fixedDeltaTime,
+            distance);
         float allowed = DistanceBeforeBlock(direction, requested);
         if (allowed > 0f) body.MovePosition(body.position + direction * allowed);
     }
@@ -401,6 +427,7 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable
                 EnemyState.Windup => new Color(1f, .82f, .42f, 1f),
                 EnemyState.Dashing => new Color(1f, .55f, .5f, 1f),
                 EnemyState.Recovering => new Color(.5f, .55f, .62f, 1f),
+                EnemyState.Frozen => new Color(.65f, .86f, 1f, 1f),
                 _ => new Color(.82f, .9f, 1f, 1f)
             };
         }

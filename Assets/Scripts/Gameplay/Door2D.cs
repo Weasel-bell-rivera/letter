@@ -124,7 +124,8 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
             if (body == null) continue;
             if (body.GetComponent<PlayerController2D>() != null || body.GetComponent<MirrorCloneController2D>() != null ||
                 body.GetComponent<FreezablePatrolEnemy2D>() != null || body.GetComponent<WindRayEnemy2D>() != null ||
-                body.GetComponent<VerticalWallPatrolEnemy2D>() != null)
+                body.GetComponent<VerticalWallPatrolEnemy2D>() != null ||
+                body.GetComponent<HorizontalFireballEnemy2D>() != null)
                 return true;
         }
         return false;

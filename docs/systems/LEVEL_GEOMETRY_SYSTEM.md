@@ -37,6 +37,7 @@ Room
 │  ├─ Background
 │  ├─ Terrain
 │  ├─ FrozenGround
+│  ├─ FreezingGround
 │  ├─ OneWayPlatform
 │  ├─ SpecialMirrorWall
 │  ├─ Hazard
@@ -62,6 +63,7 @@ Room
 | `Background` | 无 | 背景表现 |
 | `Terrain` | 实体碰撞 | 静态地面和普通墙壁 |
 | `FrozenGround` | 实体碰撞 | 雪区静态寒冰地面，向玩法层返回`FrozenGround`表面语义 |
+| `FreezingGround` | 实体碰撞 | 雪区静态冻结地面，向玩法层返回`FreezingGround`表面语义 |
 | `OneWayPlatform` | 单向碰撞 | 单向平台 |
 | `SpecialMirrorWall` | 实体碰撞 | 明确允许安装镜子的特殊垂直墙面 |
 | `Hazard` | Trigger或对应危险系统定义的检测方式 | 岩浆、尖刺等固定危险区域 |
@@ -93,6 +95,7 @@ Room
 ```text
 StaticSolid
 FrozenGround
+FreezingGround
 OneWayPlatform
 SpecialMirrorWall
 Hazard
@@ -136,6 +139,17 @@ Conveyor
 - 冻结敌人不会生成、删除或替换寒冰Tile。
 - 外观类似冰面的背景、前景和装饰Tile必须放入无玩法碰撞的对应Tilemap，不得返回`FrozenGround`语义。
 - 移动寒冰平台属于动态玩法对象，必须使用通用移动平台Prefab实现，不能放入静态`FrozenGround` Tilemap。
+
+## `FreezingGround` Prefab
+
+`FreezingGround`用于制作使Player、MirrorClone和Enemy逐渐冻结的静态地面，与低摩擦`FrozenGround`分开。首版使用`Assets/Prefabs/Gameplay/Surfaces/FreezingGroundCell2D.prefab`按标准一格一个实例组合。完整区域行为见`docs/regions/SNOW_REGION.md`。
+
+- 标准Prefab包含一格大小的可见Sprite、实体`BoxCollider2D`、Static `Rigidbody2D`、显式`SurfaceSemantic2D`、`MirrorSurface2D`和格中心提供组件。
+- 可见边界、实体碰撞边界和`FreezingGround`语义边界必须一致。
+- 每个Prefab实例明确提供自身格中心；玩法层根据首次接触的Collider锁定对应实例，不得从对象名称推断格子。
+- 表面只提供静态碰撞、网格映射和语义；冻结量、减速、恢复、死亡与Enemy状态由通用对象组件处理。
+- 首版不允许运行时生成、删除或修改`FreezingGround`实例，也不允许将该语义用于移动平台或动态对象。
+- 静态、水平、安全的`FreezingGround`在满足通用空间条件时允许放置镜子。
 
 ## 镜子放置集成
 

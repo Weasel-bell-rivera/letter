@@ -215,6 +215,16 @@
 
 雪区寒冰与敌人规则分别见`docs/regions/SNOW_REGION.md`和`docs/systems/ENEMY_SYSTEM.md`。
 
+### 冻结地面（已确定）
+
+- `FreezingGround`是独立于`FrozenGround`的雪区静态表面语义。
+- Player与MirrorClone使用完全相同的接触、冻结累积、空中保持、普通地面恢复、目标格锁定和运动减速规则。
+- MirrorClone的局部运动与重力方向不改变冻结累积速率；完全冻结时沿所接触冻结表面的切线对齐到首次接触格中心。
+- MirrorClone完全冻结按镜像死亡处理：立即清理Trigger、压力板和事件占用，销毁镜像并自动回收镜子；Player和房间不整体重置。
+- Player完全冻结按Player死亡处理：先清除MirrorClone并回收镜子，再执行完整房间重置。
+- 镜子本体不累积冻结；静态、水平、安全且空间充足的`FreezingGround`允许放置镜子，放置后镜子保持固定。
+- `FreezingGround`上的镜像生成空间仍须通过通用合法性检查；冻结Enemy和其他动态对象仍不能作为镜子放置表面。
+
 ### 特殊墙壁放置（姿态已确定）
 
 部分关卡包含具有特殊性质的垂直墙面。

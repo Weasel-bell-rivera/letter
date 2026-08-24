@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d2361e43744a558837872dfce4d59a, type: 3}
+  m_Name: DefaultHorizontalFireballEnemy
+  m_EditorClassIdentifier: W1.Runtime::HorizontalFireballEnemySettings
+  detectionHalfWidth: 6
+  detectionHalfHeight: 0.75
+  windupDuration: 0.6
+  cooldownDuration: 1.4
+  projectileSpeed: 8
+  projectileLifetime: 2
+  cameraExitMargin: 1
+  directionTolerance: 0.05

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable
+public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGroundActor2D
 {
     public enum EnemyState { Active, Frozen }
 
@@ -32,6 +32,7 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable
     private bool initialized;
     private bool configurationErrorLogged;
     private bool ownsFreezeClip;
+    private float freezingMovementMultiplier = 1f;
 
     public EnemyState State { get; private set; } = EnemyState.Active;
     public bool IsFrozen => State == EnemyState.Frozen;
@@ -42,10 +43,14 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable
     public float MoveSpeed => moveSpeed;
     public float EndpointWait => endpointWait;
     public event Action Frozen;
+    public Rigidbody2D FreezingBody => body;
+    public Collider2D FreezingCollider => bodyCollider;
+    public Vector2 FreezingUpAxis => Vector2.up;
 
     private void Awake()
     {
         ResolveReferences();
+        FreezingGroundActor2D.Ensure(gameObject);
         EnsureFreezeAudio();
         initialPosition = transform.position;
         initialized = true;
@@ -83,7 +88,7 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable
             return;
         }
 
-        SetHorizontalVelocity(direction * moveSpeed);
+        SetHorizontalVelocity(direction * moveSpeed * freezingMovementMultiplier);
     }
 
     public void ConfigurePrefabReferences(BoxCollider2D solid, EnemyDamageTrigger2D damage,
@@ -212,12 +217,18 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable
         Frozen?.Invoke();
     }
 
+    public void SetFreezingMovementMultiplier(float multiplier)
+        => freezingMovementMultiplier = Mathf.Clamp01(multiplier);
+
+    public void CompleteFreezingGround() => Freeze();
+
     public void ResetRoomState()
     {
         ResolveReferences();
         State = EnemyState.Active;
         facingRight = initiallyFacingRight;
         waitRemaining = 0f;
+        freezingMovementMultiplier = 1f;
         body.bodyType = RigidbodyType2D.Dynamic;
         body.freezeRotation = true;
         body.gravityScale = 1f;

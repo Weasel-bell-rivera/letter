@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable
+public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGroundActor2D
 {
     public enum WallSide { Left = -1, Right = 1 }
 
@@ -47,6 +47,8 @@ public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable
     private bool hasSeenValidWall;
     private bool configurationErrorLogged;
     private bool wallLossWarningLogged;
+    private bool frozenByGround;
+    private float freezingMovementMultiplier = 1f;
 
     public float LowerEndpoint => lowerEndpoint;
     public float UpperEndpoint => upperEndpoint;
@@ -60,10 +62,15 @@ public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable
     public Vector2 PathAnchor => pathAnchor;
     public Vector2 PathLower => pathAnchor + Vector2.up * lowerEndpoint;
     public Vector2 PathUpper => pathAnchor + Vector2.up * upperEndpoint;
+    public bool IsFrozenByGround => frozenByGround;
+    public Rigidbody2D FreezingBody => body;
+    public Collider2D FreezingCollider => bodyCollider;
+    public Vector2 FreezingUpAxis => Vector2.up;
 
     private void Awake()
     {
         ResolveReferences();
+        FreezingGroundActor2D.Ensure(gameObject);
         pathAnchor = body != null ? body.position : (Vector2)transform.position;
         initialized = true;
         ResetRoomState();
@@ -73,7 +80,7 @@ public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable
 
     private void FixedUpdate()
     {
-        if (!operational || !ValidateConfiguration()) return;
+        if (frozenByGround || !operational || !ValidateConfiguration()) return;
 
         if (waitRemaining > 0f)
         {
@@ -91,7 +98,8 @@ public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable
         hasSeenValidWall = true;
         lastValidWallPosition = body.position;
         float targetY = movingUp ? PathUpper.y : PathLower.y;
-        float nextY = Mathf.MoveTowards(body.position.y, targetY, moveSpeed * Time.fixedDeltaTime);
+        float nextY = Mathf.MoveTowards(body.position.y, targetY,
+            moveSpeed * freezingMovementMultiplier * Time.fixedDeltaTime);
         Vector2 nextPosition = new(pathAnchor.x, nextY);
         body.MovePosition(nextPosition);
 
@@ -160,6 +168,8 @@ public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable
         waitRemaining = 0f;
         hasSeenValidWall = false;
         wallLossWarningLogged = false;
+        frozenByGround = false;
+        freezingMovementMultiplier = 1f;
         operational = ValidateConfiguration();
         lastValidWallPosition = pathAnchor;
         if (body != null)
@@ -174,6 +184,17 @@ public sealed class VerticalWallPatrolEnemy2D : MonoBehaviour, IRoomResettable
         damageTrigger?.SetDamageEnabled(operational);
         RefreshPresentation();
         Physics2D.SyncTransforms();
+    }
+
+    public void SetFreezingMovementMultiplier(float multiplier)
+        => freezingMovementMultiplier = Mathf.Clamp01(multiplier);
+
+    public void CompleteFreezingGround()
+    {
+        frozenByGround = true;
+        StopBody();
+        damageTrigger?.SetDamageEnabled(false);
+        if (bodyVisual != null) bodyVisual.color = new Color(.65f, .86f, 1f, 1f);
     }
 
     private void ResolveReferences()

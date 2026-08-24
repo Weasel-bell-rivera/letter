@@ -68,6 +68,59 @@
 - 不修改与当前任务无关的文件。
 
 
+# Confirmation required for expensive operations
+
+## 默认不执行的非必须操作
+
+以下操作均为**非必须操作：除非用户在当前任务中明确要求，否则不执行，也不得仅为了扩大验证范围、追求更完整报告或满足通用Definition of done而自行追加**：
+
+- 非必须：为测试复制完整项目、创建项目副本或复制大量资源。
+- 非必须：运行PlayMode测试。
+- 非必须：运行完整EditMode测试套件。
+- 非必须：运行完整项目编译、完整资源重新导入或可能触发Library重建的检查。
+- 非必须：重建整个房间；若任务只要求增量添加、删除或调整对象，优先使用增量Scene编辑或修改现有Scene，除非用户明确要求重建。
+- 非必须：为已有明确规则重新创建独立设计提案；只有新增或改变未批准玩法规则时才需要先设计并确认。
+- 非必须：为简单房间配置改动新增PlayMode测试或大量自动测试；核心机制变化仍须同步相关的最小测试定义。
+- 非必须：人工试玩；未执行时必须在最终报告中记录对应运行时风险，不得声称已试玩通过。
+- 非必须：修改与当前任务无关的地图连接、世界进度、正式出口或其他房间文档。
+- 非必须：为固定放置在Scene中的敌人创建或迁移到Spawner、出生点或运行时生成服务。
+- 非必须：创建正式房间出口；只有任务明确涉及房间连接或出口时才执行。
+- 非必须：重新导入全部资源；只处理当前修改直接需要的资源。
+
+低成本且与任务直接相关的代码、文档、Prefab和Scene静态检查仍属于默认工作流，不受本节限制。
+
+## 非必须操作获准后的确认
+
+只有用户在当前任务中明确要求或明确批准后，才允许执行下列非必须操作。若任务无法在不执行其中某项操作的情况下完成，应停止对应部分，说明原因、内容、目的和大致耗时，等待用户明确确认；不得自行执行：
+
+- 非必须：为测试复制完整项目、创建项目副本或复制大量资源。
+- 非必须：启动Unity Editor批处理；仅当交付Unity序列化资产、Scene保存或编译确实需要时执行。
+- 非必须：运行PlayMode测试。
+- 非必须：运行完整EditMode测试套件。
+- 非必须：运行完整项目编译、资源重新导入或可能触发Library重建的操作。
+- 非必须：预计耗时超过1分钟，或会占用大量CPU、内存、磁盘空间的其他检查。
+- 非必须：同一测试因失败、超时或环境问题需要再次运行。
+
+用户确认仅适用于当次明确列出的操作，不代表允许后续自动追加、扩大测试范围或重复运行。
+
+在等待确认期间，可以继续进行不启动Unity的低成本只读检查，例如：
+
+- 阅读代码、文档和文本格式的Unity资源。
+- 使用`rg`搜索。
+- 检查`git diff`、`git status`。
+- 进行无需启动Unity的静态分析。
+- 明确列出尚未执行的测试及其风险。
+
+不得为了满足Definition of done而绕过本节。用户尚未批准的测试应在最终报告中标记为“未运行，等待用户确认”，不能声称任务已经通过这些测试。
+
+
+## Unity MCP
+
+- 使用Unity MCP读取或操作Unity Editor时，必须遵循`docs/UNITY_MCP_WORKFLOW.md`。
+- Unity MCP不改变设计审批、测试确认、Scene与Prefab安全或Definition of done的要求。
+- 通过Unity MCP执行的PlayMode、完整EditMode、完整编译、完整资源重新导入和其他耗时操作，仍适用本文件的确认规则。
+
+
 
 
 # Required workflow
@@ -78,8 +131,8 @@
 2. 说明当前行为和预期行为。
 3. 优先建立最小可运行原型。
 4. 实施修改。
-5. 运行项目检查、测试和静态检查。
-6. 验证重置、死亡、重复放置和场景切换等边界情况。
+5. 先进行无需额外确认的低成本检查；对于需要确认的测试，列出测试命令、目的和预计耗时，等待用户明确批准后再执行。
+6. 通过代码审查和低成本静态检查验证重置、死亡、重复放置和场景切换等边界情况；**非必须：除非用户明确要求，否则不为此自动运行PlayMode、完整测试或人工试玩。**
 7. 汇报修改内容、验证证据以及未验证风险。
 
 
@@ -94,13 +147,13 @@
 $UnityEditor = 'D:\03_Game\20_Unity\0_Editor\6000.5.7f1\Editor\Unity.exe'
 $ProjectPath = (Resolve-Path (git rev-parse --show-toplevel)).Path
 
-# Batch compile check
+# 非必须：仅在用户明确要求并确认后执行Batch compile check
 & $UnityEditor -batchmode -nographics -quit -projectPath $ProjectPath -logFile "$env:TEMP\letter-unity-compile.log"
 
-# EditMode tests
+# 非必须：仅在用户明确要求并确认后执行EditMode tests
 & $UnityEditor -batchmode -nographics -quit -projectPath $ProjectPath -runTests -testPlatform EditMode -testResults "$env:TEMP\letter-editmode-results.xml" -logFile "$env:TEMP\letter-editmode.log"
 
-# PlayMode tests
+# 非必须：仅在用户明确要求并确认后执行PlayMode tests
 & $UnityEditor -batchmode -nographics -quit -projectPath $ProjectPath -runTests -testPlatform PlayMode -testResults "$env:TEMP\letter-playmode-results.xml" -logFile "$env:TEMP\letter-playmode.log"
 ```
 
@@ -110,13 +163,13 @@ $ProjectPath = (Resolve-Path (git rev-parse --show-toplevel)).Path
 UNITY_EDITOR="/Applications/Unity/Hub/Editor/6000.5.7f1/Unity.app/Contents/MacOS/Unity"
 PROJECT_PATH="$(git rev-parse --show-toplevel)"
 
-# Batch compile check
+# 非必须：仅在用户明确要求并确认后执行Batch compile check
 "$UNITY_EDITOR" -batchmode -nographics -quit -projectPath "$PROJECT_PATH" -logFile /tmp/letter-unity-compile.log
 
-# EditMode tests
+# 非必须：仅在用户明确要求并确认后执行EditMode tests
 "$UNITY_EDITOR" -batchmode -nographics -quit -projectPath "$PROJECT_PATH" -runTests -testPlatform EditMode -testResults /tmp/letter-editmode-results.xml -logFile /tmp/letter-editmode.log
 
-# PlayMode tests
+# 非必须：仅在用户明确要求并确认后执行PlayMode tests
 "$UNITY_EDITOR" -batchmode -nographics -quit -projectPath "$PROJECT_PATH" -runTests -testPlatform PlayMode -testResults /tmp/letter-playmode-results.xml -logFile /tmp/letter-playmode.log
 ```
 
@@ -125,10 +178,10 @@ PROJECT_PATH="$(git rev-parse --show-toplevel)"
 # Definition of done
 任务只有在满足以下条件时才算完成：
 
-- 功能在可运行场景中得到验证
+- 功能具有可运行场景或可复用Prefab落点；**非必须：除非用户明确要求，否则不运行PlayMode或人工试玩**，未运行时必须记录运行时风险
 - 不破坏现有镜子和分身行为
 - 失败和重置路径可用
-- 必要测试通过
+- 已获用户批准的必要测试通过；尚未获批准的耗时测试必须明确记录为未验证风险
 - 设计规则发生变化时文档已经更新
 - 没有无关文件改动
 

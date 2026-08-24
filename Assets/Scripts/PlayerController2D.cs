@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
-public sealed class PlayerController2D : MonoBehaviour
+public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
 {
     [SerializeField] private PlayerMovementSettings settings;
     [SerializeField] private Transform visualRoot;
@@ -18,6 +18,7 @@ public sealed class PlayerController2D : MonoBehaviour
     private Collider2D supportCollider;
     private Collider2D surfaceMotionCollider;
     private Vector2 appliedSurfaceVelocity;
+    private float freezingMovementMultiplier = 1f;
     public float HorizontalInput => input;
     public bool JumpHeld => jumpHeld;
     public int JumpSequence { get; private set; }
@@ -29,10 +30,14 @@ public sealed class PlayerController2D : MonoBehaviour
     public bool IsOnFrozenGround => IsGroundedOnFrozenSurface(Vector2.down);
     public bool ControlEnabled => controlEnabled;
     public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
+    public Rigidbody2D FreezingBody => body;
+    public Collider2D FreezingCollider => bodyCollider;
+    public Vector2 FreezingUpAxis => Vector2.up;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>(); bodyCollider = GetComponent<BoxCollider2D>(); body.freezeRotation = true; body.gravityScale = 0f;
+        FreezingGroundActor2D.Ensure(gameObject);
         NormalizeVisualToCollider();
     }
     private void OnEnable() => BindJumpAction();
@@ -79,10 +84,10 @@ public sealed class PlayerController2D : MonoBehaviour
         Vector2 nextSurfaceVelocity = SurfaceMotion2D.Resolve(supportHit, grounded, out Collider2D nextMotionCollider);
         Vector2 relativeVelocity = SurfaceMotion2D.RemoveRepeatedContribution(velocity,
             surfaceMotionCollider, nextMotionCollider, appliedSurfaceVelocity);
-        float target = input * settings.maxSpeed;
+        float target = input * settings.maxSpeed * freezingMovementMultiplier;
         float accel = onFrozenGround
             ? 0f
-            : Mathf.Abs(target) > 0.01f ? settings.groundAcceleration : settings.groundDeceleration;
+            : (Mathf.Abs(target) > 0.01f ? settings.groundAcceleration : settings.groundDeceleration) * freezingMovementMultiplier;
         if (!grounded) accel *= settings.airControl;
         float relativeHorizontal = relativeVelocity.x;
         relativeHorizontal = Mathf.MoveTowards(relativeHorizontal, target, accel * Time.fixedDeltaTime);
@@ -149,6 +154,13 @@ public sealed class PlayerController2D : MonoBehaviour
     private static bool IsFrozenGround(SurfaceSemantic2D surface)
         => surface != null && surface.Type == SurfaceSemantic2D.SurfaceType.FrozenGround && surface.IsSafe;
     public void SetControlEnabled(bool value) { controlEnabled = value; if (!value) { input = 0f; jumpHeld = false; } }
+    public void SetFreezingMovementMultiplier(float multiplier)
+        => freezingMovementMultiplier = Mathf.Clamp01(multiplier);
+    public void CompleteFreezingGround()
+    {
+        if (body != null) body.linearVelocity = Vector2.zero;
+        FindAnyObjectByType<RoomResetSystem>()?.ResetRoom();
+    }
     public void TeleportTo(Vector3 position)
     {
         transform.position = position;
@@ -157,5 +169,6 @@ public sealed class PlayerController2D : MonoBehaviour
         supportCollider = null;
         surfaceMotionCollider = null;
         appliedSurfaceVelocity = Vector2.zero;
+        freezingMovementMultiplier = 1f;
     }
 }

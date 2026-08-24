@@ -14,7 +14,8 @@ public sealed class SurfaceSemantic2D : MonoBehaviour
         SpecialMirrorWall,
         Hazard,
         DynamicSurface,
-        Conveyor
+        Conveyor,
+        FreezingGround
     }
 
     [SerializeField] private SurfaceType surfaceType = SurfaceType.StaticSolid;
