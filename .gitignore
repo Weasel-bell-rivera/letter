@@ -34,3 +34,6 @@ sysinfo.txt
 # Crash reports
 crashlytics-build.properties
 
+# Local Unity screenshots
+Assets/Screenshots/
+Assets/Screenshots.meta
