@@ -38,6 +38,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
     {
         body = GetComponent<Rigidbody2D>(); bodyCollider = GetComponent<BoxCollider2D>(); body.freezeRotation = true; body.gravityScale = 0f;
         FreezingGroundActor2D.Ensure(gameObject);
+        FreezingVisual2D.Ensure(gameObject);
         NormalizeVisualToCollider();
     }
     private void OnEnable() => BindJumpAction();

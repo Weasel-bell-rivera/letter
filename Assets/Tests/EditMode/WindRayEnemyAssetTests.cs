@@ -10,6 +10,8 @@ public sealed class WindRayEnemyAssetTests
 {
     private const string SettingsPath = "Assets/Settings/Enemies/DefaultWindRayEnemy.asset";
     private const string PrefabPath = "Assets/Prefabs/Gameplay/Enemies/WindRayEnemy2D.prefab";
+    private const string SacrificialPrefabPath =
+        "Assets/Prefabs/Gameplay/Enemies/SacrificialWindRayEnemy2D.prefab";
     private const string ScenePath = "Assets/Scenes/Levels/Wind/Wind_001.unity";
     private const string FlyClipPath = "Assets/Animations/Enemies/WindRay/WindRayFly.anim";
     private const string RestSpritePath =
@@ -66,6 +68,23 @@ public sealed class WindRayEnemyAssetTests
         Assert.That(prefab.transform.Find("Visual/TargetMarker"), Is.Not.Null);
         Assert.That(prefab.transform.Find("Visual/DashTrail"), Is.Not.Null);
         Assert.That(prefab.transform.Find("LineOfSightOrigin"), Is.Not.Null);
+        Assert.That(enemy.OutcomeOnContact,
+            Is.EqualTo(WindRayEnemy2D.ContactOutcome.ContinueAttack));
+    }
+
+    [Test]
+    public void SacrificialPrefabUsesDefeatAfterHitWithoutChangingSharedNumbers()
+    {
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(SacrificialPrefabPath);
+        Assert.That(prefab, Is.Not.Null);
+        Assert.That(prefab.transform.position, Is.EqualTo(Vector3.zero));
+        WindRayEnemy2D enemy = prefab.GetComponent<WindRayEnemy2D>();
+        Assert.That(enemy, Is.Not.Null);
+        Assert.That(enemy.Settings,
+            Is.EqualTo(AssetDatabase.LoadAssetAtPath<WindRayEnemySettings>(SettingsPath)));
+        Assert.That(enemy.OutcomeOnContact,
+            Is.EqualTo(WindRayEnemy2D.ContactOutcome.DefeatAfterHit));
+        Assert.That(prefab.GetComponentInChildren<WindRayDamageTrigger2D>(true), Is.Not.Null);
     }
 
     [Test]

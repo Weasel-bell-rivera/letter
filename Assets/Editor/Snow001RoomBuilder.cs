@@ -322,7 +322,7 @@ public static class Snow001RoomBuilder
         Require(Mathf.Abs(Mathf.DeltaAngle(plate.transform.eulerAngles.z, 90f)) < .1f,
             "Plate-A must be rotated 90 degrees.");
         Require(door.ControlSource == plate, "Door-A must serialize Plate-A as its control source.");
-        Require(door.GetComponent<BoxCollider2D>().size == new Vector2(.75f, 2f),
+        Require(door.GetComponent<BoxCollider2D>().size == new Vector2(1f, 2f),
             "Door-A must use the standard two-tile Door2D Prefab size.");
         Require(terrain.HasTile(new Vector3Int(-1, 0, 0)) && terrain.HasTile(new Vector3Int(-1, 4, 0)),
             "Static Terrain must close the shaft above the two-tile Door-A.");

@@ -61,6 +61,8 @@ Player Prefab不包含常驻的手持镜子子对象。镜子处于`Held`状态�
 
 ## 固定物理与输入配置
 
+Player根对象同时挂载通用`FreezingVisual2D`。该组件只读取运行时自动确保的`FreezingGroundActor2D`进度，控制Player视觉子树的冰蓝染色和霜层Overlay，不修改Player移动、碰撞、输入或死亡规则。MirrorClone运行时创建后使用同一个表现组件。
+
 - `BoxCollider2D`尺寸固定为`0.8 × 1.8 Unity units`。
 - `Rigidbody2D`使用Dynamic Body、Continuous Collision Detection和Interpolate，并禁止物理旋转。
 - 重力由`PlayerController2D`依据`DefaultPlayerMovement.asset`计算，不在Prefab或房间中复制重力常量。

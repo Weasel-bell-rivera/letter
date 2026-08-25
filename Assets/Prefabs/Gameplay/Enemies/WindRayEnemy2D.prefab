@@ -517,6 +517,7 @@ MonoBehaviour:
   dashTrail: {fileID: 7107894307458160133}
   feedbackAudio: {fileID: 698321994252871051}
   initialVisualFacing: {x: -0.70710677, y: -0.70710677}
+  contactOutcome: 0
 --- !u!95 &7270313765814776969
 Animator:
   serializedVersion: 7

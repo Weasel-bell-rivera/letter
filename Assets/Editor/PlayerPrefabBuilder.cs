@@ -169,6 +169,7 @@ public static class PlayerPrefabBuilder
 
         PlayerController2D controller = root.AddComponent<PlayerController2D>();
         controller.Configure(visualObject.transform, movement);
+        root.AddComponent<FreezingVisual2D>();
 
         PlayerInput input = root.AddComponent<PlayerInput>();
         input.actions = inputActions;

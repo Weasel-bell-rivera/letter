@@ -41,4 +41,8 @@
                                                       [EARTH_018]                 [FIRE_012]─[FIRE_011]─[FIRE_010]─[FIRE_009]─[FIRE_013]─[FIRE_014]
                                                                                                                        │
                                                                                                                   [FIRE_015]
+                                                                                                                       │
+                                                                                                                  [FIRE_016]
+                                                                                                                       │
+                                                                                                                  [FIRE_017]
 ```

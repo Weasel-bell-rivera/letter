@@ -8,6 +8,8 @@ public static class WindRayEnemyBuilder
 {
     public const string SettingsPath = "Assets/Settings/Enemies/DefaultWindRayEnemy.asset";
     public const string PrefabPath = "Assets/Prefabs/Gameplay/Enemies/WindRayEnemy2D.prefab";
+    public const string SacrificialPrefabPath =
+        "Assets/Prefabs/Gameplay/Enemies/SacrificialWindRayEnemy2D.prefab";
     public const string RestSpritePath =
         "Assets/Art/Kenney/NewPlatformerPack/Sprites/Enemies/Double/Bee/bee_rest.png";
     public const string WingUpSpritePath =
@@ -39,7 +41,10 @@ public static class WindRayEnemyBuilder
         Sprite wingDown = ConfigureSprite(WingDownSpritePath);
         AnimatorController animatorController = CreateOrUpdateAnimator(rest, wingUp, wingDown);
         WindRayEnemySettings settings = CreateOrUpdateSettings();
-        CreateOrUpdatePrefab(settings, rest, animatorController);
+        CreateOrUpdatePrefab(settings, rest, animatorController, PrefabPath,
+            "WindRayEnemy2D", WindRayEnemy2D.ContactOutcome.ContinueAttack);
+        CreateOrUpdatePrefab(settings, rest, animatorController, SacrificialPrefabPath,
+            "SacrificialWindRayEnemy2D", WindRayEnemy2D.ContactOutcome.DefeatAfterHit);
     }
 
     private static Sprite ConfigureSprite(string path)
@@ -120,9 +125,10 @@ public static class WindRayEnemyBuilder
     }
 
     private static void CreateOrUpdatePrefab(WindRayEnemySettings settings, Sprite rest,
-        RuntimeAnimatorController animatorController)
+        RuntimeAnimatorController animatorController, string prefabPath, string rootName,
+        WindRayEnemy2D.ContactOutcome contactOutcome)
     {
-        GameObject root = new("WindRayEnemy2D");
+        GameObject root = new(rootName);
         try
         {
             Rigidbody2D body = root.AddComponent<Rigidbody2D>();
@@ -173,10 +179,11 @@ public static class WindRayEnemyBuilder
             Transform sightOrigin = Child("LineOfSightOrigin", root.transform).transform;
             enemy.Configure(settings, trigger, sightOrigin, bodyVisual, marker, trail, audio);
             enemy.SetInitialVisualFacing(new Vector2(-1f, -1f));
+            enemy.SetContactOutcome(contactOutcome);
             trigger.Configure(enemy);
 
-            GameObject saved = PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
-            Require(saved != null, $"Failed to save wind ray Prefab: {PrefabPath}");
+            GameObject saved = PrefabUtility.SaveAsPrefabAsset(root, prefabPath);
+            Require(saved != null, $"Failed to save wind ray Prefab: {prefabPath}");
         }
         finally
         {

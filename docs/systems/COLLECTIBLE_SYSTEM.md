@@ -92,6 +92,13 @@ FIRE_004:COLLECTIBLE:01
 - 镜像死亡时效果保留；玩家死亡、手动重置或切换场景时清除并按规则恢复道具。
 - 完整规则见 `docs/regions/WIND_REGION.md`。
 
+### 雪区临时胡萝卜
+
+- 类型：`TemporaryPickup`，当前实现名 `TemporaryCarrotPickup2D`。
+- 只在配置它的雪区房间当前尝试中有效；只有Player可以拾取并立即交付给显式引用的`SnowmanGate2D`。
+- Player死亡或手动重置后胡萝卜恢复、雪人重新挡路；不跨房间、不写入长期存档。
+- 完整规则见 `docs/regions/SNOW_REGION.md`。
+
 ## 验收标准
 
 - Player能按规则拾取各类型对象，MirrorClone不能拾取。

@@ -1,0 +1,271 @@
+fileFormatVersion: 2
+guid: 68253f4dc4fa44a7d99d012beb38e359
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2138632110410856058
+    second: small_tornado_3frame_handpainted_0
+  - first:
+      213: 3337730002159924649
+    second: small_tornado_3frame_handpainted_1
+  - first:
+      213: -3953360426246074948
+    second: small_tornado_3frame_handpainted_2
+  - first:
+      213: 3313808579251220903
+    second: small_tornado_3frame_handpainted_3
+  - first:
+      213: 1759476193509179973
+    second: small_tornado_3frame_handpainted_4
+  - first:
+      213: 2268603374589984152
+    second: small_tornado_3frame_handpainted_5
+  - first:
+      213: 4400574142589611588
+    second: small_tornado_3frame_handpainted_6
+  - first:
+      213: 2666735596072976930
+    second: small_tornado_3frame_handpainted_7
+  - first:
+      213: 8112823651156960296
+    second: small_tornado_3frame_handpainted_8
+  - first:
+      213: 3299319341106525801
+    second: small_tornado_3frame_handpainted_9
+  - first:
+      213: -1207977137856895062
+    second: small_tornado_3frame_handpainted_10
+  - first:
+      213: 1103197082513632479
+    second: small_tornado_3frame_handpainted_11
+  - first:
+      213: -4958203084239298215
+    second: small_tornado_3frame_handpainted_12
+  - first:
+      213: 8113193014322462474
+    second: small_tornado_3frame_handpainted_13
+  - first:
+      213: -5766222592509944845
+    second: small_tornado_3frame_handpainted_14
+  - first:
+      213: -5587246167002764097
+    second: small_tornado_3frame_handpainted_15
+  - first:
+      213: -1974231307817270838
+    second: small_tornado_3frame_handpainted_16
+  - first:
+      213: -3616731513617498584
+    second: small_tornado_3frame_handpainted_17
+  - first:
+      213: -5471852792157283327
+    second: small_tornado_3frame_handpainted_18
+  - first:
+      213: 5671453095143442359
+    second: small_tornado_0
+  - first:
+      213: -2624513867132200256
+    second: small_tornado_1
+  - first:
+      213: 7638138841225400111
+    second: small_tornado_2
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1043.75
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: small_tornado_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 627
+        height: 835
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b780589a8c05be40800000000000000
+      internalID: 5671453095143442359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small_tornado_1
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 0
+        width: 627
+        height: 835
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ca9f790b8ad39bd0800000000000000
+      internalID: -2624513867132200256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: small_tornado_2
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 0
+        width: 627
+        height: 835
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f8a58bece100a60800000000000000
+      internalID: 7638138841225400111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      small_tornado_0: 5671453095143442359
+      small_tornado_1: -2624513867132200256
+      small_tornado_2: 7638138841225400111
+      small_tornado_3frame_handpainted_0: -2138632110410856058
+      small_tornado_3frame_handpainted_1: 3337730002159924649
+      small_tornado_3frame_handpainted_10: -1207977137856895062
+      small_tornado_3frame_handpainted_11: 1103197082513632479
+      small_tornado_3frame_handpainted_12: -4958203084239298215
+      small_tornado_3frame_handpainted_13: 8113193014322462474
+      small_tornado_3frame_handpainted_14: -5766222592509944845
+      small_tornado_3frame_handpainted_15: -5587246167002764097
+      small_tornado_3frame_handpainted_16: -1974231307817270838
+      small_tornado_3frame_handpainted_17: -3616731513617498584
+      small_tornado_3frame_handpainted_18: -5471852792157283327
+      small_tornado_3frame_handpainted_2: -3953360426246074948
+      small_tornado_3frame_handpainted_3: 3313808579251220903
+      small_tornado_3frame_handpainted_4: 1759476193509179973
+      small_tornado_3frame_handpainted_5: 2268603374589984152
+      small_tornado_3frame_handpainted_6: 4400574142589611588
+      small_tornado_3frame_handpainted_7: 2666735596072976930
+      small_tornado_3frame_handpainted_8: 8112823651156960296
+      small_tornado_3frame_handpainted_9: 3299319341106525801
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -51,6 +51,7 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
     {
         ResolveReferences();
         FreezingGroundActor2D.Ensure(gameObject);
+        FreezingVisual2D.Ensure(gameObject);
         EnsureFreezeAudio();
         initialPosition = transform.position;
         initialized = true;

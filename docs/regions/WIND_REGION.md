@@ -20,6 +20,37 @@
 - 本机制不产生风力、不改变Player或MirrorClone重力，也不依赖任何风区道具。
 - 完整规则见`docs/systems/WIND_RAY_ENEMY.md`。
 
+### 殉风鳐
+
+- 当前实现名称：`SacrificialWindRayEnemy2D`。
+- 它与逐风鳐共享感知、最近目标、预警、直线冲刺、统一数值和视觉结构。
+- 命中MirrorClone时，MirrorClone死亡、镜子回收，殉风鳐同时进入已击败状态；Player和房间不整体重置。
+- 命中Player时，Player执行完整房间重置；殉风鳐随统一房间重置恢复到初始守卫状态。
+- 殉风鳐被击败后不再感知、移动或造成伤害，直到手动重置、Player死亡重置或重新进入房间。
+- 它是死亡规则不同的独立敌人原型Prefab，不是`WindRayEnemy2D.prefab`的Unity Prefab Variant。
+- 完整规则见`docs/systems/WIND_RAY_ENEMY.md`。
+
+### 风柱与小龙卷风
+
+- Player与MirrorClone受完全相同的世界空间风力和小龙卷风伤害规则；镜面输入变换不改变环境方向。
+- 小龙卷风命中Player时触发完整房间重置；命中MirrorClone时只执行镜像死亡与镜子回收。
+- 完全关闭的门阻挡风柱；移动小龙卷风碰到关闭门时立即消失。门开启后风柱和后续小龙卷风可以通过门洞。
+- 门只提供实体阻挡，不改变风柱方向、周期或小龙卷风生成周期。
+- 首版统一数值、Prefab、生成、遮挡和重置规则见`docs/systems/WIND_ENVIRONMENT_SYSTEM.md`。
+
+### 导风板
+
+- 导风板把匹配方向的有效风和移动小龙卷风固定旋转`+90°`或`-90°`。
+- 普通压力板可以在两种方向之间切换，重置后恢复初始方向。
+- 导风板不产生能量、不改变风速，也不支持首版串联。
+- 完整规则见`docs/systems/WIND_ENVIRONMENT_SYSTEM.md`。
+
+### 风力涡轮机关
+
+- 风力涡轮把方向匹配且无遮挡的持续风转换为普通机关信号。
+- 有风时保持激活，失风立即释放；不保存激活状态，也不响应小龙卷风或角色碰撞。
+- 首版主要显式控制一扇普通门，完整规则见`docs/systems/WIND_ENVIRONMENT_SYSTEM.md`。
+
 ### 失重之羽
 
 - 当前实现名称：`GravityDisablePickup2D`

@@ -115,11 +115,11 @@ public sealed class Fire008AssetTests
                 "The reusable door prefab must only receive an explicit switch reference from its scene or door group.");
             BoxCollider2D doorCollider = doorRoot.GetComponent<BoxCollider2D>();
             Assert.That(doorCollider.enabled, Is.True);
-            Assert.That(doorCollider.size, Is.EqualTo(new Vector2(.75f, 2f)));
+            Assert.That(doorCollider.size, Is.EqualTo(new Vector2(1f, 2f)));
             Assert.That(doorRoot.transform.Find("Visual").localPosition, Is.EqualTo(new Vector3(0f, -.5f, 0f)));
             Assert.That(doorRoot.transform.Find("TopVisual").localPosition, Is.EqualTo(new Vector3(0f, .5f, 0f)));
-            Assert.That(doorRoot.transform.Find("Visual").localScale, Is.EqualTo(new Vector3(.75f, 1f, 1f)));
-            Assert.That(doorRoot.transform.Find("TopVisual").localScale, Is.EqualTo(new Vector3(.75f, 1f, 1f)));
+            Assert.That(doorRoot.transform.Find("Visual").localScale, Is.EqualTo(Vector3.one));
+            Assert.That(doorRoot.transform.Find("TopVisual").localScale, Is.EqualTo(Vector3.one));
 
             Assert.That(plateRoot.transform.Find("Visual").GetComponent<SpriteRenderer>().sprite, Is.SameAs(switchIdle));
             SerializedObject plate = new(plateRoot.GetComponent<PressurePlate2D>());
@@ -264,7 +264,7 @@ public sealed class Fire008AssetTests
             .Single(tilemap => tilemap.name == "Terrain");
 
         Assert.That(doors, Has.Length.EqualTo(expectedDoorCount), scenePath);
-        Assert.That(doors.All(door => door.GetComponent<BoxCollider2D>().size == new Vector2(.75f, 2f)),
+        Assert.That(doors.All(door => door.GetComponent<BoxCollider2D>().size == new Vector2(1f, 2f)),
             Is.True, $"{scenePath} contains a stretched door instance.");
         foreach (Vector3Int cell in wallCaps)
             Assert.That(terrain.HasTile(cell), Is.True, $"{scenePath} is missing the static wall cap at {cell}.");

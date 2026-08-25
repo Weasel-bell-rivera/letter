@@ -22,7 +22,7 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     public bool IsOnFrozenGround => TryGetGroundSurface(out SurfaceSemantic2D surface, out _) && IsFrozenGround(surface);
     public event Action Died;
     public void Configure(PlayerController2D player, Vector2 transformedMoveAxis, Vector2 localGravity)
-    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); supportCollider = null; surfaceMotionCollider = null; appliedSurfaceVelocity = Vector2.zero; freezingMovementMultiplier = 1f; FreezingGroundActor2D.Ensure(gameObject); }
+    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); supportCollider = null; surfaceMotionCollider = null; appliedSurfaceVelocity = Vector2.zero; freezingMovementMultiplier = 1f; FreezingGroundActor2D.Ensure(gameObject); FreezingVisual2D.Ensure(gameObject); }
     private void FixedUpdate()
     {
         if (source == null || settings == null) return;

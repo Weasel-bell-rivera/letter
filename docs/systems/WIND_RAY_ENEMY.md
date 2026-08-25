@@ -10,6 +10,8 @@
 - 通用敌人伤害与生命周期规则同时参见`docs/systems/ENEMY_SYSTEM.md`，风区定位参见`docs/regions/WIND_REGION.md`。
 - 本设计不依赖风区道具或其他临时区域效果；没有获得任何区域道具时也必须完整成立。
 
+本文同时定义死亡规则不同的独立原型`SacrificialWindRayEnemy2D`（正式玩法名称：殉风鳐）。殉风鳐共享本文的感知、目标选择、锁定、冲刺和统一数值，但按下文“殉风鳐变种”处理命中与死亡。
+
 逐风鳐首个灰盒教学房为`WIND_001`。正式房间必须复用统一配置，不得逐实例修改感知与攻击数值。
 
 ## 设计目标
@@ -114,6 +116,8 @@ Returning
 
 ## 攻击与角色交互
 
+以下默认规则适用于基础`WindRayEnemy2D`。殉风鳐的覆盖规则见本节末尾。
+
 ### 命中Player
 
 - Player立即进入统一死亡重置流程。
@@ -134,6 +138,15 @@ Returning
 - Player可以让MirrorClone触发锁定后主动回收镜子；逐风鳐仍然攻击已记录的锁定点。
 - 镜子回收的固定帧处理优先级仍以`docs/MIRROR_MECHANIC.md`为准，逐风鳐不得阻止或延迟回收。
 - 成功诱敌不要求牺牲MirrorClone；保住MirrorClone可以支持后续压力板或路径谜题。
+
+### 殉风鳐变种（已确定）
+
+- 殉风鳐命中MirrorClone时，先执行镜像死亡与镜子回收，再进入`Defeated`状态。
+- `Defeated`期间停止感知、移动、伤害、目标标记和冲刺拖尾，并隐藏本体；Player与房间不整体重置。
+- 殉风鳐命中Player时仍由Player触发完整房间重置；殉风鳐随同一次统一重置恢复，因此不会在重置后的新尝试中保持死亡。
+- 手动重置、Player死亡重置或重新进入房间时，殉风鳐恢复守卫点、`Guarding`和全部初始反馈。
+- MirrorClone被其他危险杀死或被主动回收不会击败殉风鳐；只有殉风鳐自身伤害Trigger成功命中角色才触发击败结果。
+- 此差异改变敌人死亡和重置规则，因此殉风鳐使用独立基础Prefab，而不是Unity Prefab Variant。
 
 ## 碰撞与其他对象
 
@@ -203,6 +216,7 @@ MirrorClone单独死亡或镜子主动回收不重置逐风鳐。场景切换不
 - 自动测试已编写；因本机Unity Personal许可证被撤销，本轮尚未实际执行。
 - 逐风鳐必须通过通用组件和Prefab实现，正式房间只添加Prefab实例。
 - 房间不得使用Scene内嵌脚本、动画事件或房间编号实现其感知、攻击和重置规则。
+- 殉风鳐资产路径：`Assets/Prefabs/Gameplay/Enemies/SacrificialWindRayEnemy2D.prefab`；共享同一配置资产和动画资源，根组件明确配置为命中后击败。
 
 ## 验收标准
 

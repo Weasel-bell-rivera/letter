@@ -32,5 +32,152 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Earth/Earth_001.unity
     guid: 43590f5c3ba047743a0906e6d7b90675
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_009.unity
+    guid: e0f42fd39d4354e0d97e94773f5a9b71
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_010.unity
+    guid: adfdcd01146374f4a820e861e6964acd
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_011.unity
+    guid: d09e0aff167af4d43ba5b04ebd15e3ff
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_012.unity
+    guid: fad2b0544392d4269af6d0c390d71e5f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_003.unity
+    guid: cfabd75b269ff43c2a20d81a8a8fb574
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_003.unity
+    guid: 5be105dbc783547fda97e80cda1eef29
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_013.unity
+    guid: c578b6fdfb075448dad79feb0a685b88
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_014.unity
+    guid: 7a44d2eeecf654de3a773cac4347ab9c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_015.unity
+    guid: 987943c304b3e417b8d07ca4ca31bd4b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_004.unity
+    guid: 4a094449fa4304721a1b9dbb70faab97
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_005.unity
+    guid: 392e6f5120e1e46fab6eedfe8107cc82
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_006.unity
+    guid: 2bc6ecda656604892bf654ddfbf657d2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_007.unity
+    guid: 7ab2eecc23fea4e2789d90931d0ae929
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_008.unity
+    guid: f77524737eac44d3589ad08298235aaf
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_009.unity
+    guid: f6bb8064aa7454c648f175e505c2b284
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_010.unity
+    guid: 21220bbc631b64c06afcf2c82aa9e0d7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_011.unity
+    guid: 14f57950f75f44c6cbfd58c116f74ea2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_012.unity
+    guid: dfa471f8b73124c64bbffdc397334455
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_013.unity
+    guid: 71e4bc3a61b3149a7815f199b8ece555
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_014.unity
+    guid: 534d33e0e0e3a4f4a882015825009209
+  - enabled: 1
+    path: Assets/Scenes/Levels/Snow/Snow_015.unity
+    guid: d905157a5e0004b179a6de987f298107
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_004.unity
+    guid: e28ea7c360e614df78d95ed68de25834
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_005.unity
+    guid: 4c6d36961ef2b4d1c97dd27f0f2ef753
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_006.unity
+    guid: 02d9ea32ec1774ef38f8f0544390e474
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_007.unity
+    guid: 9149fb43e170f4087aba2a2a2f30cb91
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_008.unity
+    guid: 78eba92145db2425aa28c142d1ba9ca5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_009.unity
+    guid: 1d0d9cf5def084e688d2f054cfb999c2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_010.unity
+    guid: a182c617916564c68a67788cbe51c3f7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_011.unity
+    guid: f8294bc78cf9a40efbe79b75d3a4f142
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_012.unity
+    guid: 1cc345df89d27419ba9286f14c7c8a25
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_013.unity
+    guid: 3f2ec97461a8741c9b2cb44ab65dda07
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_014.unity
+    guid: 2cbf464308bb24d1089e714e26728bd8
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wind/Wind_015.unity
+    guid: ad8b093342f3e4c03a39d0b824076b7b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_002.unity
+    guid: b04abc494a10b442d93c3c27d070bbea
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_003.unity
+    guid: 9759409c82d154dba848e25d260b779c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_004.unity
+    guid: 1632016dea38349bda7d6a7e521b720b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_005.unity
+    guid: 939f2611100864cf08a472595f6cb6d2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_006.unity
+    guid: e386e323687d94c709c5d58fce9e8a20
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_007.unity
+    guid: f28a520b740074ac3a93b0259a93a825
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_008.unity
+    guid: 6e191a3564a054d868076dc4bea176ba
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_009.unity
+    guid: 31b9ff9e6ad5249a78f695a8c9c65b31
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_010.unity
+    guid: 3bf56b23854a94d4c90bacec75b91a92
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_011.unity
+    guid: ffb038c2101c34ac4b5d213bdac46f08
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_012.unity
+    guid: 70a70f789486c48d6a37f21cdd9d4047
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_013.unity
+    guid: e453d132066a646d89f220833f465cd5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_014.unity
+    guid: f00dfa09da23c427f9ddd4c56178c5a1
+  - enabled: 1
+    path: Assets/Scenes/Levels/Earth/Earth_015.unity
+    guid: e3a0c50f249ca4bc39e754697bda3b70
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_016.unity
+    guid: 3dd12930f1bb9443185ca878559566a5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_017.unity
+    guid: 2afaaad8039394653bf08b8f5cc02a0d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

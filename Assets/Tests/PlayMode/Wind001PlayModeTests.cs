@@ -111,6 +111,28 @@ public sealed class Wind001PlayModeTests
     }
 
     [UnityTest]
+    public IEnumerator SacrificialVariantIsDefeatedByCloneHitAndRestoredByRoomReset()
+    {
+        MirrorPlayer2D mirror = Object.FindAnyObjectByType<MirrorPlayer2D>();
+        WindRayEnemy2D enemy = Object.FindAnyObjectByType<WindRayEnemy2D>();
+        RoomResetSystem reset = Object.FindAnyObjectByType<RoomResetSystem>();
+        enemy.SetContactOutcome(WindRayEnemy2D.ContactOutcome.DefeatAfterHit);
+        Assert.That(mirror.TryPlace(), Is.True);
+
+        MirrorCloneController2D clone = mirror.Clone;
+        enemy.HandleCharacterContact(clone.GetComponent<Collider2D>());
+        yield return null;
+
+        Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
+        Assert.That(enemy.State, Is.EqualTo(WindRayEnemy2D.EnemyState.Defeated));
+        Assert.That(enemy.IsDamaging, Is.False);
+
+        reset.ResetRoom();
+        Assert.That(enemy.State, Is.EqualTo(WindRayEnemy2D.EnemyState.Guarding));
+        Assert.That(enemy.IsDamaging, Is.True);
+    }
+
+    [UnityTest]
     public IEnumerator SolidWallBlocksDistanceDetection()
     {
         MirrorPlayer2D mirror = Object.FindAnyObjectByType<MirrorPlayer2D>();

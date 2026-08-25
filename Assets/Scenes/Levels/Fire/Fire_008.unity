@@ -157,11 +157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1267712555144963095, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.75
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 1267712555144963095, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.5
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 2233886615206855802, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -209,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3779459558828408861, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.92
+      value: -8.85
       objectReference: {fileID: 0}
     - target: {fileID: 4059651125339213074, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: doorGroupId
@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542665837736653220, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.92
+      value: -8.85
       objectReference: {fileID: 0}
     - target: {fileID: 6891100641525794181, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_Name
@@ -765,11 +765,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1267712555144963095, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.75
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: 1267712555144963095, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2233886615206855802, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,7 +817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3779459558828408861, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.08
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 4059651125339213074, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: doorGroupId
@@ -829,7 +829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542665837736653220, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 6891100641525794181, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_Name
@@ -4054,11 +4054,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1267712555144963095, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.75
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 1267712555144963095, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2233886615206855802, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4106,7 +4106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3779459558828408861, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.08
+      value: 8.15
       objectReference: {fileID: 0}
     - target: {fileID: 4059651125339213074, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: doorGroupId
@@ -4118,7 +4118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542665837736653220, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.08
+      value: 8.15
       objectReference: {fileID: 0}
     - target: {fileID: 6891100641525794181, guid: cf82fa1d3b3c23543b70a815f7804a5e, type: 3}
       propertyPath: m_Name

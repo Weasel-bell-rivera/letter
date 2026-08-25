@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class EruptionHazard2D : MonoBehaviour, IRoomResettable
+public sealed class EruptionHazard2D : MonoBehaviour, IRoomResettable, IOrderedRoomResettable
 {
     public enum Phase { Warning, Dangerous, Cooldown }
     [SerializeField] private float warningDuration = 1f;
@@ -10,6 +10,7 @@ public sealed class EruptionHazard2D : MonoBehaviour, IRoomResettable
     [SerializeField] private SpriteRenderer visual;
     private float timer;
     public Phase CurrentPhase { get; private set; }
+    public int ResetOrder => 10;
 
     private void Awake() { if (hazard == null) hazard = GetComponentInChildren<Hazard2D>(); ResetRoomState(); }
     private void Update()
@@ -23,7 +24,13 @@ public sealed class EruptionHazard2D : MonoBehaviour, IRoomResettable
         CurrentPhase = phase;
         timer = phase == Phase.Warning ? warningDuration : phase == Phase.Dangerous ? dangerDuration : cooldownDuration;
         hazard?.SetActive(phase == Phase.Dangerous);
-        if (visual != null) visual.color = phase == Phase.Warning ? Color.yellow : phase == Phase.Dangerous ? Color.red : Color.gray;
+        if (visual != null)
+        {
+            // Keep the full warning phase for timing, but do not show the old
+            // yellow placeholder column. The column only represents active danger.
+            visual.enabled = phase == Phase.Dangerous;
+            visual.color = Color.red;
+        }
     }
     public void ResetRoomState() => SetPhase(Phase.Warning);
 }

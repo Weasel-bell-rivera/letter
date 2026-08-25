@@ -116,6 +116,7 @@ public static class SnowPrerequisiteBuilder
             Transform surfaceProbe = Child(root.transform, "SurfaceProbe", new Vector3(0f, -.45f, 0f)).transform;
 
             FreezablePatrolEnemy2D enemy = root.AddComponent<FreezablePatrolEnemy2D>();
+            root.AddComponent<FreezingVisual2D>();
             damage.Configure(enemy);
             enemy.ConfigurePrefabReferences(solid, damage, groundProbe, surfaceProbe,
                 activeVisual, frozenVisual, freezeEffect);

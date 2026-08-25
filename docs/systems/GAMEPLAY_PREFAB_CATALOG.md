@@ -20,10 +20,22 @@ Assets/Prefabs/Gameplay/
 ├─ Surfaces/
 │  ├─ GroundConveyor2D.prefab
 │  └─ FreezingGroundCell2D.prefab
+├─ Snow/
+│  ├─ SnowmanGate2D.prefab
+│  └─ TemporaryCarrotPickup2D.prefab
+├─ Hazards/
+│  ├─ PeriodicSnowfall2D.prefab
+│  └─ RisingLava2D.prefab
+├─ Wind/
+│  ├─ WindColumn2D.prefab
+│  ├─ MovingTornado2D.prefab
+│  ├─ TornadoGenerator2D.prefab
+│  └─ WindDeflector2D.prefab
 ├─ Enemies/
 │  ├─ FreezablePatrolEnemy2D.prefab
 │  ├─ VerticalWallPatrolEnemy2D.prefab
 │  ├─ WindRayEnemy2D.prefab
+│  ├─ SacrificialWindRayEnemy2D.prefab
 │  ├─ HorizontalFireballEnemy2D.prefab
 │  └─ Projectiles/
 │     └─ HorizontalFireballProjectile2D.prefab
@@ -31,7 +43,8 @@ Assets/Prefabs/Gameplay/
 │  ├─ Door2D.prefab
 │  └─ PermanentLatchDoorGroup2D.prefab
 ├─ Switches/
-│  └─ PressurePlate2D.prefab
+│  ├─ PressurePlate2D.prefab
+│  └─ WindTurbineSwitch2D.prefab
 ├─ Checkpoints/
 │  └─ Checkpoint2D.prefab
 └─ Exits/
@@ -44,12 +57,18 @@ Assets/Prefabs/Gameplay/
 - `VerticalWallPatrolEnemy2D.prefab`已经创建；正式房间只允许覆盖已批准的墙面侧别、竖直路径、速度、等待和视觉参数。
 - `WindRayEnemy2D.prefab`已经创建并用于`WIND_001`灰盒；统一数值已确认。**非必须：除非用户明确要求，否则不运行其独立EditMode与PlayMode测试**，未运行状态作为风险记录。
 - `HorizontalFireballEnemy2D.prefab`与其火球Prefab已有已确认规则、运行时代码和可重复构建器，并已由Unity Editor生成；尚未获准进入正式房间。**非必须：除非用户明确要求，否则不进行PlayMode试玩验证。**
+- `MovingTornado2D.prefab`使用`Assets/Art/Generated/Wind/small_tornado_3frame_handpainted.png`的三帧手绘透明Sprite动画，循环速率`8 FPS`。动画只改变Sprite，不改变`0.8×0.8 units`伤害Trigger、速度、方向、门阻挡或重置规则。
 - `Player.prefab`由通用房间生成系统管理，不作为房间Scene中的重复Prefab实例；完整结构、视觉、入口绑定和生命周期规则见`docs/systems/PLAYER_PREFAB.md`。
 - `PlacedMirror.prefab`只由`MirrorPlayer2D`在成功放置时生成；`Held`和`Unobtained`状态不在Player下保留镜子视觉。
 - 静态墙壁、台阶、低顶、固定平台和返回通道使用标准Tilemap结构，不创建房间专用Prefab。
 - 固定岩浆等静态危险区使用`Hazard` Tilemap及统一危险组件，不为单个房间创建岩浆Prefab。
+- 周期升降岩浆使用`Assets/Prefabs/Gameplay/Hazards/RisingLava2D.prefab`；视觉与Trigger共同连续移动，默认周期为`1/2/1.5/2/2.5s`，房间不得改变伤害对象、镜子交互、非支撑性质或重置规则。
+- `RisingLava2D.prefab`正式灰盒视觉使用AI生成并人工选定的手绘透明Sprite：`Assets/Art/Generated/Fire/lava_rising_handpainted.png`；Sprite只负责表现，不改变`2×1 units`危险边界、移动距离或周期。
 - 静态寒冰地面使用`FrozenGround` Tilemap，不把单块寒冰制作成Prefab；移动寒冰平台仍使用移动平台Prefab。
 - 新增冻结地面使用`FreezingGroundCell2D.prefab`按整数格位置组合；房间不得覆盖统一冻结参数。
+- `Player.prefab`与`FreezablePatrolEnemy2D.prefab`挂载共享`FreezingVisual2D`；MirrorClone由统一生成流程运行时自动挂载。房间不得复制或覆盖其冻结颜色、霜层透明度和响应速度。
+- `SnowmanGate2D.prefab`与`TemporaryCarrotPickup2D.prefab`使用显式Scene引用配对，只表达同房间临时挡路状态。
+- `PeriodicSnowfall2D.prefab`复用通用周期危险状态机；房间只配置暴露区位置和尺度，不覆盖雪区统一周期。
 
 ## 敌人Prefab原型与Variant登记
 
@@ -151,6 +170,21 @@ Prefab验证要求：
 - Player和MirrorClone均能稳定随平台移动并主动离开。
 - 重置恢复初始相位、方向、等待计时和运行状态。
 - `SurfaceSemantic2D`始终返回安全、非静态`DynamicSurface`。
+
+## `SinkingEarthBlock2D.prefab`
+
+资产路径：`Assets/Prefabs/Gameplay/Earth/SinkingEarthBlock2D.prefab`
+
+```text
+SinkingEarthBlock2D
+├─ Visual
+└─ TopMarker
+```
+
+根对象包含Kinematic `Rigidbody2D`、非Trigger `BoxCollider2D`、安全且非静态的
+`DynamicSurface`语义和`SinkingEarthBlock2D`。Prefab按上表面实际承重质量沿世界竖直方向下沉，卸重后缓慢恢复，并通过通用重置协议恢复初始高度。它不包含`MirrorSurface2D`，任何状态都不能放置镜子。
+
+完整规则、实例可覆盖字段和验收要求见`docs/systems/SINKING_EARTH_BLOCK_SYSTEM.md`。
 
 ## `FreezablePatrolEnemy2D.prefab`
 
@@ -306,6 +340,31 @@ Prefab验证要求：
 - MirrorClone死亡或主动回收不会重置逐风鳐。
 - 重置后恢复守卫点和`Guarding`状态，不残留目标、速度、计时或视觉。
 
+## `SacrificialWindRayEnemy2D.prefab`
+
+资产路径：`Assets/Prefabs/Gameplay/Enemies/SacrificialWindRayEnemy2D.prefab`。
+
+- 与`WindRayEnemy2D.prefab`共享层级、碰撞轮廓、动画、统一数值资产和冲刺状态机。
+- 根`WindRayEnemy2D`组件的命中结果固定为`DefeatAfterHit`，房间实例不得覆盖。
+- 命中MirrorClone后清理镜像并进入`Defeated`；命中Player后由完整房间重置恢复。
+- 因命中后的敌人生命周期不同，它是独立基础Prefab，不是Unity Prefab Variant。
+
+## 风区环境Prefab
+
+- `Assets/Prefabs/Gameplay/Wind/WindColumn2D.prefab`：常吹与周期风柱共用的Trigger体积、方向反馈和确定性周期控制。
+- `Assets/Prefabs/Gameplay/Wind/MovingTornado2D.prefab`：Kinematic移动、角色伤害、实体阻挡和最大路程生命周期。
+- `Assets/Prefabs/Gameplay/Wind/TornadoGenerator2D.prefab`：显式Prefab引用、固定生成间隔、数量上限、出生占用和统一重置清理。
+- `Assets/Prefabs/Gameplay/Wind/WindDeflector2D.prefab`：匹配来风、实体风影、固定`90°`输出、压力板切换和移动龙卷风转向。
+- `Assets/Prefabs/Gameplay/Switches/WindTurbineSwitch2D.prefab`：持续风接收、方向匹配、直接风与导风输出查询、普通门控制和重置释放。
+- 完整结构、允许配置与统一数值见`docs/systems/WIND_ENVIRONMENT_SYSTEM.md`。
+
+## `EruptionHazard.prefab`
+
+- 通用Prefab：`Assets/Prefabs/Gameplay/Hazards/EruptionHazard.prefab`
+- 根对象使用`EruptionHazard2D`，子对象使用通用`Hazard2D` Trigger。
+- 默认固定周期为预警`1s`、危险`1s`、冷却`2s`，重置后从预警开始。
+- Prefab负责周期、危险启停和基础颜色反馈；房间不得复制周期运行时代码。
+
 ## `PressurePlate2D.prefab`
 
 计划路径：`Assets/Prefabs/Gameplay/Switches/PressurePlate2D.prefab`
@@ -366,7 +425,7 @@ Prefab至少包含：
 - 关闭：`door_closed.png`与`door_closed_top.png`
 - 开启：`door_open.png`与`door_open_top.png`
 
-四张图片位于`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Door/`。上下两张图各保持一个标准地形格高，整扇门固定为两个格子高，标准Collider为`0.75 × 2 units`，不得纵向拉伸。临时开启使用原色开启图，永久锁存使用统一青色调；两种开启状态仍复用同一个`Door2D.prefab`。
+四张图片位于`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Door/`。上下两张图各保持一个标准地形格高，整扇门固定为两个格子高并完整占据一个标准格宽，标准Collider为`1 × 2 units`，不得在房间实例中拉伸。临时开启使用原色开启图，永久锁存使用统一青色调；两种开启状态仍复用同一个`Door2D.prefab`。
 
 Prefab负责：
 

@@ -138,13 +138,13 @@
 
 # Commands
 
-- Unity version: `6000.5.7f1`（以 `ProjectSettings/ProjectVersion.txt` 为准）
+- Unity version: `6000.5.8f1`（以 `ProjectSettings/ProjectVersion.txt` 为准）
 - 项目路径不得写死为某台机器的绝对路径；运行命令时从Git仓库根目录解析。
 
 ### Windows PowerShell
 
 ```powershell
-$UnityEditor = 'D:\03_Game\20_Unity\0_Editor\6000.5.7f1\Editor\Unity.exe'
+$UnityEditor = 'D:\03_Game\20_Unity\0_Editor\6000.5.8f1\Editor\Unity.exe'
 $ProjectPath = (Resolve-Path (git rev-parse --show-toplevel)).Path
 
 # 非必须：仅在用户明确要求并确认后执行Batch compile check
@@ -160,7 +160,7 @@ $ProjectPath = (Resolve-Path (git rev-parse --show-toplevel)).Path
 ### macOS shell
 
 ```bash
-UNITY_EDITOR="/Applications/Unity/Hub/Editor/6000.5.7f1/Unity.app/Contents/MacOS/Unity"
+UNITY_EDITOR="/Applications/Unity/Hub/Editor/6000.5.8f1/Unity.app/Contents/MacOS/Unity"
 PROJECT_PATH="$(git rev-parse --show-toplevel)"
 
 # 非必须：仅在用户明确要求并确认后执行Batch compile check

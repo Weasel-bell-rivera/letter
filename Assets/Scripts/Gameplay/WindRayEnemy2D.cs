@@ -3,8 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGroundActor2D
 {
-    public enum EnemyState { Guarding, Windup, Dashing, Recovering, Returning, Frozen }
+    public enum EnemyState { Guarding, Windup, Dashing, Recovering, Returning, Frozen, Defeated }
     public enum TargetKind { None, Player, MirrorClone }
+    public enum ContactOutcome { ContinueAttack, DefeatAfterHit }
 
     [Header("Shared configuration")]
     [SerializeField] private WindRayEnemySettings settings;
@@ -19,6 +20,9 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
 
     [Header("Instance presentation")]
     [SerializeField] private Vector2 initialVisualFacing = new(-1f, -1f);
+
+    [Header("Enemy prototype")]
+    [SerializeField] private ContactOutcome contactOutcome = ContactOutcome.ContinueAttack;
 
     private Rigidbody2D body;
     private Collider2D damageCollider;
@@ -40,6 +44,7 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
     public Vector2 GuardPoint => guardPoint;
     public Vector2 LockedPoint => lockedPoint;
     public bool HasLockedPoint => CurrentTarget != TargetKind.None;
+    public ContactOutcome OutcomeOnContact => contactOutcome;
     public float PhaseRemaining => phaseRemaining;
     public bool IsDamaging => enabled && gameObject.activeInHierarchy && damageCollider != null && damageCollider.enabled;
     public Rigidbody2D FreezingBody => body;
@@ -94,6 +99,7 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
                 AdvanceReturn();
                 break;
             case EnemyState.Frozen:
+            case EnemyState.Defeated:
                 StopBody();
                 break;
         }
@@ -124,6 +130,8 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
         if (State == EnemyState.Guarding) Face(initialVisualFacing);
     }
 
+    public void SetContactOutcome(ContactOutcome outcome) => contactOutcome = outcome;
+
     public void HandleCharacterContact(Collider2D other)
     {
         if (!IsDamaging || other == null) return;
@@ -131,6 +139,7 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
         if (clone != null)
         {
             clone.Die();
+            if (contactOutcome == ContactOutcome.DefeatAfterHit) EnterDefeatedState();
             return;
         }
 
@@ -163,6 +172,8 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
             StopBody();
         }
         if (damageCollider != null) damageCollider.enabled = true;
+        if (bodyVisual != null) bodyVisual.enabled = true;
+        if (feedbackAudio != null) feedbackAudio.enabled = true;
         RefreshStaticFeedback();
         RefreshStateVisuals();
         Physics2D.SyncTransforms();
@@ -181,6 +192,21 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
         StopBody();
         if (damageCollider != null) damageCollider.enabled = false;
         RefreshStateVisuals();
+    }
+
+    private void EnterDefeatedState()
+    {
+        State = EnemyState.Defeated;
+        CurrentTarget = TargetKind.None;
+        dashDirection = Vector2.zero;
+        dashRemaining = 0f;
+        phaseRemaining = 0f;
+        StopBody();
+        if (damageCollider != null) damageCollider.enabled = false;
+        if (bodyVisual != null) bodyVisual.enabled = false;
+        if (targetMarker != null) targetMarker.SetActive(false);
+        if (dashTrail != null) dashTrail.enabled = false;
+        if (feedbackAudio != null) feedbackAudio.enabled = false;
     }
 
     private void ResolveReferences()
@@ -428,6 +454,7 @@ public sealed class WindRayEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGr
                 EnemyState.Dashing => new Color(1f, .55f, .5f, 1f),
                 EnemyState.Recovering => new Color(.5f, .55f, .62f, 1f),
                 EnemyState.Frozen => new Color(.65f, .86f, 1f, 1f),
+                EnemyState.Defeated => Color.clear,
                 _ => new Color(.82f, .9f, 1f, 1f)
             };
         }

@@ -110,11 +110,11 @@ public static class Fire008RoomBuilder
         cameraFollow.ConfigureBounds(CameraRoomBounds);
 
         CreateDoorGroup(groupAsset, dynamicObjects.transform, "DoorGroup01", SaveIds.Fire008DoorGroup01,
-            new Vector2(-7.6f, 8.08f), new Vector2(6.15f, 8.08f), new Vector2(-10.75f, 8.5f));
+            new Vector2(-7.6f, 8.15f), new Vector2(6.15f, 8.15f), new Vector2(-10.5f, 9f));
         CreateDoorGroup(groupAsset, dynamicObjects.transform, "DoorGroup02", SaveIds.Fire008DoorGroup02,
-            new Vector2(8.8f, 1.08f), new Vector2(-9.9f, .08f), new Vector2(10.75f, 1.5f));
+            new Vector2(8.8f, 1.15f), new Vector2(-9.9f, .15f), new Vector2(11.5f, 2f));
         CreateDoorGroup(groupAsset, dynamicObjects.transform, "DoorGroup03", SaveIds.Fire008DoorGroup03,
-            new Vector2(-10.25f, -8.92f), new Vector2(9.8f, -8.92f), new Vector2(-12.75f, -8.5f));
+            new Vector2(-10.25f, -8.85f), new Vector2(9.8f, -8.85f), new Vector2(-12.5f, -8f));
 
         CreateCheckpoint(checkpointAsset, dynamicObjects.transform, "Checkpoint-1", new Vector2(-11.9f, .92f));
         CreateCheckpoint(checkpointAsset, dynamicObjects.transform, "Checkpoint-2", new Vector2(11.9f, -8.08f));
@@ -359,7 +359,7 @@ public static class Fire008RoomBuilder
             Require(PrefabUtility.GetPrefabInstanceStatus(group.gameObject) == PrefabInstanceStatus.Connected,
                 $"{group.name} must remain connected to PermanentLatchDoorGroup2D.prefab.");
         Require(groups.SelectMany(group => group.GetComponentsInChildren<Door2D>(true))
-                .All(door => door.GetComponent<BoxCollider2D>().size == new Vector2(.75f, 2f)),
+                .All(door => door.GetComponent<BoxCollider2D>().size == new Vector2(1f, 2f)),
             "Every FIRE_008 door must use the standard two-tile Door2D Prefab size.");
         Require(terrain.HasTile(new Vector3Int(-11, 10, 0)) && terrain.HasTile(new Vector3Int(-11, 12, 0)) &&
                 terrain.HasTile(new Vector3Int(11, 3, 0)) && terrain.HasTile(new Vector3Int(11, 4, 0)) &&
