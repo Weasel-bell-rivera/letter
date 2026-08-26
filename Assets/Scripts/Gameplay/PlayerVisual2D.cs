@@ -5,85 +5,97 @@ public sealed class PlayerVisual2D : MonoBehaviour
 {
     public enum PresentationPose { Automatic, Duck, Front, Hit }
 
+    private enum AnimationState { Idle, Walk, Jump, Duck, Front, Hit }
+
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite idleSprite;
-    [SerializeField] private Sprite jumpSprite;
-    [SerializeField] private Sprite walkSpriteA;
-    [SerializeField] private Sprite walkSpriteB;
-    [SerializeField] private Sprite duckSprite;
-    [SerializeField] private Sprite frontSprite;
-    [SerializeField] private Sprite hitSprite;
-    [SerializeField, Min(.01f)] private float walkFrameSeconds = .12f;
+    [SerializeField] private Sprite[] idleFrames;
+    [SerializeField] private Sprite[] walkFrames;
+    [SerializeField] private Sprite[] jumpFrames;
+    [SerializeField] private Sprite[] hitFrames;
+    [SerializeField] private Sprite[] happyFrames;
+    [SerializeField, Min(1f)] private float idleFramesPerSecond = 2f;
+    [SerializeField, Min(1f)] private float walkFramesPerSecond = 8f;
+    [SerializeField, Min(1f)] private float jumpFramesPerSecond = 12f;
+    [SerializeField, Min(1f)] private float hitFramesPerSecond = 10f;
 
     private PlayerController2D player;
     private MirrorCloneController2D clone;
     private PresentationPose pose;
+    private AnimationState animationState;
+    private float stateStartedAt;
 
     public SpriteRenderer Renderer => spriteRenderer;
-    public Sprite IdleSprite => idleSprite;
-    public Sprite JumpSprite => jumpSprite;
-    public Sprite WalkSpriteA => walkSpriteA;
-    public Sprite WalkSpriteB => walkSpriteB;
-    public Sprite DuckSprite => duckSprite;
-    public Sprite FrontSprite => frontSprite;
-    public Sprite HitSprite => hitSprite;
-    public float WalkFrameSeconds => walkFrameSeconds;
+    public Sprite IdleSprite => First(idleFrames);
+    public Sprite JumpSprite => First(jumpFrames);
+    public Sprite WalkSpriteA => Frame(walkFrames, 0);
+    public Sprite WalkSpriteB => Frame(walkFrames, 1);
+    public Sprite DuckSprite => First(idleFrames);
+    public Sprite FrontSprite => First(happyFrames) != null ? First(happyFrames) : First(idleFrames);
+    public Sprite HitSprite => First(hitFrames) != null ? First(hitFrames) : First(idleFrames);
+    public int IdleFrameCount => idleFrames?.Length ?? 0;
+    public int WalkFrameCount => walkFrames?.Length ?? 0;
+    public int JumpFrameCount => jumpFrames?.Length ?? 0;
+    public int HitFrameCount => hitFrames?.Length ?? 0;
+    public float WalkFrameSeconds => 1f / Mathf.Max(1f, walkFramesPerSecond);
     public PresentationPose Pose => pose;
 
+    public void Configure(SpriteRenderer targetRenderer, Sprite[] idle, Sprite[] walk, Sprite[] jump,
+        Sprite[] hit, Sprite[] happy, float idleFps = 2f, float walkFps = 8f,
+        float jumpFps = 12f, float hitFps = 10f)
+    {
+        spriteRenderer = targetRenderer;
+        idleFrames = idle;
+        walkFrames = walk;
+        jumpFrames = jump;
+        hitFrames = hit;
+        happyFrames = happy;
+        idleFramesPerSecond = Mathf.Max(1f, idleFps);
+        walkFramesPerSecond = Mathf.Max(1f, walkFps);
+        jumpFramesPerSecond = Mathf.Max(1f, jumpFps);
+        hitFramesPerSecond = Mathf.Max(1f, hitFps);
+        SetAnimationState(AnimationState.Idle);
+    }
+
+    // Kept for lightweight runtime prototypes that still configure the legacy seven sprites.
     public void Configure(SpriteRenderer targetRenderer, Sprite idle, Sprite jump, Sprite walkA, Sprite walkB,
         Sprite duck, Sprite front, Sprite hit, float frameSeconds = .12f)
     {
-        spriteRenderer = targetRenderer;
-        idleSprite = idle;
-        jumpSprite = jump;
-        walkSpriteA = walkA;
-        walkSpriteB = walkB;
-        duckSprite = duck;
-        frontSprite = front;
-        hitSprite = hit;
-        walkFrameSeconds = Mathf.Max(.01f, frameSeconds);
-        Apply(idleSprite);
+        Configure(targetRenderer, new[] { idle }, new[] { walkA, walkB }, new[] { jump },
+            new[] { hit }, new[] { front }, 1f, 1f / Mathf.Max(.01f, frameSeconds), 1f, 1f);
     }
 
     public void SetPresentationPose(PresentationPose nextPose)
     {
         pose = nextPose;
-        Apply(PoseSprite(nextPose));
+        SetAnimationState(PresentationState(nextPose));
     }
 
     private void Awake()
     {
         ResolveController();
-        Apply(idleSprite);
+        stateStartedAt = Time.unscaledTime;
+        SetAnimationState(AnimationState.Idle);
     }
 
     private void Update()
     {
         if (spriteRenderer == null) return;
-        if (pose != PresentationPose.Automatic)
-        {
-            Apply(PoseSprite(pose));
-            return;
-        }
 
         ResolveController();
-        bool grounded = player != null ? player.IsGroundedNow : clone != null && clone.IsGroundedNow;
-        float horizontal = player != null ? player.HorizontalInput : clone != null ? clone.MovementInput : 0f;
-
-        if (!grounded)
+        AnimationState nextState;
+        if (pose != PresentationPose.Automatic)
         {
-            Apply(jumpSprite != null ? jumpSprite : idleSprite);
-            return;
+            nextState = PresentationState(pose);
+        }
+        else
+        {
+            bool grounded = player != null ? player.IsGroundedNow : clone != null && clone.IsGroundedNow;
+            float horizontal = player != null ? player.HorizontalInput : clone != null ? clone.MovementInput : 0f;
+            nextState = !grounded ? AnimationState.Jump :
+                Mathf.Abs(horizontal) > .01f ? AnimationState.Walk : AnimationState.Idle;
         }
 
-        if (Mathf.Abs(horizontal) > .01f && walkSpriteA != null && walkSpriteB != null)
-        {
-            int frame = Mathf.FloorToInt(Time.unscaledTime / walkFrameSeconds) & 1;
-            Apply(frame == 0 ? walkSpriteA : walkSpriteB);
-            return;
-        }
-
-        Apply(idleSprite);
+        SetAnimationState(nextState);
     }
 
     private void ResolveController()
@@ -92,16 +104,57 @@ public sealed class PlayerVisual2D : MonoBehaviour
         if (player == null && clone == null) clone = GetComponentInParent<MirrorCloneController2D>();
     }
 
-    private Sprite PoseSprite(PresentationPose requested)
+    private void SetAnimationState(AnimationState nextState)
     {
-        return requested switch
+        if (animationState != nextState)
         {
-            PresentationPose.Duck => duckSprite,
-            PresentationPose.Front => frontSprite,
-            PresentationPose.Hit => hitSprite,
-            _ => idleSprite
-        };
+            animationState = nextState;
+            stateStartedAt = Time.unscaledTime;
+        }
+        ApplyCurrentFrame();
     }
+
+    private void ApplyCurrentFrame()
+    {
+        Sprite[] frames = FramesFor(animationState);
+        if (frames == null || frames.Length == 0) frames = idleFrames;
+        if (frames == null || frames.Length == 0) return;
+
+        float fps = FramesPerSecondFor(animationState);
+        int elapsedFrames = Mathf.FloorToInt((Time.unscaledTime - stateStartedAt) * fps);
+        bool loop = animationState is AnimationState.Idle or AnimationState.Walk;
+        int index = loop ? elapsedFrames % frames.Length : Mathf.Min(elapsedFrames, frames.Length - 1);
+        Apply(frames[Mathf.Max(0, index)]);
+    }
+
+    private Sprite[] FramesFor(AnimationState state) => state switch
+    {
+        AnimationState.Walk => walkFrames,
+        AnimationState.Jump => jumpFrames,
+        AnimationState.Front => happyFrames,
+        AnimationState.Hit => hitFrames,
+        _ => idleFrames
+    };
+
+    private float FramesPerSecondFor(AnimationState state) => state switch
+    {
+        AnimationState.Walk => walkFramesPerSecond,
+        AnimationState.Jump => jumpFramesPerSecond,
+        AnimationState.Hit => hitFramesPerSecond,
+        _ => idleFramesPerSecond
+    };
+
+    private static AnimationState PresentationState(PresentationPose requested) => requested switch
+    {
+        PresentationPose.Duck => AnimationState.Duck,
+        PresentationPose.Front => AnimationState.Front,
+        PresentationPose.Hit => AnimationState.Hit,
+        _ => AnimationState.Idle
+    };
+
+    private static Sprite First(Sprite[] frames) => Frame(frames, 0);
+    private static Sprite Frame(Sprite[] frames, int index) =>
+        frames != null && index >= 0 && index < frames.Length ? frames[index] : null;
 
     private void Apply(Sprite sprite)
     {

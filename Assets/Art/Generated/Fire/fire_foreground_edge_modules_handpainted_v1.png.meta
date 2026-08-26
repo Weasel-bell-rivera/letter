@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 50a7af474a89341858bd140af2e3bbde
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1840453080431950555
+    second: fire_foreground_edge_modules_handpainted_v1_0
+  - first:
+      213: 8232501951196703017
+    second: fire_foreground_edge_modules_handpainted_v1_1
+  - first:
+      213: -6948705513995569920
+    second: fire_foreground_edge_modules_handpainted_v1_2
+  - first:
+      213: -4779428288769932545
+    second: fire_foreground_edge_modules_handpainted_v1_3
+  - first:
+      213: -3399749542879550873
+    second: fire_foreground_edge_modules_handpainted_v1_4
+  - first:
+      213: -4762917366993680810
+    second: fire_foreground_edge_modules_handpainted_v1_5
+  - first:
+      213: -7579415434628184221
+    second: fire_foreground_edge_modules_handpainted_v1_6
+  - first:
+      213: -7701680150504703882
+    second: fire_foreground_edge_modules_handpainted_v1_7
+  - first:
+      213: -2765871537402737264
+    second: fire_foreground_edge_modules_handpainted_v1_8
+  - first:
+      213: 777449305945015663
+    second: fire_foreground_edge_modules_handpainted_v1_9
+  - first:
+      213: -2194988057756368230
+    second: fire_foreground_edge_modules_handpainted_v1_10
+  - first:
+      213: 8465473677402667023
+    second: fire_foreground_edge_modules_handpainted_v1_11
+  - first:
+      213: -927947865175981120
+    second: fire_foreground_edge_modules_handpainted_v1_12
+  - first:
+      213: 985735021828224659
+    second: fire_foreground_edge_modules_handpainted_v1_13
+  - first:
+      213: 6918134310117714632
+    second: fire_foreground_edge_modules_handpainted_v1_14
+  - first:
+      213: 4083587437153412217
+    second: fire_foreground_edge_modules_handpainted_v1_15
+  - first:
+      213: -146812618044114472
+    second: fire_foreground_edge_modules_handpainted_v1_16
+  - first:
+      213: -7413708343601564865
+    second: fire_foreground_edge_modules_handpainted_v1_17
+  - first:
+      213: -3563815948632664367
+    second: fire_foreground_edge_modules_handpainted_v1_18
+  - first:
+      213: -6659814752363706679
+    second: fire_foreground_edge_modules_handpainted_v1_19
+  - first:
+      213: 7815148272433813835
+    second: fire_foreground_edge_modules_handpainted_v1_20
+  - first:
+      213: 7282222353615200329
+    second: fire_foreground_edge_modules_handpainted_v1_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 13
+        width: 313
+        height: 1011
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 525841baca56576e0800000000000000
+      internalID: -1840453080431950555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_1
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 289
+        width: 485
+        height: 734
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9292acd28e8bf3270800000000000000
+      internalID: 8232501951196703017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_2
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 1017
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 005fe7d962d319f90800000000000000
+      internalID: -6948705513995569920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_3
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 1015
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff24a6a3b4f0cadb0800000000000000
+      internalID: -4779428288769932545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_4
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 39
+        width: 738
+        height: 985
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7622e5badc9a1d0d0800000000000000
+      internalID: -3399749542879550873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_5
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 593
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6568dc5c3e7b6edb0800000000000000
+      internalID: -4762917366993680810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_6
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 607
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 367cfd5d1d180d690800000000000000
+      internalID: -7579415434628184221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_7
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 287
+        width: 172
+        height: 466
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6787d7755b22e1590800000000000000
+      internalID: -7701680150504703882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_8
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 475
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d0fbead76ad99d0800000000000000
+      internalID: -2765871537402737264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_9
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 495
+        width: 13
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f650abf460e0aca00800000000000000
+      internalID: 777449305945015663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_10
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 513
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a920533bdf5d981e0800000000000000
+      internalID: -2194988057756368230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_11
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 487
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f08710525776b7570800000000000000
+      internalID: 8465473677402667023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_12
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 483
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c38a1645544f13f0800000000000000
+      internalID: -927947865175981120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_13
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 487
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 396bbba97c80ead00800000000000000
+      internalID: 985735021828224659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_14
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 461
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ca220f4086220060800000000000000
+      internalID: 6918134310117714632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_15
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 425
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 974e6c86321dba830800000000000000
+      internalID: 4083587437153412217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_16
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 423
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d97fe4a3ba66fdf0800000000000000
+      internalID: -146812618044114472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_17
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 343
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f33774f7a873d1990800000000000000
+      internalID: -7413708343601564865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_18
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 293
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d6d0e0d648ca8ec0800000000000000
+      internalID: -3563815948632664367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_19
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 306
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c6847794c59393a0800000000000000
+      internalID: -6659814752363706679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_20
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 0
+        width: 560
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b49dc6582fbf47c60800000000000000
+      internalID: 7815148272433813835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_foreground_edge_modules_handpainted_v1_21
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 0
+        width: 541
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940a4a2d5a6af0560800000000000000
+      internalID: 7282222353615200329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fire_foreground_edge_modules_handpainted_v1_0: -1840453080431950555
+      fire_foreground_edge_modules_handpainted_v1_1: 8232501951196703017
+      fire_foreground_edge_modules_handpainted_v1_10: -2194988057756368230
+      fire_foreground_edge_modules_handpainted_v1_11: 8465473677402667023
+      fire_foreground_edge_modules_handpainted_v1_12: -927947865175981120
+      fire_foreground_edge_modules_handpainted_v1_13: 985735021828224659
+      fire_foreground_edge_modules_handpainted_v1_14: 6918134310117714632
+      fire_foreground_edge_modules_handpainted_v1_15: 4083587437153412217
+      fire_foreground_edge_modules_handpainted_v1_16: -146812618044114472
+      fire_foreground_edge_modules_handpainted_v1_17: -7413708343601564865
+      fire_foreground_edge_modules_handpainted_v1_18: -3563815948632664367
+      fire_foreground_edge_modules_handpainted_v1_19: -6659814752363706679
+      fire_foreground_edge_modules_handpainted_v1_2: -6948705513995569920
+      fire_foreground_edge_modules_handpainted_v1_20: 7815148272433813835
+      fire_foreground_edge_modules_handpainted_v1_21: 7282222353615200329
+      fire_foreground_edge_modules_handpainted_v1_3: -4779428288769932545
+      fire_foreground_edge_modules_handpainted_v1_4: -3399749542879550873
+      fire_foreground_edge_modules_handpainted_v1_5: -4762917366993680810
+      fire_foreground_edge_modules_handpainted_v1_6: -7579415434628184221
+      fire_foreground_edge_modules_handpainted_v1_7: -7701680150504703882
+      fire_foreground_edge_modules_handpainted_v1_8: -2765871537402737264
+      fire_foreground_edge_modules_handpainted_v1_9: 777449305945015663
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

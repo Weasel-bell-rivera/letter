@@ -37,6 +37,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
     public bool IsOnFrozenGround => IsGroundedOnFrozenSurface(Vector2.down);
     public bool ControlEnabled => controlEnabled;
     public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
+    public Collider2D SupportCollider => supportCollider;
     public Rigidbody2D FreezingBody => body;
     public Collider2D FreezingCollider => bodyCollider;
     public Vector2 FreezingUpAxis => Vector2.up;

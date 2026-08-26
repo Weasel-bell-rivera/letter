@@ -24,6 +24,10 @@ public static class SnowRegionRoomsBuilder
     private const string DoorPrefabPath = "Assets/Prefabs/Gameplay/Doors/Door2D.prefab";
     private const string EnemyPrefabPath = "Assets/Prefabs/Gameplay/Enemies/FreezablePatrolEnemy2D.prefab";
     private const string FreezingPrefabPath = "Assets/Prefabs/Gameplay/Surfaces/FreezingGroundCell2D.prefab";
+    private const string Snow007GroundSpritePath = "Assets/Art/Snow/Tiles/snow_ice_ground_tile_64_v3.png";
+    private const string Snow007TerrainTexturePath = "Assets/Art/Earth/Terrain/LowPolyEarthTile-v4.png";
+    private const string Snow007TerrainTileFolder = "Assets/Tiles/Snow/Snow007";
+    private const string Snow007TerrainTilePath = Snow007TerrainTileFolder + "/Snow007Terrain.asset";
     private const string SnowmanPrefabPath = "Assets/Prefabs/Gameplay/Snow/SnowmanGate2D.prefab";
     private const string CarrotPrefabPath = "Assets/Prefabs/Gameplay/Snow/TemporaryCarrotPickup2D.prefab";
     private const string SnowfallPrefabPath = "Assets/Prefabs/Gameplay/Hazards/PeriodicSnowfall2D.prefab";
@@ -44,6 +48,14 @@ public static class SnowRegionRoomsBuilder
         for (int room = 4; room <= 15; room++) BuildRoom(room);
         AssetDatabase.SaveAssets();
         Debug.Log("SNOW_004 through SNOW_015 Tilemap greyboxes built successfully.");
+    }
+
+    [MenuItem("Tools/W1/Rebuild SNOW_007")]
+    public static void RebuildSnow007()
+    {
+        BuildRoom(7);
+        AssetDatabase.SaveAssets();
+        Debug.Log("SNOW_007 rebuilt with its low-contrast low-poly Terrain art.");
     }
 
     private static void BuildSnowPrefabs()
@@ -88,7 +100,8 @@ public static class SnowRegionRoomsBuilder
 
     private static void BuildRoom(int id)
     {
-        Tile terrainTile = Load<Tile>(TerrainTilePath); Tile iceTile = Load<Tile>(IceTilePath);
+        Tile terrainTile = id == 7 ? EnsureSnow007TerrainTile() : Load<Tile>(TerrainTilePath);
+        Tile iceTile = Load<Tile>(IceTilePath);
         PhysicsMaterial2D iceMaterial = Load<PhysicsMaterial2D>(IceMaterialPath);
         GameObject exitPrefab = Load<GameObject>(ExitPrefabPath);
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -126,6 +139,8 @@ public static class SnowRegionRoomsBuilder
     private static void ConfigureLayout(int id, Tilemap terrain, Tilemap ice, Tile terrainTile, Tile iceTile)
     {
         void Ice(int a, int b) { for (int x = a; x <= b; x++) { terrain.SetTile(new Vector3Int(x,-3), null); ice.SetTile(new Vector3Int(x,-3), iceTile); } }
+        if (id == 7)
+            foreach (int x in new[] {-5,-4,-3,1,2,3,7,8}) terrain.SetTile(new Vector3Int(x, -3), null);
         if (id is 4 or 5 or 6) Ice(3, 7);
         if (id is 8 or 9) Ice(5, 9);
         if (id is 12 or 13) { Ice(-5, 1); Ice(5, 9); }
@@ -162,7 +177,11 @@ public static class SnowRegionRoomsBuilder
         if (id is 7 or 8 or 15)
         {
             int[] xs = id == 7 ? new[] {-5,-4,-3,1,2,3,7,8} : id == 8 ? new[] {-1,0,1,2} : new[] {-6,-5,-4};
-            foreach (int x in xs) Prefab(FreezingPrefabPath, parent, new Vector3(x, -2.5f), $"FreezingGround-{x}");
+            foreach (int x in xs)
+            {
+                GameObject cell = Prefab(FreezingPrefabPath, parent, new Vector3(x, -2.5f), $"FreezingGround-{x}");
+                if (id == 7) ConfigureSnow007GroundVisual(cell);
+            }
         }
         if (id is 12 or 14)
         {
@@ -195,6 +214,42 @@ public static class SnowRegionRoomsBuilder
         GameObject snow = Prefab(SnowfallPrefabPath, parent, new Vector3(x, .5f), name);
         Vector3 scale = snow.transform.localScale; scale.x = .65f; snow.transform.localScale = scale;
         Record(snow.transform);
+    }
+
+    private static void ConfigureSnow007GroundVisual(GameObject cell)
+    {
+        SpriteRenderer renderer = cell.GetComponent<SpriteRenderer>();
+        renderer.sprite = Load<Sprite>(Snow007GroundSpritePath);
+        renderer.color = Color.white;
+        Record(renderer);
+    }
+
+    private static Tile EnsureSnow007TerrainTile()
+    {
+        TextureImporter importer = AssetImporter.GetAtPath(Snow007TerrainTexturePath) as TextureImporter;
+        Require(importer != null, $"Missing asset: {Snow007TerrainTexturePath}");
+        importer.textureType = TextureImporterType.Sprite;
+        importer.spriteImportMode = SpriteImportMode.Single;
+        importer.spritePixelsPerUnit = 1254f;
+        importer.filterMode = FilterMode.Bilinear;
+        importer.textureCompression = TextureImporterCompression.Uncompressed;
+        importer.mipmapEnabled = false;
+        importer.wrapMode = TextureWrapMode.Clamp;
+        importer.SaveAndReimport();
+
+        Directory.CreateDirectory(Snow007TerrainTileFolder);
+        Tile tile = AssetDatabase.LoadAssetAtPath<Tile>(Snow007TerrainTilePath);
+        if (tile == null)
+        {
+            tile = ScriptableObject.CreateInstance<Tile>();
+            AssetDatabase.CreateAsset(tile, Snow007TerrainTilePath);
+        }
+
+        tile.sprite = Load<Sprite>(Snow007TerrainTexturePath);
+        tile.color = Color.white;
+        tile.colliderType = Tile.ColliderType.Grid;
+        Record(tile);
+        return tile;
     }
 
     private static PressurePlate2D Plate(Transform parent, Vector2 position, string name)

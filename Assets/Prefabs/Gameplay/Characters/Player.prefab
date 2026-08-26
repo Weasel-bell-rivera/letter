@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 448bca3c4ef20ec40a8d2d457ae7f7e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b64e72d7428423fa351f750a3dd5f7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,14 +106,38 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: W1.Runtime::PlayerVisual2D
   spriteRenderer: {fileID: 8624046566166828307}
-  idleSprite: {fileID: 21300000, guid: 448bca3c4ef20ec40a8d2d457ae7f7e2, type: 3}
-  jumpSprite: {fileID: 21300000, guid: 32ecf279775f0624a879a534148f1dce, type: 3}
-  walkSpriteA: {fileID: 21300000, guid: 80d909cc209b9304b83799a892b61baa, type: 3}
-  walkSpriteB: {fileID: 21300000, guid: 92f1176781fe39c468fa6bccce2b4de0, type: 3}
-  duckSprite: {fileID: 21300000, guid: a07325eebfa9942458fafe20725a8b40, type: 3}
-  frontSprite: {fileID: 21300000, guid: 3a882d5dc8aa7724ba3b863b4b6e8ef7, type: 3}
-  hitSprite: {fileID: 21300000, guid: 46c3ffc82b1ed09428f4f99bcdd5e584, type: 3}
-  walkFrameSeconds: 0.12
+  idleFrames:
+  - {fileID: 21300000, guid: 3b64e72d7428423fa351f750a3dd5f7c, type: 3}
+  - {fileID: 21300000, guid: 88224c7b398542539b2e5d3f2fc092e4, type: 3}
+  walkFrames:
+  - {fileID: 21300000, guid: 22362038207f4c059b29eca3698a9fca, type: 3}
+  - {fileID: 21300000, guid: fbad091b5ad2421a942b3b5c4070adb6, type: 3}
+  - {fileID: 21300000, guid: e113c98197604f4a9a3dcc0e0e6d3251, type: 3}
+  - {fileID: 21300000, guid: 520dc6cb338848dc810d8a9e0e4e6e86, type: 3}
+  jumpFrames:
+  - {fileID: 21300000, guid: bbbeb9eb58a44838917501c4bfb7c1e8, type: 3}
+  - {fileID: 21300000, guid: 82bcd5a53c9b48668b1794e40dd5daca, type: 3}
+  - {fileID: 21300000, guid: d21f372637604b55bd535c089cf99fa0, type: 3}
+  - {fileID: 21300000, guid: 6b13d7fe484f4dcebd91b414f1e8c9d3, type: 3}
+  - {fileID: 21300000, guid: a4c18c277e204547bcefa7d9a63a7c5c, type: 3}
+  - {fileID: 21300000, guid: 8a2403e58bae4f24907202b189d8cdef, type: 3}
+  - {fileID: 21300000, guid: 860f8ce912014b85965b8e417a5b707f, type: 3}
+  - {fileID: 21300000, guid: c1d486854c92435693b18e297714a07d, type: 3}
+  - {fileID: 21300000, guid: ebd31bba21a2499b84791aea2700efea, type: 3}
+  - {fileID: 21300000, guid: d57f0ddaef9c4f2495d67e1f86f4f977, type: 3}
+  - {fileID: 21300000, guid: 90b831cd5d0a4757a8b00bdd93f6a08a, type: 3}
+  hitFrames:
+  - {fileID: 21300000, guid: 3ce5b2a06def4c0dab0277df9879c23f, type: 3}
+  - {fileID: 21300000, guid: 76f2d71cb7a54544b9cbcc60b525cdc8, type: 3}
+  - {fileID: 21300000, guid: bc47e262b262433aafbd0f2ce4d2748c, type: 3}
+  - {fileID: 21300000, guid: 24e123a237ac4790b4af2ae93959f356, type: 3}
+  happyFrames:
+  - {fileID: 21300000, guid: 6990d957fc514d4b8ce78e44fde2837c, type: 3}
+  - {fileID: 21300000, guid: 9a7584c786464e2eabf524e1be30247a, type: 3}
+  idleFramesPerSecond: 2
+  walkFramesPerSecond: 8
+  jumpFramesPerSecond: 12
+  hitFramesPerSecond: 10
 --- !u!1 &4870972150017224388
 GameObject:
   m_ObjectHideFlags: 0

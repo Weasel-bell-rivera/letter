@@ -25,6 +25,7 @@
 - 使用机制：FreezingGround、普通安全地面
 - 静态结构：标准`Terrain`、`FrozenGround`及其余标准Tilemap层；未使用的层保持空层
 - 动态对象：全部使用共享Prefab实例；固定Scene敌人不迁移到Spawner
+- 地面视觉：本房间8格`FreezingGroundCell2D`保留共享碰撞、`FreezingGround`表面语义与重置行为，仅在Scene实例上覆盖为`Assets/Art/Snow/Tiles/snow_ice_ground_tile_64_v3.png`；普通恢复岛使用`Assets/Tiles/Snow/Snow007/Snow007Terrain.asset`，其Sprite为低色差、粗分区的`Assets/Art/Earth/Terrain/LowPolyEarthTile-v4.png`，以暖土色与冰蓝冻结地面保持明确区分。视觉替换不改变`StaticSolid`或`FreezingGround`语义
 - 入口：保留唯一`DEFAULT`安全入口，并为每个已实现相邻来源配置`FROM_<来源房间ID>`入口
 - 出口：严格指向`docs/maps/MAP.md`登记的相邻雪区房间，并显式请求目标房的`FROM_<本房ID>`入口
 - 相机：有边界的Player跟随，正交尺寸`7`，双轴跟随，平滑时间`0.15秒`；显式显示边界为`X[-20,20]`、`Y[-7,7]`。入口构图使用实体墙边界`X[-13,13]`、`Y[-7,7]`，运行时按实际画面宽高比计算入口相机中心，使出生侧视野边缘对齐对应实体墙；16:9左侧入口的相机中心约为`X=-0.556`，更宽画面则重新计算，不写死该数值。Player到达水平中央构图线后开始水平跟随。左右外墙以外使用统一雪区纯色背景延伸，不放置玩法对象或相邻房间内容；16:9下相机中心X可在约`[-7.56,7.56]`范围内跟随，Y按边界居中

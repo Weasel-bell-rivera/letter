@@ -6,6 +6,7 @@
 - Unity Scene：`Assets/Scenes/Levels/Earth/Earth_006.unity`（已创建并登记Build Settings）。
 - 地图连接：左`EARTH_007`，右`EARTH_010`。
 - 入口与出口：保留唯一`DEFAULT`安全入口；每个已实现相邻来源使用`FROM_<来源房间ID>`入口，出口显式请求目标房的`FROM_<本房ID>`入口。
+- `DEFAULT`入口位于左出口Trigger内侧且与其保持安全间距，直接从本Scene启动时不得立即触发离场。
 - 世界进入顺序与土区解锁条件仍待确定。
 
 ## 房间定位
@@ -28,6 +29,7 @@
 - 概念可玩边界：`x=-12～12，y=-5～6`；灰盒前可以收紧，但不得改变谜题关系。
 - 左侧入口、中央土块、右侧水平往返平台；土块未下沉时两者高度错开2格。
 - 静态地形使用标准`Terrain` Tilemap；镜子放置点必须是安全`StaticSolid`。
+- `Terrain` Tilemap使用`Assets/Tiles/Earth/Earth006/Earth006Terrain.asset`呈现粗颗粒low-poly土地纹理；该视觉替换不改变格子布局、碰撞或`StaticSolid`表面语义。
 - 动态对象完整行程不得夹住角色、侵入出口或形成存活软锁。
 
 ## Prefab需求

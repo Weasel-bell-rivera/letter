@@ -49,29 +49,30 @@ public static class SurfaceSupport2D
         RaycastHit2D[] hits = Physics2D.BoxCastAll(bodyBounds.center,
             bodyBounds.size * new Vector2(.8f, .9f), 0f, down, castDistance, groundMask);
 
-        foreach (RaycastHit2D hit in hits)
-        {
-            if (!IsValidSupport(hit, owner, down) || hit.collider != previousSupport) continue;
-            supportHit = hit;
-            SurfaceSemantic2D.TryGet(hit.collider, out surface);
-            return true;
-        }
-
         bool found = false;
         bool bestCoversFootCenter = false;
         bool bestProvidesMotion = false;
+        bool bestWasPreviousSupport = false;
+        bool bestContainsActorFootprint = false;
         Vector2 tangent = new(-down.y, down.x);
         foreach (RaycastHit2D hit in hits)
         {
             if (!IsValidSupport(hit, owner, down)) continue;
             bool coversFootCenter = CoversFootCenter(hit.collider.bounds, bodyBounds.center, tangent);
             bool providesMotion = hit.collider.GetComponent<ISurfaceMotionProvider2D>() != null;
+            bool wasPreviousSupport = hit.collider == previousSupport;
+            bool containsActorFootprint = !providesMotion ||
+                                          ContainsActorFootprint(hit.collider.bounds, bodyBounds, tangent);
             if (found && !IsBetterCandidate(hit, coversFootCenter, providesMotion, supportHit,
-                    bestCoversFootCenter, bestProvidesMotion)) continue;
+                    bestCoversFootCenter, bestProvidesMotion, wasPreviousSupport,
+                    bestWasPreviousSupport, containsActorFootprint,
+                    bestContainsActorFootprint)) continue;
             found = true;
             supportHit = hit;
             bestCoversFootCenter = coversFootCenter;
             bestProvidesMotion = providesMotion;
+            bestWasPreviousSupport = wasPreviousSupport;
+            bestContainsActorFootprint = containsActorFootprint;
         }
 
         if (!found) return false;
@@ -97,14 +98,38 @@ public static class SurfaceSupport2D
                coordinate <= center + extent + SamePlaneTolerance;
     }
 
+    private static bool ContainsActorFootprint(Bounds supportBounds, Bounds actorBounds, Vector2 tangent)
+    {
+        float supportCenter = Vector2.Dot(supportBounds.center, tangent);
+        float supportExtent = Mathf.Abs(tangent.x) * supportBounds.extents.x +
+                              Mathf.Abs(tangent.y) * supportBounds.extents.y;
+        float actorCenter = Vector2.Dot(actorBounds.center, tangent);
+        float actorExtent = Mathf.Abs(tangent.x) * actorBounds.extents.x +
+                            Mathf.Abs(tangent.y) * actorBounds.extents.y;
+        return actorCenter - actorExtent >= supportCenter - supportExtent - SamePlaneTolerance &&
+               actorCenter + actorExtent <= supportCenter + supportExtent + SamePlaneTolerance;
+    }
+
     private static bool IsBetterCandidate(RaycastHit2D candidate, bool candidateCoversFootCenter,
         bool candidateProvidesMotion, RaycastHit2D current, bool currentCoversFootCenter,
-        bool currentProvidesMotion)
+        bool currentProvidesMotion, bool candidateWasPreviousSupport, bool currentWasPreviousSupport,
+        bool candidateContainsActorFootprint, bool currentContainsActorFootprint)
     {
+        // Resolve a static/dynamic seam before comparing vertical distance. Once
+        // the full actor footprint belongs to the dynamic surface, its first
+        // downward step must not make the adjacent static terrain win merely by
+        // becoming closer; that would reverse the platform every physics step.
+        if (candidateProvidesMotion != currentProvidesMotion)
+        {
+            bool dynamicContainsActor = candidateProvidesMotion
+                ? candidateContainsActorFootprint
+                : currentContainsActorFootprint;
+            return dynamicContainsActor ? candidateProvidesMotion : !candidateProvidesMotion;
+        }
         if (candidate.distance < current.distance - SamePlaneTolerance) return true;
         if (candidate.distance > current.distance + SamePlaneTolerance) return false;
         if (candidateCoversFootCenter != currentCoversFootCenter) return candidateCoversFootCenter;
-        if (candidateProvidesMotion != currentProvidesMotion) return candidateProvidesMotion;
+        if (candidateWasPreviousSupport != currentWasPreviousSupport) return candidateWasPreviousSupport;
         return candidate.collider.GetEntityId() < current.collider.GetEntityId();
     }
 }

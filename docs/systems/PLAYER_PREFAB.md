@@ -24,21 +24,19 @@
 - Player Prefab：`Assets/Prefabs/Gameplay/Characters/Player.prefab`
 - 基础移动参数：`Assets/Settings/Player/DefaultPlayerMovement.asset`
 - 输入动作：`Assets/Settings/InputSystem_Actions.inputactions`
-- 角色图片目录：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Characters/Double/`
+- 角色图片目录：`Assets/Art/Characters/Player/HandDrawn/`
 - 放置镜图片：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Coin/coin_gold_side.png`
 - 放置镜视觉Prefab：`Assets/Prefabs/Gameplay/Mirrors/PlacedMirror.prefab`
 
-使用以下Kenney Double角色图片：
+正式Player视觉使用由手绘角色动画图集切分出的透明PNG帧：
 
-- `character_green_idle.png`
-- `character_green_jump.png`
-- `character_green_walk_a.png`
-- `character_green_walk_b.png`
-- `character_green_duck.png`
-- `character_green_front.png`
-- `character_green_hit.png`
+- `player_idle_00.png`至`player_idle_01.png`
+- `player_walk_00.png`至`player_walk_03.png`
+- `player_jump_00.png`至`player_jump_10.png`
+- `player_hit_00.png`至`player_hit_03.png`
+- `player_happy_00.png`至`player_happy_01.png`
 
-所有图片使用一致的Sprite导入设置、Pivot、Pixels Per Unit、Point Filter和无压缩配置。不得在房间中替换单张图片形成不同尺寸或碰撞轮廓的Player变体。
+所有图片使用一致的`512 × 512`画布、中心Pivot、约`284.444 Pixels Per Unit`、Bilinear Filter和无压缩配置，使完整画布高度保持`1.8 Unity units`。不得在房间中替换单张图片形成不同尺寸或碰撞轮廓的Player变体。
 
 ## Prefab层级
 
@@ -75,12 +73,12 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 
 ## 视觉状态
 
-- 稳定站立且无水平输入：`idle`。
-- 稳定落地且存在水平输入：`walk_a`与`walk_b`循环。
-- 离地：`jump`。
-- `duck`图片保留给未来明确批准的下蹲或压低表现；当前没有Duck输入，不得仅因图片存在而新增下蹲玩法。
-- `front`图片保留给明确的正面展示、交互或过场表现；当前普通移动不自动转为正面。
-- `hit`图片保留给统一受击表现；当前死亡和重置时序未批准额外延迟，不得为了播放动画延迟伤害结算。
+- 稳定站立且无水平输入：2帧`idle`循环。
+- 稳定落地且存在水平输入：4帧`walk`循环。
+- 离地：从头播放11帧`jump`，到达末帧后保持，直到重新落地；不得因滞空过长循环播放起跳动作。
+- `duck`表现暂时回退到`idle`；当前没有Duck输入，不得仅因素材存在而新增下蹲玩法。
+- `front`使用2帧`happy`，只用于明确的正面展示、交互或过场表现；当前普通移动不自动转为正面。
+- `hit`使用4帧受击表现；当前死亡和重置时序未批准额外延迟，不得为了播放完动画延迟伤害结算。
 
 未进入当前状态机的图片仍必须导入并由Player视觉组件持有明确引用，避免房间或脚本临时加载任意路径。
 
@@ -93,6 +91,8 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 - 入口Transform决定Player Collider中心的生成位置。
 - 入口可配置初始面向，但不得覆盖Player其他规则。
 - 入口必须能够容纳完整Player Collider，不能与墙壁、门、危险区或动态对象重叠。
+- 入口应优先沿离开对应出口的方向，为完整Player Collider与出口Trigger边界保留至少`1.0 Unity unit`净距；`DEFAULT`入口也应优先满足与最近出口的同一净距，不得通过缩小Player Collider或出口Trigger规避。
+- 对窄平台、垂直连接或既有关卡中无法安全满足上述净距的入口，通用`RoomExit2D`必须在Player生成或房间重置后保持未武装，直到Player完整离开出口边界外扩`1.0 Unity unit`的释放区后才允许触发。不得在具体房间脚本中复制或绕过该防回触流程。
 - 双向或分支房间连接必须为每个已实现来源配置稳定的来源入口ID，统一命名为`FROM_<来源房间ID>`；出口必须显式请求目标房中的对应来源入口，不得把不同方向的返回连接全部指向`DEFAULT`。
 - `DEFAULT`只承担直接打开Scene、无有效目标入口时的安全回退，以及房间文档明确指定的默认进入方向；来源入口不得同时标记为默认入口。
 
@@ -164,7 +164,7 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 ### EditMode
 
 - Player Prefab可独立加载，必需组件与内部引用完整。
-- Collider、Rigidbody、PlayerInput、移动资产和七张视觉图片配置正确。
+- Collider、Rigidbody、PlayerInput、移动资产和五组共23帧视觉图片配置正确。
 - Prefab根坐标为零、缩放为一，不含房间对象引用。
 - 所有正式房间Scene都没有序列化Player实例，并且恰好有一个`DEFAULT`入口和一个通用生成组件。
 - 房间Builder不再调用`AddComponent`拼装Player。

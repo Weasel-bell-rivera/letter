@@ -16,7 +16,7 @@ public static class PlayerPrefabBuilder
     public const string MirrorSpritePath =
         "Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Coin/coin_gold_side.png";
     public const string SpriteDirectory =
-        "Assets/Art/Kenney/NewPlatformerPack/Sprites/Characters/Double";
+        "Assets/Art/Characters/Player/HandDrawn";
 
     private const string MovementSettingsPath = "Assets/Settings/Player/DefaultPlayerMovement.asset";
     private const string InputActionsPath = "Assets/Settings/InputSystem_Actions.inputactions";
@@ -72,21 +72,21 @@ public static class PlayerPrefabBuilder
 
     private static void ConfigurePlayerSpriteImports()
     {
-        foreach (string path in SpritePaths())
+        foreach (string path in AllSpritePaths())
         {
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
             TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
             Require(importer != null, $"Missing Player sprite: {path}");
             importer.textureType = TextureImporterType.Sprite;
             importer.spriteImportMode = SpriteImportMode.Single;
-            importer.spritePixelsPerUnit = 128f;
+            importer.spritePixelsPerUnit = 284.44446f;
             importer.spritePivot = new Vector2(.5f, .5f);
             TextureImporterSettings textureSettings = new();
             importer.ReadTextureSettings(textureSettings);
             textureSettings.spriteMeshType = SpriteMeshType.FullRect;
             importer.SetTextureSettings(textureSettings);
             importer.mipmapEnabled = false;
-            importer.filterMode = FilterMode.Point;
+            importer.filterMode = FilterMode.Bilinear;
             importer.textureCompression = TextureImporterCompression.Uncompressed;
             importer.alphaIsTransparency = true;
             importer.SaveAndReimport();
@@ -140,7 +140,11 @@ public static class PlayerPrefabBuilder
             ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
         PlayerMovementSettings movement = AssetDatabase.LoadAssetAtPath<PlayerMovementSettings>(MovementSettingsPath);
         InputActionAsset inputActions = AssetDatabase.LoadAssetAtPath<InputActionAsset>(InputActionsPath);
-        Sprite[] sprites = SpritePaths().Select(LoadSprite).ToArray();
+        Sprite[] idleFrames = LoadFrames("idle", 2);
+        Sprite[] walkFrames = LoadFrames("walk", 4);
+        Sprite[] jumpFrames = LoadFrames("jump", 11);
+        Sprite[] hitFrames = LoadFrames("hit", 4);
+        Sprite[] happyFrames = LoadFrames("happy", 2);
         Require(movement != null, "DefaultPlayerMovement.asset is required.");
         Require(inputActions != null, "InputSystem_Actions.inputactions is required.");
 
@@ -161,11 +165,10 @@ public static class PlayerPrefabBuilder
         GameObject visualObject = new("Visual");
         visualObject.transform.SetParent(root.transform, false);
         SpriteRenderer renderer = visualObject.AddComponent<SpriteRenderer>();
-        renderer.sprite = sprites[0];
+        renderer.sprite = idleFrames[0];
         renderer.sortingOrder = 10;
         PlayerVisual2D visual = visualObject.AddComponent<PlayerVisual2D>();
-        visual.Configure(renderer, sprites[0], sprites[1], sprites[2], sprites[3], sprites[4], sprites[5],
-            sprites[6]);
+        visual.Configure(renderer, idleFrames, walkFrames, jumpFrames, hitFrames, happyFrames);
 
         PlayerController2D controller = root.AddComponent<PlayerController2D>();
         controller.Configure(visualObject.transform, movement);
@@ -325,16 +328,16 @@ public static class PlayerPrefabBuilder
         return sprite;
     }
 
-    private static string[] SpritePaths() => new[]
+    private static Sprite[] LoadFrames(string animation, int count) => Enumerable.Range(0, count)
+        .Select(index => LoadSprite($"{SpriteDirectory}/player_{animation}_{index:00}.png"))
+        .ToArray();
+
+    private static string[] AllSpritePaths() => new[]
     {
-        $"{SpriteDirectory}/character_green_idle.png",
-        $"{SpriteDirectory}/character_green_jump.png",
-        $"{SpriteDirectory}/character_green_walk_a.png",
-        $"{SpriteDirectory}/character_green_walk_b.png",
-        $"{SpriteDirectory}/character_green_duck.png",
-        $"{SpriteDirectory}/character_green_front.png",
-        $"{SpriteDirectory}/character_green_hit.png"
-    };
+        ("idle", 2), ("walk", 4), ("jump", 11), ("hit", 4), ("happy", 2)
+    }.SelectMany(animation => Enumerable.Range(0, animation.Item2)
+        .Select(index => $"{SpriteDirectory}/player_{animation.Item1}_{index:00}.png"))
+        .ToArray();
 
     private static void Require(bool condition, string message)
     {

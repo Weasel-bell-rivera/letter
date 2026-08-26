@@ -48,6 +48,10 @@ public sealed class PlayerPrefabAssetTests
             visual.IdleSprite, visual.JumpSprite, visual.WalkSpriteA, visual.WalkSpriteB,
             visual.DuckSprite, visual.FrontSprite, visual.HitSprite
         }.All(sprite => sprite != null), Is.True);
+        Assert.That(visual.IdleFrameCount, Is.EqualTo(2));
+        Assert.That(visual.WalkFrameCount, Is.EqualTo(4));
+        Assert.That(visual.JumpFrameCount, Is.EqualTo(11));
+        Assert.That(visual.HitFrameCount, Is.EqualTo(4));
 
         PlayerPrefabRegistry registry = AssetDatabase.LoadAssetAtPath<PlayerPrefabRegistry>(
             RegistryPath);

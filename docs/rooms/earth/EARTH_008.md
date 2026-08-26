@@ -65,5 +65,6 @@
 
 - 操作前可看清因果关系；镜子合法性可预判；土块全行程安全；解法不依赖帧率或盲跳。
 - 已使用标准Tilemap骨架、通用压沉土块Prefab及本文列出的通用动态对象完成灰盒。
+- `Terrain` Tilemap使用`Assets/Art/Earth/Terrain/earth008_rock_block_v1.png`的暖棕手绘岩块视觉；Sprite采用约`6%`视觉越界以覆盖圆角透明缝隙，美术替换不改变格子布局、碰撞或`StaticSolid`表面语义。
 - 已完成Unity序列化保存、Builder内部结构校验和低成本静态检查；未运行PlayMode、完整EditMode或人工试玩。
 - 尚需人工试玩校正实际Collider净空、跳跃节奏、动态表面换乘窗口和镜像路线可读性。

@@ -18,6 +18,24 @@ public static class EarthRegionRoomsBuilder
     private const string DoorPrefabPath = "Assets/Prefabs/Gameplay/Doors/Door2D.prefab";
     private const string EnemyPrefabPath = "Assets/Prefabs/Gameplay/Enemies/VerticalWallPatrolEnemy2D.prefab";
     private const string ExitPrefabPath = "Assets/Prefabs/Gameplay/Exits/RoomExit2D.prefab";
+    private const string Earth005FarBackgroundPath =
+        "Assets/Art/Earth/Backgrounds/earth005_far_background_v1.png";
+    private const string EarthSupportColumnPath =
+        "Assets/Art/Earth/Midground/earth_support_column_v1.png";
+    private const string EarthStrataOverlayPath =
+        "Assets/Art/Earth/Midground/earth_strata_overlay_v1.png";
+    private const string EarthSinkingBlockFramePath =
+        "Assets/Art/Earth/Midground/earth_sinking_block_frame_v1.png";
+    private static readonly string[] Earth005TerrainSpritePaths =
+    {
+        "Assets/Art/Earth/Terrain/earth_terrain_default_dirt.png"
+    };
+    private const string Earth005TerrainTileFolder = "Assets/Tiles/Earth/Earth005";
+    private const string Earth007TerrainTexturePath = "Assets/Art/Earth/Terrain/LowPolyEarthTile-v4.png";
+    private const string Earth007TerrainTileFolder = "Assets/Tiles/Earth/Earth007";
+    private const string Earth007TerrainTilePath = Earth007TerrainTileFolder + "/Earth007Terrain.asset";
+    private const string EarthAmbientGlowPath =
+        "Assets/Art/Earth/Lighting/earth_ambient_glow_v1.png";
 
     private static readonly Dictionary<int, int[]> ImplementedNeighbors = new()
     {
@@ -55,9 +73,20 @@ public static class EarthRegionRoomsBuilder
         Debug.Log("EARTH_005 visual readability pass built successfully.");
     }
 
+    [MenuItem("Tools/W1/Rebuild EARTH_007")]
+    public static void RebuildEarth007()
+    {
+        Require(AssetDatabase.LoadAssetAtPath<GameObject>(SinkPrefabPath) != null,
+            $"Missing sinking block Prefab: {SinkPrefabPath}");
+        Directory.CreateDirectory("Assets/Scenes/Levels/Earth");
+        BuildRoom(7);
+        AssetDatabase.SaveAssets();
+        Debug.Log("EARTH_007 rebuilt with its low-contrast low-poly Terrain art.");
+    }
+
     private static void BuildRoom(int id)
     {
-        Tile terrainTile = Load<Tile>(TerrainTilePath);
+        Tile terrainTile = id == 7 ? EnsureEarth007TerrainTile() : Load<Tile>(TerrainTilePath);
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         GameObject root = new($"EARTH_{id:000} {RoomName(id)} Greybox");
 
@@ -75,6 +104,7 @@ public static class EarthRegionRoomsBuilder
         CreateTilemap(grid.transform, "Foreground");
 
         BuildTerrain(id, terrain, terrainTile);
+        if (id == 5) ApplyEarth005TerrainArt(terrain, EnsureEarth005TerrainTiles());
         if (id == 5) ApplyEarth005ReadabilityLayers(grid.transform, terrain);
         Bake(terrain);
 
@@ -87,12 +117,13 @@ public static class EarthRegionRoomsBuilder
         GameObject exits = new("Exits");
         exits.transform.SetParent(gameplay.transform, false);
 
-        Transform entrance = Marker("Entrance-DEFAULT", new Vector3(-10f, -2.08f, 0f), entrances.transform);
+        float defaultEntranceX = id is 5 or 6 or 7 ? -9.5f : -10f;
+        Transform entrance = Marker("Entrance-DEFAULT", new Vector3(defaultEntranceX, -2.08f, 0f), entrances.transform);
         CreateReturnEntrances(id, entrances.transform);
         CreateGameplay(id, dynamics.transform, scene);
         if (id == 5) ApplyEarth005ReadabilityToBlocks(dynamics.transform);
         CreateExits(id, exits.transform, scene);
-        if (id == 5) CreateEarth005PlaceholderArt(root.transform);
+        if (id == 5) CreateEarth005FarBackground(root.transform);
         CameraFollow2D cameraFollow = CreateCamera(id);
 
         GameObject systems = new("RoomSystems");
@@ -223,10 +254,78 @@ public static class EarthRegionRoomsBuilder
 
     private static void ApplyEarth005ReadabilityLayers(Transform grid, Tilemap terrain)
     {
-        terrain.color = new Color(.72f, .66f, .58f, 1f);
+        terrain.color = Color.white;
         SetTilemapSorting(grid, "Background", -30);
         SetTilemapSorting(grid, "Decoration", -5);
         SetTilemapSorting(grid, "Foreground", 30);
+    }
+
+    private static Tile[] EnsureEarth005TerrainTiles()
+    {
+        Directory.CreateDirectory(Earth005TerrainTileFolder);
+        Tile[] tiles = new Tile[Earth005TerrainSpritePaths.Length];
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            Sprite sprite = Load<Sprite>(Earth005TerrainSpritePaths[i]);
+            string tilePath = $"{Earth005TerrainTileFolder}/Earth005Terrain_{(char)('A' + i)}.asset";
+            Tile tile = AssetDatabase.LoadAssetAtPath<Tile>(tilePath);
+            if (tile == null)
+            {
+                tile = ScriptableObject.CreateInstance<Tile>();
+                AssetDatabase.CreateAsset(tile, tilePath);
+            }
+
+            tile.sprite = sprite;
+            tile.color = Color.white;
+            tile.colliderType = Tile.ColliderType.Grid;
+            EditorUtility.SetDirty(tile);
+            tiles[i] = tile;
+        }
+
+        AssetDatabase.SaveAssets();
+        return tiles;
+    }
+
+    private static Tile EnsureEarth007TerrainTile()
+    {
+        TextureImporter importer = AssetImporter.GetAtPath(Earth007TerrainTexturePath) as TextureImporter;
+        Require(importer != null, $"Missing terrain texture: {Earth007TerrainTexturePath}");
+        importer.textureType = TextureImporterType.Sprite;
+        importer.spriteImportMode = SpriteImportMode.Single;
+        importer.spritePixelsPerUnit = 1254f;
+        importer.filterMode = FilterMode.Bilinear;
+        importer.textureCompression = TextureImporterCompression.Uncompressed;
+        importer.mipmapEnabled = false;
+        importer.wrapMode = TextureWrapMode.Clamp;
+        importer.SaveAndReimport();
+
+        Directory.CreateDirectory(Earth007TerrainTileFolder);
+        Tile tile = AssetDatabase.LoadAssetAtPath<Tile>(Earth007TerrainTilePath);
+        if (tile == null)
+        {
+            tile = ScriptableObject.CreateInstance<Tile>();
+            AssetDatabase.CreateAsset(tile, Earth007TerrainTilePath);
+        }
+
+        tile.sprite = Load<Sprite>(Earth007TerrainTexturePath);
+        tile.color = Color.white;
+        tile.colliderType = Tile.ColliderType.Grid;
+        EditorUtility.SetDirty(tile);
+        return tile;
+    }
+
+    private static void ApplyEarth005TerrainArt(Tilemap terrain, IReadOnlyList<Tile> variants)
+    {
+        Require(variants != null && variants.Count > 0, "EARTH_005 terrain art needs Tile variants.");
+        terrain.CompressBounds();
+        foreach (Vector3Int position in terrain.cellBounds.allPositionsWithin)
+        {
+            if (!terrain.HasTile(position)) continue;
+            uint hash = unchecked((uint)(position.x * 73856093) ^ (uint)(position.y * 19349663));
+            hash ^= hash >> 13;
+            hash *= 1274126177u;
+            terrain.SetTile(position, variants[(int)(hash % (uint)variants.Count)]);
+        }
     }
 
     private static void ApplyEarth005ReadabilityToBlocks(Transform dynamics)
@@ -258,52 +357,112 @@ public static class EarthRegionRoomsBuilder
         EditorUtility.SetDirty(renderer);
     }
 
-    private static void CreateEarth005PlaceholderArt(Transform room)
+    private static void CreateEarth005FarBackground(Transform room)
     {
-        Sprite sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
-        Require(sprite != null, "Built-in placeholder Sprite is unavailable.");
+        Sprite sprite = Load<Sprite>(Earth005FarBackgroundPath);
+        Require(sprite != null, $"Missing EARTH_005 far-background Sprite: {Earth005FarBackgroundPath}");
 
-        GameObject art = new("Art_Readability_Placeholders");
+        GameObject art = new("Art");
         art.transform.SetParent(room, false);
         GameObject far = ArtGroup("FarBackground", art.transform);
-        GameObject mid = ArtGroup("Midground", art.transform);
-        GameObject guides = ArtGroup("GameplayGuides", art.transform);
-        GameObject foreground = ArtGroup("ForegroundFrame", art.transform);
-        GameObject atmosphere = ArtGroup("Atmosphere", art.transform);
+        SizedSprite(sprite, far.transform, "Earth005FarBackground", new Vector2(-.25f, .5f),
+            new Vector2(28f, 14f), new Color(.72f, .72f, .72f, 1f), -40);
+        CreateEarth005Midground(art.transform);
+        CreateEarth005LightingGuides(art.transform);
+        CreateEarth005Atmosphere(art.transform);
+        CreateEarth005ForegroundFrame(art.transform);
+    }
 
-        PlaceholderSprite(sprite, far.transform, "DeepRockField", new Vector2(0f, .5f),
-            new Vector2(26f, 15f), new Color(.055f, .045f, .035f, 1f), -40);
-        PlaceholderSprite(sprite, far.transform, "LowerDepth", new Vector2(0f, -3.4f),
-            new Vector2(26f, 4.5f), new Color(.11f, .075f, .045f, .8f), -38);
+    private static void CreateEarth005Midground(Transform art)
+    {
+        Sprite support = Load<Sprite>(EarthSupportColumnPath);
+        Sprite strata = Load<Sprite>(EarthStrataOverlayPath);
+        Sprite blockFrame = Load<Sprite>(EarthSinkingBlockFramePath);
+        Require(support != null && strata != null && blockFrame != null,
+            "EARTH_005 midground art assets are incomplete.");
 
-        PlaceholderSprite(sprite, mid.transform, "LeftSupport", new Vector2(-11.7f, .8f),
-            new Vector2(.65f, 11f), new Color(.19f, .12f, .065f, .72f), -20);
-        PlaceholderSprite(sprite, mid.transform, "CenterStrata", new Vector2(0f, 3.2f),
-            new Vector2(7f, .45f), new Color(.25f, .16f, .08f, .45f), -20);
-        PlaceholderSprite(sprite, mid.transform, "RightSupport", new Vector2(11.2f, 1.2f),
-            new Vector2(.65f, 10f), new Color(.19f, .12f, .065f, .72f), -20);
+        GameObject mid = ArtGroup("Midground", art);
+        SizedSprite(support, mid.transform, "LeftRockSupport", new Vector2(-11.25f, .8f),
+            new Vector2(2.2f, 8.2f), new Color(.48f, .48f, .48f, .9f), -18);
+        SpriteRenderer rightSupport = SizedSprite(support, mid.transform, "RightRockSupport",
+            new Vector2(10.75f, 1f), new Vector2(2.2f, 8.2f),
+            new Color(.48f, .48f, .48f, .9f), -18);
+        rightSupport.flipX = true;
 
-        PlaceholderSprite(sprite, guides.transform, "LeftRouteRead", new Vector2(-8.5f, .55f),
-            new Vector2(6.2f, .28f), new Color(.82f, .52f, .19f, .2f), -4);
-        PlaceholderSprite(sprite, guides.transform, "RightRouteRead", new Vector2(8.5f, 2.55f),
-            new Vector2(6.2f, .28f), new Color(.82f, .52f, .19f, .2f), -4);
-        PlaceholderSprite(sprite, guides.transform, "BlockATravel", new Vector2(-4f, -4.5f),
-            new Vector2(.16f, 3f), new Color(1f, .68f, .22f, .35f), -3);
-        PlaceholderSprite(sprite, guides.transform, "BlockBTravel", new Vector2(4f, -4.5f),
-            new Vector2(.16f, 3f), new Color(1f, .68f, .22f, .35f), -3);
-        PlaceholderSprite(sprite, guides.transform, "EntranceGlow", new Vector2(-10f, -2.8f),
-            new Vector2(2.8f, 1.8f), new Color(.9f, .58f, .2f, .12f), -6);
-        PlaceholderSprite(sprite, guides.transform, "RightExitGlow", new Vector2(10f, -2.8f),
-            new Vector2(2.8f, 1.8f), new Color(.9f, .58f, .2f, .1f), -6);
+        SizedSprite(strata, mid.transform, "LeftRouteStrata", new Vector2(-8.5f, -.25f),
+            new Vector2(5.6f, 1.45f), new Color(.52f, .52f, .52f, .92f), -12);
+        SpriteRenderer rightStrata = SizedSprite(strata, mid.transform, "RightRouteStrata",
+            new Vector2(8.5f, 1.75f), new Vector2(5.6f, 1.45f),
+            new Color(.52f, .52f, .52f, .92f), -12);
+        rightStrata.flipX = true;
+        SizedSprite(strata, mid.transform, "LowerTerrainTransition", new Vector2(0f, -4.35f),
+            new Vector2(12f, 1.5f), new Color(.42f, .42f, .42f, .82f), -14);
 
-        PlaceholderSprite(sprite, foreground.transform, "LeftFrame", new Vector2(-12.55f, 0f),
-            new Vector2(.9f, 15f), new Color(.035f, .027f, .02f, .9f), 25);
-        PlaceholderSprite(sprite, foreground.transform, "RightFrame", new Vector2(12.05f, 0f),
-            new Vector2(.9f, 15f), new Color(.035f, .027f, .02f, .9f), 25);
-        PlaceholderSprite(sprite, foreground.transform, "TopFrame", new Vector2(-.25f, 6.65f),
-            new Vector2(24.7f, .7f), new Color(.035f, .027f, .02f, .82f), 25);
+        SizedSprite(blockFrame, mid.transform, "SinkingBlockFrameA", new Vector2(-4f, -4.45f),
+            new Vector2(3.4f, 5.1f), new Color(.58f, .58f, .58f, .92f), -8);
+        SpriteRenderer frameB = SizedSprite(blockFrame, mid.transform, "SinkingBlockFrameB",
+            new Vector2(4f, -4.45f), new Vector2(3.4f, 5.1f),
+            new Color(.58f, .58f, .58f, .92f), -8);
+        frameB.flipX = true;
+    }
 
+    private static void CreateEarth005LightingGuides(Transform art)
+    {
+        Sprite glow = Load<Sprite>(EarthAmbientGlowPath);
+        Require(glow != null, $"Missing EARTH_005 ambient glow Sprite: {EarthAmbientGlowPath}");
+        GameObject lighting = ArtGroup("LightingGuides", art);
+
+        AddPulse(SizedSprite(glow, lighting.transform, "PuzzleLightPool", new Vector2(0f, -3.15f),
+            new Vector2(12f, 4.4f), new Color(.78f, .48f, .18f, .12f), -9), 9f, .08f, .015f, 0f);
+        AddPulse(SizedSprite(glow, lighting.transform, "LeftRouteClarity", new Vector2(-8.5f, -.15f),
+            new Vector2(7f, 2.5f), new Color(.72f, .45f, .2f, .075f), -13), 11f, .06f, .01f, 1.7f);
+        AddPulse(SizedSprite(glow, lighting.transform, "RightRouteClarity", new Vector2(8.5f, 1.85f),
+            new Vector2(7f, 2.5f), new Color(.72f, .45f, .2f, .075f), -13), 11f, .06f, .01f, 4.1f);
+        SizedSprite(glow, lighting.transform, "ExitGuideLeft", new Vector2(-10.7f, -2.5f),
+            new Vector2(3.2f, 3.6f), new Color(.62f, .58f, .25f, .09f), -7);
+        SizedSprite(glow, lighting.transform, "ExitGuideRight", new Vector2(9.8f, -2.5f),
+            new Vector2(3.2f, 3.6f), new Color(.62f, .58f, .25f, .09f), -7);
+    }
+
+    private static void AddPulse(SpriteRenderer renderer, float seconds, float alphaVariation,
+        float scaleVariation, float phase)
+    {
+        AmbientSpritePulse2D pulse = renderer.gameObject.AddComponent<AmbientSpritePulse2D>();
+        pulse.Configure(seconds, alphaVariation, scaleVariation, phase);
+        EditorUtility.SetDirty(pulse);
+    }
+
+    private static void CreateEarth005Atmosphere(Transform art)
+    {
+        GameObject atmosphere = ArtGroup("Atmosphere", art);
+        Sprite glow = Load<Sprite>(EarthAmbientGlowPath);
+        Require(glow != null, "EARTH_005 atmosphere needs the ambient glow Sprite.");
+        SizedSprite(glow, atmosphere.transform, "DepthHazeLeft", new Vector2(-6.2f, 2.2f),
+            new Vector2(9f, 4.8f), new Color(.52f, .39f, .27f, .11f), -22);
+        SizedSprite(glow, atmosphere.transform, "DepthHazeRight", new Vector2(6.2f, .5f),
+            new Vector2(9f, 4.8f), new Color(.52f, .39f, .27f, .095f), -22);
+        SizedSprite(glow, atmosphere.transform, "CentralGroundHaze", new Vector2(0f, -2.6f),
+            new Vector2(14f, 3.2f), new Color(.62f, .42f, .24f, .08f), -10);
         CreateEarth005Dust(atmosphere.transform);
+    }
+
+    private static void CreateEarth005ForegroundFrame(Transform art)
+    {
+        Sprite support = Load<Sprite>(EarthSupportColumnPath);
+        Sprite strata = Load<Sprite>(EarthStrataOverlayPath);
+        Require(support != null && strata != null,
+            "EARTH_005 foreground frame needs support and strata Sprites.");
+        GameObject foreground = ArtGroup("ForegroundFrame", art);
+        SizedSprite(support, foreground.transform, "ForegroundFrameLeft", new Vector2(-12.4f, .4f),
+            new Vector2(2.8f, 12.8f), new Color(.4f, .4f, .4f, .82f), 25);
+        SpriteRenderer right = SizedSprite(support, foreground.transform, "ForegroundFrameRight",
+            new Vector2(11.4f, .4f), new Vector2(2.8f, 12.8f),
+            new Color(.4f, .4f, .4f, .82f), 25);
+        right.flipX = true;
+        SpriteRenderer top = SizedSprite(strata, foreground.transform, "ForegroundTopStrata",
+            new Vector2(0f, 6.35f), new Vector2(16f, 1.8f),
+            new Color(.34f, .34f, .34f, .82f), 25);
+        top.flipY = true;
     }
 
     private static GameObject ArtGroup(string name, Transform parent)
@@ -313,7 +472,7 @@ public static class EarthRegionRoomsBuilder
         return group;
     }
 
-    private static SpriteRenderer PlaceholderSprite(Sprite sprite, Transform parent, string name,
+    private static SpriteRenderer SizedSprite(Sprite sprite, Transform parent, string name,
         Vector2 position, Vector2 size, Color color, int sortingOrder)
     {
         GameObject visual = new(name);
@@ -321,8 +480,8 @@ public static class EarthRegionRoomsBuilder
         visual.transform.localPosition = position;
         SpriteRenderer renderer = visual.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
-        renderer.drawMode = SpriteDrawMode.Sliced;
-        renderer.size = size;
+        Vector2 nativeSize = sprite.bounds.size;
+        visual.transform.localScale = new Vector3(size.x / nativeSize.x, size.y / nativeSize.y, 1f);
         renderer.color = color;
         renderer.sortingOrder = sortingOrder;
         return renderer;
@@ -337,16 +496,17 @@ public static class EarthRegionRoomsBuilder
         ParticleSystem.MainModule main = particles.main;
         main.loop = true;
         main.playOnAwake = true;
+        main.prewarm = true;
         main.startLifetime = new ParticleSystem.MinMaxCurve(8f, 12f);
         main.startSpeed = new ParticleSystem.MinMaxCurve(.08f, .18f);
-        main.startSize = new ParticleSystem.MinMaxCurve(.025f, .07f);
+        main.startSize = new ParticleSystem.MinMaxCurve(.04f, .11f);
         main.startColor = new ParticleSystem.MinMaxGradient(
-            new Color(.56f, .42f, .25f, .08f), new Color(.8f, .65f, .4f, .18f));
-        main.maxParticles = 36;
+            new Color(.56f, .42f, .25f, .12f), new Color(.8f, .65f, .4f, .24f));
+        main.maxParticles = 48;
         main.simulationSpace = ParticleSystemSimulationSpace.World;
 
         ParticleSystem.EmissionModule emission = particles.emission;
-        emission.rateOverTime = 2.2f;
+        emission.rateOverTime = 3f;
         ParticleSystem.ShapeModule shape = particles.shape;
         shape.shapeType = ParticleSystemShapeType.Box;
         shape.scale = new Vector3(23f, .5f, .1f);
@@ -405,6 +565,13 @@ public static class EarthRegionRoomsBuilder
             string targetEntrance = ImplementedNeighbors.TryGetValue(neighbors[i], out int[] targetNeighbors) &&
                                     targetNeighbors.Contains(id) ? $"FROM_EARTH_{id:000}" : "DEFAULT";
             exit.Configure($"Earth_{neighbors[i]:000}", targetEntrance);
+            if (id == 5)
+            {
+                SpriteRenderer visual = instance.transform.Find("Visual")?.GetComponent<SpriteRenderer>();
+                Require(visual != null, "EARTH_005 exit visual is missing.");
+                visual.color = new Color(.44f, .68f, .34f, .3f);
+                EditorUtility.SetDirty(visual);
+            }
             Record(exit);
         }
     }
@@ -415,7 +582,8 @@ public static class EarthRegionRoomsBuilder
         for (int i = 0; i < neighbors.Length; i++)
         {
             float exitX = neighbors.Length == 1 ? 10f : Mathf.Lerp(-11f, 10f, i / (float)(neighbors.Length - 1));
-            float spawnX = exitX < 0f ? exitX + 1.5f : exitX - 1.5f;
+            float exitClearance = id == 8 ? 2f : 1.5f;
+            float spawnX = exitX < 0f ? exitX + exitClearance : exitX - exitClearance;
             Transform marker = Marker($"Entrance-FROM_EARTH_{neighbors[i]:000}", new Vector3(spawnX, -2.08f), parent);
             PlayerRoomAuthoring.ConfigureEntrance(marker, $"FROM_EARTH_{neighbors[i]:000}", false, exitX < 0f);
         }

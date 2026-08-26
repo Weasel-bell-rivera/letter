@@ -14,6 +14,7 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     private float freezingMovementMultiplier = 1f;
     public Vector2 GravityAxis => gravityAxis;
     public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
+    public Collider2D SupportCollider => supportCollider;
     public float MovementInput => source != null ? source.HorizontalInput : 0f;
     public Rigidbody2D FreezingBody => body;
     public Collider2D FreezingCollider => box;
@@ -47,7 +48,15 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
         { relativeVelocity -= gravityAxis * settings.JumpSpeed; lastJumpPressed = float.NegativeInfinity; lastGrounded = float.NegativeInfinity; }
         if (!source.JumpHeld && Vector2.Dot(relativeVelocity, -gravityAxis) > 0f)
         { float upward = Vector2.Dot(relativeVelocity, -gravityAxis); relativeVelocity += gravityAxis * upward * (1f - settings.jumpCutMultiplier); }
-        if (Mathf.Abs(target) > .01f && visualRoot != null) { Vector3 s = visualRoot.localScale; s.x = Mathf.Abs(s.x) * Mathf.Sign(target); visualRoot.localScale = s; }
+        if (Mathf.Abs(target) > .01f && visualRoot != null)
+        {
+            Vector3 scale = visualRoot.localScale;
+            float facing = Mathf.Abs(moveAxis.x) > .01f
+                ? Mathf.Sign(moveAxis.x * target)
+                : Mathf.Sign(target);
+            scale.x = Mathf.Abs(scale.x) * facing;
+            visualRoot.localScale = scale;
+        }
         surfaceMotionCollider = grounded ? nextMotionCollider : null;
         appliedSurfaceVelocity = grounded ? nextSurfaceVelocity : Vector2.zero;
         body.linearVelocity = relativeVelocity + (grounded ? nextSurfaceVelocity : Vector2.zero);

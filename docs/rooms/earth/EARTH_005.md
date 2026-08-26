@@ -66,6 +66,12 @@
 - 操作前可看清因果关系；镜子合法性可预判；土块全行程安全；解法不依赖帧率或盲跳。
 - 已使用标准Tilemap骨架、通用压沉土块Prefab及本文列出的通用动态对象完成灰盒。
 - 已完成第一轮纯表现可读性整理：压低背景与Terrain视觉竞争，为`SinkingBlock-A/B`统一使用更醒目的土石主体和高亮顶面，并固定`Background/Decoration/Foreground`的表现层顺序。该调整不改变Collider、表面语义、土块参数、路线或解法。
-- 后续美术步骤暂以无碰撞占位表现落实：深层岩壁色块、矿井支撑结构、左右错层路线弱引导、两块土块的垂直行程提示、边缘前景框景和低密度尘埃。占位对象统一位于`Art_Readability_Placeholders`层级，不含Collider、Trigger、SurfaceSemantic或房间玩法脚本，待正式素材齐备后原位替换。
+- 第四步远景环境已替换为正式生成素材`Assets/Art/Earth/Backgrounds/earth005_far_background_v1.png`：包含深层岩壁、远处岩层、中央坑道、低对比支撑、弱矿物光和背景边缘压暗。场景对象位于`Art/FarBackground`，仅含SpriteRenderer，不含Collider、Trigger、SurfaceSemantic或房间玩法脚本。
+- 第五步中景结构已使用独立透明Sprite落实：左右承重岩柱、左右路线岩层过渡、下层Terrain过渡，以及两块压沉土块的垂直活动槽。对象统一位于`Art/Midground`，Sorting Order为`-18～-8`，仅含SpriteRenderer，不参与碰撞、危险、镜子放置或机关状态。
+- 第六步玩法地形材质已完成：`Terrain`保留原有Tilemap、CompositeCollider2D、`StaticSolid`表面语义和镜子安全放置配置，所有可见格子默认使用用户提供并压暗为深暖棕色的`Assets/Art/Earth/Terrain/earth_terrain_default_dirt.png`。该贴图不携带玩法语义，不改变任何格子、边界、路线或机关参数；原B、C纹理保留但不参与本房Terrain分布。
+- 第七步光色与视觉引导已完成：使用无碰撞透明叠色Sprite建立中央机关光池、左右路线净空和两侧出口提示，并降低出口原型绿光的饱和竞争。光色对象位于`Art/LightingGuides`、Sorting Order为`-13～-7`，不使用真实Light2D，不改变渲染管线、机关状态或交互判定。
+- 第八步动态氛围已完成并加强：`Art/Atmosphere`包含左右纵深雾层、中央贴地薄雾和低密度缓慢下落尘埃；中央机关光池和两条路线提亮使用通用`AmbientSpritePulse2D`进行低幅度、错相位呼吸。动态表现不改变碰撞、时间窗口或机关状态，且Sorting保持在玩法对象之后。
+- 第九步前景框景与最终收敛已完成并加强：左右独立承重岩柱与顶部悬岩位于`Art/ForegroundFrame`、Sorting Order为`25`，中央玩法区保持开放，并避让Player、MirrorClone、压沉土块、活动槽和主要路线。前景仅含SpriteRenderer，不参与碰撞、危险或镜子放置判断；未采用透明通道不合格的旧前景框图。
+- 默认入口位于`x=-9.5`，与左侧通往`EARTH_004`的出口Trigger保持出生净空，避免直接打开本Scene时立即触发返回跳转。
 - 已完成Unity序列化保存、Builder内部结构校验和低成本静态检查；未运行PlayMode、完整EditMode或人工试玩。
 - 尚需人工试玩校正实际Collider净空、跳跃节奏、动态表面换乘窗口和镜像路线可读性。
