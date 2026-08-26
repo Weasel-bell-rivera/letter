@@ -62,7 +62,7 @@
 
 | 内容 | 实现 | 规则 |
 |---|---|---|
-| 普通地面、边界和停止墙 | `Terrain` Tilemap | `StaticSolid`、安全、允许地面镜 |
+| 普通地面、平台支撑和局部停止墙 | `Terrain` Tilemap | `StaticSolid`、安全、允许地面镜 |
 | 连续冰面 | `FrozenGround` Tilemap | 安全静态寒冰、共享零摩擦材质、允许地面镜 |
 | 左侧默认入口 | `RoomEntrance2D` | `DEFAULT`，由`SNOW_002`进入或直接加载时使用，初始朝右 |
 | 上层终点返回入口 | `RoomEntrance2D` | `FROM_SNOW_004`，从`SNOW_004`返回时使用，初始朝右 |
