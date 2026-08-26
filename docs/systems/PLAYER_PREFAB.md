@@ -61,7 +61,7 @@ Player Prefab不包含常驻的手持镜子子对象。镜子处于`Held`状态�
 
 ## 固定物理与输入配置
 
-Player根对象同时挂载通用`FreezingVisual2D`。该组件只读取运行时自动确保的`FreezingGroundActor2D`进度，控制Player视觉子树的冰蓝染色和霜层Overlay，不修改Player移动、碰撞、输入或死亡规则。MirrorClone运行时创建后使用同一个表现组件。
+Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGroundActor2D`进度以及Player的`FrozenGround`首格渐冻进度，控制Player视觉子树的冰蓝染色和霜层Overlay，不自行修改移动、碰撞、输入或死亡规则。MirrorClone运行时创建后使用同一个表现组件。
 
 - `BoxCollider2D`尺寸固定为`0.8 × 1.8 Unity units`。
 - `Rigidbody2D`使用Dynamic Body、Continuous Collision Detection和Interpolate，并禁止物理旋转。
@@ -93,6 +93,8 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件只读取运行�
 - 入口Transform决定Player Collider中心的生成位置。
 - 入口可配置初始面向，但不得覆盖Player其他规则。
 - 入口必须能够容纳完整Player Collider，不能与墙壁、门、危险区或动态对象重叠。
+- 双向或分支房间连接必须为每个已实现来源配置稳定的来源入口ID，统一命名为`FROM_<来源房间ID>`；出口必须显式请求目标房中的对应来源入口，不得把不同方向的返回连接全部指向`DEFAULT`。
+- `DEFAULT`只承担直接打开Scene、无有效目标入口时的安全回退，以及房间文档明确指定的默认进入方向；来源入口不得同时标记为默认入口。
 
 每个正式房间包含一个通用`RoomPlayerSpawner2D`：
 

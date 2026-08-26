@@ -3,6 +3,7 @@ using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.TestTools.Utils;
 
 public sealed class FrozenGroundMovementPlayModeTests
 {
@@ -31,34 +32,35 @@ public sealed class FrozenGroundMovementPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator PlayerCannotAccelerateOrDecelerateOnFrozenGroundAndRecoversOnNormalGround()
+    public IEnumerator MovingPlayerGraduallyFreezesAtIceCellCenterAndReturnsToCheckpoint()
     {
-        SurfaceSemantic2D surface = CreateGround("Frozen Ground", Vector2.zero, new Vector2(10f, 1f),
+        CreateGround("Frozen Ground", Vector2.zero, new Vector2(10f, 1f),
             SurfaceSemantic2D.SurfaceType.FrozenGround);
         PlayerController2D player = CreatePlayer(new Vector2(0f, 1.41f));
         Rigidbody2D body = player.GetComponent<Rigidbody2D>();
-        SetHorizontalInput(player, 1f);
+        GameObject entranceObject = new("Entrance");
+        entranceObject.transform.SetParent(root.transform);
+        entranceObject.transform.position = new Vector3(-2f, 1.41f, 0f);
+        RoomResetSystem reset = new GameObject("Room Reset").AddComponent<RoomResetSystem>();
+        reset.transform.SetParent(root.transform);
+        reset.Configure(player, null, entranceObject.transform);
+        body.linearVelocity = new Vector2(3f, 0f);
         Physics2D.SyncTransforms();
 
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
 
         Assert.That(player.IsOnFrozenGround, Is.True);
-        Assert.That(body.linearVelocity.x, Is.EqualTo(0f).Within(.01f),
-            "Input must not accelerate the Player while grounded on ice.");
+        Assert.That(player.FrozenGroundFreezeAmount, Is.GreaterThan(0f).And.LessThan(1f));
+        Assert.That(body.linearVelocity.x, Is.GreaterThan(0f).And.LessThan(3f));
 
-        SetHorizontalInput(player, 0f);
-        body.linearVelocity = new Vector2(3f, body.linearVelocity.y);
-        yield return new WaitForFixedUpdate();
-        yield return new WaitForFixedUpdate();
-        Assert.That(body.linearVelocity.x, Is.EqualTo(3f).Within(.03f),
-            "Releasing input must not decelerate the Player while grounded on ice.");
+        int fixedSteps = 0;
+        while (Vector2.Distance(player.transform.position, entranceObject.transform.position) > .01f && fixedSteps++ < 120)
+            yield return new WaitForFixedUpdate();
 
-        surface.Configure(SurfaceSemantic2D.SurfaceType.StaticSolid, true, true);
-        yield return new WaitForFixedUpdate();
-        Assert.That(player.IsOnFrozenGround, Is.False);
-        Assert.That(body.linearVelocity.x, Is.LessThan(2.5f),
-            "Default ground deceleration must resume immediately after leaving ice.");
+        Assert.That(player.transform.position, Is.EqualTo(entranceObject.transform.position).Using(Vector3ComparerWithEqualsOperator.Instance));
+        Assert.That(player.FrozenGroundFreezeAmount, Is.EqualTo(0f));
+        Assert.That(body.linearVelocity.sqrMagnitude, Is.LessThan(.001f));
     }
 
     [UnityTest]

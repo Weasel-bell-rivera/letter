@@ -11,6 +11,11 @@ using UnityEngine.Tilemaps;
 /// <summary>Builds SNOW_004..SNOW_015 Tilemap greyboxes from shared gameplay Prefabs.</summary>
 public static class SnowRegionRoomsBuilder
 {
+    private static readonly Rect DefaultCameraBounds = new(-13f, -7f, 26f, 14f);
+    private static readonly Rect WideCameraBounds = new(-20f, -7f, 40f, 14f);
+    private static readonly Rect Snow007EntryFramingBounds = new(-13f, -7f, 26f, 14f);
+    private const float CameraOrthographicSize = 7f;
+    private const float CameraSmoothTime = .15f;
     private const string TerrainTilePath = "Assets/Tiles/Snow/SnowTerrainGraybox.asset";
     private const string IceTilePath = "Assets/Tiles/Snow/FrozenGroundSnowBlock.asset";
     private const string IceMaterialPath = "Assets/Settings/Physics/FrozenGround.physicsMaterial2D";
@@ -105,12 +110,13 @@ public static class SnowRegionRoomsBuilder
         GameObject entrances = new("Entrances"); entrances.transform.SetParent(gameplay.transform);
         GameObject exits = new("Exits"); exits.transform.SetParent(gameplay.transform);
         Transform entrance = Marker("Entrance-DEFAULT", new Vector3(-9.5f, -1.08f, 0f), entrances.transform);
+        CreateReturnEntrances(id, entrances.transform);
         CreateGameplay(id, dynamics.transform);
         CreateExits(id, exitPrefab, exits.transform);
-        CreateCamera();
+        CameraFollow2D cameraFollow = CreateCamera(id);
         GameObject systems = new("RoomSystems"); systems.transform.SetParent(root.transform);
         RoomResetSystem reset = systems.AddComponent<RoomResetSystem>();
-        PlayerRoomAuthoring.ConfigureRoom(systems, entrance, reset, null, false);
+        PlayerRoomAuthoring.ConfigureRoom(systems, entrance, reset, cameraFollow, false);
         Validate(scene, id, terrain, ice);
         string path = $"Assets/Scenes/Levels/Snow/Snow_{id:000}.unity";
         EditorSceneManager.MarkSceneDirty(scene); Require(EditorSceneManager.SaveScene(scene, path), $"Failed to save {path}");
@@ -146,11 +152,11 @@ public static class SnowRegionRoomsBuilder
         if (id is 5 or 6 or 8 or 9 or 13 or 14 or 15)
         {
             PressurePlate2D p1 = Plate(parent, new Vector2(-7f, -2.35f), "Plate-1");
-            Door2D d1 = Door(parent, new Vector2(0f, -2f), "Door-1", p1);
+            Door2D d1 = Door(parent, new Vector2(.5f, -2f), "Door-1", p1);
             if (id is 6 or 9 or 13 or 14 or 15)
             {
                 PressurePlate2D p2 = Plate(parent, new Vector2(7f, -2.35f), "Plate-2");
-                Door(parent, new Vector2(10f, -2f), "Door-2", p2);
+                Door(parent, new Vector2(10.5f, -2f), "Door-2", p2);
             }
         }
         if (id is 7 or 8 or 15)
@@ -220,10 +226,31 @@ public static class SnowRegionRoomsBuilder
             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
             instance.name = $"Exit to SNOW_{neighbors[i]:000}"; instance.transform.SetParent(parent, false);
             instance.transform.position = new Vector3(x, y, 0f);
-            RoomExit2D exit = instance.GetComponent<RoomExit2D>(); exit.Configure($"Snow_{neighbors[i]:000}", "DEFAULT");
+            string targetEntrance = HasSourceEntrance(neighbors[i], id) ? $"FROM_SNOW_{id:000}" : "DEFAULT";
+            RoomExit2D exit = instance.GetComponent<RoomExit2D>(); exit.Configure($"Snow_{neighbors[i]:000}", targetEntrance);
             Record(instance.transform); Record(exit);
         }
     }
+
+    private static void CreateReturnEntrances(int id, Transform parent)
+    {
+        int[] neighbors = Neighbors[id];
+        for (int i = 0; i < neighbors.Length; i++)
+        {
+            Vector3 position = i switch
+            {
+                0 => new Vector3(-10f, -1.08f, 0f),
+                1 => new Vector3(9.75f, -1.08f, 0f),
+                _ when id >= 9 => new Vector3(8.4f, 3.92f, 0f),
+                _ => new Vector3(8.75f, -1.08f, 0f)
+            };
+            Transform marker = Marker($"Entrance-FROM_SNOW_{neighbors[i]:000}", position, parent);
+            PlayerRoomAuthoring.ConfigureEntrance(marker, $"FROM_SNOW_{neighbors[i]:000}", false, i == 0);
+        }
+    }
+
+    private static bool HasSourceEntrance(int targetRoom, int sourceRoom)
+        => targetRoom == 3 ? sourceRoom == 4 : Neighbors.TryGetValue(targetRoom, out int[] neighbors) && neighbors.Contains(sourceRoom);
 
     private static Tilemap CreateTilemap(Transform parent, string name)
     { GameObject go = new(name); go.transform.SetParent(parent, false); Tilemap map = go.AddComponent<Tilemap>(); go.AddComponent<TilemapRenderer>(); return map; }
@@ -241,7 +268,20 @@ public static class SnowRegionRoomsBuilder
     private static Transform Marker(string name, Vector3 position, Transform parent) { GameObject go=new(name); go.transform.SetParent(parent,false); go.transform.position=position; return go.transform; }
     private static SpriteRenderer Visual(string name, Transform parent, Vector2 size, Color color, Sprite sprite)
     { GameObject go=new(name); go.transform.SetParent(parent,false); SpriteRenderer r=go.AddComponent<SpriteRenderer>(); r.sprite=sprite; r.color=color; Vector2 native=sprite.bounds.size; go.transform.localScale=new Vector3(size.x/native.x,size.y/native.y,1); return r; }
-    private static void CreateCamera() { GameObject go=new("Main Camera"); go.tag="MainCamera"; go.transform.position=new Vector3(0,0,-10); Camera c=go.AddComponent<Camera>(); c.orthographic=true; c.orthographicSize=7; c.backgroundColor=new Color(.68f,.84f,.94f); go.AddComponent<AudioListener>(); }
+    private static CameraFollow2D CreateCamera(int roomId)
+    {
+        GameObject go = new("Main Camera"); go.tag = "MainCamera";
+        go.transform.position = new Vector3(0, 0, -10);
+        Camera camera = go.AddComponent<Camera>(); camera.orthographic = true;
+        camera.orthographicSize = CameraOrthographicSize; camera.backgroundColor = new Color(.68f, .84f, .94f);
+        go.AddComponent<AudioListener>();
+        CameraFollow2D follow = go.AddComponent<CameraFollow2D>();
+        follow.Configure(null, true); follow.ConfigureDamping(CameraSmoothTime);
+        follow.ConfigureBounds(CameraBoundsFor(roomId));
+        if (roomId == 7) follow.ConfigureEntryFramingBounds(Snow007EntryFramingBounds);
+        return follow;
+    }
+    private static Rect CameraBoundsFor(int roomId) => roomId is 7 or 8 ? WideCameraBounds : DefaultCameraBounds;
     private static string RoomName(int id) => id switch {4=>"Frozen Step",5=>"Gate the Enemy",6=>"Mirror Twin Route",7=>"Warm Islands",8=>"Clone Freeze",9=>"Enemy Routing",10=>"Carrot for Snowman",11=>"Snowfall Shelter",12=>"Ice in Snowfall",13=>"Split Shelter",14=>"Frozen Stair",15=>"White Pendulum",_=>"Snow Room"};
     private static void Validate(Scene scene, int id, Tilemap terrain, Tilemap ice)
     {
@@ -249,7 +289,20 @@ public static class SnowRegionRoomsBuilder
         Require(terrain.GetComponent<SurfaceSemantic2D>()?.Type==SurfaceSemantic2D.SurfaceType.StaticSolid,$"SNOW_{id:000} Terrain semantic missing");
         Require(roots.SelectMany(r=>r.GetComponentsInChildren<PlayerController2D>(true)).Count()==0,$"SNOW_{id:000} serializes Player");
         Require(roots.SelectMany(r=>r.GetComponentsInChildren<RoomPlayerSpawner2D>(true)).Count()==1,$"SNOW_{id:000} needs one spawner");
+        RoomEntrance2D[] entrances = roots.SelectMany(r=>r.GetComponentsInChildren<RoomEntrance2D>(true)).ToArray();
+        Require(entrances.Length==Neighbors[id].Length+1 && entrances.Count(value=>value.IsDefault)==1 &&
+                entrances.Select(value=>value.EntranceId).Distinct().Count()==entrances.Length,
+            $"SNOW_{id:000} source entrance configuration mismatch");
         Require(roots.SelectMany(r=>r.GetComponentsInChildren<RoomExit2D>(true)).Count()==Neighbors[id].Length,$"SNOW_{id:000} exit count mismatch");
+        Camera camera = roots.SelectMany(r=>r.GetComponentsInChildren<Camera>(true)).Single();
+        CameraFollow2D follow = camera.GetComponent<CameraFollow2D>();
+        Require(camera.orthographic && Mathf.Approximately(camera.orthographicSize, CameraOrthographicSize) &&
+                follow != null && follow.FollowsVertical && follow.UsesRoomBounds &&
+                follow.RoomBounds == CameraBoundsFor(id) && Mathf.Approximately(follow.SmoothTime, CameraSmoothTime),
+            $"SNOW_{id:000} bounded Player-follow camera mismatch");
+        if (id == 7)
+            Require(follow.AlignsEntryFramingToBounds && follow.EntryFramingBounds == Snow007EntryFramingBounds,
+                "SNOW_007 entrance framing must align the live view with its physical walls");
         if (ice.GetUsedTilesCount()>0) Require(ice.GetComponent<SurfaceSemantic2D>()?.Type==SurfaceSemantic2D.SurfaceType.FrozenGround,$"SNOW_{id:000} ice semantic missing");
     }
     private static void AddBuildScene(string path) { List<EditorBuildSettingsScene> scenes=EditorBuildSettings.scenes.ToList(); if(!scenes.Any(s=>s.path==path)) scenes.Add(new EditorBuildSettingsScene(path,true)); EditorBuildSettings.scenes=scenes.ToArray(); }

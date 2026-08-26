@@ -114,7 +114,7 @@ public static class Fire010RoomBuilder
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         instance.name = "Door-A";
         instance.transform.SetParent(parent, false);
-        instance.transform.position = new Vector3(-9.5f, -1.5f, 0f);
+        instance.transform.position = new Vector3(-9.5f, -1f, 0f);
         Door2D door = instance.GetComponent<Door2D>();
         door.ConfigureControlSource(plate);
         door.SetState(Door2D.VisualState.Closed);

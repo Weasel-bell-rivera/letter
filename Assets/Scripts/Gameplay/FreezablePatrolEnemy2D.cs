@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFreezingGroundActor2D
 {
-    public enum EnemyState { Active, Frozen }
+    public enum EnemyState { Active, Freezing, Frozen }
 
     [Header("Prefab references")]
     [SerializeField] private BoxCollider2D bodyCollider;
@@ -33,10 +34,15 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
     private bool configurationErrorLogged;
     private bool ownsFreezeClip;
     private float freezingMovementMultiplier = 1f;
+    private float frozenGroundEntryX;
+    private float frozenGroundTargetX;
+    private float frozenGroundDirection;
+    private float frozenGroundFreezeAmount;
 
     public EnemyState State { get; private set; } = EnemyState.Active;
     public bool IsFrozen => State == EnemyState.Frozen;
-    public bool IsDamaging => State == EnemyState.Active && damageTrigger != null && damageTrigger.DamageEnabled;
+    public float FrozenGroundFreezeAmount => frozenGroundFreezeAmount;
+    public bool IsDamaging => State != EnemyState.Frozen && damageTrigger != null && damageTrigger.DamageEnabled;
     public bool FacingRight => facingRight;
     public float LeftEndpoint => leftEndpoint;
     public float RightEndpoint => rightEndpoint;
@@ -67,8 +73,14 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
 
     private void FixedUpdate()
     {
-        if (!ValidateConfiguration() || State != EnemyState.Active) return;
-        if (TryFreezeFromFootContact()) return;
+        if (!ValidateConfiguration() || State == EnemyState.Frozen) return;
+        if (State == EnemyState.Active) TryBeginFrozenGroundFreezing();
+        if (State == EnemyState.Freezing)
+        {
+            if (UpdateFrozenGroundFreezing()) return;
+            SetHorizontalVelocity(frozenGroundDirection * moveSpeed * freezingMovementMultiplier);
+            return;
+        }
 
         if (waitRemaining > 0f)
         {
@@ -149,9 +161,9 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
         return valid;
     }
 
-    private bool TryFreezeFromFootContact()
+    private void TryBeginFrozenGroundFreezing()
     {
-        if (body.linearVelocity.y > .05f) return false;
+        if (body.linearVelocity.y > .05f) return;
         Vector2 probeSize = new(Mathf.Max(.1f, bodyCollider.bounds.size.x * .65f), .08f);
         foreach (RaycastHit2D hit in Physics2D.BoxCastAll(surfaceProbe.position, probeSize, 0f, Vector2.down, .14f))
         {
@@ -160,10 +172,57 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
             if (!SurfaceSemantic2D.TryGet(hit.collider, out SurfaceSemantic2D semantic) ||
                 semantic.Type != SurfaceSemantic2D.SurfaceType.FrozenGround || !semantic.IsStatic || !semantic.IsSafe)
                 continue;
-            Freeze();
-            return true;
+            BeginFrozenGroundFreezing(hit);
+            return;
         }
-        return false;
+    }
+
+    private void BeginFrozenGroundFreezing(RaycastHit2D hit)
+    {
+        State = EnemyState.Freezing;
+        frozenGroundEntryX = body.position.x;
+        frozenGroundDirection = Mathf.Abs(body.linearVelocity.x) > .01f
+            ? Mathf.Sign(body.linearVelocity.x)
+            : (facingRight ? 1f : -1f);
+
+        Tilemap tilemap = hit.collider.GetComponent<Tilemap>();
+        if (tilemap == null) tilemap = hit.collider.GetComponentInParent<Tilemap>();
+        if (tilemap != null)
+        {
+            Vector3 probe = new(surfaceProbe.position.x + frozenGroundDirection * .01f, hit.point.y, 0f);
+            frozenGroundTargetX = tilemap.GetCellCenterWorld(tilemap.WorldToCell(probe)).x;
+        }
+        else
+        {
+            // Non-Tilemap test/prototype surfaces use the same one-unit world grid convention.
+            frozenGroundTargetX = Mathf.Floor(surfaceProbe.position.x) + .5f;
+        }
+
+        if ((frozenGroundTargetX - frozenGroundEntryX) * frozenGroundDirection < 0f)
+            frozenGroundTargetX += frozenGroundDirection;
+
+        frozenGroundFreezeAmount = 0f;
+        RefreshVisuals(false);
+    }
+
+    private bool UpdateFrozenGroundFreezing()
+    {
+        float distance = Mathf.Abs(frozenGroundTargetX - frozenGroundEntryX);
+        float travelled = Mathf.Abs(body.position.x - frozenGroundEntryX);
+        frozenGroundFreezeAmount = distance <= .001f ? 1f : Mathf.Clamp01(travelled / distance);
+        freezingMovementMultiplier = Mathf.Lerp(1f, .25f, frozenGroundFreezeAmount);
+        RefreshVisuals(false);
+
+        bool reachedCenter = frozenGroundDirection > 0f
+            ? body.position.x >= frozenGroundTargetX
+            : body.position.x <= frozenGroundTargetX;
+        if (!reachedCenter) return false;
+
+        Vector2 centered = body.position;
+        centered.x = frozenGroundTargetX;
+        body.position = centered;
+        Freeze();
+        return true;
     }
 
     private bool IsWallAhead(float direction)
@@ -208,6 +267,7 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
     {
         if (State == EnemyState.Frozen) return;
         State = EnemyState.Frozen;
+        frozenGroundFreezeAmount = 1f;
         body.linearVelocity = Vector2.zero;
         body.angularVelocity = 0f;
         body.bodyType = RigidbodyType2D.Kinematic;
@@ -230,6 +290,10 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
         facingRight = initiallyFacingRight;
         waitRemaining = 0f;
         freezingMovementMultiplier = 1f;
+        frozenGroundFreezeAmount = 0f;
+        frozenGroundEntryX = 0f;
+        frozenGroundTargetX = 0f;
+        frozenGroundDirection = 0f;
         body.bodyType = RigidbodyType2D.Dynamic;
         body.freezeRotation = true;
         body.gravityScale = 1f;
@@ -246,9 +310,27 @@ public sealed class FreezablePatrolEnemy2D : MonoBehaviour, IRoomResettable, IFr
 
     private void RefreshVisuals(bool playFreezeEffect)
     {
-        if (activeVisual != null) activeVisual.SetActive(State == EnemyState.Active);
-        if (frozenVisual != null) frozenVisual.SetActive(State == EnemyState.Frozen);
+        if (activeVisual != null) activeVisual.SetActive(true);
+        if (frozenVisual != null)
+        {
+            frozenVisual.SetActive(State != EnemyState.Active);
+            SpriteRenderer source = activeVisual != null ? activeVisual.GetComponent<SpriteRenderer>() : null;
+            SpriteRenderer overlay = frozenVisual.GetComponent<SpriteRenderer>();
+            if (source != null && overlay != null)
+            {
+                overlay.sprite = source.sprite;
+                frozenVisual.transform.localScale = activeVisual.transform.localScale;
+                Color color = overlay.color;
+                color.a = Mathf.Lerp(.08f, .72f, frozenGroundFreezeAmount);
+                overlay.color = color;
+            }
+        }
         if (freezeEffect != null) freezeEffect.SetActive(playFreezeEffect && State == EnemyState.Frozen);
+        if (activeVisual != null)
+        {
+            SpriteFrameAnimator2D animator = activeVisual.GetComponent<SpriteFrameAnimator2D>();
+            if (animator != null) animator.enabled = State != EnemyState.Frozen;
+        }
     }
 
     private void RefreshFacingVisual()

@@ -72,7 +72,7 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
         if (cameraFollow != null)
         {
             cameraFollow.Configure(SpawnedPlayer.transform, cameraFollow.FollowsVertical);
-            cameraFollow.SnapToTarget();
+            cameraFollow.BeginEntryFraming();
         }
 
         Physics2D.SyncTransforms();

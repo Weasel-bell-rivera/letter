@@ -5,6 +5,7 @@
 - 当前状态：灰盒已创建，等待人工试玩与运行时调优。
 - Unity Scene：`Assets/Scenes/Levels/Earth/Earth_006.unity`（已创建并登记Build Settings）。
 - 地图连接：左`EARTH_007`，右`EARTH_010`。
+- 入口与出口：保留唯一`DEFAULT`安全入口；每个已实现相邻来源使用`FROM_<来源房间ID>`入口，出口显式请求目标房的`FROM_<本房ID>`入口。
 - 世界进入顺序与土区解锁条件仍待确定。
 
 ## 房间定位

@@ -173,7 +173,7 @@ public static class WindRoomBatchBuilder
             case Puzzle.CloneWind:
                 Wind(parent, new Vector2(-2f, -1.5f), Vector2.left, new Vector2(16f, 2f));
                 PressurePlate2D clonePlate = Plate(parent, new Vector2(-9f, -2.35f));
-                Door2D cloneDoor = Door(parent, new Vector2(5f, -1f));
+                Door2D cloneDoor = Door(parent, new Vector2(5.5f, -1f));
                 cloneDoor.ConfigureControlSource(clonePlate);
                 Record(cloneDoor);
                 break;
@@ -186,7 +186,7 @@ public static class WindRoomBatchBuilder
             case Puzzle.Tornado:
                 Generator(parent, new Vector2(-8f, -1.5f));
                 Generator(parent, new Vector2(1f, -.5f));
-                Door2D tornadoDoor = Door(parent, new Vector2(5f, -1f));
+                Door2D tornadoDoor = Door(parent, new Vector2(5.5f, -1f));
                 PressurePlate2D tornadoPlate = Plate(parent, new Vector2(-5f, -2.35f));
                 tornadoDoor.ConfigureControlSource(tornadoPlate);
                 Record(tornadoDoor);
@@ -202,15 +202,15 @@ public static class WindRoomBatchBuilder
                 break;
             case Puzzle.TurbineDoor:
                 Wind(parent, new Vector2(-5f, -1.5f), Vector2.right, new Vector2(14f, 2f));
-                TurbineDoor(parent, new Vector2(1f, -1.5f), new Vector2(5f, -1f));
+                TurbineDoor(parent, new Vector2(1f, -1.5f), new Vector2(5.5f, -1f));
                 break;
             case Puzzle.PeriodicTurbine:
                 Wind(parent, new Vector2(-5f, -1.5f), Vector2.right, new Vector2(14f, 2f), true);
-                TurbineDoor(parent, new Vector2(1f, -1.5f), new Vector2(5f, -1f));
+                TurbineDoor(parent, new Vector2(1f, -1.5f), new Vector2(5.5f, -1f));
                 break;
             case Puzzle.TornadoDoor:
                 Generator(parent, new Vector2(-8f, -1.5f));
-                Door2D shelter = Door(parent, new Vector2(2f, -1f));
+                Door2D shelter = Door(parent, new Vector2(2.5f, -1f));
                 PressurePlate2D switchPlate = Plate(parent, new Vector2(-5f, -2.35f));
                 shelter.ConfigureControlSource(switchPlate);
                 Record(shelter);
@@ -218,7 +218,7 @@ public static class WindRoomBatchBuilder
             case Puzzle.DeflectorTurbine:
                 Wind(parent, new Vector2(-5f, -1.5f), Vector2.right, new Vector2(10f, 2f));
                 Deflector(parent, new Vector2(0f, -1.5f), false, null);
-                TurbineDoor(parent, new Vector2(0f, 2f), new Vector2(5f, -1f), Vector2.up);
+                TurbineDoor(parent, new Vector2(0f, 2f), new Vector2(5.5f, -1f), Vector2.up);
                 break;
             case Puzzle.Finale:
                 Wind(parent, new Vector2(-4f, -1.5f), Vector2.right, new Vector2(12f, 2f), true);

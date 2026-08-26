@@ -12,7 +12,8 @@ using UnityEngine.Tilemaps;
 public static class Fire012RoomBuilder
 {
     public const string ScenePath = "Assets/Scenes/Levels/Fire/Fire_012.unity";
-    private const string TerrainTilePath = "Assets/Tiles/Graybox/Fire009Terrain.asset";
+    private const string TerrainTexturePath = "Assets/Art/Fire/Tiles/fire012_silver_sandstone_ground_v1.png";
+    private const string TerrainTilePath = "Assets/Tiles/Fire/Fire012SilverSandstoneGround.asset";
     private const string HintTilePath = "Assets/Tiles/Graybox/Fire009MirrorHint.asset";
     private const string PlatePrefabPath = "Assets/Prefabs/Gameplay/Switches/PressurePlate2D.prefab";
     private const string DoorPrefabPath = "Assets/Prefabs/Gameplay/Doors/Door2D.prefab";
@@ -24,9 +25,29 @@ public static class Fire012RoomBuilder
 
     public static void BuildFromCommandLine()
     {
+        CreateOrUpdateTerrainTile();
         BuildScene();
         AssetDatabase.SaveAssets();
         Debug.Log("FIRE_012 door-as-shield Tilemap greybox built successfully.");
+    }
+
+    [MenuItem("Tools/W1/Fire/Apply FIRE-012 Silver Sandstone Terrain")]
+    public static void ApplyTerrainArt()
+    {
+        Tile terrainTile = CreateOrUpdateTerrainTile();
+        Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+        Tilemap terrain = scene.GetRootGameObjects()
+            .SelectMany(root => root.GetComponentsInChildren<Tilemap>(true))
+            .Single(map => map.name == "Terrain");
+
+        foreach (Vector3Int position in terrain.cellBounds.allPositionsWithin)
+            if (terrain.HasTile(position)) terrain.SetTile(position, terrainTile);
+
+        BakeTerrain(terrain);
+        EditorSceneManager.MarkSceneDirty(scene);
+        Require(EditorSceneManager.SaveScene(scene, ScenePath), "Failed to save FIRE_012 scene.");
+        AssetDatabase.SaveAssets();
+        Debug.Log("FIRE_012 Terrain updated to the silver sandstone Tile.");
     }
 
     private static void BuildScene()
@@ -116,7 +137,7 @@ public static class Fire012RoomBuilder
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         instance.name = "Door-A Shield";
         instance.transform.SetParent(parent, false);
-        instance.transform.position = new Vector3(-5f, -1.5f, 0f);
+        instance.transform.position = new Vector3(-4.5f, -1f, 0f);
         Door2D door = instance.GetComponent<Door2D>();
         door.ConfigureControlSource(plate);
         door.SetState(Door2D.VisualState.Closed);
@@ -199,6 +220,25 @@ public static class Fire012RoomBuilder
             "FIRE_012 Terrain collider geometry was not generated.");
     }
 
+    private static Tile CreateOrUpdateTerrainTile()
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(TerrainTilePath));
+        Sprite sprite = AssetDatabase.LoadAllAssetsAtPath(TerrainTexturePath).OfType<Sprite>().Single();
+        Tile tile = AssetDatabase.LoadAssetAtPath<Tile>(TerrainTilePath);
+        if (tile == null)
+        {
+            tile = ScriptableObject.CreateInstance<Tile>();
+            AssetDatabase.CreateAsset(tile, TerrainTilePath);
+        }
+
+        tile.name = Path.GetFileNameWithoutExtension(TerrainTilePath);
+        tile.sprite = sprite;
+        tile.color = Color.white;
+        tile.colliderType = Tile.ColliderType.Grid;
+        EditorUtility.SetDirty(tile);
+        return tile;
+    }
+
     private static Transform Marker(string name, Vector3 position, Transform parent)
     {
         GameObject marker = new(name);
@@ -230,6 +270,11 @@ public static class Fire012RoomBuilder
         Require(terrain.GetComponent<SurfaceSemantic2D>()?.Type == SurfaceSemantic2D.SurfaceType.StaticSolid &&
                 terrain.GetComponent<MirrorSurface2D>()?.kind == MirrorSurface2D.SurfaceKind.Ground,
             "FIRE_012 Terrain semantics are invalid.");
+        TileBase[] usedTiles = new TileBase[terrain.GetUsedTilesCount()];
+        terrain.GetUsedTilesNonAlloc(usedTiles);
+        Require(usedTiles.Where(tile => tile != null)
+                .All(tile => AssetDatabase.GetAssetPath(tile) == TerrainTilePath),
+            "FIRE_012 Terrain must use its silver sandstone Tile.");
         Require(door.GetComponent<BoxCollider2D>().size == new Vector2(1f, 2f),
             "FIRE_012 must use the standard two-tile Door2D size.");
     }

@@ -68,6 +68,7 @@ public static class W1ProjectBuilder
     {
         BuildCenter001();
         BuildCenter002Placeholder();
+        Center001GroundTilemapBuilder.Apply();
         AddBuildScene("Assets/Scenes/Levels/Center/Center_001.unity");
         AddBuildScene("Assets/Scenes/Levels/Center/Center_002.unity");
     }

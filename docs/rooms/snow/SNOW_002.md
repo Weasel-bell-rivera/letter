@@ -60,10 +60,12 @@ Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Default/terrain_snow_block.png
 - `FrozenGround`配置`Tilemap`、`TilemapRenderer`、`TilemapCollider2D`、`CompositeCollider2D`、Static `Rigidbody2D`、`SurfaceSemantic2D`和`MirrorSurface2D`。
 - 24个Tile通过一次`SetTilesBlock`写入，并将碰撞烘焙为有效Composite几何。
 - 原型入口`PrototypeEntrance`位于`(-9.5, -1.08)`，用于验证Player能够稳定落在冰面上。
-- 原型包含Player、镜子系统、跟随相机和`RoomResetSystem`，用于验证放置、回收和手动重置；这些对象没有引入房间专用运行时脚本。
+- 原型通过统一Spawner生成Player和镜子系统，并包含`RoomResetSystem`与Player跟随相机，用于验证放置、回收和手动重置；这些对象没有引入房间专用运行时脚本。
+- 相机使用雪区统一正交尺寸`7`、双轴跟随和`0.15秒`平滑时间；显式显示边界为`Rect(-12, -7, 24, 14)`。房间小于完整视野的方向按通用规则居中，不显示边界外内容。
 - 房间中央包含一个`MovingPlatform2D.prefab`实例，锚点为`(0, 0)`，沿本地`x=-2～2`水平往返，速度`2`，端点等待`0.35秒`，初始相位`0.5`。
 - 当前原型没有正式房间出口、敌人、门、压力板、危险物或其他谜题对象。
 - 当前没有实现寒冰低摩擦参数覆盖；在雪区加速度与减速度确认前，Player和MirrorClone继续使用现有默认移动参数。
+- 当前仍未批准或实现正式出口；未来连接`SNOW_003`时应指向其左侧`DEFAULT`入口，不得在本次双入口修复中提前增加出口。
 
 ## Prefab需求
 
@@ -97,4 +99,3 @@ Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Default/terrain_snow_block.png
 - 当前实现授权仅覆盖上述横向冰面最小原型，不代表完整房间布局或玩法设计已经获批。
 - 正式设计前必须阅读 `docs/LEVEL_DESIGN.md`、对应区域文档和相关系统文档。
 - 在剩余房间设计获得确认前，不得增加正式入口、出口、谜题机关、敌人、危险物或其他未批准内容。
-

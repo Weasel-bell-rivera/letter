@@ -15,9 +15,11 @@ public static class Snow001RoomBuilder
     public const string TerrainTexturePath =
         "Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Default/terrain_sand_block_center.png";
     public const string TerrainTilePath = "Assets/Tiles/Snow/SnowTerrainGraybox.asset";
-    public const string MirrorWallTilePath = "Assets/Tiles/Snow/SnowMirrorWallGraybox.asset";
     public const string FrozenGroundTilePath = "Assets/Tiles/Snow/FrozenGroundSnowBlock.asset";
     public const string FrozenGroundMaterialPath = "Assets/Settings/Physics/FrozenGround.physicsMaterial2D";
+    public static readonly Rect CameraBounds = new(-14f, -3f, 29f, 14f);
+    public const float CameraOrthographicSize = 7f;
+    public const float CameraSmoothTime = .15f;
 
     private const string PlatePrefabPath = "Assets/Prefabs/Gameplay/Switches/PressurePlate2D.prefab";
     private const string DoorPrefabPath = "Assets/Prefabs/Gameplay/Doors/Door2D.prefab";
@@ -37,8 +39,6 @@ public static class Snow001RoomBuilder
         Sprite terrainSprite = AssetDatabase.LoadAssetAtPath<Sprite>(TerrainTexturePath);
         Require(terrainSprite != null, "Terrain texture did not import as a Sprite.");
         Tile terrainTile = CreateOrUpdateTile(TerrainTilePath, terrainSprite, Color.white, Tile.ColliderType.Grid);
-        Tile mirrorWallTile = CreateOrUpdateTile(MirrorWallTilePath, terrainSprite,
-            new Color(.35f, .95f, 1f, .9f), Tile.ColliderType.Grid);
         Tile frozenTile = AssetDatabase.LoadAssetAtPath<Tile>(FrozenGroundTilePath);
         PhysicsMaterial2D frozenMaterial = AssetDatabase.LoadAssetAtPath<PhysicsMaterial2D>(FrozenGroundMaterialPath);
         GameObject platePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PlatePrefabPath);
@@ -50,7 +50,7 @@ public static class Snow001RoomBuilder
         Require(platePrefab != null && doorPrefab != null && enemyPrefab != null && exitPrefab != null,
             "SNOW_001 gameplay Prefab dependencies are missing.");
 
-        BuildScene(terrainTile, mirrorWallTile, frozenTile, frozenMaterial,
+        BuildScene(terrainTile, frozenTile, frozenMaterial,
             platePrefab, doorPrefab, enemyPrefab, exitPrefab);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -73,12 +73,12 @@ public static class Snow001RoomBuilder
         importer.SaveAndReimport();
     }
 
-    private static void BuildScene(TileBase terrainTile, TileBase mirrorWallTile, TileBase frozenTile,
+    private static void BuildScene(TileBase terrainTile, TileBase frozenTile,
         PhysicsMaterial2D frozenMaterial,
         GameObject platePrefab, GameObject doorPrefab, GameObject enemyPrefab, GameObject exitPrefab)
     {
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-        GameObject room = new("SNOW_001 Mirror Gate Ice Step");
+        GameObject room = new("SNOW_001 Ice Gate Step");
 
         GameObject gridObject = new("Grid");
         gridObject.transform.SetParent(room.transform);
@@ -88,7 +88,6 @@ public static class Snow001RoomBuilder
         Tilemap terrain = CreateTilemapLayer(gridObject.transform, "Terrain");
         Tilemap frozenGround = CreateTilemapLayer(gridObject.transform, "FrozenGround");
         CreateTilemapLayer(gridObject.transform, "OneWayPlatform");
-        Tilemap mirrorWall = CreateTilemapLayer(gridObject.transform, "SpecialMirrorWall");
         CreateTilemapLayer(gridObject.transform, "Hazard");
         CreateTilemapLayer(gridObject.transform, "Decoration");
         CreateTilemapLayer(gridObject.transform, "Foreground");
@@ -97,12 +96,9 @@ public static class Snow001RoomBuilder
             MirrorSurface2D.SurfaceKind.Ground, null);
         ConfigureSolidTilemap(frozenGround, SurfaceSemantic2D.SurfaceType.FrozenGround,
             MirrorSurface2D.SurfaceKind.Ground, frozenMaterial);
-        ConfigureSolidTilemap(mirrorWall, SurfaceSemantic2D.SurfaceType.SpecialMirrorWall,
-            MirrorSurface2D.SurfaceKind.SpecialWall, null);
 
         BuildTerrain(terrain, terrainTile);
-        Fill(mirrorWall, mirrorWallTile, -10, -10, 5, 8);
-        BakeTilemapGeometry(terrain, mirrorWall);
+        BakeTilemapGeometry(terrain);
         Tile frozenTileForScene = AssetDatabase.LoadAssetAtPath<Tile>(FrozenGroundTilePath);
         Require(frozenTileForScene != null, "FrozenGround Tile became unavailable while building the Scene.");
         Fill(frozenGround, frozenTileForScene, 2, 3, -3, -3);
@@ -123,8 +119,8 @@ public static class Snow001RoomBuilder
         CameraFollow2D cameraFollow = CreateCamera();
 
         PressurePlate2D plate = CreatePlate(platePrefab, dynamicObjects.transform,
-            new Vector2(-4.15f, 6.3f));
-        Door2D door = CreateDoor(doorPrefab, dynamicObjects.transform, new Vector2(-.65f, -1.5f), plate);
+            new Vector2(-2.5f, 6.15f));
+        Door2D door = CreateDoor(doorPrefab, dynamicObjects.transform, new Vector2(-.5f, -1f), plate);
         FreezablePatrolEnemy2D enemy = CreateEnemy(enemyPrefab, dynamicObjects.transform, new Vector2(-5f, -1.48f));
         CreateExit(exitPrefab, exits.transform, new Vector2(11.5f, 2.92f));
 
@@ -134,7 +130,7 @@ public static class Snow001RoomBuilder
         BindRuntimeScript(reset, "Assets/Scripts/Core/RoomResetSystem.cs");
         PlayerRoomAuthoring.ConfigureRoom(systems, entrance, reset, cameraFollow);
 
-        ValidateSceneOrThrow(scene, terrain, frozenGround, mirrorWall, plate, door, enemy);
+        ValidateSceneOrThrow(scene, terrain, frozenGround, plate, door, enemy, cameraFollow);
         EditorSceneManager.MarkSceneDirty(scene);
         Require(EditorSceneManager.SaveScene(scene, ScenePath), "Failed to save SNOW_001 scene.");
         AddBuildScene(ScenePath);
@@ -146,9 +142,10 @@ public static class Snow001RoomBuilder
         Fill(terrain, tile, -14, -14, -3, 10);
         Fill(terrain, tile, 14, 14, -3, 10);
         Fill(terrain, tile, -9, 1, 5, 5);       // entrance and observation route
-        Fill(terrain, tile, -4, -4, 0, 6);      // clone's local-gravity wall and low hurdle
+        Fill(terrain, tile, -4, -4, 0, 5);      // structural wall ending flush with the observation floor
         Fill(terrain, tile, -13, 1, -3, -3);    // enemy lane and safe landing area
         Fill(terrain, tile, 4, 13, 1, 1);       // goal platform, four units over lower floor
+        Fill(terrain, tile, 4, 4, -3, 0);       // support wall sealing the drop beside the ice strip
         Fill(terrain, tile, 3, 3, 4, 9);        // prevents dropping from observation onto the goal
         Fill(terrain, tile, -1, -1, 0, 4);      // static wall cap above the two-tile Door-A
     }
@@ -198,7 +195,7 @@ public static class Snow001RoomBuilder
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         instance.name = "Plate-A";
         instance.transform.SetParent(parent, false);
-        instance.transform.SetPositionAndRotation(position, Quaternion.Euler(0f, 0f, 90f));
+        instance.transform.SetPositionAndRotation(position, Quaternion.identity);
         return instance.GetComponent<PressurePlate2D>();
     }
 
@@ -245,15 +242,17 @@ public static class Snow001RoomBuilder
     {
         GameObject cameraObject = new("Main Camera");
         cameraObject.tag = "MainCamera";
-        cameraObject.transform.position = new Vector3(0f, 3f, -10f);
+        cameraObject.transform.position = new Vector3(0f, 4f, -10f);
         Camera camera = cameraObject.AddComponent<Camera>();
         camera.orthographic = true;
-        camera.orthographicSize = 10f;
+        camera.orthographicSize = CameraOrthographicSize;
         camera.backgroundColor = new Color(.58f, .74f, .86f);
         cameraObject.AddComponent<AudioListener>();
         CameraFollow2D follow = cameraObject.AddComponent<CameraFollow2D>();
         BindRuntimeScript(follow, "Assets/Scripts/Gameplay/CameraFollow2D.cs");
         follow.Configure(null, true);
+        follow.ConfigureDamping(CameraSmoothTime);
+        follow.ConfigureBounds(CameraBounds);
         return follow;
     }
 
@@ -306,7 +305,7 @@ public static class Snow001RoomBuilder
     }
 
     private static void ValidateSceneOrThrow(Scene scene, Tilemap terrain, Tilemap frozenGround,
-        Tilemap mirrorWall, PressurePlate2D plate, Door2D door, FreezablePatrolEnemy2D enemy)
+        PressurePlate2D plate, Door2D door, FreezablePatrolEnemy2D enemy, CameraFollow2D cameraFollow)
     {
         Require(terrain.GetComponent<SurfaceSemantic2D>()?.Type == SurfaceSemantic2D.SurfaceType.StaticSolid,
             "Terrain semantic is invalid.");
@@ -317,18 +316,36 @@ public static class Snow001RoomBuilder
             "FrozenGround tiles are missing from the approved ice strip.");
         Require(frozenGround.GetComponent<TilemapCollider2D>()?.sharedMaterial?.friction == 0f,
             "FrozenGround must use the zero-friction material.");
-        Require(mirrorWall.GetComponent<MirrorSurface2D>()?.kind == MirrorSurface2D.SurfaceKind.SpecialWall,
-            "SpecialMirrorWall must expose the approved wall mirror surface.");
-        Require(Mathf.Abs(Mathf.DeltaAngle(plate.transform.eulerAngles.z, 90f)) < .1f,
-            "Plate-A must be rotated 90 degrees.");
+        Require(Mathf.Abs(Mathf.DeltaAngle(plate.transform.eulerAngles.z, 0f)) < .1f,
+            "Plate-A must be a horizontal Player-accessible pressure plate.");
+        Require(plate.transform.position == new Vector3(-2.5f, 6.15f, 0f),
+            "Plate-A must remain on the Player observation route.");
+        Require(terrain.HasTile(new Vector3Int(-4, 5, 0)) &&
+                !terrain.HasTile(new Vector3Int(-4, 6, 0)),
+            "Terrain beside Plate-A must remain flush with the observation floor.");
         Require(door.ControlSource == plate, "Door-A must serialize Plate-A as its control source.");
+        Require(door.transform.position == new Vector3(-.5f, -1f, 0f),
+            "Door-A must align to the one-cell-wide, two-cell-high Terrain opening.");
         Require(door.GetComponent<BoxCollider2D>().size == new Vector2(1f, 2f),
             "Door-A must use the standard two-tile Door2D Prefab size.");
         Require(terrain.HasTile(new Vector3Int(-1, 0, 0)) && terrain.HasTile(new Vector3Int(-1, 4, 0)),
             "Static Terrain must close the shaft above the two-tile Door-A.");
+        Require(terrain.HasTile(new Vector3Int(4, -3, 0)) && terrain.HasTile(new Vector3Int(4, 0, 0)),
+            "Static Terrain must seal the drop beside the FrozenGround strip.");
         Require(enemy.LeftEndpoint < 0f && enemy.RightEndpoint > 0f, "Enemy-A patrol endpoints must be local offsets.");
+        Camera camera = cameraFollow.GetComponent<Camera>();
+        Require(camera != null && camera.orthographic &&
+                Mathf.Approximately(camera.orthographicSize, CameraOrthographicSize),
+            "SNOW_001 must use the approved orthographic camera size.");
+        Require(cameraFollow.FollowsVertical && cameraFollow.UsesRoomBounds &&
+                cameraFollow.RoomBounds == CameraBounds &&
+                Mathf.Approximately(cameraFollow.SmoothTime, CameraSmoothTime),
+            "SNOW_001 must use the approved bounded, damped follow camera configuration.");
 
         GameObject[] roots = scene.GetRootGameObjects();
+        Require(roots.SelectMany(root => root.GetComponentsInChildren<SurfaceSemantic2D>(true))
+                .All(surface => surface.Type != SurfaceSemantic2D.SurfaceType.SpecialMirrorWall),
+            "SNOW_001 must not contain SpecialMirrorWall semantics.");
         Require(roots.SelectMany(root => root.GetComponentsInChildren<PlayerController2D>(true)).Count() == 0,
             "SNOW_001 must not serialize a room-local Player.");
         Require(roots.SelectMany(root => root.GetComponentsInChildren<RoomPlayerSpawner2D>(true)).Count() == 1,

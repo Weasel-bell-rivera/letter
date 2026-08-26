@@ -12,6 +12,7 @@ public sealed class FreezingVisual2D : MonoBehaviour
 
     private readonly Dictionary<SpriteRenderer, Color> baseColors = new();
     private FreezingGroundActor2D source;
+    private PlayerController2D player;
     private SpriteRenderer[] renderers;
     private SpriteRenderer overlay;
     private SpriteRenderer overlayTarget;
@@ -29,6 +30,7 @@ public sealed class FreezingVisual2D : MonoBehaviour
     private void Awake()
     {
         source = GetComponent<FreezingGroundActor2D>();
+        player = GetComponent<PlayerController2D>();
         RefreshRenderers();
         CreateOverlay();
         Apply(0f);
@@ -37,7 +39,8 @@ public sealed class FreezingVisual2D : MonoBehaviour
     private void LateUpdate()
     {
         if (source == null) source = GetComponent<FreezingGroundActor2D>();
-        float target = source != null ? source.FreezeAmount : 0f;
+        float target = Mathf.Max(source != null ? source.FreezeAmount : 0f,
+            player != null ? player.FrozenGroundFreezeAmount : 0f);
         displayedAmount = Mathf.MoveTowards(displayedAmount, target, responseSpeed * Time.deltaTime);
         if (renderers == null || renderers.Length == 0) RefreshRenderers();
         UpdateOverlayTarget();

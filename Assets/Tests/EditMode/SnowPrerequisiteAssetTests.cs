@@ -1,6 +1,9 @@
+using System.Linq;
 using NUnit.Framework;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public sealed class SnowPrerequisiteAssetTests
@@ -44,6 +47,12 @@ public sealed class SnowPrerequisiteAssetTests
         Assert.That(prefab.transform.Find("Visual/ActiveVisual"), Is.Not.Null);
         Assert.That(prefab.transform.Find("Visual/FrozenVisual"), Is.Not.Null);
         Assert.That(prefab.transform.Find("Visual/FreezeEffect"), Is.Not.Null);
+        SpriteRenderer activeRenderer = prefab.transform.Find("Visual/ActiveVisual").GetComponent<SpriteRenderer>();
+        SpriteRenderer frozenOverlay = prefab.transform.Find("Visual/FrozenVisual").GetComponent<SpriteRenderer>();
+        Assert.That(frozenOverlay.sprite, Is.EqualTo(activeRenderer.sprite),
+            "Frozen state must tint the original enemy image instead of replacing it with a color block.");
+        Assert.That(frozenOverlay.transform.localScale, Is.EqualTo(activeRenderer.transform.localScale));
+        Assert.That(frozenOverlay.color.a, Is.LessThan(1f));
         Assert.That(prefab.transform.Find("BodyCollider")?.GetComponent<BoxCollider2D>(), Is.Not.Null);
         Assert.That(prefab.transform.Find("BodyCollider")?.GetComponent<SurfaceSemantic2D>()?.Type,
             Is.EqualTo(SurfaceSemantic2D.SurfaceType.DynamicSurface));
@@ -62,5 +71,53 @@ public sealed class SnowPrerequisiteAssetTests
         Assert.That(enemy.RightEndpoint, Is.GreaterThan(0f));
         Assert.That(enemy.MoveSpeed, Is.GreaterThan(0f));
         Assert.That(enemy.EndpointWait, Is.GreaterThanOrEqualTo(0f));
+    }
+
+    [Test]
+    public void EveryApprovedSnowRoomUsesTheRegionalPlayerFollowCamera()
+    {
+        for (int roomId = 1; roomId <= 15; roomId++)
+        {
+            string scenePath = $"Assets/Scenes/Levels/Snow/Snow_{roomId:000}.unity";
+            Scene scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
+            try
+            {
+                GameObject[] roots = scene.GetRootGameObjects();
+                Camera camera = roots.SelectMany(root => root.GetComponentsInChildren<Camera>(true)).Single();
+                CameraFollow2D follow = camera.GetComponent<CameraFollow2D>();
+                RoomResetSystem reset = roots.SelectMany(root =>
+                    root.GetComponentsInChildren<RoomResetSystem>(true)).Single();
+                Rect expectedBounds = roomId == 1
+                    ? new Rect(-14f, -3f, 29f, 14f)
+                    : roomId == 2
+                        ? new Rect(-12f, -7f, 24f, 14f)
+                        : roomId is 7 or 8
+                            ? new Rect(-20f, -7f, 40f, 14f)
+                        : new Rect(-13f, -7f, 26f, 14f);
+
+                Assert.That(camera.orthographic, Is.True, $"SNOW_{roomId:000} camera must be orthographic.");
+                Assert.That(camera.orthographicSize, Is.EqualTo(7f).Within(.001f));
+                Assert.That(follow, Is.Not.Null, $"SNOW_{roomId:000} must follow the spawned Player.");
+                Assert.That(follow.Target, Is.Null, "The runtime spawner binds the Player after entering the room.");
+                Assert.That(follow.FollowsVertical, Is.True);
+                Assert.That(follow.SmoothTime, Is.EqualTo(.15f).Within(.001f));
+                Assert.That(follow.UsesRoomBounds, Is.True);
+                Assert.That(follow.RoomBounds, Is.EqualTo(expectedBounds));
+                if (roomId == 7)
+                {
+                    Assert.That(follow.AlignsEntryFramingToBounds, Is.True);
+                    Assert.That(follow.EntryFramingBounds, Is.EqualTo(new Rect(-13f, -7f, 26f, 14f)),
+                        "SNOW_007 must align its live entrance view with the physical walls.");
+                }
+
+                SerializedObject serializedReset = new(reset);
+                Assert.That(serializedReset.FindProperty("cameraFollow").objectReferenceValue,
+                    Is.SameAs(follow), $"SNOW_{roomId:000} reset must restore its follow camera.");
+            }
+            finally
+            {
+                EditorSceneManager.CloseScene(scene, true);
+            }
+        }
     }
 }

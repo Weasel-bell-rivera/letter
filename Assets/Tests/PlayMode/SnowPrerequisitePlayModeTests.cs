@@ -40,7 +40,7 @@ public sealed class SnowPrerequisitePlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator EnemyFreezesOnlyFromStableFootContactAndResetRestoresActiveState()
+    public IEnumerator EnemyGraduallyFreezesAtFirstIceCellCenterAndResetRestoresActiveState()
     {
         CreateGround("Frozen Surface", new Vector2(0f, -.5f), new Vector2(8f, 1f),
             SurfaceSemantic2D.SurfaceType.FrozenGround);
@@ -49,9 +49,17 @@ public sealed class SnowPrerequisitePlayModeTests
         enemy.Frozen += () => freezeEvents++;
 
         yield return new WaitForFixedUpdate();
-        yield return new WaitForFixedUpdate();
+
+        Assert.That(enemy.State, Is.EqualTo(FreezablePatrolEnemy2D.EnemyState.Freezing));
+        Assert.That(enemy.FrozenGroundFreezeAmount, Is.LessThan(1f));
+        Assert.That(enemy.IsDamaging, Is.True);
+
+        int fixedSteps = 0;
+        while (!enemy.IsFrozen && fixedSteps++ < 120)
+            yield return new WaitForFixedUpdate();
 
         Assert.That(enemy.IsFrozen, Is.True);
+        Assert.That(enemy.transform.position.x, Is.EqualTo(.5f).Within(.02f));
         Assert.That(enemy.GetComponent<Rigidbody2D>().bodyType, Is.EqualTo(RigidbodyType2D.Kinematic));
         Assert.That(enemy.IsDamaging, Is.False);
         Assert.That(enemy.transform.Find("BodyCollider").GetComponent<SurfaceSemantic2D>().IsSafe, Is.True);
@@ -149,8 +157,9 @@ public sealed class SnowPrerequisitePlayModeTests
         enemy.transform.position = new Vector2(3f, .52f);
         enemy.GetComponent<Rigidbody2D>().position = enemy.transform.position;
         Physics2D.SyncTransforms();
-        yield return new WaitForFixedUpdate();
-        yield return new WaitForFixedUpdate();
+        int freezeSteps = 0;
+        while (!enemy.IsFrozen && freezeSteps++ < 240)
+            yield return new WaitForFixedUpdate();
         Assert.That(enemy.IsFrozen, Is.True);
 
         door.transform.position = new Vector2(3f, 1.5f);

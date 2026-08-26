@@ -50,7 +50,13 @@ public sealed class RoomResetSystem : MonoBehaviour
         foreach (IRoomResettable resettable in resettables) resettable.ResetRoomState();
         player.TeleportTo(checkpoint);
         Physics2D.SyncTransforms();
-        cameraFollow?.SnapToTarget();
+        if (cameraFollow != null)
+        {
+            bool resetToEntrance = entrance != null &&
+                Vector2.SqrMagnitude((Vector2)checkpoint - (Vector2)entrance.position) <= .0001f;
+            if (resetToEntrance) cameraFollow.BeginEntryFraming();
+            else cameraFollow.SnapToTarget();
+        }
         player.SetControlEnabled(true);
         resetting = false;
     }

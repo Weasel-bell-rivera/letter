@@ -94,7 +94,9 @@ public static class SnowPrerequisiteBuilder
             GameObject activeVisual = Visual(visualRoot.transform, "ActiveVisual", new Vector2(1.2f, 1f),
                 new Color(.85f, .28f, .32f));
             GameObject frozenVisual = Visual(visualRoot.transform, "FrozenVisual", new Vector2(1.2f, 1f),
-                new Color(.55f, .9f, 1f));
+                new Color(.55f, .9f, 1f, .72f));
+            frozenVisual.GetComponent<SpriteRenderer>().sprite = activeVisual.GetComponent<SpriteRenderer>().sprite;
+            frozenVisual.transform.localScale = activeVisual.transform.localScale;
             GameObject freezeEffect = Visual(visualRoot.transform, "FreezeEffect", new Vector2(1.42f, 1.2f),
                 new Color(.75f, .95f, 1f, .35f));
             frozenVisual.SetActive(false);

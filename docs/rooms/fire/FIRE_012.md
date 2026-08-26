@@ -29,13 +29,14 @@
 ```
 
 - `Terrain`承担边界、地面、门上封墙、左侧楼梯、上层平台和止挡墙，使用Composite Collider与`StaticSolid`语义；其余标准Tilemap层保留。
+- `Terrain`统一使用 `Assets/Tiles/Fire/Fire012SilverSandstoneGround.asset`；该Tile以 `Assets/Art/Fire/Tiles/fire012_silver_sandstone_ground_v1.png` 作为单个 `1×1 Unity unit` 银灰砂岩格子，不改变地形坐标、碰撞或表面语义。
 
 ## Prefab需求
 
 | 实例ID | 通用Prefab路径 | 初始位置/状态 | 配置 |
 |---|---|---|---|
 | `Plate-A` | `Assets/Prefabs/Gameplay/Switches/PressurePlate2D.prefab` | `(8.5,-1.7)`；弹起 | 通用持续占用 |
-| `Door-A Shield` | `Assets/Prefabs/Gameplay/Doors/Door2D.prefab` | `(-5,-1.5)`；关闭 | 显式引用`Plate-A` |
+| `Door-A Shield` | `Assets/Prefabs/Gameplay/Doors/Door2D.prefab` | `(-4.5,-1)`；关闭 | 显式引用`Plate-A` |
 | `Enemy-H1` | `Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab` | `(12.5,-1.5)`；向左 | 固定Scene敌人，不使用Spawner |
 | `Exit-A` | `Assets/Prefabs/Gameplay/Exits/RoomExit2D.prefab` | `(9.5,3)` | 目标`Fire_011/DEFAULT` |
 

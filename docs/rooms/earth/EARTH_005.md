@@ -5,6 +5,7 @@
 - 当前状态：灰盒已创建，等待人工试玩与运行时调优。
 - Unity Scene：`Assets/Scenes/Levels/Earth/Earth_005.unity`（已创建并登记Build Settings）。
 - 地图连接：上`EARTH_004`，下`EARTH_007`。
+- 入口与出口：保留唯一`DEFAULT`安全入口；每个已实现相邻来源使用`FROM_<来源房间ID>`入口，出口显式请求目标房的`FROM_<本房ID>`入口。
 - 世界进入顺序与土区解锁条件仍待确定。
 
 ## 房间定位
@@ -64,5 +65,7 @@
 
 - 操作前可看清因果关系；镜子合法性可预判；土块全行程安全；解法不依赖帧率或盲跳。
 - 已使用标准Tilemap骨架、通用压沉土块Prefab及本文列出的通用动态对象完成灰盒。
+- 已完成第一轮纯表现可读性整理：压低背景与Terrain视觉竞争，为`SinkingBlock-A/B`统一使用更醒目的土石主体和高亮顶面，并固定`Background/Decoration/Foreground`的表现层顺序。该调整不改变Collider、表面语义、土块参数、路线或解法。
+- 后续美术步骤暂以无碰撞占位表现落实：深层岩壁色块、矿井支撑结构、左右错层路线弱引导、两块土块的垂直行程提示、边缘前景框景和低密度尘埃。占位对象统一位于`Art_Readability_Placeholders`层级，不含Collider、Trigger、SurfaceSemantic或房间玩法脚本，待正式素材齐备后原位替换。
 - 已完成Unity序列化保存、Builder内部结构校验和低成本静态检查；未运行PlayMode、完整EditMode或人工试玩。
 - 尚需人工试玩校正实际Collider净空、跳跃节奏、动态表面换乘窗口和镜像路线可读性。

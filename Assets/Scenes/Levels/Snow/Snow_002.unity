@@ -280,14 +280,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: W1.Runtime::CameraFollow2D
   target: {fileID: 0}
   followVertical: 1
-  smoothTime: 0
-  constrainToRoomBounds: 0
+  smoothTime: 0.15
+  constrainToRoomBounds: 1
   roomBounds:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+    x: -12
+    y: -7
+    width: 24
+    height: 14
 --- !u!81 &702062893
 AudioListener:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.5
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

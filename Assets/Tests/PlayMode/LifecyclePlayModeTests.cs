@@ -117,9 +117,10 @@ public sealed class LifecyclePlayModeTests
         SceneManager.LoadScene("Center_001"); yield return null; yield return new WaitForFixedUpdate();
         MirrorSurface2D[] grounds = Object.FindObjectsByType<MirrorSurface2D>(FindObjectsSortMode.None);
         Assert.That(grounds, Has.Length.EqualTo(1), "CENTER_001 must use one continuous active ground.");
-        BoxCollider2D groundCollider = grounds[0].GetComponent<BoxCollider2D>();
-        Assert.That(groundCollider.bounds.min.x, Is.LessThanOrEqualTo(-14f));
-        Assert.That(groundCollider.bounds.max.x, Is.GreaterThanOrEqualTo(14f));
+        Collider2D groundCollider = grounds[0].GetComponent<Collider2D>();
+        Assert.That(groundCollider, Is.Not.Null, "CENTER_001 ground must provide a collider.");
+        Assert.That(groundCollider.bounds.min.x, Is.LessThanOrEqualTo(-13.99f));
+        Assert.That(groundCollider.bounds.max.x, Is.GreaterThanOrEqualTo(13.99f));
         MirrorPlayer2D mirror = Object.FindFirstObjectByType<MirrorPlayer2D>(); MirrorAbilityPickup2D pickup = Object.FindFirstObjectByType<MirrorAbilityPickup2D>();
         Assert.That(mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Unobtained));
         Assert.That(pickup.TryCollect(Object.FindFirstObjectByType<PlayerController2D>()), Is.True);

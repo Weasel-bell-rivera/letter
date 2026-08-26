@@ -75,13 +75,22 @@
 | `Decoration` | 放镜提示 | 无 | 无 | 不参与玩法判断 |
 | `Foreground` | 空层 | 无 | 无 | 标准结构 |
 
+## 环境美术分层
+
+- Terrain和环境表现统一使用`volcanic_basalt_large_v2`正面玄武岩格：每格只保留约2～3个主要岩体，采用大块、低频、清晰轮廓的尺度；不使用碎石马赛克纹理。
+- `EnvironmentArt/FarCavernGrid`：使用上述格子的低对比度远景，无Collider、无表面语义，排序顺序`-30`。
+- `EnvironmentArt/MidgroundCeilingGrid`与`MidgroundLowerGrid`：用于收拢洞穴上下轮廓，无Collider、无玩法判断，排序顺序分别为`-20`与`-19`。
+- `EnvironmentArt/ForegroundLowerGrid`：仅遮挡相机底部无玩法区域，无Collider、无玩法判断，排序顺序`30`；不得覆盖门、压力板、喷发、敌人或移动路线。
+- 已移除高频顶缘短段和零散小变化格，避免形成规律拼贴与细碎噪点。
+- 上述表现层统一使用正面正交格子，不使用斜视角、透视道具或可被误判为平台的高亮边缘。
+
 ## Prefab需求
 
 | 实例ID | 通用Prefab | 资产路径 | 初始位置/状态 | 实例配置 |
 |---|---|---|---|---|
 | `Eruption-A` | `EruptionHazard2D` | `Assets/Prefabs/Gameplay/Hazards/EruptionHazard.prefab` | `(-3.5,0)`；预警开始 | 统一`1/1/2s`周期 |
 | `Plate-A` | `PressurePlate2D` | `Assets/Prefabs/Gameplay/Switches/PressurePlate2D.prefab` | `(4,-1.7)`；弹起 | 通用占用规则 |
-| `Door-A` | `Door2D` | `Assets/Prefabs/Gameplay/Doors/Door2D.prefab` | `(-8.5,-1.5)`；关闭 | 显式引用`Plate-A` |
+| `Door-A` | `Door2D` | `Assets/Prefabs/Gameplay/Doors/Door2D.prefab` | `(-8.5,-1)`；关闭 | 显式引用`Plate-A` |
 | `Enemy-H1` | `HorizontalFireballEnemy2D` | `Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab` | `(9.5,-1.5)`；向左 | 只覆盖位置与朝向 |
 | `Exit-A` | `RoomExit2D` | `Assets/Prefabs/Gameplay/Exits/RoomExit2D.prefab` | `(-11,-1)` | 目标`Fire_012/DEFAULT` |
 

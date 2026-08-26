@@ -52,11 +52,14 @@ public static class Fire013To015RoomBuilder
         Transform entrance = Marker("Entrance-DEFAULT", Vector3.up * -1.08f, c.Entrances);
         PressurePlate2D plateA = Plate(a, c, "Plate-A", new Vector3(4f, -1.7f));
         PressurePlate2D plateB = Plate(a, c, "Plate-B", new Vector3(-4f, -1.7f));
-        Door2D doorA = Door(a, c, "Door-A to FIRE_014", new Vector3(-6f, -1.5f), plateA);
-        Door2D doorB = Door(a, c, "Door-B to FIRE_015", new Vector3(6f, -1.5f), plateB);
+        Door2D doorA = Door(a, c, "Door-A to FIRE_014", new Vector3(-5.5f, -1f), plateA);
+        Door2D doorB = Door(a, c, "Door-B to FIRE_015", new Vector3(6.5f, -1f), plateB);
         Exit(a, c, "Exit-A to FIRE_014", new Vector3(-13.2f, -1f), "Fire_014");
         Exit(a, c, "Exit-B to FIRE_015", new Vector3(13.2f, -1f), "Fire_015");
         Exit(a, c, "Exit-C to FIRE_009", new Vector3(2.5f, 2f), "Fire_009");
+        ReturnEntrance(c, "FIRE_014", new Vector3(-11.7f, -1.08f), true);
+        ReturnEntrance(c, "FIRE_015", new Vector3(11.7f, -1.08f), false);
+        ReturnEntrance(c, "FIRE_009", new Vector3(2.5f, 2.92f), false);
         ConfigureRoom(c, entrance);
         Finish(c, "Assets/Scenes/Levels/Fire/Fire_013.unity", plateA, plateB, doorA, doorB);
     }
@@ -72,10 +75,11 @@ public static class Fire013To015RoomBuilder
 
         Transform entrance = Marker("Entrance-DEFAULT", Vector3.up * -1.08f, c.Entrances);
         PressurePlate2D plate = Plate(a, c, "Plate-A", new Vector3(6.5f, -1.7f));
-        Door2D door = Door(a, c, "Door-A Shield", new Vector3(-8f, -1.5f), plate);
+        Door2D door = Door(a, c, "Door-A Shield", new Vector3(-7.5f, -1f), plate);
         HorizontalFireballEnemy2D rightEnemy = Enemy(a, c, "Enemy-H1 Right", new Vector3(11.5f, -1.5f), false);
         HorizontalFireballEnemy2D leftEnemy = Enemy(a, c, "Enemy-H2 Left", new Vector3(-12.5f, -1.5f), true);
         Exit(a, c, "Exit-A to FIRE_013", new Vector3(-10.3f, -1f), "Fire_013");
+        ReturnEntrance(c, "FIRE_013", new Vector3(-8.8f, -1.08f), true);
         ConfigureRoom(c, entrance);
         Finish(c, "Assets/Scenes/Levels/Fire/Fire_014.unity", plate, door, rightEnemy, leftEnemy);
     }
@@ -93,12 +97,14 @@ public static class Fire013To015RoomBuilder
 
         Transform entrance = Marker("Entrance-DEFAULT", new Vector3(1f, -1.08f), c.Entrances);
         PressurePlate2D plate = Plate(a, c, "Plate-A", new Vector3(8.5f, -1.7f));
-        Door2D door = Door(a, c, "Door-A", new Vector3(-10f, -1.5f), plate);
+        Door2D door = Door(a, c, "Door-A", new Vector3(-9.5f, -1f), plate);
         EruptionHazard2D eruptionA = Eruption(a, c, "Eruption-A", new Vector3(-1.5f, 0f));
         EruptionHazard2D eruptionB = Eruption(a, c, "Eruption-B", new Vector3(-6.5f, 0f));
         HorizontalFireballEnemy2D enemy = Enemy(a, c, "Enemy-H1", new Vector3(12.5f, -1.5f), false);
         Exit(a, c, "Exit-A to FIRE_016", new Vector3(-12.5f, -1f), "Fire_016");
         Exit(a, c, "Exit-B to FIRE_013", new Vector3(5.5f, -1f), "Fire_013");
+        ReturnEntrance(c, "FIRE_016", new Vector3(-11f, -1.08f), true);
+        ReturnEntrance(c, "FIRE_013", new Vector3(4f, -1.08f), false);
         ConfigureRoom(c, entrance);
         Finish(c, "Assets/Scenes/Levels/Fire/Fire_015.unity", plate, door, eruptionA, eruptionB, enemy);
     }
@@ -115,11 +121,13 @@ public static class Fire013To015RoomBuilder
         Transform entrance = Marker("Entrance-DEFAULT", Vector3.up * -1.08f, c.Entrances);
         PressurePlate2D plateA = Plate(a, c, "Plate-A", new Vector3(3.5f, -1.7f));
         PressurePlate2D plateB = Plate(a, c, "Plate-B", new Vector3(-3.5f, -1.7f));
-        Door2D doorA = Door(a, c, "Door-A to FIRE_017", new Vector3(-8f, -1.5f), plateA);
-        Door2D doorB = Door(a, c, "Door-B to FIRE_015", new Vector3(8f, -1.5f), plateB);
+        Door2D doorA = Door(a, c, "Door-A to FIRE_017", new Vector3(-7.5f, -1f), plateA);
+        Door2D doorB = Door(a, c, "Door-B to FIRE_015", new Vector3(8.5f, -1f), plateB);
         HorizontalFireballEnemy2D enemy = Enemy(a, c, "Enemy-H1", new Vector3(12.5f, -1.5f), false);
         Exit(a, c, "Exit-A to FIRE_017", new Vector3(-12f, -1f), "Fire_017");
         Exit(a, c, "Exit-B to FIRE_015", new Vector3(12f, -1f), "Fire_015");
+        ReturnEntrance(c, "FIRE_017", new Vector3(-10.5f, -1.08f), true);
+        ReturnEntrance(c, "FIRE_015", new Vector3(10.5f, -1.08f), false);
         ConfigureRoom(c, entrance);
         Finish(c, "Assets/Scenes/Levels/Fire/Fire_016.unity", plateA, plateB, doorA, doorB, enemy);
     }
@@ -135,13 +143,14 @@ public static class Fire013To015RoomBuilder
 
         Transform entrance = Marker("Entrance-DEFAULT", new Vector3(2f, -1.08f), c.Entrances);
         PressurePlate2D plate = Plate(a, c, "Plate-A", new Vector3(5.5f, -1.7f));
-        Door2D door = Door(a, c, "Door-A Return", new Vector3(-11f, -1.5f), plate);
+        Door2D door = Door(a, c, "Door-A Return", new Vector3(-10.5f, -1f), plate);
         EruptionHazard2D eruptionA = Eruption(a, c, "Eruption-A", new Vector3(0f, 0f));
         EruptionHazard2D eruptionB = Eruption(a, c, "Eruption-B", new Vector3(-4.5f, 0f));
         RisingLava2D lavaA = RisingLava(a, c, "RisingLava-A", new Vector3(-1.5f, -2.5f));
         RisingLava2D lavaB = RisingLava(a, c, "RisingLava-B", new Vector3(-6.5f, -2.5f));
         HorizontalFireballEnemy2D enemy = Enemy(a, c, "Enemy-H1", new Vector3(12.5f, -1.5f), false);
         Exit(a, c, "Exit-A to FIRE_016", new Vector3(-13f, -1f), "Fire_016");
+        ReturnEntrance(c, "FIRE_016", new Vector3(-11.5f, -1.08f), true);
         ConfigureRoom(c, entrance);
         Finish(c, "Assets/Scenes/Levels/Fire/Fire_017.unity", plate, door, eruptionA, eruptionB, lavaA, lavaB, enemy);
     }
@@ -283,8 +292,18 @@ public static class Fire013To015RoomBuilder
     {
         GameObject go = Instance(a.Exit, c.Exits, name, position);
         RoomExit2D exit = go.GetComponent<RoomExit2D>();
-        exit.Configure(target, "DEFAULT"); EditorUtility.SetDirty(exit);
+        string source = c.Root.name[..8];
+        string targetEntrance = target is "Fire_013" or "Fire_014" or "Fire_015" or "Fire_016" or "Fire_017"
+            ? $"FROM_{source}"
+            : "DEFAULT";
+        exit.Configure(target, targetEntrance); EditorUtility.SetDirty(exit);
         PrefabUtility.RecordPrefabInstancePropertyModifications(exit);
+    }
+
+    private static void ReturnEntrance(Context c, string sourceRoom, Vector3 position, bool facingRight)
+    {
+        Transform marker = Marker($"Entrance-FROM_{sourceRoom}", position, c.Entrances);
+        PlayerRoomAuthoring.ConfigureEntrance(marker, $"FROM_{sourceRoom}", false, facingRight);
     }
 
     private static GameObject Instance(GameObject prefab, Transform parent, string name, Vector3 position)
@@ -308,6 +327,10 @@ public static class Fire013To015RoomBuilder
         GameObject[] roots = c.Scene.GetRootGameObjects();
         Require(roots.SelectMany(x => x.GetComponentsInChildren<PlayerController2D>(true)).Count() == 0, "Room serialized a local Player.");
         Require(roots.SelectMany(x => x.GetComponentsInChildren<RoomPlayerSpawner2D>(true)).Count() == 1, "Room needs one spawner.");
+        RoomEntrance2D[] entrances = roots.SelectMany(x => x.GetComponentsInChildren<RoomEntrance2D>(true)).ToArray();
+        Require(entrances.Count(value => value.IsDefault) == 1 &&
+                entrances.Select(value => value.EntranceId).Distinct().Count() == entrances.Length,
+            "Room source entrance configuration is invalid.");
         Require(required.All(x => x && PrefabUtility.GetPrefabInstanceStatus(x.gameObject) == PrefabInstanceStatus.Connected), "Gameplay Prefab connection lost.");
         foreach (Door2D door in required.OfType<Door2D>()) Require(door.ControlSource, "Door control source is missing.");
         EditorSceneManager.MarkSceneDirty(c.Scene);

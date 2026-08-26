@@ -22,6 +22,9 @@ public static class Snow002RoomBuilder
     public const int IceMinX = -12;
     public const int IceMaxX = 11;
     public const int IceY = -3;
+    public static readonly Rect CameraBounds = new(-12f, -7f, 24f, 14f);
+    public const float CameraOrthographicSize = 7f;
+    public const float CameraSmoothTime = .15f;
 
 
     [MenuItem("Tools/W1/Build SNOW-002 Frozen Ground Prototype")]
@@ -114,6 +117,8 @@ public static class Snow002RoomBuilder
         CameraFollow2D cameraFollow = camera.gameObject.AddComponent<CameraFollow2D>();
         BindRuntimeScript(cameraFollow, "Assets/Scripts/Gameplay/CameraFollow2D.cs");
         cameraFollow.Configure(null, true);
+        cameraFollow.ConfigureDamping(CameraSmoothTime);
+        cameraFollow.ConfigureBounds(CameraBounds);
 
         GameObject systems = new("RoomSystems");
         systems.transform.SetParent(room.transform);
@@ -183,7 +188,7 @@ public static class Snow002RoomBuilder
         cameraObject.transform.position = new Vector3(playerPosition.x, playerPosition.y, -10f);
         Camera camera = cameraObject.AddComponent<Camera>();
         camera.orthographic = true;
-        camera.orthographicSize = 5.5f;
+        camera.orthographicSize = CameraOrthographicSize;
         camera.backgroundColor = new Color(.72f, .86f, .94f);
         cameraObject.AddComponent<AudioListener>();
         return camera;
@@ -233,6 +238,12 @@ public static class Snow002RoomBuilder
             "SNOW_002 prototype must contain exactly one RoomPlayerSpawner2D.");
         Require(roots.SelectMany(root => root.GetComponentsInChildren<RoomResetSystem>(true)).Count() == 1,
             "SNOW_002 prototype must contain exactly one RoomResetSystem.");
+        Camera camera = roots.SelectMany(root => root.GetComponentsInChildren<Camera>(true)).Single();
+        CameraFollow2D follow = camera.GetComponent<CameraFollow2D>();
+        Require(camera.orthographic && Mathf.Approximately(camera.orthographicSize, CameraOrthographicSize) &&
+                follow != null && follow.FollowsVertical && follow.UsesRoomBounds &&
+                follow.RoomBounds == CameraBounds && Mathf.Approximately(follow.SmoothTime, CameraSmoothTime),
+            "SNOW_002 must use the approved bounded Player-follow camera.");
         MovingPlatform2D platform = roots.SelectMany(root =>
             root.GetComponentsInChildren<MovingPlatform2D>(true)).Single();
         Require(PrefabUtility.GetPrefabInstanceStatus(platform.gameObject) == PrefabInstanceStatus.Connected,

@@ -80,7 +80,7 @@
 | 实例ID | 通用Prefab | 资产路径 | 初始位置/状态 | 实例配置 |
 |---|---|---|---|---|
 | `Plate-A` | `PressurePlate2D` | `Assets/Prefabs/Gameplay/Switches/PressurePlate2D.prefab` | `(7.25,-1.7)`；弹起 | 不覆盖触发对象规则 |
-| `Door-A` | `Door2D` | `Assets/Prefabs/Gameplay/Doors/Door2D.prefab` | `(-9.5,-1.5)`；关闭 | 控制源显式引用`Plate-A` |
+| `Door-A` | `Door2D` | `Assets/Prefabs/Gameplay/Doors/Door2D.prefab` | `(-9.5,-1)`；关闭 | 控制源显式引用`Plate-A` |
 | `Exit-A` | `RoomExit2D` | `Assets/Prefabs/Gameplay/Exits/RoomExit2D.prefab` | `(-11.5,-1)` | 目标`Fire_011/DEFAULT` |
 
 Player、镜子和MirrorClone由统一系统提供，不在Scene中复制。

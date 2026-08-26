@@ -125,6 +125,7 @@ Player出生
 
 - 灰盒Scene已经创建。
 - 灰盒Scene已同步为从出生点到出口的一整块连续、等高、无间隙地面。
+- 连续地面使用标准 `Grid/Terrain` Tilemap，由 `Assets/Tiles/Center/CenterStoneGround.asset` 在 `x=-14..13, y=-4` 铺设 28 个 `1×1 Unity unit` 格子；Tile使用 `Assets/Art/Center/Tiles/center_stone_ground_v1.png`，连续碰撞边界、位置和普通静态安全表面语义保持不变。
 - 镜子永久拾取已经接入统一收藏与存档系统，关闭并重新启动游戏时恢复`MIRROR`能力和拾取ID。
 - 镜子拾取物在永久获得后不再出现；`Held`状态只表示Player逻辑持有镜子，不显示手持镜。左键成功放置时才显示统一场景镜视觉，回收后再次隐藏。
 - 当前动态玩法对象尚未完成Prefab化，不能将现有Scene内嵌对象视为正式资源结构。
