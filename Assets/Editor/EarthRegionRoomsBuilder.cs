@@ -206,8 +206,8 @@ public static class EarthRegionRoomsBuilder
         if (id is 8 or 15)
         {
             PressurePlate2D plate = CreatePlate(parent, scene,
-                id == 8 ? new Vector2(-7f, -3.35f) : new Vector2(7f, -3.35f), "PressurePlate-A");
-            CreateDoor(parent, scene, id == 8 ? new Vector2(.5f, -3f) : new Vector2(10.5f, -3f),
+                id == 8 ? new Vector2(-7f, -2.85f) : new Vector2(7f, -3.35f), "PressurePlate-A");
+            CreateDoor(parent, scene, id == 8 ? new Vector2(.5f, -2f) : new Vector2(10.5f, -3f),
                 plate, "Door-A");
         }
 
