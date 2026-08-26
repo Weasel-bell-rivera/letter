@@ -113,8 +113,7 @@ public static class SnowRegionRoomsBuilder
         CreateTilemap(grid.transform, "FreezingGround"); CreateTilemap(grid.transform, "OneWayPlatform");
         CreateTilemap(grid.transform, "SpecialMirrorWall"); CreateTilemap(grid.transform, "Hazard");
         CreateTilemap(grid.transform, "Decoration"); CreateTilemap(grid.transform, "Foreground");
-        Fill(terrain, terrainTile, -13, 12, -3, -3); Fill(terrain, terrainTile, -13, -13, -2, 6);
-        Fill(terrain, terrainTile, 12, 12, -2, 6); Fill(terrain, terrainTile, -13, 12, 6, 6);
+        Fill(terrain, terrainTile, -13, 12, -3, -3);
         ConfigureLayout(id, terrain, ice, terrainTile, iceTile);
         Bake(terrain); if (ice.GetUsedTilesCount() > 0) Bake(ice);
 
@@ -357,7 +356,7 @@ public static class SnowRegionRoomsBuilder
             $"SNOW_{id:000} bounded Player-follow camera mismatch");
         if (id == 7)
             Require(follow.AlignsEntryFramingToBounds && follow.EntryFramingBounds == Snow007EntryFramingBounds,
-                "SNOW_007 entrance framing must align the live view with its physical walls");
+                "SNOW_007 entrance framing must align the live view with its configured composition bounds");
         if (ice.GetUsedTilesCount()>0) Require(ice.GetComponent<SurfaceSemantic2D>()?.Type==SurfaceSemantic2D.SurfaceType.FrozenGround,$"SNOW_{id:000} ice semantic missing");
     }
     private static void AddBuildScene(string path) { List<EditorBuildSettingsScene> scenes=EditorBuildSettings.scenes.ToList(); if(!scenes.Any(s=>s.path==path)) scenes.Add(new EditorBuildSettingsScene(path,true)); EditorBuildSettings.scenes=scenes.ToArray(); }

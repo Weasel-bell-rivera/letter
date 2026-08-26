@@ -138,9 +138,6 @@ public static class Snow001RoomBuilder
 
     private static void BuildTerrain(Tilemap terrain, TileBase tile)
     {
-        Fill(terrain, tile, -14, 14, 10, 10);
-        Fill(terrain, tile, -14, -14, -3, 10);
-        Fill(terrain, tile, 14, 14, -3, 10);
         Fill(terrain, tile, -9, 1, 5, 5);       // entrance and observation route
         Fill(terrain, tile, -4, -4, 0, 5);      // structural wall ending flush with the observation floor
         Fill(terrain, tile, -13, 1, -3, -3);    // enemy lane and safe landing area

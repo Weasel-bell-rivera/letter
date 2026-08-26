@@ -116,9 +116,6 @@ public static class Snow003RoomBuilder
         Fill(frozenGround, frozenTile, -5, 4, 1, 1);
         Fill(terrain, terrainTile, -6, -6, 2, 3);
         Fill(terrain, terrainTile, -10, -7, 1, 1);
-        Fill(terrain, terrainTile, -13, -13, -2, 5);
-        Fill(terrain, terrainTile, 12, 12, -2, 5);
-        Fill(terrain, terrainTile, -13, 12, 6, 6);
         Bake(terrain);
         Bake(frozenGround);
 
