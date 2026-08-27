@@ -7,10 +7,23 @@
 - 镜像消失或死亡时必须立即从压力板占用列表移除。
 - 压力板必须提供清晰的按下、保持和弹起反馈。
 
+### 压力板激活模式（已确定）
+
+`PressurePlate2D`具有显式实例模式，默认值始终为`Occupancy`：
+
+- `Occupancy`：沿用地面持续占用规则；只允许Player和MirrorClone触发，火球与其他动态物体无效。
+- `FireballLatch`：允许把同一通用压力板Prefab安装在墙面；Player、MirrorClone和普通动态物体接触无效，只有`HorizontalFireballProjectile2D`命中才能激活。
+- `FireballLatch`命中一次后立即锁存激活，对应门持续开启；火球在命中同一物理步销毁。
+- 手动重置、Player死亡重置、离开并重新进入房间时，`FireballLatch`恢复未激活，对应普通门恢复房间初始状态。
+- MirrorClone死亡或镜子回收不解除已经激活的`FireballLatch`。
+- 压力板必须通过序列化模式判断触发规则，不得根据墙面位置、旋转、对象名、Sprite或房间编号推断。
+- 墙面实例必须具有清楚的未激活、命中和已激活表现；旋转只改变安装姿态，不改变Trigger边界和规则。
+
 ## 门
 
 - 门由一个或多个压力板或Trigger控制。
 - 单压力板控制时，压力板激活则开门，压力板释放则关门。
+- `FireballLatch`压力板激活时，普通门以锁存开启表现保持开启，直到统一房间重置恢复关闭。
 - 多压力板控制支持AND和OR配置，默认使用AND。
 - 房间文档必须明确每扇门的控制源、逻辑模式和初始状态。
 - 风区风力涡轮属于已批准的持续Trigger控制源；涡轮控制的普通门不得同时配置压力板或永久锁存控制源，完整风信号规则见`docs/systems/WIND_ENVIRONMENT_SYSTEM.md`。

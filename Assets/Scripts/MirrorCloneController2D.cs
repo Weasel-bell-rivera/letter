@@ -7,6 +7,8 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     private PlayerController2D source; private Rigidbody2D body; private BoxCollider2D box; private PlayerMovementSettings settings;
     private Vector2 moveAxis = Vector2.left, gravityAxis = Vector2.down; private int observedJumpInput; private bool gravityDisabled;
     private float lastGrounded = float.NegativeInfinity, lastJumpPressed = float.NegativeInfinity;
+    private bool jumpConsumedSinceGrounded;
+    private bool separatedFromGroundAfterJump;
     private Transform visualRoot;
     private Collider2D supportCollider;
     private Collider2D surfaceMotionCollider;
@@ -30,8 +32,17 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
         Vector2 velocity = body.linearVelocity;
         bool grounded = TryGetGroundSurface(out SurfaceSemantic2D groundSurface, out RaycastHit2D supportHit);
         supportCollider = grounded ? supportHit.collider : null;
-        if (grounded) lastGrounded = Time.time;
         Vector2 nextSurfaceVelocity = SurfaceMotion2D.Resolve(supportHit, grounded, out Collider2D nextMotionCollider);
+        if (!grounded && jumpConsumedSinceGrounded)
+            separatedFromGroundAfterJump = true;
+        float relativeUpwardSpeed = Vector2.Dot(velocity - nextSurfaceVelocity, -gravityAxis);
+        if (grounded && (!jumpConsumedSinceGrounded ||
+                         (separatedFromGroundAfterJump && relativeUpwardSpeed <= 0f)))
+        {
+            lastGrounded = Time.time;
+            jumpConsumedSinceGrounded = false;
+            separatedFromGroundAfterJump = false;
+        }
         if (observedJumpInput != source.JumpInputSequence) { observedJumpInput = source.JumpInputSequence; lastJumpPressed = Time.time; }
         Vector2 relativeVelocity = SurfaceMotion2D.RemoveRepeatedContribution(velocity,
             surfaceMotionCollider, nextMotionCollider, appliedSurfaceVelocity);
@@ -44,8 +55,16 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
         if (!gravityDisabled) relativeVelocity += gravityAxis * settings.Gravity * Time.fixedDeltaTime;
         float falling = Vector2.Dot(relativeVelocity, gravityAxis);
         if (falling > settings.maxFallSpeed) relativeVelocity -= gravityAxis * (falling - settings.maxFallSpeed);
-        if (Time.time - lastJumpPressed <= settings.jumpBuffer && Time.time - lastGrounded <= settings.coyoteTime)
-        { relativeVelocity -= gravityAxis * settings.JumpSpeed; lastJumpPressed = float.NegativeInfinity; lastGrounded = float.NegativeInfinity; }
+        if (!jumpConsumedSinceGrounded &&
+            Time.time - lastJumpPressed <= settings.jumpBuffer &&
+            Time.time - lastGrounded <= settings.coyoteTime)
+        {
+            relativeVelocity -= gravityAxis * settings.JumpSpeed;
+            lastJumpPressed = float.NegativeInfinity;
+            lastGrounded = float.NegativeInfinity;
+            jumpConsumedSinceGrounded = true;
+            separatedFromGroundAfterJump = false;
+        }
         if (!source.JumpHeld && Vector2.Dot(relativeVelocity, -gravityAxis) > 0f)
         { float upward = Vector2.Dot(relativeVelocity, -gravityAxis); relativeVelocity += gravityAxis * upward * (1f - settings.jumpCutMultiplier); }
         if (Mathf.Abs(target) > .01f && visualRoot != null)

@@ -54,4 +54,36 @@ public sealed class HorizontalFireballEnemyAssetTests
         Assert.That(prefab.transform.Find("Visual"), Is.Not.Null);
         Assert.That(prefab.transform.Find("Trail").GetComponent<LineRenderer>(), Is.Not.Null);
     }
+
+    [Test]
+    public void FireballLatchOnlyAcceptsHorizontalFireballAndClearsOnReset()
+    {
+        GameObject plateObject = new("FireballLatchPlate");
+        GameObject projectileObject = new("HorizontalFireball");
+        try
+        {
+            PressurePlate2D plate = plateObject.AddComponent<PressurePlate2D>();
+            projectileObject.AddComponent<Rigidbody2D>();
+            projectileObject.AddComponent<CircleCollider2D>();
+            HorizontalFireballProjectile2D projectile =
+                projectileObject.AddComponent<HorizontalFireballProjectile2D>();
+
+            Assert.That(plate.Mode, Is.EqualTo(PressurePlate2D.ActivationMode.Occupancy));
+            Assert.That(plate.TryActivateByFireball(projectile), Is.False);
+
+            plate.ConfigureActivationMode(PressurePlate2D.ActivationMode.FireballLatch);
+            Assert.That(plate.TryActivateByFireball(projectile), Is.True);
+            Assert.That(plate.IsActive, Is.True);
+            Assert.That(plate.IsFireballLatched, Is.True);
+
+            plate.ResetRoomState();
+            Assert.That(plate.IsActive, Is.False);
+            Assert.That(plate.IsFireballLatched, Is.False);
+        }
+        finally
+        {
+            Object.DestroyImmediate(projectileObject);
+            Object.DestroyImmediate(plateObject);
+        }
+    }
 }

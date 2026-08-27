@@ -8,6 +8,8 @@ public static class HorizontalFireballEnemyBuilder
     public const string SettingsPath = "Assets/Settings/Enemies/DefaultHorizontalFireballEnemy.asset";
     public const string EnemyPrefabPath =
         "Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab";
+    public const string EnemyBodySpritePath =
+        "Assets/Art/Generated/Enemies/FurnaceToad.png";
     public const string ProjectilePrefabPath =
         "Assets/Prefabs/Gameplay/Enemies/Projectiles/HorizontalFireballProjectile2D.prefab";
 
@@ -114,9 +116,9 @@ public static class HorizontalFireballEnemyBuilder
 
             GameObject visualRoot = Child("Visual", root.transform);
             SpriteRenderer bodyVisual = Visual("BodyVisual", visualRoot.transform,
-                new Vector2(.9f, 1f), new Color(.75f, .28f, .14f, 1f), 5);
+                new Vector2(1.15f, 1f), Color.white, 5, EnemyBodySprite());
             SpriteRenderer muzzleVisual = Visual("MuzzleVisual", visualRoot.transform,
-                new Vector2(.25f, .25f), new Color(1f, .45f, .08f, 1f), 6);
+                new Vector2(.2f, .2f), new Color(1f, .45f, .08f, 1f), 6, BuiltinMuzzleSprite());
             muzzleVisual.transform.localPosition = new Vector3(.55f, 0f, 0f);
 
             GameObject solidObject = Child("BodyCollider", root.transform);
@@ -145,11 +147,12 @@ public static class HorizontalFireballEnemyBuilder
         }
     }
 
-    private static SpriteRenderer Visual(string name, Transform parent, Vector2 size, Color color, int order)
+    private static SpriteRenderer Visual(string name, Transform parent, Vector2 size, Color color, int order,
+        Sprite sprite = null)
     {
         GameObject go = Child(name, parent);
         SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
-        renderer.sprite = BuiltinSprite();
+        renderer.sprite = sprite != null ? sprite : BuiltinSprite();
         renderer.color = color;
         renderer.sortingOrder = order;
         ScaleVisual(renderer, size);
@@ -164,6 +167,16 @@ public static class HorizontalFireballEnemyBuilder
 
     private static Sprite BuiltinSprite()
         => AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
+
+    private static Sprite BuiltinMuzzleSprite()
+        => AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+
+    private static Sprite EnemyBodySprite()
+    {
+        Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(EnemyBodySpritePath);
+        Require(sprite != null, $"Missing furnace toad body sprite: {EnemyBodySpritePath}");
+        return sprite;
+    }
 
     private static GameObject Child(string name, Transform parent)
     {

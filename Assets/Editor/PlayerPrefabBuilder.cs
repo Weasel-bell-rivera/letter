@@ -143,6 +143,11 @@ public static class PlayerPrefabBuilder
         Sprite[] idleFrames = LoadFrames("idle", 2);
         Sprite[] walkFrames = LoadFrames("walk", 4);
         Sprite[] jumpFrames = LoadFrames("jump", 11);
+        float[] jumpFrameVerticalOffsets =
+        {
+            0f, -.00703125f, -.00703125f, -.07382812f, -.13710937f, -.15117186f,
+            -.09140625f, 0f, 0f, -.01054687f, 0f
+        };
         Sprite[] hitFrames = LoadFrames("hit", 4);
         Sprite[] happyFrames = LoadFrames("happy", 2);
         Require(movement != null, "DefaultPlayerMovement.asset is required.");
@@ -168,7 +173,8 @@ public static class PlayerPrefabBuilder
         renderer.sprite = idleFrames[0];
         renderer.sortingOrder = 10;
         PlayerVisual2D visual = visualObject.AddComponent<PlayerVisual2D>();
-        visual.Configure(renderer, idleFrames, walkFrames, jumpFrames, hitFrames, happyFrames);
+        visual.Configure(renderer, idleFrames, walkFrames, jumpFrames, hitFrames, happyFrames,
+            jumpVerticalOffsets: jumpFrameVerticalOffsets);
 
         PlayerController2D controller = root.AddComponent<PlayerController2D>();
         controller.Configure(visualObject.transform, movement);

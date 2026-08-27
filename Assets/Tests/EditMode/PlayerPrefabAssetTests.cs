@@ -51,6 +51,8 @@ public sealed class PlayerPrefabAssetTests
         Assert.That(visual.IdleFrameCount, Is.EqualTo(2));
         Assert.That(visual.WalkFrameCount, Is.EqualTo(4));
         Assert.That(visual.JumpFrameCount, Is.EqualTo(11));
+        Assert.That(visual.JumpFrameVerticalOffsetCount, Is.EqualTo(visual.JumpFrameCount),
+            "Every jump frame must keep a stable visual foot anchor.");
         Assert.That(visual.HitFrameCount, Is.EqualTo(4));
 
         PlayerPrefabRegistry registry = AssetDatabase.LoadAssetAtPath<PlayerPrefabRegistry>(

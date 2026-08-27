@@ -179,5 +179,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Fire/Fire_017.unity
     guid: 2afaaad8039394653bf08b8f5cc02a0d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_002.unity
+    guid: a5dd991a07c504643a700e83f86807ae
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_003.unity
+    guid: 2df1444e442b5486486654b81ba8eaee
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

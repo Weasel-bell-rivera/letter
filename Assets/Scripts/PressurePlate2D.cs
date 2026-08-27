@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable
 {
+    public enum ActivationMode { Occupancy, FireballLatch }
+
+    [SerializeField] private ActivationMode activationMode = ActivationMode.Occupancy;
     [SerializeField] private SpriteRenderer plateRenderer;
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite pressedSprite;
@@ -22,17 +25,21 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable
     private Vector3 visualRestScale;
     private Vector3 visualRestPosition;
     private bool latchedVisual;
+    private bool fireballLatched;
     private bool lastReportedActive;
 
     public bool IsActive
     {
         get
         {
+            if (activationMode == ActivationMode.FireballLatch) return fireballLatched;
             ReconcileOccupants();
             return occupants.Count > 0;
         }
     }
 
+    public ActivationMode Mode => activationMode;
+    public bool IsFireballLatched => activationMode == ActivationMode.FireballLatch && fireballLatched;
     public bool IsLatchedVisual => latchedVisual;
     public event Action<PressurePlate2D, bool> ActiveChanged;
 
@@ -69,6 +76,25 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable
         RefreshState(false);
     }
 
+    public void ConfigureActivationMode(ActivationMode mode)
+    {
+        activationMode = mode;
+        occupants.Clear();
+        fireballLatched = false;
+        RefreshState(true);
+    }
+
+    public bool TryActivateByFireball(HorizontalFireballProjectile2D projectile)
+    {
+        if (projectile == null || activationMode != ActivationMode.FireballLatch) return false;
+        if (!fireballLatched)
+        {
+            fireballLatched = true;
+            RefreshState(true);
+        }
+        return true;
+    }
+
     public void SetLatchedVisual(bool latched)
     {
         latchedVisual = latched;
@@ -77,18 +103,21 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (activationMode != ActivationMode.Occupancy) return;
         Rigidbody2D body = GetValidOccupant(other);
         if (body != null && occupants.Add(body)) RefreshState(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (activationMode != ActivationMode.Occupancy) return;
         Rigidbody2D body = other.attachedRigidbody;
         if (body != null && occupants.Remove(body)) RefreshState(true);
     }
 
     private void FixedUpdate()
     {
+        if (activationMode != ActivationMode.Occupancy) return;
         if (ReconcileOccupants()) RefreshState(true);
     }
 
@@ -131,7 +160,7 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable
 
     private void RefreshState(bool notify)
     {
-        bool active = occupants.Count > 0;
+        bool active = activationMode == ActivationMode.FireballLatch ? fireballLatched : occupants.Count > 0;
         bool pressed = latchedVisual || active;
 
         bool usesStateSprites = idleSprite != null && pressedSprite != null;
@@ -156,6 +185,7 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable
     public void ResetRoomState()
     {
         occupants.Clear();
+        fireballLatched = false;
         RefreshState(true);
     }
 }

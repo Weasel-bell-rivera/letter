@@ -66,7 +66,7 @@
 - 火球命中实体阻挡后销毁；命中Player触发完整房间重置，命中MirrorClone只执行镜像死亡与镜子回收。
 - 火球离开相机边界`1 unit`或存活`2 s`后销毁，不产生爆炸、残留火焰或地形变化。
 - 敌人与火球不破坏镜子、不触发机关、不推动动态对象；攻击全程不显示红色小叉或落点标记。
-- 完整规则与首版数值见`docs/systems/HORIZONTAL_FIREBALL_ENEMY_PROPOSAL.md`。该机制尚未安排正式房间。
+- 完整规则与首版数值见`docs/systems/HORIZONTAL_FIREBALL_ENEMY_PROPOSAL.md`。首次正式教学房为`FIRE_002`，`FIRE_009`用于后续巩固。
 
 ## 敌人原型与Prefab Variant
 

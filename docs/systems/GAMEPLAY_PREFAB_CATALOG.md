@@ -392,7 +392,8 @@ PressurePlate
 
 Prefab负责：
 
-- 只接受Player和MirrorClone作为有效占用者。
+- 默认使用`Occupancy`模式，只接受Player和MirrorClone作为有效占用者。
+- Scene实例可显式切换为`FireballLatch`模式并旋转安装到墙面；该模式只接受水平火球，命中后锁存到房间重置。
 - 管理多Collider和多对象占用，最后一个有效对象离开后才释放。
 - MirrorClone死亡、消失或镜子回收时清理对应占用。
 - 提供激活状态，并参与统一房间重置。

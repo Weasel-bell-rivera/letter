@@ -62,6 +62,7 @@ public sealed class HorizontalFireballProjectile2D : MonoBehaviour, IRoomResetta
             Collider2D other = hit.collider;
             if (ShouldIgnore(other)) continue;
             if (TryDamageCharacter(other)) return;
+            if (TryActivateFireballPlate(other)) return;
             if (!other.isTrigger)
             {
                 Consume();
@@ -75,7 +76,16 @@ public sealed class HorizontalFireballProjectile2D : MonoBehaviour, IRoomResetta
     {
         if (!IsLaunched || ShouldIgnore(other)) return;
         if (TryDamageCharacter(other)) return;
+        if (TryActivateFireballPlate(other)) return;
         if (!other.isTrigger) Consume();
+    }
+
+    private bool TryActivateFireballPlate(Collider2D other)
+    {
+        PressurePlate2D plate = other.GetComponentInParent<PressurePlate2D>();
+        if (plate == null || !plate.TryActivateByFireball(this)) return false;
+        Consume();
+        return true;
     }
 
     private bool TryDamageCharacter(Collider2D other)

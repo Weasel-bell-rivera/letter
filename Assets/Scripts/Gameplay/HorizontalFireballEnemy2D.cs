@@ -329,10 +329,10 @@ public sealed class HorizontalFireballEnemy2D : MonoBehaviour, IRoomResettable, 
             bodyVisual.flipX = facing < 0f;
             bodyVisual.color = State switch
             {
-                EnemyState.Windup => new Color(1f, .55f, .12f, 1f),
-                EnemyState.Cooldown => new Color(.45f, .2f, .14f, 1f),
+                EnemyState.Windup => new Color(1f, .82f, .45f, 1f),
+                EnemyState.Cooldown => new Color(.45f, .35f, .3f, 1f),
                 EnemyState.Frozen => new Color(.65f, .86f, 1f, 1f),
-                _ => new Color(.75f, .28f, .14f, 1f)
+                _ => Color.white
             };
         }
         if (muzzleVisual != null)

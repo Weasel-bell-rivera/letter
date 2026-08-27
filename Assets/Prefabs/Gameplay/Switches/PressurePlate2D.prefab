@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982df92537984b15963161d48f2a9bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: W1.Runtime::PressurePlate2D
+  activationMode: 0
   plateRenderer: {fileID: 5019450061456550855}
   idleSprite: {fileID: 21300000, guid: 64a1a62591954469a6e43ffe5f92daa7, type: 3}
   pressedSprite: {fileID: 21300000, guid: 956d2c56669047f1aa44260d9cccdddb, type: 3}

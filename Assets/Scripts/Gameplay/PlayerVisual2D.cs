@@ -11,6 +11,7 @@ public sealed class PlayerVisual2D : MonoBehaviour
     [SerializeField] private Sprite[] idleFrames;
     [SerializeField] private Sprite[] walkFrames;
     [SerializeField] private Sprite[] jumpFrames;
+    [SerializeField] private float[] jumpFrameVerticalOffsets;
     [SerializeField] private Sprite[] hitFrames;
     [SerializeField] private Sprite[] happyFrames;
     [SerializeField, Min(1f)] private float idleFramesPerSecond = 2f;
@@ -35,13 +36,14 @@ public sealed class PlayerVisual2D : MonoBehaviour
     public int IdleFrameCount => idleFrames?.Length ?? 0;
     public int WalkFrameCount => walkFrames?.Length ?? 0;
     public int JumpFrameCount => jumpFrames?.Length ?? 0;
+    public int JumpFrameVerticalOffsetCount => jumpFrameVerticalOffsets?.Length ?? 0;
     public int HitFrameCount => hitFrames?.Length ?? 0;
     public float WalkFrameSeconds => 1f / Mathf.Max(1f, walkFramesPerSecond);
     public PresentationPose Pose => pose;
 
     public void Configure(SpriteRenderer targetRenderer, Sprite[] idle, Sprite[] walk, Sprite[] jump,
         Sprite[] hit, Sprite[] happy, float idleFps = 2f, float walkFps = 8f,
-        float jumpFps = 12f, float hitFps = 10f)
+        float jumpFps = 12f, float hitFps = 10f, float[] jumpVerticalOffsets = null)
     {
         spriteRenderer = targetRenderer;
         idleFrames = idle;
@@ -49,6 +51,7 @@ public sealed class PlayerVisual2D : MonoBehaviour
         jumpFrames = jump;
         hitFrames = hit;
         happyFrames = happy;
+        jumpFrameVerticalOffsets = jumpVerticalOffsets;
         idleFramesPerSecond = Mathf.Max(1f, idleFps);
         walkFramesPerSecond = Mathf.Max(1f, walkFps);
         jumpFramesPerSecond = Mathf.Max(1f, jumpFps);
@@ -124,7 +127,13 @@ public sealed class PlayerVisual2D : MonoBehaviour
         int elapsedFrames = Mathf.FloorToInt((Time.unscaledTime - stateStartedAt) * fps);
         bool loop = animationState is AnimationState.Idle or AnimationState.Walk;
         int index = loop ? elapsedFrames % frames.Length : Mathf.Min(elapsedFrames, frames.Length - 1);
-        Apply(frames[Mathf.Max(0, index)]);
+        index = Mathf.Max(0, index);
+        float verticalOffset = animationState == AnimationState.Jump &&
+                               jumpFrameVerticalOffsets != null && index < jumpFrameVerticalOffsets.Length
+            ? jumpFrameVerticalOffsets[index]
+            : 0f;
+        transform.localPosition = Vector3.up * verticalOffset;
+        Apply(frames[index]);
     }
 
     private Sprite[] FramesFor(AnimationState state) => state switch

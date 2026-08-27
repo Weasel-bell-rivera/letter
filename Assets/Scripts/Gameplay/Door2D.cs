@@ -44,7 +44,7 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
 
     private void FixedUpdate()
     {
-        if (controlSource != null) SetOpen(controlSource.IsActive);
+        if (controlSource != null) SetState(ControlSourceState());
         if (IsWaitingToClose) TryApplyRequestedState();
     }
 
@@ -73,7 +73,8 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
         if (isActiveAndEnabled && controlSource != null) controlSource.ActiveChanged -= OnControlSourceChanged;
         controlSource = source;
         if (isActiveAndEnabled && controlSource != null) controlSource.ActiveChanged += OnControlSourceChanged;
-        if (Application.isPlaying) SetOpen(controlSource != null ? controlSource.IsActive : initiallyOpen);
+        if (Application.isPlaying) SetState(controlSource != null ? ControlSourceState() :
+            initiallyOpen ? VisualState.TemporaryOpen : VisualState.Closed);
     }
 
     public void SetOpen(bool open) => SetState(open ? VisualState.TemporaryOpen : VisualState.Closed);
@@ -153,9 +154,14 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
         if (doorTopRenderer != null) doorTopRenderer.color = color;
     }
 
-    private void OnControlSourceChanged(PressurePlate2D _, bool active) => SetOpen(active);
+    private VisualState ControlSourceState() => controlSource == null || !controlSource.IsActive
+        ? VisualState.Closed
+        : controlSource.IsFireballLatched ? VisualState.LatchedOpen : VisualState.TemporaryOpen;
+
+    private void OnControlSourceChanged(PressurePlate2D _, bool active) =>
+        SetState(active ? ControlSourceState() : VisualState.Closed);
 
     public void ResetRoomState() => SetState(controlSource != null && controlSource.IsActive
-        ? VisualState.TemporaryOpen
+        ? ControlSourceState()
         : initiallyOpen ? VisualState.TemporaryOpen : VisualState.Closed);
 }

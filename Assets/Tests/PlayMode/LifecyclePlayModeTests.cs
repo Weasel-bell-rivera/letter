@@ -167,6 +167,43 @@ public sealed class LifecyclePlayModeTests
         InputSystem.settings.backgroundBehavior = previousBackgroundBehavior;
     }
 
+    [UnityTest] public IEnumerator Center001HoldingJumpCannotTriggerAnotherJumpBeforeLanding()
+    {
+        InputSettings.BackgroundBehavior previousBackgroundBehavior = InputSystem.settings.backgroundBehavior;
+        InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+        Keyboard keyboard = Keyboard.current;
+        bool addedKeyboard = keyboard == null;
+        if (addedKeyboard) keyboard = InputSystem.AddDevice<Keyboard>();
+
+        SceneManager.LoadScene("Center_001");
+        yield return null;
+        yield return new WaitForFixedUpdate();
+
+        PlayerController2D player = Object.FindFirstObjectByType<PlayerController2D>();
+        Assert.That(player.IsGroundedNow, Is.True);
+
+        PressJump(keyboard);
+        yield return new WaitForFixedUpdate();
+        int jumpSequenceAfterTakeoff = player.JumpSequence;
+        float previousVerticalSpeed = player.GetComponent<Rigidbody2D>().linearVelocity.y;
+
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForFixedUpdate();
+            float currentVerticalSpeed = player.GetComponent<Rigidbody2D>().linearVelocity.y;
+            Assert.That(currentVerticalSpeed, Is.LessThanOrEqualTo(previousVerticalSpeed + .01f),
+                "Holding Jump must not apply another upward velocity impulse.");
+            previousVerticalSpeed = currentVerticalSpeed;
+        }
+
+        Assert.That(player.JumpSequence, Is.EqualTo(jumpSequenceAfterTakeoff),
+            "Holding Jump before landing must not trigger an air jump.");
+
+        ReleaseJump(keyboard);
+        if (addedKeyboard) InputSystem.RemoveDevice(keyboard);
+        InputSystem.settings.backgroundBehavior = previousBackgroundBehavior;
+    }
+
     [UnityTest] public IEnumerator Center001PlayerCanJumpAfterTriggerPickupAndMirrorPlacement()
     {
         InputSettings.BackgroundBehavior previousBackgroundBehavior = InputSystem.settings.backgroundBehavior;

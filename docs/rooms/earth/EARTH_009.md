@@ -35,8 +35,15 @@
 - SinkingBlock-A/B：各宽2、行程3；恢复速度0.7/1.2。
 - 压沉土块统一使用`Assets/Prefabs/Gameplay/Earth/SinkingEarthBlock2D.prefab`。
 - 其他对象使用现有通用Prefab；实例只覆盖对应系统文档允许的参数。
+- 地面上沿流光统一使用`Assets/Prefabs/Visuals/FlowingGroundTopEdge2D.prefab`；房间实例只覆盖`localStart`、`localEnd`和显示名称，宽度与共享材质沿用Prefab默认值。
 - Player、镜子和MirrorClone不作为房间重复实例。
 - 本房没有Spawner敌人；敌人出生点与生成配置不适用。
+
+## 地面视觉表现
+
+- `Grid/Decoration/GroundTopGlow`下放置六个`FlowingGroundTopEdge2D.prefab`实例，共享`Assets/Materials/Earth/EarthFlowingGroundGlow.mat`，仅沿可站立静态地形的上沿叠加程序化绿色轮廓光；Terrain本体继续使用默认地砖材质。
+- 上沿流光由宽度`0.4 unit`的无碰撞LineRenderer分段组成，中心对齐Tile顶部并按Tile实际左右边界收口；端帽使用平头，几何范围严格终止在配置端点，不伸出地形表面。不使用绘制贴图，不生成Light2D，不改变地形Collider、`StaticSolid`表面语义、镜子放置、危险判定或重置状态。
+- 暗绿色基础辉光保持连续，宽幅高亮能量段以明显的明暗峰谷沿世界坐标水平移动；方向和速度只用于环境氛围，不表达土块恢复计时或任何隐藏玩法状态。
 
 ## 相机配置
 

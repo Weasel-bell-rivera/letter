@@ -123,6 +123,8 @@ public sealed class Fire008AssetTests
 
             Assert.That(plateRoot.transform.Find("Visual").GetComponent<SpriteRenderer>().sprite, Is.SameAs(switchIdle));
             SerializedObject plate = new(plateRoot.GetComponent<PressurePlate2D>());
+            Assert.That(plate.FindProperty("activationMode").enumValueIndex,
+                Is.EqualTo((int)PressurePlate2D.ActivationMode.Occupancy));
             Assert.That(plate.FindProperty("idleSprite").objectReferenceValue, Is.SameAs(switchIdle));
             Assert.That(plate.FindProperty("pressedSprite").objectReferenceValue, Is.SameAs(switchPressed));
         }

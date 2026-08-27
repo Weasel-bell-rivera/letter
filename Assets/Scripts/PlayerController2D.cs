@@ -11,8 +11,10 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
     private Rigidbody2D body;
     private BoxCollider2D bodyCollider;
     private float input;
-    private float lastGrounded;
+    private float lastGrounded = float.NegativeInfinity;
     private float lastJumpPressed = float.NegativeInfinity;
+    private bool jumpConsumedSinceGrounded;
+    private bool separatedFromGroundAfterJump;
     private bool jumpHeld;
     private bool controlEnabled = true;
     private InputAction jumpAction;
@@ -70,18 +72,15 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
     public void OnMove(InputValue value) => input = controlEnabled ? value.Get<float>() : 0f;
     public void OnJump(InputValue value)
     {
-        // PlayerInput's SendMessages mode does not send the canceled phase for Button
-        // actions. Keep its performed notification for compatibility and recover the
-        // release state through the direct action callbacks and polling below.
-        SetJumpInput(value.isPressed);
+        // PlayerInput uses SendMessages for the other actions. Jump is sampled from
+        // its InputAction in Update so one physical press has exactly one authority.
     }
     public void OnResetRoom(InputValue value) { if (value.isPressed && controlEnabled) FindAnyObjectByType<RoomResetSystem>()?.ResetRoom(); }
     private void Update()
     {
         BindJumpAction();
-        if (jumpAction != null && jumpHeld && !jumpAction.IsPressed()) jumpHeld = false;
+        PollJumpAction();
         if (input != 0f) { FacingRight = input > 0f; Face(input); }
-        if (IsGroundedNow) lastGrounded = Time.time;
     }
     private void FixedUpdate()
     {
@@ -90,12 +89,22 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
         bool grounded = TryGetGroundSurface(Vector2.down, out SurfaceSemantic2D groundSurface,
             out RaycastHit2D supportHit);
         supportCollider = grounded ? supportHit.collider : null;
+        Vector2 nextSurfaceVelocity = SurfaceMotion2D.Resolve(supportHit, grounded, out Collider2D nextMotionCollider);
+        if (!grounded && jumpConsumedSinceGrounded)
+            separatedFromGroundAfterJump = true;
+        float relativeUpwardSpeed = velocity.y - nextSurfaceVelocity.y;
+        if (grounded && (!jumpConsumedSinceGrounded ||
+                         (separatedFromGroundAfterJump && relativeUpwardSpeed <= 0f)))
+        {
+            lastGrounded = Time.time;
+            jumpConsumedSinceGrounded = false;
+            separatedFromGroundAfterJump = false;
+        }
         bool onFrozenGround = IsFrozenGround(groundSurface);
         if (!frozenGroundFreezing && onFrozenGround &&
             (Mathf.Abs(body.linearVelocity.x) > .01f || Mathf.Abs(input) > .01f))
             BeginFrozenGroundFreezing(supportHit);
         if (frozenGroundFreezing && UpdateFrozenGroundFreezing()) return;
-        Vector2 nextSurfaceVelocity = SurfaceMotion2D.Resolve(supportHit, grounded, out Collider2D nextMotionCollider);
         Vector2 relativeVelocity = SurfaceMotion2D.RemoveRepeatedContribution(velocity,
             surfaceMotionCollider, nextMotionCollider, appliedSurfaceVelocity);
         float target = input * settings.maxSpeed * freezingMovementMultiplier;
@@ -118,8 +127,17 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
         appliedSurfaceVelocity = grounded ? nextSurfaceVelocity : Vector2.zero;
         relativeVelocity.y = Mathf.Max(relativeVelocity.y - settings.Gravity * Time.fixedDeltaTime,
             -settings.maxFallSpeed);
-        if (Time.time - lastJumpPressed <= settings.jumpBuffer && Time.time - lastGrounded <= settings.coyoteTime)
-        { relativeVelocity.y = settings.JumpSpeed; lastJumpPressed = float.NegativeInfinity; lastGrounded = float.NegativeInfinity; JumpSequence++; }
+        if (!jumpConsumedSinceGrounded &&
+            Time.time - lastJumpPressed <= settings.jumpBuffer &&
+            Time.time - lastGrounded <= settings.coyoteTime)
+        {
+            relativeVelocity.y = settings.JumpSpeed;
+            lastJumpPressed = float.NegativeInfinity;
+            lastGrounded = float.NegativeInfinity;
+            jumpConsumedSinceGrounded = true;
+            separatedFromGroundAfterJump = false;
+            JumpSequence++;
+        }
         if (!jumpHeld && relativeVelocity.y > 0f) relativeVelocity.y *= settings.jumpCutMultiplier;
         body.linearVelocity = relativeVelocity + (grounded ? nextSurfaceVelocity : Vector2.zero);
     }
@@ -137,15 +155,10 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
         if (jumpAction == nextJump) return;
         UnbindJumpAction();
         jumpAction = nextJump;
-        if (jumpAction == null) return;
-        jumpAction.performed += OnJumpPerformed;
-        jumpAction.canceled += OnJumpCanceled;
     }
     private void UnbindJumpAction()
     {
         if (jumpAction == null) return;
-        jumpAction.performed -= OnJumpPerformed;
-        jumpAction.canceled -= OnJumpCanceled;
         jumpAction = null;
     }
     private void OnDisable()
@@ -153,13 +166,20 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
         UnbindJumpAction();
         jumpHeld = false;
     }
-    private void OnJumpPerformed(InputAction.CallbackContext _) => SetJumpInput(true);
-    private void OnJumpCanceled(InputAction.CallbackContext _) => SetJumpInput(false);
-    private void SetJumpInput(bool pressed)
+    private void PollJumpAction()
     {
-        pressed &= controlEnabled;
-        if (pressed && !jumpHeld) { lastJumpPressed = Time.time; JumpInputSequence++; }
-        jumpHeld = pressed;
+        if (jumpAction == null || !controlEnabled)
+        {
+            jumpHeld = false;
+            return;
+        }
+
+        if (jumpAction.WasPressedThisFrame())
+        {
+            lastJumpPressed = Time.time;
+            JumpInputSequence++;
+        }
+        jumpHeld = jumpAction.IsPressed();
     }
     public bool IsGrounded(Vector2 direction)
         => TryGetGroundSurface(direction, out _, out _);
@@ -243,5 +263,9 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
         frozenGroundTargetX = 0f;
         frozenGroundDirection = 0f;
         frozenGroundEntrySpeed = 0f;
+        lastGrounded = float.NegativeInfinity;
+        lastJumpPressed = float.NegativeInfinity;
+        jumpConsumedSinceGrounded = false;
+        separatedFromGroundAfterJump = false;
     }
 }
