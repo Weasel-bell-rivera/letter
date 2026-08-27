@@ -61,6 +61,9 @@
 
 ## Tilemap配置
 
+- 编辑用Tile Palette：`Assets/TilePalettes/<Region>.prefab`。
+- Palette必需Tile：`<列出本房需要加入共享Palette的Tile资产路径>`。
+
 | Tilemap层 | 使用范围 | 碰撞 | 表面语义 | 备注 |
 |---|---|---|---|---|
 | `Terrain` | `<范围>` | 实体 | `StaticSolid` | `<说明>` |

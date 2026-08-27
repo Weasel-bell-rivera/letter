@@ -70,6 +70,9 @@
 
 - Scene：`Assets/Scenes/Levels/Fire/Fire_003.unity`
 - Editor构建器：`Assets/Editor/Fire003RoomBuilder.cs`
+- 编辑用Tile Palette：`Assets/TilePalettes/Fire.prefab`
+- Palette必需Tile：`Assets/Tiles/Graybox/Fire003Terrain.asset`、`Assets/Tiles/Graybox/Fire003MirrorHint.asset`
+- 可通过`Tools/W1/Tile Palettes/Sync FIRE-003 Palette`独立补齐Palette；该操作不得重建或修改Scene。
 - 使用`PressurePlate2D`、`Door2D`、`PermanentLatchDoorGroup2D`、`HorizontalFireballEnemy2D`、`EruptionHazard`与`RoomExit2D`通用Prefab。
 - 标准Tilemap层齐全；静态地形仅位于`Terrain`，中段`Hazard`层为空。
 

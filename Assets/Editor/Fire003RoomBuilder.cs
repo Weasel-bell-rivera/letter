@@ -12,6 +12,7 @@ using UnityEngine.Tilemaps;
 public static class Fire003RoomBuilder
 {
     public const string ScenePath = "Assets/Scenes/Levels/Fire/Fire_003.unity";
+    public const string TilePalettePath = "Assets/TilePalettes/Fire.prefab";
     private const string TerrainTilePath = "Assets/Tiles/Graybox/Fire003Terrain.asset";
     private const string HintTilePath = "Assets/Tiles/Graybox/Fire003MirrorHint.asset";
     private const string TerrainTexturePath =
@@ -29,6 +30,24 @@ public static class Fire003RoomBuilder
     [MenuItem("Tools/W1/Build FIRE-003 Greybox")]
     public static void BuildFromMenu() => Build();
 
+    [MenuItem("Tools/W1/Tile Palettes/Sync FIRE-003 Palette")]
+    public static void SyncTilePaletteFromMenu()
+    {
+        SyncTilePalette();
+        Debug.Log($"FIRE_003 Tile Palette synchronized at {TilePalettePath} without rebuilding the Scene.");
+    }
+
+    // Entry point for batch/editor synchronization that deliberately does not open or save the room Scene.
+    public static void SyncTilePalette()
+    {
+        Tile terrainTile = AssetDatabase.LoadAssetAtPath<Tile>(TerrainTilePath);
+        Tile hintTile = AssetDatabase.LoadAssetAtPath<Tile>(HintTilePath);
+        Require(terrainTile != null, $"Missing FIRE_003 terrain Tile: {TerrainTilePath}");
+        Require(hintTile != null, $"Missing FIRE_003 hint Tile: {HintTilePath}");
+        TilePaletteAuthoring.EnsureTiles(TilePalettePath, terrainTile, hintTile);
+        AssetDatabase.SaveAssets();
+    }
+
     public static void Build()
     {
         Directory.CreateDirectory("Assets/Scenes/Levels/Fire");
@@ -45,6 +64,7 @@ public static class Fire003RoomBuilder
         Sprite builtin = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
         Tile terrainTile = MakeTile(TerrainTilePath, terrainSprite, Color.white, Tile.ColliderType.Grid);
         Tile hintTile = MakeTile(HintTilePath, builtin, new Color(.15f, .9f, 1f, .75f), Tile.ColliderType.None);
+        TilePaletteAuthoring.EnsureTiles(TilePalettePath, terrainTile, hintTile);
 
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         GameObject room = new("FIRE_003 Split Furnace");

@@ -44,3 +44,5 @@
 - 当前机关清单不是封闭集合；后续新增机关按行为和状态判断其职责，不按名称判断。
 - Tilemap分层、碰撞、表面语义、动态玩法对象边界和扩展规则见 `docs/systems/LEVEL_GEOMETRY_SYSTEM.md`。
 - Tilemap只改变关卡制作与静态空间表达方式，不得改变镜子、镜像、玩家移动或区域机制规则。
+- 正式灰盒使用`Assets/TilePalettes/<Region>.prefab`下的区域共享Tile Palette；生成房间的Editor Builder必须同步补齐本房使用的Tile，并提供不重建Scene的独立刷新入口。
+- Palette同步只能补充缺失Tile，不得清空、替换或重排策划手工内容；Palette是编辑器制作资产，不得用于推断运行时碰撞或表面语义。
