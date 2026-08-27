@@ -25,6 +25,7 @@ public static class PlayerRoomAuthoring
         ConfigureDefaultEntrance(entrance, facingRight);
         RoomPlayerSpawner2D spawner = host.GetComponent<RoomPlayerSpawner2D>()
             ?? host.AddComponent<RoomPlayerSpawner2D>();
+        spawner.ConfigureCamera(cameraFollow);
         reset?.Configure(null, null, entrance, cameraFollow);
         if (cameraFollow != null) cameraFollow.Configure(null, cameraFollow.FollowsVertical);
         return spawner;

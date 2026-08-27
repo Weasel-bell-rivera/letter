@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
-public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
+public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, ISpringBounceReceiver2D
 {
     [SerializeField] private PlayerMovementSettings settings;
     [SerializeField] private Transform visualRoot;
@@ -28,6 +28,8 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
     private float frozenGroundDirection;
     private float frozenGroundEntrySpeed;
     private float frozenGroundFreezeAmount;
+    private Vector2 springContactVelocity;
+    private bool springAntiGravityLaunchActive;
     public float HorizontalInput => input;
     public bool JumpHeld => jumpHeld;
     public int JumpSequence { get; private set; }
@@ -44,6 +46,8 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
     public Collider2D FreezingCollider => bodyCollider;
     public Vector2 FreezingUpAxis => Vector2.up;
     public float FrozenGroundFreezeAmount => frozenGroundFreezeAmount;
+    public float SpringGravityMagnitude => settings != null ? settings.Gravity : 0f;
+    public Vector2 SpringContactVelocity => springContactVelocity;
 
     private void Awake()
     {
@@ -138,8 +142,12 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
             separatedFromGroundAfterJump = false;
             JumpSequence++;
         }
-        if (!jumpHeld && relativeVelocity.y > 0f) relativeVelocity.y *= settings.jumpCutMultiplier;
+        if (springAntiGravityLaunchActive && relativeVelocity.y <= 0f)
+            springAntiGravityLaunchActive = false;
+        if (!jumpHeld && relativeVelocity.y > 0f && !springAntiGravityLaunchActive)
+            relativeVelocity.y *= settings.jumpCutMultiplier;
         body.linearVelocity = relativeVelocity + (grounded ? nextSurfaceVelocity : Vector2.zero);
+        springContactVelocity = body.linearVelocity;
     }
     private void Face(float direction) { if (visualRoot == null) return; Vector3 s = visualRoot.localScale; s.x = Mathf.Abs(s.x) * Mathf.Sign(direction); visualRoot.localScale = s; }
     public void SetFacing(bool right)
@@ -248,6 +256,25 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
         if (body != null) body.linearVelocity = Vector2.zero;
         FindAnyObjectByType<RoomResetSystem>()?.ResetRoom();
     }
+    public bool ApplySpringBounce(Vector2 outwardNormal, float launchSpeed)
+    {
+        if (body == null || outwardNormal.sqrMagnitude < .0001f || launchSpeed <= 0f) return false;
+        Vector2 normal = outwardNormal.normalized;
+        Vector2 incomingVelocity = springContactVelocity;
+        Vector2 result = incomingVelocity - normal * Vector2.Dot(incomingVelocity, normal) + normal * launchSpeed;
+        body.linearVelocity = result;
+        springContactVelocity = result;
+        lastJumpPressed = float.NegativeInfinity;
+        lastGrounded = float.NegativeInfinity;
+        if (Vector2.Dot(normal, Vector2.up) >= .65f)
+        {
+            springAntiGravityLaunchActive = true;
+            supportCollider = null;
+            surfaceMotionCollider = null;
+            appliedSurfaceVelocity = Vector2.zero;
+        }
+        return true;
+    }
     public void TeleportTo(Vector3 position)
     {
         transform.position = position;
@@ -267,5 +294,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D
         lastJumpPressed = float.NegativeInfinity;
         jumpConsumedSinceGrounded = false;
         separatedFromGroundAfterJump = false;
+        springContactVelocity = Vector2.zero;
+        springAntiGravityLaunchActive = false;
     }
 }

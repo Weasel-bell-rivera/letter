@@ -8,9 +8,13 @@ using UnityEngine.SceneManagement;
 public sealed class RoomPlayerSpawner2D : MonoBehaviour
 {
     [SerializeField] private bool spawnOnAwake = true;
+    [SerializeField] private CameraFollow2D roomCamera;
 
     public PlayerController2D SpawnedPlayer { get; private set; }
     public RoomEntrance2D SpawnedEntrance { get; private set; }
+    public CameraFollow2D RoomCamera => roomCamera;
+
+    public void ConfigureCamera(CameraFollow2D cameraController) => roomCamera = cameraController;
 
     private void Awake()
     {
@@ -67,7 +71,7 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
         }
 
         RoomResetSystem reset = FindInScene<RoomResetSystem>(scene).FirstOrDefault();
-        CameraFollow2D cameraFollow = FindInScene<CameraFollow2D>(scene).FirstOrDefault();
+        CameraFollow2D cameraFollow = ResolveRoomCamera(scene);
         reset?.Configure(SpawnedPlayer, mirror, SpawnedEntrance.transform, cameraFollow);
         if (cameraFollow != null)
         {
@@ -78,6 +82,22 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
         Physics2D.SyncTransforms();
         SpawnedPlayer.SetControlEnabled(true);
         return SpawnedPlayer;
+    }
+
+    private CameraFollow2D ResolveRoomCamera(Scene scene)
+    {
+        if (roomCamera != null && roomCamera.gameObject.scene == scene) return roomCamera;
+
+        CameraFollow2D[] cameras = FindInScene<CameraFollow2D>(scene);
+        if (cameras.Length > 1)
+        {
+            Debug.LogError($"{scene.name} contains multiple CameraFollow2D components. " +
+                "Formal rooms must explicitly reference exactly one room camera.", this);
+            return null;
+        }
+
+        roomCamera = cameras.FirstOrDefault();
+        return roomCamera;
     }
 
     private static RoomEntrance2D SelectEntrance(RoomEntrance2D[] entrances, string requestedId)

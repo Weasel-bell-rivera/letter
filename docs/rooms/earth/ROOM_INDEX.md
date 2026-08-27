@@ -4,7 +4,7 @@
 
 | 房间 | 状态 | 设计文档 | Unity Scene | 主要目标 |
 |---|---|---|---|---|
-| EARTH_001 | 灰盒已创建，待试玩 | `docs/rooms/earth/EARTH_001.md` | `Assets/Scenes/Levels/Earth/Earth_001.unity` | 观察竖直爬墙敌人并验证通用Prefab |
+| EARTH_001 | 灰盒已更新，自动测试通过，待试玩 | `docs/rooms/earth/EARTH_001.md` | `Assets/Scenes/Levels/Earth/Earth_001.unity` | 观察竖直爬墙敌人，并用镜像诱导固定投火兵的弧线火球 |
 | EARTH_002 | 灰盒已创建，待试玩 | `docs/rooms/earth/EARTH_002.md` | `Assets/Scenes/Levels/Earth/Earth_002.unity` | 首次主动压沉土块 |
 | EARTH_003 | 灰盒已创建，待试玩 | `docs/rooms/earth/EARTH_003.md` | `Assets/Scenes/Levels/Earth/Earth_003.unity` | 利用卸重后的恢复运动 |
 | EARTH_004 | 灰盒已创建，待试玩 | `docs/rooms/earth/EARTH_004.md` | `Assets/Scenes/Levels/Earth/Earth_004.unity` | Player与MirrorClone分别承重 |

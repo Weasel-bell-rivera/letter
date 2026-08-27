@@ -20,6 +20,8 @@ Assets/Prefabs/Gameplay/
 ├─ Surfaces/
 │  ├─ GroundConveyor2D.prefab
 │  └─ FreezingGroundCell2D.prefab
+├─ Devices/
+│  └─ Spring2D.prefab
 ├─ Snow/
 │  ├─ SnowmanGate2D.prefab
 │  └─ TemporaryCarrotPickup2D.prefab
@@ -37,8 +39,11 @@ Assets/Prefabs/Gameplay/
 │  ├─ WindRayEnemy2D.prefab
 │  ├─ SacrificialWindRayEnemy2D.prefab
 │  ├─ HorizontalFireballEnemy2D.prefab
+│  ├─ GroundFireThrowerEnemy2D.prefab
 │  └─ Projectiles/
 │     └─ HorizontalFireballProjectile2D.prefab
+├─ Projectiles/
+│  └─ ArcFireballProjectile2D.prefab
 ├─ Doors/
 │  ├─ Door2D.prefab
 │  └─ PermanentLatchDoorGroup2D.prefab
@@ -51,13 +56,14 @@ Assets/Prefabs/Gameplay/
    └─ RoomExit2D.prefab
 ```
 
-- 移动平台、地面传送带、门、压力板、检查点和出口路径已经创建。
+- 移动平台、地面传送带、固定地面弹簧、门、压力板、检查点和出口路径已经创建。
 - **非必须：除非用户明确要求，否则不自动追加代表性房间试玩、PlayMode测试或完整自动测试。**未执行时记录未验证风险；公共机制发生变化时只维护与变化直接相关的最小测试定义。
 - `FreezablePatrolEnemy2D.prefab`已经创建并通过独立EditMode与PlayMode测试；正式房间只允许覆盖已批准的巡逻实例参数。
 - `VerticalWallPatrolEnemy2D.prefab`已经创建；正式房间只允许覆盖已批准的墙面侧别、竖直路径、速度、等待和视觉参数。
 - `WindRayEnemy2D.prefab`已经创建并用于`WIND_001`灰盒；统一数值已确认。**非必须：除非用户明确要求，否则不运行其独立EditMode与PlayMode测试**，未运行状态作为风险记录。
 - `HorizontalFireballEnemy2D.prefab`与其火球Prefab已有已确认规则、运行时代码和可重复构建器，并已由Unity Editor生成；尚未获准进入正式房间。**非必须：除非用户明确要求，否则不进行PlayMode试玩验证。**
 - `MovingTornado2D.prefab`使用`Assets/Art/Generated/Wind/small_tornado_3frame_handpainted.png`的三帧手绘透明Sprite动画，循环速率`8 FPS`。动画只改变Sprite，不改变`0.8×0.8 units`伤害Trigger、速度、方向、门阻挡或重置规则。
+- `GroundFireThrowerEnemy2D.prefab`与`ArcFireballProjectile2D.prefab`已经创建并用于`EARTH_001`；专项EditMode与PlayMode测试各`3/3`通过。房间只覆盖位置和初始左右朝向，统一攻击数值保存在共享Settings资产。
 - `Player.prefab`由通用房间生成系统管理，不作为房间Scene中的重复Prefab实例；完整结构、视觉、入口绑定和生命周期规则见`docs/systems/PLAYER_PREFAB.md`。
 - `PlacedMirror.prefab`只由`MirrorPlayer2D`在成功放置时生成；`Held`和`Unobtained`状态不在Player下保留镜子视觉。
 - 静态墙壁、台阶、低顶、固定平台和返回通道使用标准Tilemap结构，不创建房间专用Prefab。
@@ -137,6 +143,43 @@ Prefab验证要求：
 - 侧向重力MirrorClone接触侧面时不获得水平传送带速度。
 - 启停和重置不留下累计速度或接触引用。
 - 镜子放置失败不生成镜子或镜像，也不改变传送带状态。
+
+## `Spring2D.prefab`
+
+资产路径：`Assets/Prefabs/Gameplay/Devices/Spring2D.prefab`
+
+```text
+Spring2D
+└─ Visual
+```
+
+根对象包含Static `Rigidbody2D`、非Trigger `BoxCollider2D`、固定安全`Spring`表面语义和`Spring2D`。根坐标是装置底部中心；Collider尺寸为`1 × 1 units`、中心为`(0, 0.5)`。`Visual`位于`(0, 0.5)`，包含`SpriteRenderer`和只负责展开/压缩图片切换的`SpringVisual2D`。
+
+Prefab使用：
+
+- 展开：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Spring/spring_out.png`
+- 压缩：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Spring/spring.png`
+
+两张图片统一按`128 PPU`、Point Filter、Full Rect和无压缩导入。完整回弹规则以`docs/systems/SPRING_SYSTEM.md`为准。
+
+Prefab负责：
+
+- 把顶面接触弹到目标`5 units`高度，把左右接触沿外法线以`8 units/s`弹开。
+- Player和MirrorClone通过统一接口获得相同的固定法向输出，并保留切向速度。
+- 同一次连续接触只触发一次，离开后允许重新触发。
+- 返回`Spring`语义并保持无`MirrorSurface2D`，使镜子放置稳定失败。
+- 物理触发后立即播放约`0.08秒`的压缩反馈，重置时恢复展开图。
+
+房间实例只允许覆盖位置以及不改变碰撞轮廓和反馈含义的区域视觉、声音。首版不得旋转、缩放、移动、启停、改变回弹数值、改变Player/MirrorClone资格或加入房间专用脚本。
+
+Prefab验证要求：
+
+- 根位置为零、缩放为一，必需组件、Sprite和内部引用完整。
+- Collider、展开视觉和顶/左右有效面一致，底面不触发。
+- Rigidbody保持Static，`SurfaceSemantic2D`保持固定、安全的`Spring`。
+- 顶面、左右侧面、角点、连续接触和离开后重触发结果确定。
+- Player与MirrorClone规则一致，死亡、镜子回收和房间重置不残留状态。
+- Prefab不包含房间编号、正式世界坐标或房间专用引用。
 
 ## `MovingPlatform2D.prefab`
 
@@ -366,6 +409,40 @@ Prefab验证要求：
 - 默认固定周期为预警`1s`、危险`1s`、冷却`2s`，重置后从预警开始。
 - Prefab负责周期、危险启停和基础颜色反馈；房间不得复制周期运行时代码。
 
+## `GroundFireThrowerEnemy2D.prefab`
+
+资产路径：`Assets/Prefabs/Gameplay/Enemies/GroundFireThrowerEnemy2D.prefab`
+
+```text
+GroundFireThrowerEnemy2D
+├─ BodyCollider              ← 实体Collider与DynamicSurface语义
+├─ DamageTrigger             ← 独立接触伤害Trigger
+├─ FacingRoot
+│  ├─ Visual
+│  │  └─ BodyVisual
+│  ├─ ThrowOrigin
+│  └─ ChargeVisual
+├─ LineOfSightOrigin
+└─ TargetMarker
+```
+
+根对象包含Kinematic `Rigidbody2D`、投火状态机、统一Settings与火球Prefab引用，并实现统一房间重置接口。Prefab负责最近目标与遮挡判断、锁定点、举火预警、投掷、冷却、本体伤害和在途火球所有权。
+
+房间实例只允许覆盖Transform位置与初始左右朝向。不得覆盖探测距离、预警、火球速度、弧高、半径、寿命、冷却、Player/MirrorClone资格、重置或存档规则。Prefab资产不得包含房间编号、正式世界坐标或房间专用诱导点。
+
+## `ArcFireballProjectile2D.prefab`
+
+资产路径：`Assets/Prefabs/Gameplay/Projectiles/ArcFireballProjectile2D.prefab`
+
+```text
+ArcFireballProjectile2D
+└─ Visual
+   ├─ Glow
+   └─ BodyVisual
+```
+
+根对象包含Kinematic `Rigidbody2D`、Trigger `CircleCollider2D`和确定性弹道组件。生成时由投火兵传入锁定点和共享Settings数值；Prefab本身不保存正式房间目标。每个固定物理步使用圆形扫掠防止穿透，命中Player、MirrorClone与非Trigger实体时按`docs/systems/GROUND_FIRE_THROWER_ENEMY.md`结算。
+
 ## `PressurePlate2D.prefab`
 
 计划路径：`Assets/Prefabs/Gameplay/Switches/PressurePlate2D.prefab`
@@ -555,4 +632,6 @@ Room
 - 冻结敌人停止伤害、可被双方稳定踩踏，并在重置后完整恢复活动状态。
 - 逐风鳐按距离、遮挡和最近目标规则确定性锁定Player或MirrorClone，完成冲刺、喘息和返回循环。
 - 逐风鳐命中Player与MirrorClone分别进入正确生命周期流程，并在重置后完整恢复守卫状态。
+- 投火兵按距离、视线和最近目标规则锁定Player或MirrorClone，锁定后火球不追踪。
+- 投火兵的在途火球在Player死亡与手动重置时全部清除；MirrorClone单独死亡不会重置敌人攻击阶段。
 - Scene中没有为单个房间解包并复制通用玩法逻辑。

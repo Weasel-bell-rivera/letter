@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
-public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActor2D
+public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActor2D, ISpringBounceReceiver2D
 {
     private PlayerController2D source; private Rigidbody2D body; private BoxCollider2D box; private PlayerMovementSettings settings;
     private Vector2 moveAxis = Vector2.left, gravityAxis = Vector2.down; private int observedJumpInput; private bool gravityDisabled;
@@ -14,9 +14,13 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     private Collider2D surfaceMotionCollider;
     private Vector2 appliedSurfaceVelocity;
     private float freezingMovementMultiplier = 1f;
+    private Vector2 springContactVelocity;
+    private bool springAntiGravityLaunchActive;
     public Vector2 GravityAxis => gravityAxis;
     public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
     public Collider2D SupportCollider => supportCollider;
+    public float SpringGravityMagnitude => settings != null ? settings.Gravity : 0f;
+    public Vector2 SpringContactVelocity => springContactVelocity;
     public float MovementInput => source != null ? source.HorizontalInput : 0f;
     public Rigidbody2D FreezingBody => body;
     public Collider2D FreezingCollider => box;
@@ -25,7 +29,7 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     public bool IsOnFrozenGround => TryGetGroundSurface(out SurfaceSemantic2D surface, out _) && IsFrozenGround(surface);
     public event Action Died;
     public void Configure(PlayerController2D player, Vector2 transformedMoveAxis, Vector2 localGravity)
-    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); supportCollider = null; surfaceMotionCollider = null; appliedSurfaceVelocity = Vector2.zero; freezingMovementMultiplier = 1f; FreezingGroundActor2D.Ensure(gameObject); FreezingVisual2D.Ensure(gameObject); }
+    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); supportCollider = null; surfaceMotionCollider = null; appliedSurfaceVelocity = Vector2.zero; freezingMovementMultiplier = 1f; springContactVelocity = Vector2.zero; springAntiGravityLaunchActive = false; FreezingGroundActor2D.Ensure(gameObject); FreezingVisual2D.Ensure(gameObject); }
     private void FixedUpdate()
     {
         if (source == null || settings == null) return;
@@ -65,7 +69,10 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
             jumpConsumedSinceGrounded = true;
             separatedFromGroundAfterJump = false;
         }
-        if (!source.JumpHeld && Vector2.Dot(relativeVelocity, -gravityAxis) > 0f)
+        if (springAntiGravityLaunchActive && Vector2.Dot(relativeVelocity, -gravityAxis) <= 0f)
+            springAntiGravityLaunchActive = false;
+        if (!source.JumpHeld && Vector2.Dot(relativeVelocity, -gravityAxis) > 0f &&
+            !springAntiGravityLaunchActive)
         { float upward = Vector2.Dot(relativeVelocity, -gravityAxis); relativeVelocity += gravityAxis * upward * (1f - settings.jumpCutMultiplier); }
         if (Mathf.Abs(target) > .01f && visualRoot != null)
         {
@@ -79,6 +86,7 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
         surfaceMotionCollider = grounded ? nextMotionCollider : null;
         appliedSurfaceVelocity = grounded ? nextSurfaceVelocity : Vector2.zero;
         body.linearVelocity = relativeVelocity + (grounded ? nextSurfaceVelocity : Vector2.zero);
+        springContactVelocity = body.linearVelocity;
     }
     private bool TryGetGroundSurface(out SurfaceSemantic2D surface, out RaycastHit2D supportHit)
     {
@@ -94,6 +102,25 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     {
         if (body != null) body.linearVelocity = Vector2.zero;
         Die();
+    }
+    public bool ApplySpringBounce(Vector2 outwardNormal, float launchSpeed)
+    {
+        if (body == null || outwardNormal.sqrMagnitude < .0001f || launchSpeed <= 0f) return false;
+        Vector2 normal = outwardNormal.normalized;
+        Vector2 incomingVelocity = springContactVelocity;
+        Vector2 result = incomingVelocity - normal * Vector2.Dot(incomingVelocity, normal) + normal * launchSpeed;
+        body.linearVelocity = result;
+        springContactVelocity = result;
+        lastJumpPressed = float.NegativeInfinity;
+        lastGrounded = float.NegativeInfinity;
+        if (Vector2.Dot(normal, -gravityAxis) >= .65f)
+        {
+            springAntiGravityLaunchActive = true;
+            supportCollider = null;
+            surfaceMotionCollider = null;
+            appliedSurfaceVelocity = Vector2.zero;
+        }
+        return true;
     }
     public void Die() { Died?.Invoke(); Destroy(gameObject); }
 }

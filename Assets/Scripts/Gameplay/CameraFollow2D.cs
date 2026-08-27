@@ -6,6 +6,8 @@ public sealed class CameraFollow2D : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private bool followVertical;
     [SerializeField, Min(0f)] private float smoothTime;
+    [SerializeField] private Vector2 framingOffset;
+    [SerializeField] private bool useExplicitFramingOffset;
     [SerializeField] private bool constrainToRoomBounds;
     [SerializeField] private Rect roomBounds;
     [SerializeField] private bool alignEntryFramingToBounds;
@@ -27,6 +29,8 @@ public sealed class CameraFollow2D : MonoBehaviour
     public Transform Target => target;
     public bool FollowsVertical => followVertical;
     public float SmoothTime => smoothTime;
+    public Vector2 FramingOffset => framingOffset;
+    public bool UsesExplicitFramingOffset => useExplicitFramingOffset;
     public bool UsesRoomBounds => constrainToRoomBounds;
     public Rect RoomBounds => roomBounds;
     public bool AlignsEntryFramingToBounds => alignEntryFramingToBounds;
@@ -34,8 +38,22 @@ public sealed class CameraFollow2D : MonoBehaviour
 
     public void Configure(Transform followTarget, bool vertical = false)
     {
-        target = followTarget;
         followVertical = vertical;
+        BindTarget(followTarget);
+    }
+
+    public void ConfigureFraming(Vector2 cameraCenterOffset)
+    {
+        framingOffset = cameraCenterOffset;
+        useExplicitFramingOffset = true;
+    }
+
+    public void BindTarget(Transform followTarget)
+    {
+        target = followTarget;
+        followVelocity = Vector3.zero;
+        horizontalAcquired = false;
+        verticalAcquired = false;
     }
 
     public void ConfigureDamping(float seconds)
@@ -138,7 +156,7 @@ public sealed class CameraFollow2D : MonoBehaviour
             verticalAcquired = true;
     }
 
-    private float TargetCameraX() => target.position.x;
+    private float TargetCameraX() => target.position.x + (useExplicitFramingOffset ? framingOffset.x : 0f);
 
     private void CaptureInitialRoomPosition()
     {
@@ -149,6 +167,7 @@ public sealed class CameraFollow2D : MonoBehaviour
 
     private float TargetCameraY()
     {
+        if (useExplicitFramingOffset) return target.position.y + framingOffset.y;
         if (controlledCamera == null) controlledCamera = GetComponent<Camera>();
         float halfHeight = controlledCamera != null && controlledCamera.orthographic
             ? controlledCamera.orthographicSize

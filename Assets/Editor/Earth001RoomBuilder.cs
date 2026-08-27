@@ -9,15 +9,19 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 /// <summary>
-/// Builds the approved EARTH_001 vertical wall patrol observation greybox.
+/// Builds the approved EARTH_001 enemy observation greybox.
 /// Room-specific gameplay behaviour is intentionally absent.
 /// </summary>
 public static class Earth001RoomBuilder
 {
     public const string ScenePath = "Assets/Scenes/Levels/Earth/Earth_001.unity";
     public const string TerrainTilePath = "Assets/Tiles/Earth/Earth001TerrainGraybox.asset";
-    public const string EnemyPrefabPath =
+    public const string WallEnemyPrefabPath =
         "Assets/Prefabs/Gameplay/Enemies/VerticalWallPatrolEnemy2D.prefab";
+    public const string FireThrowerPrefabPath =
+        "Assets/Prefabs/Gameplay/Enemies/GroundFireThrowerEnemy2D.prefab";
+    public const string BackgroundLavaPrefabPath =
+        "Assets/Prefabs/Visual/Regions/Fire/BackgroundLavaDrip2D.prefab";
 
     public const int GroundMinX = -13;
     public const int GroundMaxX = 12;
@@ -28,6 +32,8 @@ public static class Earth001RoomBuilder
 
     public static readonly Vector3 EntrancePosition = new(8f, -2.08f, 0f);
     public static readonly Vector3 EnemyPosition = new(-4.54f, 1f, 0f);
+    public static readonly Vector3 FireThrowerPosition = new(0f, -2.5f, 0f);
+    public static readonly Vector3 BackgroundLavaPosition = new(-9f, 8.5f, 0f);
     public static readonly Vector3 CameraPosition = new(0f, 2f, -10f);
     public static readonly Rect CameraBounds = new(-13f, -5f, 26f, 14f);
 
@@ -43,16 +49,23 @@ public static class Earth001RoomBuilder
         Directory.CreateDirectory("Assets/Tiles/Earth");
 
         Sprite terrainSprite = AssetDatabase.LoadAssetAtPath<Sprite>(TerrainTexturePath);
-        GameObject enemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(EnemyPrefabPath);
+        GroundFireThrowerEnemyBuilder.BuildAssets();
+        BackgroundLavaDripPrefabBuilder.BuildAssets();
+        GameObject enemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(WallEnemyPrefabPath);
+        GameObject fireThrowerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(FireThrowerPrefabPath);
+        GameObject backgroundLavaPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(BackgroundLavaPrefabPath);
 
         Require(terrainSprite != null, $"Missing terrain Sprite: {TerrainTexturePath}");
-        Require(enemyPrefab != null, $"Missing vertical wall patrol Prefab: {EnemyPrefabPath}");
+        Require(enemyPrefab != null, $"Missing vertical wall patrol Prefab: {WallEnemyPrefabPath}");
+        Require(fireThrowerPrefab != null, $"Missing ground fire thrower Prefab: {FireThrowerPrefabPath}");
+        Require(backgroundLavaPrefab != null,
+            $"Missing background lava drip Prefab: {BackgroundLavaPrefabPath}");
 
         Tile terrainTile = CreateOrUpdateTerrainTile(terrainSprite);
-        BuildScene(terrainTile, enemyPrefab);
+        BuildScene(terrainTile, enemyPrefab, fireThrowerPrefab, backgroundLavaPrefab);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        Debug.Log("EARTH_001 vertical wall patrol observation greybox built successfully.");
+        Debug.Log("EARTH_001 enemy observation greybox built successfully.");
     }
 
     private static Tile CreateOrUpdateTerrainTile(Sprite sprite)
@@ -72,15 +85,20 @@ public static class Earth001RoomBuilder
         return tile;
     }
 
-    private static void BuildScene(TileBase terrainTile, GameObject enemyPrefab)
+    private static void BuildScene(TileBase terrainTile, GameObject enemyPrefab,
+        GameObject fireThrowerPrefab, GameObject backgroundLavaPrefab)
     {
-        Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-        GameObject room = new("EARTH_001 Wall Patrol Observation Greybox");
+        Scene previousActiveScene = SceneManager.GetActiveScene();
+        Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
+        SceneManager.SetActiveScene(scene);
+        try
+        {
+        GameObject room = new("EARTH_001 Enemy Observation Greybox");
 
         GameObject gridRoot = new("Grid");
         gridRoot.transform.SetParent(room.transform);
         gridRoot.AddComponent<Grid>().cellSize = Vector3.one;
-        CreateTilemapLayer(gridRoot.transform, "Background");
+        Tilemap background = CreateTilemapLayer(gridRoot.transform, "Background");
         Tilemap terrain = CreateTilemapLayer(gridRoot.transform, "Terrain");
         CreateTilemapLayer(gridRoot.transform, "FrozenGround");
         CreateTilemapLayer(gridRoot.transform, "OneWayPlatform");
@@ -88,6 +106,8 @@ public static class Earth001RoomBuilder
         CreateTilemapLayer(gridRoot.transform, "Hazard");
         CreateTilemapLayer(gridRoot.transform, "Decoration");
         CreateTilemapLayer(gridRoot.transform, "Foreground");
+
+        CreateBackgroundLava(backgroundLavaPrefab, background.transform, scene);
 
         ConfigureTerrain(terrain);
         FillHorizontal(terrain, terrainTile, GroundMinX, GroundMaxX, GroundY);
@@ -99,6 +119,7 @@ public static class Earth001RoomBuilder
         GameObject dynamicObjects = new("DynamicObjects");
         dynamicObjects.transform.SetParent(gameplay.transform);
         CreateEnemy(enemyPrefab, dynamicObjects.transform, scene);
+        CreateFireThrower(fireThrowerPrefab, dynamicObjects.transform, scene);
 
         GameObject entrances = new("Entrances");
         entrances.transform.SetParent(gameplay.transform);
@@ -120,6 +141,14 @@ public static class Earth001RoomBuilder
         EditorSceneManager.MarkSceneDirty(scene);
         Require(EditorSceneManager.SaveScene(scene, ScenePath), "Failed to save EARTH_001 scene.");
         AddBuildScene(ScenePath);
+        }
+        finally
+        {
+            if (previousActiveScene.IsValid() && previousActiveScene.isLoaded)
+                SceneManager.SetActiveScene(previousActiveScene);
+            if (scene.IsValid() && scene.isLoaded)
+                EditorSceneManager.CloseScene(scene, true);
+        }
     }
 
     private static Tilemap CreateTilemapLayer(Transform parent, string name)
@@ -188,6 +217,30 @@ public static class Earth001RoomBuilder
         PrefabUtility.RecordPrefabInstancePropertyModifications(enemy);
     }
 
+    private static void CreateFireThrower(GameObject prefab, Transform parent, Scene scene)
+    {
+        GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, scene);
+        instance.name = "Enemy-B-FireThrower";
+        instance.transform.SetParent(parent, false);
+        instance.transform.position = FireThrowerPosition;
+
+        GroundFireThrowerEnemy2D enemy = instance.GetComponent<GroundFireThrowerEnemy2D>();
+        Require(enemy != null, "Ground fire thrower Prefab must contain GroundFireThrowerEnemy2D.");
+        enemy.SetInitiallyFacingRight(true);
+        EditorUtility.SetDirty(enemy);
+        PrefabUtility.RecordPrefabInstancePropertyModifications(instance.transform);
+        PrefabUtility.RecordPrefabInstancePropertyModifications(enemy);
+    }
+
+    private static void CreateBackgroundLava(GameObject prefab, Transform parent, Scene scene)
+    {
+        GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, scene);
+        instance.name = BackgroundLavaDripPrefabBuilder.Earth001InstanceName;
+        instance.transform.SetParent(parent, false);
+        instance.transform.position = BackgroundLavaPosition;
+        PrefabUtility.RecordPrefabInstancePropertyModifications(instance.transform);
+    }
+
     private static Camera CreateFixedCamera()
     {
         GameObject cameraObject = new("Main Camera");
@@ -250,6 +303,24 @@ public static class Earth001RoomBuilder
                 Mathf.Approximately(enemy.MoveSpeed, 1.5f) && Mathf.Approximately(enemy.EndpointWait, .3f) &&
                 enemy.InitiallyMovingUp,
             "EARTH_001 Enemy-A must use the approved patrol configuration.");
+
+        GroundFireThrowerEnemy2D fireThrower = roots.SelectMany(root =>
+            root.GetComponentsInChildren<GroundFireThrowerEnemy2D>(true)).Single();
+        Require(PrefabUtility.GetPrefabInstanceStatus(fireThrower.gameObject) == PrefabInstanceStatus.Connected,
+            "EARTH_001 Enemy-B fire thrower must remain connected to its shared Prefab.");
+        Require(Vector2.Distance(fireThrower.transform.position, FireThrowerPosition) < .001f,
+            "EARTH_001 Enemy-B fire thrower must use the approved position.");
+        Require(fireThrower.Settings != null && fireThrower.Settings.IsValid &&
+                Mathf.Approximately(fireThrower.Settings.DetectionRadius, 7f),
+            "EARTH_001 Enemy-B must use the approved shared fire thrower settings.");
+
+        Transform backgroundLava = roots.SelectMany(root => root.GetComponentsInChildren<Transform>(true))
+            .Single(transform => transform.name == BackgroundLavaDripPrefabBuilder.Earth001InstanceName);
+        Require(PrefabUtility.GetPrefabInstanceStatus(backgroundLava.gameObject) ==
+                PrefabInstanceStatus.Connected,
+            "EARTH_001 background lava drip must remain connected to its shared Prefab.");
+        Require(Vector2.Distance(backgroundLava.position, BackgroundLavaPosition) < .001f,
+            "EARTH_001 background lava drip must use the approved decorative position.");
 
         Require(camera.orthographic && Mathf.Approximately(camera.orthographicSize, 7f) &&
                 Vector3.Distance(camera.transform.position, CameraPosition) < .001f,

@@ -2,10 +2,11 @@
 
 ## 状态与权威范围
 
-- 当前状态：可冻结地面巡逻敌人、竖直墙面巡逻敌人与风区逐风鳐的核心规则、统一数值与通用Prefab均已实现；火区投火者规则、运行时代码与通用Prefab已生成，尚未进行PlayMode试玩验证。
+- 当前状态：可冻结地面巡逻敌人、竖直墙面巡逻敌人、风区逐风鳐与固定投火兵的核心规则、统一数值和通用Prefab均已实现；火区投火者规则、运行时代码与通用Prefab已生成，尚未进行PlayMode试玩验证。各类型的验证状态见对应详细文档。
 - 本文定义敌人的通用状态、移动、碰撞、伤害、冻结、重置和场景切换规则。
 - 雪区寒冰地面的区域规则见`docs/regions/SNOW_REGION.md`。
 - 风区逐风鳐的详细规则见`docs/systems/WIND_RAY_ENEMY.md`。
+- 固定投火兵与弧线火球的详细规则见`docs/systems/GROUND_FIRE_THROWER_ENEMY.md`。
 - 运行时创建敌人时，出生点、Spawner、房间注册、空间安全、重置和场景卸载规则见`docs/systems/ENEMY_SPAWN_SYSTEM.md`。
 - Prefab结构和可配置字段见`docs/systems/GAMEPLAY_PREFAB_CATALOG.md`。
 - 具体房间只配置敌人实例，不得重新定义通用敌人行为。
@@ -68,6 +69,15 @@
 - 敌人与火球不破坏镜子、不触发机关、不推动动态对象；攻击全程不显示红色小叉或落点标记。
 - 完整规则与首版数值见`docs/systems/HORIZONTAL_FIREBALL_ENEMY_PROPOSAL.md`。首次正式教学房为`FIRE_002`，`FIRE_009`用于后续巩固。
 
+### 固定投火兵
+
+- 固定站在Scene配置的地面守卫点，不巡逻、不追逐、不跳跃。
+- 在`7 units`内按距离和视线选择最近的Player或MirrorClone，平局稳定选择Player。
+- 进入预警时锁定目标世界位置，`0.8 s`后投出不追踪的确定性弧线火球。
+- 命中Player触发完整房间重置；命中MirrorClone只执行镜像死亡联动。
+- Cooldown期间不重新索敌，所有在途火球在完整房间重置时清除。
+- 不绘制运行时探测圆；详细状态、弹道、Prefab、重置和数值以`docs/systems/GROUND_FIRE_THROWER_ENEMY.md`为准。
+
 ## 敌人原型与Prefab Variant
 
 ### 敌人原型判定
@@ -107,7 +117,7 @@ Prefab Variant不得：
 
 房间专用的位置、巡逻端点、初始方向、守卫点和其他允许的实例参数直接配置在Scene中的Prefab实例上，不为单个房间创建Variant。只有会被多个房间复用且差异稳定的版本才创建Variant。
 
-当前`FreezablePatrolEnemy2D`、`VerticalWallPatrolEnemy2D`、`WindRayEnemy2D`和`HorizontalFireballEnemy2D`分别属于独立敌人原型，不得互相作为Prefab Variant。活动与冻结仍是`FreezablePatrolEnemy2D`同一实例的运行时状态变化，不创建冻结Variant。
+当前`FreezablePatrolEnemy2D`、`VerticalWallPatrolEnemy2D`、`WindRayEnemy2D`、`HorizontalFireballEnemy2D`和`GroundFireThrowerEnemy2D`分别属于独立敌人原型，不得互相作为Prefab Variant。活动与冻结仍是`FreezablePatrolEnemy2D`同一实例的运行时状态变化，不创建冻结Variant。
 
 ## 竖直墙面巡逻规则
 
@@ -315,9 +325,11 @@ MirrorClone单独死亡不重置敌人。场景切换时不携带敌人位置、
 
 逐风鳐在手动重置、Player死亡重置或重新进入房间时恢复初始守卫点和`Guarding`状态，并清空目标、锁定点、速度与全部阶段计时。MirrorClone单独死亡或镜子主动回收不重置逐风鳐。场景切换不携带其位置、状态、目标或计时。
 
+投火兵在手动重置、Player死亡重置或重新进入房间时恢复初始守卫点、初始朝向和`Guarding`状态，并清空目标、锁定点、阶段计时与全部在途火球。MirrorClone单独死亡或镜子主动回收不重置投火兵；已经锁定的攻击继续指向原世界位置。场景切换不携带其状态或火球。
+
 ## 存档
 
-地面巡逻敌人的位置、方向、巡逻阶段和冻结状态，竖直墙面巡逻敌人的位置、方向、等待计时和墙面接触状态，以及逐风鳐的位置、目标和攻击阶段，都属于`RoomAttemptState`，不写入长期存档。
+地面巡逻敌人的位置、方向、巡逻阶段和冻结状态，竖直墙面巡逻敌人的位置、方向、等待计时和墙面接触状态，逐风鳐的位置、目标和攻击阶段，以及投火兵的目标、阶段计时与在途火球，都属于`RoomAttemptState`，不写入长期存档。
 
 ## 验收标准
 
@@ -337,3 +349,5 @@ MirrorClone单独死亡不重置敌人。场景切换时不携带敌人位置、
 - 逐风鳐只选择感知距离内且无遮挡的最近Player或MirrorClone，并在锁定后保持同一锁定点。
 - 逐风鳐命中MirrorClone不会触发房间整体重置，命中Player会触发完整死亡重置。
 - 逐风鳐的喘息与返回阶段不会获取新目标，重置和场景切换不会留下攻击状态。
+- 投火兵只锁定距离内且无遮挡的最近Player或MirrorClone，锁定点不随目标移动或回收改变。
+- 投火兵的火球不追踪；命中双方分别进入正确生命周期，完整重置不会留下火球或冷却状态。

@@ -47,6 +47,15 @@
 - 压沉土块始终是`DynamicSurface`，不能放置镜子；静止、运动和完全下沉状态均不改变该规则。
 - 完整规则见`docs/systems/SINKING_EARTH_BLOCK_SYSTEM.md`。
 
+### 地面弹簧交互（已确定）
+
+- Player和MirrorClone具有完全相同的弹簧触发资格、回弹速度、有效面、重复接触和重置规则。
+- 弹簧的顶、左、右外法线属于世界环境方向，不经过镜面输入变换；特殊墙面镜生成的旋转重力MirrorClone仍按实际接触面回弹。
+- 顶面目标弹射高度为`5 units`，左右侧面固定回弹速度为`8 units/s`；法向速度被替换，切向世界速度保持不变。
+- 弹簧使用显式`Spring`表面语义且不具有`MirrorSurface2D`，因此始终不是合法镜子放置表面。
+- 镜子回收、MirrorClone死亡或镜像清除时必须立即清除对应弹簧接触记录，但不重置弹簧或Player。
+- 完整规则见`docs/systems/SPRING_SYSTEM.md`。
+
 ### 地面镜的物理形态（已确定）
 
 - 镜子底座落在水平地面上，镜面保持竖直。
