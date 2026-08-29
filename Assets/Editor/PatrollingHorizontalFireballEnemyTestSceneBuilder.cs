@@ -52,7 +52,7 @@ public static class PatrollingHorizontalFireballEnemyTestSceneBuilder
             AssetDatabase.CreateAsset(settings, SettingsPath);
         }
         settings.name = "DefaultPatrollingHorizontalFireballEnemy";
-        settings.Configure(attack, 1.5f, .2f, .08f, .16f, .05f);
+        settings.Configure(attack, 1.5f, 1f, .2f, .08f);
         EditorUtility.SetDirty(settings);
         return settings;
     }

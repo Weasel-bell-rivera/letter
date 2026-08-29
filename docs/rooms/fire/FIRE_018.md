@@ -4,10 +4,10 @@
 
 - 房间ID：`FIRE_018`。
 - 区域：火之区域。
-- 当前状态：灰盒中；用户已确认与`FIRE_017`相连并要求制作。
+- 当前状态：灰盒中；用户已确认与`FIRE_017`相连并要求制作；通往`FIRE_019`的地图连接已登记，但尚未增量实现到本房Scene。
 - Unity Scene：`Assets/Scenes/Levels/Fire/Fire_018.unity`。
 - 区域规则：`docs/regions/FIRE_REGION.md`。
-- 地图连接：`docs/maps/MAP.md`；左侧连接`FIRE_017`。
+- 地图连接：`docs/maps/MAP.md`；左侧连接`FIRE_017`，右侧规划连接`FIRE_019`。
 - 静态几何：`docs/systems/LEVEL_GEOMETRY_SYSTEM.md`。
 - 镜子与镜像：`docs/MIRROR_MECHANIC.md`。
 - 门与开关：`docs/systems/DOOR_SYSTEM.md`。
@@ -17,7 +17,8 @@
 
 - `FIRE_017`右侧出口进入本房左上角`DEFAULT`入口。
 - 本房左上角`Exit-Back-to-FIRE_017`返回`Fire_017/FROM_FIRE_018`。
-- 本房当前是终端谜题房；打开`Door-Upper`即完成机关目标，不创建通往其他房间的出口。
+- 本房现有灰盒仍以打开`Door-Upper`作为机关完成目标，Scene中尚未创建通往其他房间的出口。
+- 地图已登记本房右侧连接`FIRE_019`，且`FIRE_019`无出口灰盒已经创建；用户要求本阶段暂不考虑出口，因此本房不增加`Exit-to-FIRE_019`，既有Scene保持不变。
 
 ## 房间定位
 

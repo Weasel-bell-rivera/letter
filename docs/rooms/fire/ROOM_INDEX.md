@@ -34,7 +34,10 @@
 | FIRE_016 | 灰盒中 | `docs/rooms/fire/FIRE_016.md` | `Assets/Scenes/Levels/Fire/Fire_016.unity` | 双门接力与镜像替身 |
 | FIRE_017 | 灰盒中 | `docs/rooms/fire/FIRE_017.md` | `Assets/Scenes/Levels/Fire/Fire_017.unity` | 周期升降岩浆与火区机制综合考验 |
 | FIRE_018 | 灰盒中 | `docs/rooms/fire/FIRE_018.md` | `Assets/Scenes/Levels/Fire/Fire_018.unity` | 上下双通道；镜像与本体分别诱导火球命中双锁存板，AND开启上方门 |
+| FIRE_019 | 灰盒中 | `docs/rooms/fire/FIRE_019.md` | `Assets/Scenes/Levels/Fire/Fire_019.unity` | 三通道接力；先放行巡逻投火者，再用MirrorClone进入底层诱导火球；暂不实现出口 |
 
 FIRE_001、FIRE_002、FIRE_004、FIRE_005、FIRE_006与FIRE_007当前处于待试玩状态；FIRE_003与FIRE_008至FIRE_017已由用户明确要求实现，当前处于灰盒中。FIRE_006本次只批准并实现空间灰盒，不包含核心解法、完成目标或出口。
 
 FIRE_018已由用户确认与FIRE_017相连并进入灰盒实现；当前采用FIRE_017右侧出口连接FIRE_018左上入口。
+
+FIRE_019已按用户要求进入灰盒实现；Scene暂不包含出口，也未修改FIRE_018 Scene的连接。地图中的FIRE_018—FIRE_019仍表示规划连接，待出口设计获批后再落地。

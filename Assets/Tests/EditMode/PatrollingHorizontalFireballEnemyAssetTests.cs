@@ -19,6 +19,7 @@ public sealed class PatrollingHorizontalFireballEnemyAssetTests
         Assert.That(settings, Is.Not.Null);
         Assert.That(settings.IsValid, Is.True);
         Assert.That(settings.PatrolSpeed, Is.EqualTo(1.5f).Within(.0001f));
+        Assert.That(settings.GravityScale, Is.EqualTo(1f).Within(.0001f));
         Assert.That(settings.TurnPauseDuration, Is.EqualTo(.2f).Within(.0001f));
     }
 
@@ -29,6 +30,9 @@ public sealed class PatrollingHorizontalFireballEnemyAssetTests
         Assert.That(prefab, Is.Not.Null);
         Assert.That(prefab.GetComponent<PatrollingHorizontalFireballEnemy2D>(), Is.Not.Null);
         Assert.That(prefab.GetComponent<HorizontalFireballEnemy2D>(), Is.Not.Null);
+        Rigidbody2D body = prefab.GetComponent<Rigidbody2D>();
+        Assert.That(body.bodyType, Is.EqualTo(RigidbodyType2D.Dynamic));
+        Assert.That(body.gravityScale, Is.EqualTo(1f).Within(.0001f));
         Assert.That(PrefabUtility.GetPrefabAssetType(prefab), Is.EqualTo(PrefabAssetType.Regular));
     }
 

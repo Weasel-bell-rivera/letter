@@ -27,6 +27,7 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
     private void Awake()
     {
         ResolveReferences();
+        ApplyBodyConfiguration();
         initialPosition = transform.position;
         initialized = true;
         ResetRoomState();
@@ -40,9 +41,13 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
         if (attackController.State == HorizontalFireballEnemy2D.EnemyState.Frozen)
         {
             State = PatrolState.Frozen;
-            StopBody();
+            body.bodyType = RigidbodyType2D.Kinematic;
+            body.gravityScale = 0f;
+            body.linearVelocity = Vector2.zero;
+            body.angularVelocity = 0f;
             return;
         }
+        ApplyBodyConfiguration();
 
         bool attackStopped = attackController.State != HorizontalFireballEnemy2D.EnemyState.Watching;
         if (attackStopped)
@@ -72,7 +77,7 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
             return;
         }
 
-        if (ShouldTurn())
+        if (HasForwardStaticBlocker())
         {
             BeginTurnPause();
             return;
@@ -80,8 +85,7 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
 
         State = PatrolState.Patrolling;
         attackController.SetInitiallyFacingRight(movementDirection > 0f);
-        Vector2 next = body.position + Vector2.right * (movementDirection * settings.PatrolSpeed * Time.fixedDeltaTime);
-        body.MovePosition(next);
+        body.linearVelocity = new Vector2(movementDirection * settings.PatrolSpeed, body.linearVelocity.y);
     }
 
     public void Configure(PatrollingHorizontalFireballEnemySettings sharedSettings,
@@ -91,6 +95,7 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
         attackController = attack;
         bodyCollider = solid;
         ResolveReferences();
+        ApplyBodyConfiguration();
         configurationErrorLogged = false;
     }
 
@@ -116,6 +121,7 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
         transform.position = initialPosition;
         if (body != null)
         {
+            ApplyBodyConfiguration();
             body.position = initialPosition;
             StopBody();
         }
@@ -123,7 +129,7 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
         Physics2D.SyncTransforms();
     }
 
-    private bool ShouldTurn() => HasForwardStaticBlocker() || !HasSafeGroundAhead();
+    private bool ShouldTurn() => HasForwardStaticBlocker();
 
     private bool HasForwardStaticBlocker()
     {
@@ -137,22 +143,6 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
             Collider2D collider = hit.collider;
             if (collider == null || collider.isTrigger || IsOwnCollider(collider)) continue;
             if (IsStaticSolid(collider) || collider.GetComponentInParent<Door2D>() != null) return true;
-        }
-        return false;
-    }
-
-    private bool HasSafeGroundAhead()
-    {
-        Bounds bounds = bodyCollider.bounds;
-        float step = settings.PatrolSpeed * Time.fixedDeltaTime + settings.ForwardProbeMargin;
-        Vector2 origin = new(bounds.center.x + movementDirection * (bounds.extents.x + step),
-            bounds.min.y + settings.MaxGroundHeightDifference);
-        float distance = settings.GroundProbeDistance + settings.MaxGroundHeightDifference;
-        foreach (RaycastHit2D hit in Physics2D.RaycastAll(origin, Vector2.down, distance))
-        {
-            Collider2D collider = hit.collider;
-            if (collider == null || collider.isTrigger || IsOwnCollider(collider)) continue;
-            if (IsStaticSolid(collider)) return true;
         }
         return false;
     }
@@ -178,8 +168,16 @@ public sealed class PatrollingHorizontalFireballEnemy2D : MonoBehaviour, IRoomRe
     private void StopBody()
     {
         if (body == null) return;
-        body.linearVelocity = Vector2.zero;
+        body.linearVelocity = new Vector2(0f, body.linearVelocity.y);
         body.angularVelocity = 0f;
+    }
+
+    private void ApplyBodyConfiguration()
+    {
+        if (body == null || settings == null) return;
+        body.bodyType = RigidbodyType2D.Dynamic;
+        body.gravityScale = settings.GravityScale;
+        body.freezeRotation = true;
     }
 
     private void ResolveReferences()

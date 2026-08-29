@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: W1.Runtime::PatrollingHorizontalFireballEnemySettings
   attackSettings: {fileID: 11400000, guid: 052bbf2d3cc04bbfae34231d023d5724, type: 2}
   patrolSpeed: 1.5
+  gravityScale: 1
   turnPauseDuration: 0.2
   forwardProbeMargin: 0.08
-  groundProbeDistance: 0.16
-  maxGroundHeightDifference: 0.05

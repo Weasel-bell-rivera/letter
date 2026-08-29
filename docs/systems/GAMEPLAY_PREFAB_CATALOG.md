@@ -63,7 +63,7 @@ Assets/Prefabs/Gameplay/
 - `VerticalWallPatrolEnemy2D.prefab`已经创建；正式房间只允许覆盖已批准的墙面侧别、竖直路径、速度、等待和视觉参数。
 - `WindRayEnemy2D.prefab`已经创建并用于`WIND_001`灰盒；统一数值已确认。**非必须：除非用户明确要求，否则不运行其独立EditMode与PlayMode测试**，未运行状态作为风险记录。
 - `HorizontalFireballEnemy2D.prefab`与其火球Prefab已有已确认规则、运行时代码和可重复构建器，并已由Unity Editor生成；尚未获准进入正式房间。**非必须：除非用户明确要求，否则不进行PlayMode试玩验证。**
-- `PatrollingHorizontalFireballEnemy2D.prefab`已创建；它组合复用已批准的水平投火攻击控制器和火球Prefab，并以独立巡逻控制器实现地面移动、阻挡/边缘折返和攻击阶段停止。独立测试Scene为`Assets/Scenes/Tests/PatrollingHorizontalFireballEnemyTest.unity`；尚未进行PlayMode试玩验证。
+- `PatrollingHorizontalFireballEnemy2D.prefab`已创建；它组合复用已批准的水平投火攻击控制器和火球Prefab，并以独立巡逻控制器实现受重力的水平移动、实体阻挡折返、缺口下落和攻击阶段停止水平移动。独立测试Scene为`Assets/Scenes/Tests/PatrollingHorizontalFireballEnemyTest.unity`；尚未进行PlayMode试玩验证。
 - `MovingTornado2D.prefab`使用`Assets/Art/Generated/Wind/small_tornado_3frame_handpainted.png`的三帧手绘透明Sprite动画，循环速率`8 FPS`。动画只改变Sprite，不改变`0.8×0.8 units`伤害Trigger、速度、方向、门阻挡或重置规则。
 - `GroundFireThrowerEnemy2D.prefab`与`ArcFireballProjectile2D.prefab`已经创建并用于`EARTH_001`；专项EditMode与PlayMode测试各`3/3`通过。房间只覆盖位置和初始左右朝向，统一攻击数值保存在共享Settings资产。
 - `Player.prefab`由通用房间生成系统管理，不作为房间Scene中的重复Prefab实例；完整结构、视觉、入口绑定和生命周期规则见`docs/systems/PLAYER_PREFAB.md`。

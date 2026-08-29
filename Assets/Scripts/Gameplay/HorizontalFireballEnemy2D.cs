@@ -175,7 +175,11 @@ public sealed class HorizontalFireballEnemy2D : MonoBehaviour, IRoomResettable, 
         State = EnemyState.Frozen;
         CurrentTarget = TargetKind.None;
         phaseRemaining = 0f;
-        StopBody();
+        if (body != null)
+        {
+            body.linearVelocity = Vector2.zero;
+            body.angularVelocity = 0f;
+        }
         damageTrigger?.SetDamageEnabled(false);
         RefreshPresentation();
     }
@@ -317,7 +321,9 @@ public sealed class HorizontalFireballEnemy2D : MonoBehaviour, IRoomResettable, 
     private void StopBody()
     {
         if (body == null) return;
-        body.linearVelocity = Vector2.zero;
+        body.linearVelocity = body.bodyType == RigidbodyType2D.Dynamic
+            ? new Vector2(0f, body.linearVelocity.y)
+            : Vector2.zero;
         body.angularVelocity = 0f;
     }
 
