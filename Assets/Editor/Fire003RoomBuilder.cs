@@ -21,7 +21,6 @@ public static class Fire003RoomBuilder
     private const string DoorPath = "Assets/Prefabs/Gameplay/Doors/Door2D.prefab";
     private const string DoorGroupPath = "Assets/Prefabs/Gameplay/Doors/PermanentLatchDoorGroup2D.prefab";
     private const string EnemyPath = "Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab";
-    private const string EruptionPath = "Assets/Prefabs/Gameplay/Hazards/EruptionHazard.prefab";
     private const string ExitPath = "Assets/Prefabs/Gameplay/Exits/RoomExit2D.prefab";
     // Orthographic size 7 at 16:9 shows about 24.89 units horizontally.
     // A 24-unit room keeps the full puzzle width visible without horizontal tracking.
@@ -57,7 +56,6 @@ public static class Fire003RoomBuilder
         GameObject doorPrefab = RequireAsset(DoorPath);
         GameObject groupPrefab = RequireAsset(DoorGroupPath);
         GameObject enemyPrefab = RequireAsset(EnemyPath);
-        GameObject eruptionPrefab = RequireAsset(EruptionPath);
         GameObject exitPrefab = RequireAsset(ExitPath);
         Sprite terrainSprite = AssetDatabase.LoadAssetAtPath<Sprite>(TerrainTexturePath);
         Require(terrainSprite != null, $"Missing terrain sprite: {TerrainTexturePath}");
@@ -117,8 +115,6 @@ public static class Fire003RoomBuilder
 
         Enemy(enemyPrefab, dynamicRoot, "Thrower-E1", new Vector2(-7f, 1f), true);
         Enemy(enemyPrefab, dynamicRoot, "Thrower-E2", new Vector2(7f, -6f), false);
-        Instance(eruptionPrefab, dynamicRoot, "Eruption-A", new Vector2(0f, 10f));
-
         GameObject finalGroupObject = Instance(groupPrefab, dynamicRoot, "Final-Door-Group", Vector2.zero);
         PressurePlate2D finalA = finalGroupObject.transform.Find("PlateA").GetComponent<PressurePlate2D>();
         PressurePlate2D finalB = finalGroupObject.transform.Find("PlateB").GetComponent<PressurePlate2D>();

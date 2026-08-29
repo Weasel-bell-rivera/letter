@@ -188,5 +188,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Earth/Earth_002.unity
     guid: 604b67ad60c0d2545a7316e47bc7cea1
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_004.unity
+    guid: 71a4895c71f6b4e33a745357d9e6a15c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_005.unity
+    guid: f0ea3025db5d34e5ab7832c79fa98ddb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_018.unity
+    guid: d2c411241ffda405884d34cf7ed3c7e8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

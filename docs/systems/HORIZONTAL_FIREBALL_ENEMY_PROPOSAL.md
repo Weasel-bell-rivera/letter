@@ -47,6 +47,8 @@ HorizontalFireballProjectile2D
 
 敌人负责感知、选敌、蓄力、发射节奏和房间重置。火球负责固定方向移动、碰撞、命中和销毁。具体房间不得复制这两类逻辑。
 
+- 敌人`BodyCollider`标准范围为`0.9 × 1 unit`；`DamageTrigger`范围为`1 × 1.1 units`并使用本地`Y=0.05`偏移，使两者底边完全齐平。固定落地实例以该共同底边贴合支撑面，不允许DamageTrigger向下陷入地形。
+
 ## 敌人状态模型
 
 ```text

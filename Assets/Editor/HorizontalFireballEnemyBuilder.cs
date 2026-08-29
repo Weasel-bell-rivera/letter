@@ -12,6 +12,8 @@ public static class HorizontalFireballEnemyBuilder
         "Assets/Art/Generated/Enemies/FurnaceToad.png";
     public const string ProjectilePrefabPath =
         "Assets/Prefabs/Gameplay/Enemies/Projectiles/HorizontalFireballProjectile2D.prefab";
+    public const string ProjectileSpritePath =
+        "Assets/Art/Generated/Enemies/Projectiles/Fireball.png";
 
     [MenuItem("Tools/W1/Build Horizontal Fireball Enemy Assets")]
     public static void BuildFromMenu() => BuildFromCommandLine();
@@ -68,10 +70,10 @@ public static class HorizontalFireballEnemyBuilder
 
             GameObject visual = Child("Visual", root.transform);
             SpriteRenderer renderer = visual.AddComponent<SpriteRenderer>();
-            renderer.sprite = BuiltinSprite();
-            renderer.color = new Color(1f, .55f, .08f, 1f);
+            renderer.sprite = ProjectileSprite();
+            renderer.color = Color.white;
             renderer.sortingOrder = 7;
-            ScaleVisual(renderer, new Vector2(.4f, .4f));
+            ScaleVisual(renderer, new Vector2(.5f, .4f));
 
             GameObject trailObject = Child("Trail", root.transform);
             LineRenderer trail = trailObject.AddComponent<LineRenderer>();
@@ -128,6 +130,7 @@ public static class HorizontalFireballEnemyBuilder
             GameObject damageObject = Child("DamageTrigger", root.transform);
             BoxCollider2D damageCollider = damageObject.AddComponent<BoxCollider2D>();
             damageCollider.size = new Vector2(1f, 1.1f);
+            damageCollider.offset = new Vector2(0f, .05f);
             damageCollider.isTrigger = true;
             HorizontalFireballEnemyDamageTrigger2D damage =
                 damageObject.AddComponent<HorizontalFireballEnemyDamageTrigger2D>();
@@ -175,6 +178,13 @@ public static class HorizontalFireballEnemyBuilder
     {
         Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(EnemyBodySpritePath);
         Require(sprite != null, $"Missing furnace toad body sprite: {EnemyBodySpritePath}");
+        return sprite;
+    }
+
+    private static Sprite ProjectileSprite()
+    {
+        Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ProjectileSpritePath);
+        Require(sprite != null, $"Missing fireball sprite: {ProjectileSpritePath}");
         return sprite;
     }
 

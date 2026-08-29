@@ -1,0 +1,1027 @@
+fileFormatVersion: 2
+guid: 50d0de260030542c3af7fce34a16671f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5090841344669913496
+    second: fire007_pressure_plate_v1_0
+  - first:
+      213: 2068848452895284812
+    second: fire007_pressure_plate_v1_1
+  - first:
+      213: 3315444311007948697
+    second: fire007_pressure_plate_v1_2
+  - first:
+      213: -5676787137627243820
+    second: fire007_pressure_plate_v1_3
+  - first:
+      213: 1821446629855494889
+    second: fire007_pressure_plate_v1_4
+  - first:
+      213: -7216298915859234775
+    second: fire007_pressure_plate_v1_5
+  - first:
+      213: -6664212964271638486
+    second: fire007_pressure_plate_v1_6
+  - first:
+      213: -3802842374193581294
+    second: fire007_pressure_plate_v1_7
+  - first:
+      213: -7565630191954903077
+    second: fire007_pressure_plate_v1_8
+  - first:
+      213: 1796906866473801311
+    second: fire007_pressure_plate_v1_9
+  - first:
+      213: 2867001514053368568
+    second: fire007_pressure_plate_v1_10
+  - first:
+      213: 7985956600258824110
+    second: fire007_pressure_plate_v1_11
+  - first:
+      213: -6939481423006511193
+    second: fire007_pressure_plate_v1_12
+  - first:
+      213: 6388617177157653878
+    second: fire007_pressure_plate_v1_13
+  - first:
+      213: 8962259027746135845
+    second: fire007_pressure_plate_v1_14
+  - first:
+      213: -8522374625741774710
+    second: fire007_pressure_plate_v1_15
+  - first:
+      213: 6266577551495345583
+    second: fire007_pressure_plate_v1_16
+  - first:
+      213: 9206868749040829273
+    second: fire007_pressure_plate_v1_17
+  - first:
+      213: 6786065447459358172
+    second: fire007_pressure_plate_v1_18
+  - first:
+      213: -5788930208077190818
+    second: fire007_pressure_plate_v1_19
+  - first:
+      213: 2586136358084312141
+    second: fire007_pressure_plate_v1_20
+  - first:
+      213: -5937095510837102712
+    second: fire007_pressure_plate_v1_21
+  - first:
+      213: -8364080780706138226
+    second: fire007_pressure_plate_v1_22
+  - first:
+      213: 3327458581172132649
+    second: fire007_pressure_plate_v1_23
+  - first:
+      213: 8803398468147208894
+    second: fire007_pressure_plate_v1_24
+  - first:
+      213: -8933186745900248905
+    second: fire007_pressure_plate_v1_25
+  - first:
+      213: 8108591016430663327
+    second: fire007_pressure_plate_v1_26
+  - first:
+      213: 3159834183289355614
+    second: fire007_pressure_plate_v1_27
+  - first:
+      213: 7102739384199181258
+    second: fire007_pressure_plate_v1_28
+  - first:
+      213: -5279272068609974342
+    second: fire007_pressure_plate_v1_29
+  - first:
+      213: -4795328090047753213
+    second: fire007_pressure_plate_v1_30
+  - first:
+      213: -8631297051480784399
+    second: fire007_pressure_plate_v1_31
+  - first:
+      213: -4887754952765946232
+    second: fire007_pressure_plate_v1_32
+  - first:
+      213: 8452929342698092320
+    second: fire007_pressure_plate_v1_33
+  - first:
+      213: -8024584650132127763
+    second: fire007_pressure_plate_v1_34
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 724
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_0
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 15
+        width: 2071
+        height: 701
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ee31bf4c2b959b0800000000000000
+      internalID: -5090841344669913496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_1
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 690
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4e90f8e4b606bc10800000000000000
+      internalID: 2068848452895284812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_2
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 691
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99fe73ee803d20e20800000000000000
+      internalID: 3315444311007948697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_3
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 663
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dab83cdc200831b0800000000000000
+      internalID: -5676787137627243820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_4
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 130
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e28ed53f04174910800000000000000
+      internalID: 1821446629855494889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_5
+      rect:
+        serializedVersion: 2
+        x: 1420
+        y: 111
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9208c2f9e5e8adb90800000000000000
+      internalID: -7216298915859234775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_6
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 126
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2839051e95f383a0800000000000000
+      internalID: -6664212964271638486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_7
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 85
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 213736d4207993bc0800000000000000
+      internalID: -3802842374193581294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_8
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 96
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdfbe82cc6b710790800000000000000
+      internalID: -7565630191954903077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_9
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 74
+        width: 80
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5691ae4645efe810800000000000000
+      internalID: 1796906866473801311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_10
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 101
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fa78afdfa2a9c720800000000000000
+      internalID: 2867001514053368568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_11
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 79
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea70d1e6731d3de60800000000000000
+      internalID: 7985956600258824110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_12
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 95
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7af4648a96202bf90800000000000000
+      internalID: -6939481423006511193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_13
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 95
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 675d07a697de8a850800000000000000
+      internalID: 6388617177157653878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_14
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 65
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52f98d50a17506c70800000000000000
+      internalID: 8962259027746135845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_15
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 79
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a80ebdd6e617ab980800000000000000
+      internalID: -8522374625741774710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_16
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 79
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa53152d41b57f650800000000000000
+      internalID: 6266577551495345583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_17
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 81
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9534930e85e55cf70800000000000000
+      internalID: 9206868749040829273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_18
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 79
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd50e520292fc2e50800000000000000
+      internalID: 6786065447459358172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_19
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 81
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e59e70695a699afa0800000000000000
+      internalID: -5788930208077190818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_20
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 77
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4c7654d05dc3e320800000000000000
+      internalID: 2586136358084312141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_21
+      rect:
+        serializedVersion: 2
+        x: 1635
+        y: 82
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 887fcf6c6133b9da0800000000000000
+      internalID: -5937095510837102712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_22
+      rect:
+        serializedVersion: 2
+        x: 1382
+        y: 69
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e87b65148d0dceb80800000000000000
+      internalID: -8364080780706138226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_23
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 66
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92b179f23f18d2e20800000000000000
+      internalID: 3327458581172132649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_24
+      rect:
+        serializedVersion: 2
+        x: 1673
+        y: 65
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb2e12ea344fb2a70800000000000000
+      internalID: 8803398468147208894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_25
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 63
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b053621cf1f60480800000000000000
+      internalID: -8933186745900248905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_26
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 47
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f96f54b7190878070800000000000000
+      internalID: 8108591016430663327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_27
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 35
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5d391cb27cf9db20800000000000000
+      internalID: 3159834183289355614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_28
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 49
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac37e5786dff19260800000000000000
+      internalID: 7102739384199181258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_29
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 47
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf5cdd36024cb6b0800000000000000
+      internalID: -5279272068609974342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_30
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 47
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30450434282937db0800000000000000
+      internalID: -4795328090047753213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_31
+      rect:
+        serializedVersion: 2
+        x: 1831
+        y: 47
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f18c9fef09773880800000000000000
+      internalID: -8631297051480784399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_32
+      rect:
+        serializedVersion: 2
+        x: 1914
+        y: 49
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 886ca3354c43b2cb0800000000000000
+      internalID: -4887754952765946232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_33
+      rect:
+        serializedVersion: 2
+        x: 1921
+        y: 47
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 027fefe9376de4570800000000000000
+      internalID: 8452929342698092320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire007_pressure_plate_v1_34
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 21
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: def72dad6c2f2a090800000000000000
+      internalID: -8024584650132127763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fire007_pressure_plate_v1_0: -5090841344669913496
+      fire007_pressure_plate_v1_1: 2068848452895284812
+      fire007_pressure_plate_v1_10: 2867001514053368568
+      fire007_pressure_plate_v1_11: 7985956600258824110
+      fire007_pressure_plate_v1_12: -6939481423006511193
+      fire007_pressure_plate_v1_13: 6388617177157653878
+      fire007_pressure_plate_v1_14: 8962259027746135845
+      fire007_pressure_plate_v1_15: -8522374625741774710
+      fire007_pressure_plate_v1_16: 6266577551495345583
+      fire007_pressure_plate_v1_17: 9206868749040829273
+      fire007_pressure_plate_v1_18: 6786065447459358172
+      fire007_pressure_plate_v1_19: -5788930208077190818
+      fire007_pressure_plate_v1_2: 3315444311007948697
+      fire007_pressure_plate_v1_20: 2586136358084312141
+      fire007_pressure_plate_v1_21: -5937095510837102712
+      fire007_pressure_plate_v1_22: -8364080780706138226
+      fire007_pressure_plate_v1_23: 3327458581172132649
+      fire007_pressure_plate_v1_24: 8803398468147208894
+      fire007_pressure_plate_v1_25: -8933186745900248905
+      fire007_pressure_plate_v1_26: 8108591016430663327
+      fire007_pressure_plate_v1_27: 3159834183289355614
+      fire007_pressure_plate_v1_28: 7102739384199181258
+      fire007_pressure_plate_v1_29: -5279272068609974342
+      fire007_pressure_plate_v1_3: -5676787137627243820
+      fire007_pressure_plate_v1_30: -4795328090047753213
+      fire007_pressure_plate_v1_31: -8631297051480784399
+      fire007_pressure_plate_v1_32: -4887754952765946232
+      fire007_pressure_plate_v1_33: 8452929342698092320
+      fire007_pressure_plate_v1_34: -8024584650132127763
+      fire007_pressure_plate_v1_4: 1821446629855494889
+      fire007_pressure_plate_v1_5: -7216298915859234775
+      fire007_pressure_plate_v1_6: -6664212964271638486
+      fire007_pressure_plate_v1_7: -3802842374193581294
+      fire007_pressure_plate_v1_8: -7565630191954903077
+      fire007_pressure_plate_v1_9: 1796906866473801311
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

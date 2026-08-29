@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResettable
 {
     public enum VisualState { Closed, TemporaryOpen, LatchedOpen }
+    public enum ControlLogic { And, Or }
 
     [SerializeField] private bool initiallyOpen;
     [SerializeField] private SpriteRenderer doorRenderer;
@@ -13,6 +15,8 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
     [SerializeField] private Sprite openBodySprite;
     [SerializeField] private Sprite openTopSprite;
     [SerializeField] private PressurePlate2D controlSource;
+    [SerializeField] private PressurePlate2D[] controlSources = Array.Empty<PressurePlate2D>();
+    [SerializeField] private ControlLogic controlLogic = ControlLogic.And;
     [SerializeField] private Color closedColor = new(.9f, .22f, .16f, 1f);
     [SerializeField] private Color temporaryOpenColor = new(.45f, 1f, .45f, .18f);
     [SerializeField] private Color latchedOpenColor = new(.2f, .9f, 1f, .18f);
@@ -24,6 +28,8 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
     public bool IsWaitingToClose => requestedState == VisualState.Closed && IsOpen;
     public VisualState State { get; private set; }
     public PressurePlate2D ControlSource => controlSource;
+    public PressurePlate2D[] ControlSources => controlSources;
+    public ControlLogic Logic => controlLogic;
     public int ResetOrder => 50;
 
     private void Awake()
@@ -34,17 +40,17 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
 
     private void OnEnable()
     {
-        if (controlSource != null) controlSource.ActiveChanged += OnControlSourceChanged;
+        SubscribeControlSources();
     }
 
     private void OnDisable()
     {
-        if (controlSource != null) controlSource.ActiveChanged -= OnControlSourceChanged;
+        UnsubscribeControlSources();
     }
 
     private void FixedUpdate()
     {
-        if (controlSource != null) SetState(ControlSourceState());
+        if (HasControlSource()) SetState(ControlSourceState());
         if (IsWaitingToClose) TryApplyRequestedState();
     }
 
@@ -70,10 +76,24 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
 
     public void ConfigureControlSource(PressurePlate2D source)
     {
-        if (isActiveAndEnabled && controlSource != null) controlSource.ActiveChanged -= OnControlSourceChanged;
+        if (isActiveAndEnabled) UnsubscribeControlSources();
         controlSource = source;
-        if (isActiveAndEnabled && controlSource != null) controlSource.ActiveChanged += OnControlSourceChanged;
-        if (Application.isPlaying) SetState(controlSource != null ? ControlSourceState() :
+        controlSources = Array.Empty<PressurePlate2D>();
+        controlLogic = ControlLogic.And;
+        if (isActiveAndEnabled) SubscribeControlSources();
+        if (Application.isPlaying) SetState(HasControlSource() ? ControlSourceState() :
+            initiallyOpen ? VisualState.TemporaryOpen : VisualState.Closed);
+    }
+
+    public void ConfigureControlSources(ControlLogic logic, params PressurePlate2D[] sources)
+    {
+        if (isActiveAndEnabled) UnsubscribeControlSources();
+        controlSource = null;
+        controlLogic = logic;
+        controlSources = sources == null ? Array.Empty<PressurePlate2D>() :
+            Array.FindAll(sources, source => source != null);
+        if (isActiveAndEnabled) SubscribeControlSources();
+        SetState(HasControlSource() ? ControlSourceState() :
             initiallyOpen ? VisualState.TemporaryOpen : VisualState.Closed);
     }
 
@@ -154,14 +174,48 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
         if (doorTopRenderer != null) doorTopRenderer.color = color;
     }
 
-    private VisualState ControlSourceState() => controlSource == null || !controlSource.IsActive
-        ? VisualState.Closed
-        : controlSource.IsFireballLatched ? VisualState.LatchedOpen : VisualState.TemporaryOpen;
+    private bool HasControlSource() => controlSource != null || controlSources is { Length: > 0 };
+
+    private VisualState ControlSourceState()
+    {
+        if (!HasControlSource()) return VisualState.Closed;
+        if (controlSources == null || controlSources.Length == 0)
+            return controlSource.IsActive
+                ? controlSource.IsFireballLatched ? VisualState.LatchedOpen : VisualState.TemporaryOpen
+                : VisualState.Closed;
+
+        bool active = controlLogic == ControlLogic.And;
+        bool allFireballLatched = true;
+        foreach (PressurePlate2D source in controlSources)
+        {
+            bool sourceActive = source != null && source.IsActive;
+            active = controlLogic == ControlLogic.And ? active && sourceActive : active || sourceActive;
+            allFireballLatched &= source != null && source.IsFireballLatched;
+        }
+        if (!active) return VisualState.Closed;
+        return allFireballLatched ? VisualState.LatchedOpen : VisualState.TemporaryOpen;
+    }
+
+    private void SubscribeControlSources()
+    {
+        if (controlSource != null) controlSource.ActiveChanged += OnControlSourceChanged;
+        if (controlSources == null) return;
+        foreach (PressurePlate2D source in controlSources)
+            if (source != null) source.ActiveChanged += OnControlSourceChanged;
+    }
+
+    private void UnsubscribeControlSources()
+    {
+        if (controlSource != null) controlSource.ActiveChanged -= OnControlSourceChanged;
+        if (controlSources == null) return;
+        foreach (PressurePlate2D source in controlSources)
+            if (source != null) source.ActiveChanged -= OnControlSourceChanged;
+    }
 
     private void OnControlSourceChanged(PressurePlate2D _, bool active) =>
         SetState(active ? ControlSourceState() : VisualState.Closed);
 
-    public void ResetRoomState() => SetState(controlSource != null && controlSource.IsActive
+    public void ResetRoomState() => SetState(HasControlSource() && ControlSourceState() != VisualState.Closed
         ? ControlSourceState()
         : initiallyOpen ? VisualState.TemporaryOpen : VisualState.Closed);
 }

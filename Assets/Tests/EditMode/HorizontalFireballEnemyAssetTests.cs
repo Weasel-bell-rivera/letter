@@ -37,6 +37,11 @@ public sealed class HorizontalFireballEnemyAssetTests
         Assert.That(prefab.GetComponent<Rigidbody2D>().bodyType, Is.EqualTo(RigidbodyType2D.Kinematic));
         Assert.That(prefab.transform.Find("BodyCollider"), Is.Not.Null);
         Assert.That(prefab.transform.Find("DamageTrigger"), Is.Not.Null);
+        BoxCollider2D bodyCollider = prefab.transform.Find("BodyCollider").GetComponent<BoxCollider2D>();
+        BoxCollider2D damageTrigger = prefab.transform.Find("DamageTrigger").GetComponent<BoxCollider2D>();
+        Assert.That(damageTrigger.offset.y, Is.EqualTo(.05f));
+        Assert.That(damageTrigger.offset.y - damageTrigger.size.y * .5f,
+            Is.EqualTo(bodyCollider.offset.y - bodyCollider.size.y * .5f).Within(.001f));
         Assert.That(prefab.transform.Find("FireOrigin"), Is.Not.Null);
         Assert.That(prefab.transform.Find("Visual/BodyVisual"), Is.Not.Null);
         Assert.That(prefab.transform.Find("Visual/MuzzleVisual"), Is.Not.Null);
@@ -84,6 +89,46 @@ public sealed class HorizontalFireballEnemyAssetTests
         {
             Object.DestroyImmediate(projectileObject);
             Object.DestroyImmediate(plateObject);
+        }
+    }
+
+    [Test]
+    public void DoorAndControlWaitsForBothFireballLatches()
+    {
+        GameObject upperObject = new("UpperLatch");
+        GameObject lowerObject = new("LowerLatch");
+        GameObject doorObject = new("AndDoor");
+        GameObject projectileObject = new("HorizontalFireball");
+        try
+        {
+            PressurePlate2D upper = upperObject.AddComponent<PressurePlate2D>();
+            PressurePlate2D lower = lowerObject.AddComponent<PressurePlate2D>();
+            upper.ConfigureActivationMode(PressurePlate2D.ActivationMode.FireballLatch);
+            lower.ConfigureActivationMode(PressurePlate2D.ActivationMode.FireballLatch);
+            Door2D door = doorObject.AddComponent<Door2D>();
+            door.ConfigureControlSources(Door2D.ControlLogic.And, upper, lower);
+            projectileObject.AddComponent<Rigidbody2D>();
+            projectileObject.AddComponent<CircleCollider2D>();
+            HorizontalFireballProjectile2D projectile =
+                projectileObject.AddComponent<HorizontalFireballProjectile2D>();
+
+            upper.TryActivateByFireball(projectile);
+            Assert.That(door.IsOpen, Is.False);
+            lower.TryActivateByFireball(projectile);
+            Assert.That(door.IsOpen, Is.True);
+            Assert.That(door.State, Is.EqualTo(Door2D.VisualState.LatchedOpen));
+
+            upper.ResetRoomState();
+            lower.ResetRoomState();
+            door.ResetRoomState();
+            Assert.That(door.IsOpen, Is.False);
+        }
+        finally
+        {
+            Object.DestroyImmediate(projectileObject);
+            Object.DestroyImmediate(doorObject);
+            Object.DestroyImmediate(lowerObject);
+            Object.DestroyImmediate(upperObject);
         }
     }
 }

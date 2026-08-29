@@ -19,7 +19,8 @@
 ## Unity资源
 
 - Scene：`Assets/Scenes/Levels/Fire/Fire_007.unity`
-- 当前状态：灰盒已创建并加入Build Settings
+- Tile Palette：`Assets/TilePalettes/Fire.prefab`
+- 当前状态：灰盒静态几何已按标准Tilemap结构重构，并已加入Build Settings
 
 ## 房间定位
 
@@ -38,7 +39,7 @@
 - 左侧为入口和安全出生区，右侧为出口。
 - `Plate-A`位于房间中部偏左，`Plate-B`位于房间中部偏右；两块压力板关于中央建议镜子放置点近似对称。
 - `Door-A`位于`Plate-B`右侧、出口左侧，是通向出口的唯一通路。
-- `Door-A`为高型竖直门。关闭时Collider从地面延伸到房间上边界，有效阻挡高度不得低于`4.5 units`，高于Player和MirrorClone的标准`3 units`跳跃高度；门顶不得形成可站立表面或绕行空间。
+- `Door-A`为`1×2 units`的竖直门，视觉边界与Collider一致。门上方到房间边界之间的防绕行空间由静态`Terrain`墙体填充，不通过拉伸门Sprite实现。
 - 入口、两块压力板、门及出口应尽量同时处于视野内；通过开关、门和锁存状态表达因果，不绘制压力板到门的连线。
 
 ```text
@@ -55,7 +56,7 @@
 
 S  左侧入口与出生区
 M  建议的地面镜放置位置
-█  Door-A关闭时的高型阻挡范围
+█  Door-A及其上方静态墙体组成的阻挡范围
 E  Door-A后的右侧出口
 ```
 
@@ -64,7 +65,7 @@ E  Door-A后的右侧出口
 | ID | 对象 | 初始状态 | 作用 |
 |---|---|---|---|
 | `FIRE_007:DOOR_GROUP:01` | 永久锁存门控组 | 未锁存 | 统一管理门和两块压力板 |
-| `Door-A` | 高型门 | 关闭 | 阻挡右侧出口 |
+| `Door-A` | `1×2 units`门 | 关闭 | 与上方静态墙体共同阻挡右侧出口 |
 | `Plate-A` | 压力板 | 弹起、未激活 | 门控组左侧输入 |
 | `Plate-B` | 压力板 | 弹起、未激活 | 门控组右侧输入 |
 | `MirrorHint-A` | 建议放置区 | 静态视觉提示 | 引导玩家在两板之间放置地面镜 |
@@ -82,7 +83,7 @@ E  Door-A后的右侧出口
 | 实例ID | 通用Prefab | 资产路径 | 状态与房间配置 |
 |---|---|---|---|
 | `FIRE_007:DOOR_GROUP:01` | `PermanentLatchDoorGroup` | `Assets/Prefabs/Gameplay/Doors/PermanentLatchDoorGroup.prefab` | 待创建；组合一扇门和两块嵌套压力板，配置稳定组ID和永久锁存状态 |
-| Door-A | `Door`（门控组嵌套Prefab） | `Assets/Prefabs/Gameplay/Doors/Door.prefab` | 待创建；高型门，初始关闭 |
+| Door-A | `Door`（门控组嵌套Prefab） | `Assets/Prefabs/Gameplay/Doors/Door.prefab` | 待创建；`1×2 units`，初始关闭 |
 | Plate-A、Plate-B | `PressurePlate`（门控组嵌套Prefab） | `Assets/Prefabs/Gameplay/Switches/PressurePlate.prefab` | 待创建；允许Player和MirrorClone占用 |
 | Exit-A | `RoomExit` | `Assets/Prefabs/Gameplay/Exits/RoomExit.prefab` | 待创建；目标为`FIRE_008` |
 
@@ -119,14 +120,14 @@ E  Door-A后的右侧出口
 - 单块压力板被占用时，门临时开启，并显示对应压力板到门的临时激活反馈。
 - 两块压力板同时激活时，必须提供不同于临时开启的锁存声音和视觉反馈。
 - 锁存完成后，两块压力板持续保持按下，门保持完全开启并显示锁存状态。
-- 门的可见高度和实体边界必须一致，让玩家在尝试前判断无法跳过。
+- 门的`1×2 units`可见边界和实体边界必须一致；上方静态墙体需清楚表达剩余阻挡范围。
 
 ## 常见错误
 
 - Player单独踩住一块压力板：门会开启，但离开后恢复关闭，不能完成机关。
 - 镜子放在两板之外：Player和MirrorClone无法稳定同时到达两板；玩家可以无惩罚地回收并重新放置。
 - 两板锁存前收回镜子：MirrorClone消失并释放占用，门按剩余压力板状态结算。
-- 尝试跳过门：高门和上方边界阻挡，不能通过标准跳跃、边缘站立或Collider缝隙绕过。
+- 尝试跳过门：门上方的静态墙体与房间边界共同阻挡，不能通过标准跳跃、边缘站立或Collider缝隙绕过。
 
 ## 重置与返回
 
@@ -139,7 +140,7 @@ E  Door-A后的右侧出口
 
 - 未锁存时Player必须始终可以回到两块压力板之间重新放置镜子，或执行手动重置。
 - `Door-A`临时关闭路径被Player或MirrorClone占用时，必须使用通用防夹规则暂停关闭。
-- 门上方、门体边缘和房间边界不得产生可绕行路线或意外落脚点。
+- `1×2 units`门上方必须使用连续静态`Terrain`墙体填满至房间边界；门体边缘和墙体接缝不得产生可绕行路线或意外落脚点。
 - 右侧返回入口只应在玩家已经通过本房间、机关组已经写入锁存状态后可达；返回时门必须保持开启，不能把玩家困在门的右侧。
 - 锁存发生后，即使立即收回镜子，两块压力板和门也不得恢复。
 - 房间不得加入房间专用玩法脚本，使用通用镜子、压力板、门控组、存档和房间重置组件组合实现。
@@ -152,12 +153,16 @@ E  Door-A后的右侧出口
 - Player和MirrorClone分别占用两块压力板时，在统一物理状态结算后只触发一次永久锁存。
 - 锁存后门永久开启、两块压力板永久保持按下，并立即请求保存`FIRE_007:DOOR_GROUP:01`。
 - 重置、死亡、切换房间和重新读取存档都不会清除锁存；新存档不继承锁存。
-- 门不能被标准跳跃越过，也不会夹死、推出或穿过Player及MirrorClone。
+- `1×2 units`门与上方静态墙体组合后不能被标准跳跃越过；门不会夹死、推出或穿过Player及MirrorClone。
 - 玩家可以按预期解法稳定完成，不依赖精确跳跃、限时操作或危险物。
 
 ## 实施记录
 
-- 场景使用一条连续静态地面、固定单屏镜头、两块压力板、中央镜子提示区、高型防绕行门和通往`FIRE_008`的右侧出口。
+- 场景使用一条连续静态地面、固定单屏镜头、两块压力板、中央镜子提示区、`1×2 units`门和通往`FIRE_008`的右侧出口；门上方静态墙体由后续地形编辑补齐。
+- 连续地面及左右、上方防绕行边界位于`Grid/Terrain`，使用`TilemapCollider2D + CompositeCollider2D + Static Rigidbody2D`合并碰撞，并显式配置`StaticSolid`与地面镜放置语义。
+- `MirrorHint-A`的原运行时提示对象保持不变；`Grid/Decoration`同时保留中央无碰撞提示Tile，其他标准Tilemap层为空且不引入新规则。
+- 使用共享Palette `Assets/TilePalettes/Fire.prefab`，迁移工具提供独立Palette同步入口，不需要重建Scene。
+- `Plate-A`与`Plate-B`使用火区专用手绘黑曜石压力板Sprite；`Door-A`使用火区专用手绘熔岩锁门Sprite。美术替换只作用于本房Scene中的视觉子对象，不改变压力板、门、锁存、碰撞或重置逻辑。
 - 通用组件`PermanentLatchDoorGroup2D`统一结算两块压力板，管理临时开启与永久锁存，并通过`SaveService`持久化`FIRE_007:DOOR_GROUP:01`。
 - `PressurePlate2D`只接受Player和MirrorClone；`Door2D`在关闭路径被两者占用时保持开启，直到路径清空。
 - 房间重置采用有序结算：普通对象先恢复，永久锁存门组最后从存档重建状态。

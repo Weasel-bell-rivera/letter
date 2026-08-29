@@ -19,7 +19,8 @@
 ## Unity资源
 
 - Scene：`Assets/Scenes/Levels/Fire/Fire_006.unity`
-- 当前状态：空间灰盒已创建，等待人工试玩观察构图与碰撞边界
+- Tile Palette：`Assets/TilePalettes/Fire.prefab`
+- 当前状态：空间灰盒已按标准Tilemap结构重构，等待人工试玩观察构图与碰撞边界
 
 ## Prefab需求
 
@@ -177,10 +178,15 @@ T  Player从FIRE_005进入后的出生与重置位置
 ## 灰盒实现记录
 
 - 实装Scene：`Assets/Scenes/Levels/Fire/Fire_006.unity`。
+- 静态安全平台、房间边界和上部U形结构位于`Grid/Terrain`；使用`TilemapCollider2D + CompositeCollider2D + Static Rigidbody2D`合并碰撞，并显式配置`StaticSolid`与地面镜放置语义。
+- 中央固定岩浆位于`Grid/Hazard`，可见Tile边界与Trigger边界一致，并显式配置`Hazard`表面语义和通用`Hazard2D`。
+- 中央岩浆的可见格使用`Assets/Tiles/Fire/Fire006Lava.asset`，其Sprite来自`Assets/Art/Generated/Fire/Fire006LavaTile.png`；该房间专用美术Tile不改变8格危险范围、Trigger或表面语义。
+- `Background`、`OneWayPlatform`、`SpecialMirrorWall`、`Decoration`和`Foreground`标准层已保留为空层；本房没有借此新增对应玩法语义。
+- 使用共享Palette `Assets/TilePalettes/Fire.prefab`，迁移工具提供独立Palette同步入口，不需要重建Scene。
 - 固定正交镜头尺寸：`7.5`；可一次观察完整构图。
 - 左右安全平台各宽`8 units`，中央岩浆沟宽`8 units`；岩浆可见边界与Trigger Collider一致。
 - `T`位于右侧平台`(9, -3.1)`，同时作为Player出生点和`RoomResetSystem`重置点。
-- 上部结构由左右横梁和三个静态Box Collider组成中央U形障碍；房间两端设静态边界墙。
+- 上部结构由连续Terrain Tile组成左右横梁和中央U形障碍；房间两端由Terrain Tile形成静态边界墙。
 - 使用通用`PlayerController2D`、`MirrorPlayer2D`、`RoomResetSystem`、`MirrorSurface2D`和`Hazard2D`组件，没有房间专用脚本。
 - Unity `6000.5.7f1`批处理已验证Scene可反序列化加载、入口与重置引用正确、镜子已解锁、两段安全地面可放镜子、岩浆为持续Hazard Trigger、U形障碍Collider完整，且Scene没有目标或出口。
 - 当前项目快照批量编译通过，EditMode测试`13/13`通过；针对本Scene的临时PlayMode验证`1/1`通过，覆盖镜子放置、MirrorClone岩浆死亡联动、Player岩浆死亡重置及入口复位。

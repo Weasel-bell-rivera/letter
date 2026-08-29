@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 150910772}
   m_Layer: 0
-  m_Name: SNOW_016 Tilemap MCP Demo (Non-Formal)
+  m_Name: TEST_001 Tilemap MCP Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

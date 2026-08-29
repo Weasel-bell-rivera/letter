@@ -18,9 +18,9 @@
 |---|---|---|---|---|
 | FIRE_001 | 待试玩 | `docs/rooms/fire/FIRE_001.md` | `Assets/Scenes/Levels/Fire/Fire_001.unity` | 只教学岩浆伤害 |
 | FIRE_002 | 待试玩 | `docs/rooms/fire/FIRE_002.md` | `Assets/Scenes/Levels/Fire/Fire_002.unity` | 首次教学水平投火者与镜像替身 |
-| FIRE_003 | 灰盒中 | `docs/rooms/fire/FIRE_003.md` | `Assets/Scenes/Levels/Fire/Fire_003.unity` | 顶部放镜、纵向分路、交叉门、投火者与永久双板锁存 |
-| FIRE_004 | 已批准 | `docs/rooms/fire/FIRE_004.md` | `Assets/Scenes/Levels/Fire/Fire_004.unity` | 教学镜像、压力板和门 |
-| FIRE_005 | 已批准 | `docs/rooms/fire/FIRE_005.md` | `Assets/Scenes/Levels/Fire/Fire_005.unity` | 组合FIRE_001至FIRE_004 |
+| FIRE_003 | 手工灰盒已同步，待运行时验证 | `docs/rooms/fire/FIRE_003.md` | `Assets/Scenes/Levels/Fire/Fire_003.unity` | 顶部放镜、纵向分路与两段持续占板交叉门 |
+| FIRE_004 | 待试玩 | `docs/rooms/fire/FIRE_004.md` | `Assets/Scenes/Levels/Fire/Fire_004.unity` | 用镜像引导水平火球命中锁存板并打开机关门 |
+| FIRE_005 | 待试玩 | `docs/rooms/fire/FIRE_005.md` | `Assets/Scenes/Levels/Fire/Fire_005.unity` | 三层横向折返；双投火者、中部锁存板、单格背板与右侧出口门 |
 | FIRE_006 | 待试玩 | `docs/rooms/fire/FIRE_006.md` | `Assets/Scenes/Levels/Fire/Fire_006.unity` | 上下双层空间灰盒；T为FIRE_005出生点 |
 | FIRE_007 | 待试玩 | `docs/rooms/fire/FIRE_007.md` | `Assets/Scenes/Levels/Fire/Fire_007.unity` | 永久锁存双压力板门控组灰盒 |
 | FIRE_008 | 灰盒中 | `docs/rooms/fire/FIRE_008.md` | `Assets/Scenes/Levels/Fire/Fire_008.unity` | 三段地形错位与双压力板组合房 |
@@ -33,5 +33,8 @@
 | FIRE_015 | 灰盒中 | `docs/rooms/fire/FIRE_015.md` | `Assets/Scenes/Levels/Fire/Fire_015.unity` | 双喷发、岩浆、诱敌与单板门综合房 |
 | FIRE_016 | 灰盒中 | `docs/rooms/fire/FIRE_016.md` | `Assets/Scenes/Levels/Fire/Fire_016.unity` | 双门接力与镜像替身 |
 | FIRE_017 | 灰盒中 | `docs/rooms/fire/FIRE_017.md` | `Assets/Scenes/Levels/Fire/Fire_017.unity` | 周期升降岩浆与火区机制综合考验 |
+| FIRE_018 | 灰盒中 | `docs/rooms/fire/FIRE_018.md` | `Assets/Scenes/Levels/Fire/Fire_018.unity` | 上下双通道；镜像与本体分别诱导火球命中双锁存板，AND开启上方门 |
 
-FIRE_001、FIRE_002、FIRE_006与FIRE_007当前处于待试玩状态；FIRE_003与FIRE_008至FIRE_017已由用户明确要求实现，当前处于灰盒中；FIRE_004至FIRE_005已获批准，可以制作灰盒。FIRE_006本次只批准并实现空间灰盒，不包含核心解法、完成目标或出口。
+FIRE_001、FIRE_002、FIRE_004、FIRE_005、FIRE_006与FIRE_007当前处于待试玩状态；FIRE_003与FIRE_008至FIRE_017已由用户明确要求实现，当前处于灰盒中。FIRE_006本次只批准并实现空间灰盒，不包含核心解法、完成目标或出口。
+
+FIRE_018已由用户确认与FIRE_017相连并进入灰盒实现；当前采用FIRE_017右侧出口连接FIRE_018左上入口。
