@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: d18223f1d446544eb9a5a5c08fe684fb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8616399676845263563
+    second: earth_rock_wall_slab_v1_0
+  - first:
+      213: 4409571038563593151
+    second: earth_rock_wall_slab_v1_1
+  - first:
+      213: -6442765239587528710
+    second: earth_rock_wall_slab_v1_2
+  - first:
+      213: -1121565253654564224
+    second: earth_rock_wall_slab_v1_3
+  - first:
+      213: 7529077543768151985
+    second: earth_rock_wall_slab_v1_4
+  - first:
+      213: 8235131864335515481
+    second: earth_rock_wall_slab_v1_5
+  - first:
+      213: -759614613100042542
+    second: earth_rock_wall_slab_v1_6
+  - first:
+      213: 5883391599486838167
+    second: earth_rock_wall_slab_v1_7
+  - first:
+      213: -2789422094555701890
+    second: earth_rock_wall_slab_v1_8
+  - first:
+      213: 1092986174959149793
+    second: earth_rock_wall_slab_v1_9
+  - first:
+      213: -8829429361655546039
+    second: earth_rock_wall_slab_v1_10
+  - first:
+      213: -3442176611984438287
+    second: earth_rock_wall_slab_v1_11
+  - first:
+      213: 3157572073989948382
+    second: earth_rock_wall_slab_v1_12
+  - first:
+      213: -5686971216625835450
+    second: earth_rock_wall_slab_v1_13
+  - first:
+      213: 5069885831895173281
+    second: earth_rock_wall_slab_v1_14
+  - first:
+      213: 3158236841995445858
+    second: earth_rock_wall_slab_v1_15
+  - first:
+      213: 8296165852834301264
+    second: earth_rock_wall_slab_v1_16
+  - first:
+      213: -6623167043651089940
+    second: earth_rock_wall_slab_v1_17
+  - first:
+      213: -6573132138011158850
+    second: earth_rock_wall_slab_v1_18
+  - first:
+      213: 8811938650354526081
+    second: earth_rock_wall_slab_v1_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_0
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 1458
+        height: 1012
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bca072dbad9939770800000000000000
+      internalID: 8616399676845263563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_1
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 965
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbbee652f71f13d30800000000000000
+      internalID: 4409571038563593151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_2
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 965
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aff962b5623b696a0800000000000000
+      internalID: -6442765239587528710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_3
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 943
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 082bf7718566f60f0800000000000000
+      internalID: -1121565253654564224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_4
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 883
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b7dba2a228ac7860800000000000000
+      internalID: 7529077543768151985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_5
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 93
+        width: 37
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95ff73c8cc0194270800000000000000
+      internalID: 8235131864335515481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_6
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 113
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d6e9f3b88e4575f0800000000000000
+      internalID: -759614613100042542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_7
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 125
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7952ee9fc7106a150800000000000000
+      internalID: 5883391599486838167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_8
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 95
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7d916d426bf949d0800000000000000
+      internalID: -2789422094555701890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_9
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 95
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e26ade92211b2f00800000000000000
+      internalID: 1092986174959149793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_10
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 81
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94ffd11a6c0977580800000000000000
+      internalID: -8829429361655546039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_11
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 81
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fb828cdb9eea30d0800000000000000
+      internalID: -3442176611984438287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_12
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 58
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed34dde5213f1db20800000000000000
+      internalID: 3157572073989948382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_13
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 65
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64265213fc1d311b0800000000000000
+      internalID: -5686971216625835450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_14
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 65
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a8c5ed7d4adb5640800000000000000
+      internalID: 5069885831895173281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_15
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 47
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 266a0bbbcaf44db20800000000000000
+      internalID: 3158236841995445858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_16
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 46
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0550aef53e6e12370800000000000000
+      internalID: 8296165852834301264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_17
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 47
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce94a133aa8c514a0800000000000000
+      internalID: -6623167043651089940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_18
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 29
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb6142c752b87c4a0800000000000000
+      internalID: -6573132138011158850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: earth_rock_wall_slab_v1_19
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 0
+        width: 47
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 187aaecc38b4a4a70800000000000000
+      internalID: 8811938650354526081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      earth_rock_wall_slab_v1_0: 8616399676845263563
+      earth_rock_wall_slab_v1_1: 4409571038563593151
+      earth_rock_wall_slab_v1_10: -8829429361655546039
+      earth_rock_wall_slab_v1_11: -3442176611984438287
+      earth_rock_wall_slab_v1_12: 3157572073989948382
+      earth_rock_wall_slab_v1_13: -5686971216625835450
+      earth_rock_wall_slab_v1_14: 5069885831895173281
+      earth_rock_wall_slab_v1_15: 3158236841995445858
+      earth_rock_wall_slab_v1_16: 8296165852834301264
+      earth_rock_wall_slab_v1_17: -6623167043651089940
+      earth_rock_wall_slab_v1_18: -6573132138011158850
+      earth_rock_wall_slab_v1_19: 8811938650354526081
+      earth_rock_wall_slab_v1_2: -6442765239587528710
+      earth_rock_wall_slab_v1_3: -1121565253654564224
+      earth_rock_wall_slab_v1_4: 7529077543768151985
+      earth_rock_wall_slab_v1_5: 8235131864335515481
+      earth_rock_wall_slab_v1_6: -759614613100042542
+      earth_rock_wall_slab_v1_7: 5883391599486838167
+      earth_rock_wall_slab_v1_8: -2789422094555701890
+      earth_rock_wall_slab_v1_9: 1092986174959149793
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

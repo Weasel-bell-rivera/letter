@@ -1,0 +1,1469 @@
+fileFormatVersion: 2
+guid: a35e2551230384dd38c86ad29ebb86c5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8637320497170458549
+    second: test007_layer_03_far_environment_v1_0
+  - first:
+      213: -789127359388195994
+    second: test007_layer_03_far_environment_v1_1
+  - first:
+      213: 2751276195274217603
+    second: test007_layer_03_far_environment_v1_2
+  - first:
+      213: 6449834010034070269
+    second: test007_layer_03_far_environment_v1_3
+  - first:
+      213: 6492867198377183527
+    second: test007_layer_03_far_environment_v1_4
+  - first:
+      213: 7379062316766988842
+    second: test007_layer_03_far_environment_v1_5
+  - first:
+      213: -4409677682331963024
+    second: test007_layer_03_far_environment_v1_6
+  - first:
+      213: -4711821721540807152
+    second: test007_layer_03_far_environment_v1_7
+  - first:
+      213: 1194947749430494486
+    second: test007_layer_03_far_environment_v1_8
+  - first:
+      213: -2087436112429703874
+    second: test007_layer_03_far_environment_v1_9
+  - first:
+      213: 4493187920468526311
+    second: test007_layer_03_far_environment_v1_10
+  - first:
+      213: -7800708517437678454
+    second: test007_layer_03_far_environment_v1_11
+  - first:
+      213: 8603529182747889615
+    second: test007_layer_03_far_environment_v1_12
+  - first:
+      213: 6964865670751192742
+    second: test007_layer_03_far_environment_v1_13
+  - first:
+      213: -2027690187921305761
+    second: test007_layer_03_far_environment_v1_14
+  - first:
+      213: -3293256778311931455
+    second: test007_layer_03_far_environment_v1_15
+  - first:
+      213: -2931055028059060682
+    second: test007_layer_03_far_environment_v1_16
+  - first:
+      213: -6902731762988511141
+    second: test007_layer_03_far_environment_v1_17
+  - first:
+      213: -7619757582547774624
+    second: test007_layer_03_far_environment_v1_18
+  - first:
+      213: 6245919290529449968
+    second: test007_layer_03_far_environment_v1_19
+  - first:
+      213: 285427753300814787
+    second: test007_layer_03_far_environment_v1_20
+  - first:
+      213: -6748058951563240078
+    second: test007_layer_03_far_environment_v1_21
+  - first:
+      213: -8129519960100086637
+    second: test007_layer_03_far_environment_v1_22
+  - first:
+      213: -2368821899973357971
+    second: test007_layer_03_far_environment_v1_23
+  - first:
+      213: 5860103616269951157
+    second: test007_layer_03_far_environment_v1_24
+  - first:
+      213: 1939146162906330530
+    second: test007_layer_03_far_environment_v1_25
+  - first:
+      213: 8381616222958211361
+    second: test007_layer_03_far_environment_v1_26
+  - first:
+      213: -2134863894058619981
+    second: test007_layer_03_far_environment_v1_27
+  - first:
+      213: -7944290204438774630
+    second: test007_layer_03_far_environment_v1_28
+  - first:
+      213: -7263716414218404263
+    second: test007_layer_03_far_environment_v1_29
+  - first:
+      213: -6994157226313226905
+    second: test007_layer_03_far_environment_v1_30
+  - first:
+      213: -1842761572330492605
+    second: test007_layer_03_far_environment_v1_31
+  - first:
+      213: 5964785357931636452
+    second: test007_layer_03_far_environment_v1_32
+  - first:
+      213: -4911982563784257758
+    second: test007_layer_03_far_environment_v1_33
+  - first:
+      213: -6113546339594148992
+    second: test007_layer_03_far_environment_v1_34
+  - first:
+      213: -431102457188161899
+    second: test007_layer_03_far_environment_v1_35
+  - first:
+      213: -4629797715789277478
+    second: test007_layer_03_far_environment_v1_36
+  - first:
+      213: 2297298218225871321
+    second: test007_layer_03_far_environment_v1_37
+  - first:
+      213: -2096458832567743840
+    second: test007_layer_03_far_environment_v1_38
+  - first:
+      213: -7334758596741641713
+    second: test007_layer_03_far_environment_v1_39
+  - first:
+      213: -6071859326685429839
+    second: test007_layer_03_far_environment_v1_40
+  - first:
+      213: 6629188827096931165
+    second: test007_layer_03_far_environment_v1_41
+  - first:
+      213: 1074800238231859437
+    second: test007_layer_03_far_environment_v1_42
+  - first:
+      213: 8992536532944613046
+    second: test007_layer_03_far_environment_v1_43
+  - first:
+      213: -2510154445130022358
+    second: test007_layer_03_far_environment_v1_44
+  - first:
+      213: -6494556508885495988
+    second: test007_layer_03_far_environment_v1_45
+  - first:
+      213: -403755710389604626
+    second: test007_layer_03_far_environment_v1_46
+  - first:
+      213: 6093228086736658933
+    second: test007_layer_03_far_environment_v1_47
+  - first:
+      213: -3704249881620016292
+    second: test007_layer_03_far_environment_v1_48
+  - first:
+      213: -5434524194368020068
+    second: test007_layer_03_far_environment_v1_49
+  - first:
+      213: 8366913527872577243
+    second: test007_layer_03_far_environment_v1_50
+  - first:
+      213: 9210930596550427950
+    second: test007_layer_03_far_environment_v1_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1667
+        height: 941
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b7ab0dca3dedd770800000000000000
+      internalID: 8637320497170458549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_1
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 786
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 663ef1df8d47c05f0800000000000000
+      internalID: -789127359388195994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_2
+      rect:
+        serializedVersion: 2
+        x: 1630
+        y: 745
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 388de4a6f1f7e2620800000000000000
+      internalID: 2751276195274217603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 694
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df260540cd9628950800000000000000
+      internalID: 6449834010034070269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_4
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 583
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 729ce05f05c4b1a50800000000000000
+      internalID: 6492867198377183527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 362
+        width: 31
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a0e56c412b76660800000000000000
+      internalID: 7379062316766988842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_6
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 412
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 071b2aae28dadc2c0800000000000000
+      internalID: -4409677682331963024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_7
+      rect:
+        serializedVersion: 2
+        x: 1515
+        y: 348
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 016379acb1f3c9eb0800000000000000
+      internalID: -4711821721540807152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_8
+      rect:
+        serializedVersion: 2
+        x: 1525
+        y: 340
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61505f1a5ae459010800000000000000
+      internalID: 1194947749430494486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_9
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 338
+        width: 36
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3d1e4b5aefe703e0800000000000000
+      internalID: -2087436112429703874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_10
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 323
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e44a949b920b5e30800000000000000
+      internalID: 4493187920468526311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_11
+      rect:
+        serializedVersion: 2
+        x: 1517
+        y: 323
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8c53cdeee05eb390800000000000000
+      internalID: -7800708517437678454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_12
+      rect:
+        serializedVersion: 2
+        x: 1563
+        y: 314
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcf05605530e56770800000000000000
+      internalID: 8603529182747889615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 295
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a600751d6c28a060800000000000000
+      internalID: 6964865670751192742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_14
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 286
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5fc76a64823cd3e0800000000000000
+      internalID: -2027690187921305761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_15
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 307
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c9e19698600c42d0800000000000000
+      internalID: -3293256778311931455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_16
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 299
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 636ca6b3bfcc257d0800000000000000
+      internalID: -2931055028059060682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_17
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 259
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b509347a8029430a0800000000000000
+      internalID: -6902731762988511141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_18
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 254
+        width: 29
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06396a199de214690800000000000000
+      internalID: -7619757582547774624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_19
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 267
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f784cf9086fda650800000000000000
+      internalID: 6245919290529449968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_20
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 250
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb6884870b06f300800000000000000
+      internalID: 285427753300814787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_21
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 257
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27d9da4e2241a52a0800000000000000
+      internalID: -6748058951563240078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_22
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 265
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39c59c71ba42e2f80800000000000000
+      internalID: -8129519960100086637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_23
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 258
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6e0ce35801402fd0800000000000000
+      internalID: -2368821899973357971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_24
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 234
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b0a0cad035435150800000000000000
+      internalID: 5860103616269951157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_25
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 246
+        width: 7
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a5f79f392b39ea10800000000000000
+      internalID: 1939146162906330530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_26
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 243
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 121531d0c8b715470800000000000000
+      internalID: 8381616222958211361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_27
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 226
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bb24de69907f52e0800000000000000
+      internalID: -2134863894058619981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_28
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 214
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9cbfc3562630c190800000000000000
+      internalID: -7944290204438774630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_29
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 234
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95e7655f768123b90800000000000000
+      internalID: -7263716414218404263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_30
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 210
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7656e5e2f03cfee90800000000000000
+      internalID: -6994157226313226905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_31
+      rect:
+        serializedVersion: 2
+        x: 1583
+        y: 218
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34d20830d123d66e0800000000000000
+      internalID: -1842761572330492605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_32
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 202
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e667f42eac27c250800000000000000
+      internalID: 5964785357931636452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_33
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 185
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22f0abe02e125dbb0800000000000000
+      internalID: -4911982563784257758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_34
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 188
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 083e99ebef1582ba0800000000000000
+      internalID: -6113546339594148992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_35
+      rect:
+        serializedVersion: 2
+        x: 1338
+        y: 183
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5966089699a640af0800000000000000
+      internalID: -431102457188161899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_36
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 184
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad61778d187afbfb0800000000000000
+      internalID: -4629797715789277478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_37
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 167
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d9ad70de84a1ef10800000000000000
+      internalID: 2297298218225871321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_38
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 168
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aac19e9cc1e7e2e0800000000000000
+      internalID: -2096458832567743840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_39
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 152
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0ac8ffdae3b53a90800000000000000
+      internalID: -7334758596741641713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_40
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 102
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bfb5cacc1c6cbba0800000000000000
+      internalID: -6071859326685429839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_41
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 104
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5bd9148d1c9ffb50800000000000000
+      internalID: 6629188827096931165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_42
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 86
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de0b0544f157aee00800000000000000
+      internalID: 1074800238231859437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_43
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 54
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bee2eb0558ebcc70800000000000000
+      internalID: 8992536532944613046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_44
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 48
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2248aed4d32a2dd0800000000000000
+      internalID: -2510154445130022358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_45
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 54
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4fcd2ac343bed5a0800000000000000
+      internalID: -6494556508885495988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_46
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 50
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee21321252956af0800000000000000
+      internalID: -403755710389604626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_47
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 55
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f12f5d59ae7f8450800000000000000
+      internalID: 6093228086736658933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_48
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 19
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5391cecb5cd79cc0800000000000000
+      internalID: -3704249881620016292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_49
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 39
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c91ad6fd901b494b0800000000000000
+      internalID: -5434524194368020068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_50
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 37
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bde5147168f3d1470800000000000000
+      internalID: 8366913527872577243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test007_layer_03_far_environment_v1_51
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 31
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e254a22739cc3df70800000000000000
+      internalID: 9210930596550427950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      test007_layer_03_far_environment_v1_0: 8637320497170458549
+      test007_layer_03_far_environment_v1_1: -789127359388195994
+      test007_layer_03_far_environment_v1_10: 4493187920468526311
+      test007_layer_03_far_environment_v1_11: -7800708517437678454
+      test007_layer_03_far_environment_v1_12: 8603529182747889615
+      test007_layer_03_far_environment_v1_13: 6964865670751192742
+      test007_layer_03_far_environment_v1_14: -2027690187921305761
+      test007_layer_03_far_environment_v1_15: -3293256778311931455
+      test007_layer_03_far_environment_v1_16: -2931055028059060682
+      test007_layer_03_far_environment_v1_17: -6902731762988511141
+      test007_layer_03_far_environment_v1_18: -7619757582547774624
+      test007_layer_03_far_environment_v1_19: 6245919290529449968
+      test007_layer_03_far_environment_v1_2: 2751276195274217603
+      test007_layer_03_far_environment_v1_20: 285427753300814787
+      test007_layer_03_far_environment_v1_21: -6748058951563240078
+      test007_layer_03_far_environment_v1_22: -8129519960100086637
+      test007_layer_03_far_environment_v1_23: -2368821899973357971
+      test007_layer_03_far_environment_v1_24: 5860103616269951157
+      test007_layer_03_far_environment_v1_25: 1939146162906330530
+      test007_layer_03_far_environment_v1_26: 8381616222958211361
+      test007_layer_03_far_environment_v1_27: -2134863894058619981
+      test007_layer_03_far_environment_v1_28: -7944290204438774630
+      test007_layer_03_far_environment_v1_29: -7263716414218404263
+      test007_layer_03_far_environment_v1_3: 6449834010034070269
+      test007_layer_03_far_environment_v1_30: -6994157226313226905
+      test007_layer_03_far_environment_v1_31: -1842761572330492605
+      test007_layer_03_far_environment_v1_32: 5964785357931636452
+      test007_layer_03_far_environment_v1_33: -4911982563784257758
+      test007_layer_03_far_environment_v1_34: -6113546339594148992
+      test007_layer_03_far_environment_v1_35: -431102457188161899
+      test007_layer_03_far_environment_v1_36: -4629797715789277478
+      test007_layer_03_far_environment_v1_37: 2297298218225871321
+      test007_layer_03_far_environment_v1_38: -2096458832567743840
+      test007_layer_03_far_environment_v1_39: -7334758596741641713
+      test007_layer_03_far_environment_v1_4: 6492867198377183527
+      test007_layer_03_far_environment_v1_40: -6071859326685429839
+      test007_layer_03_far_environment_v1_41: 6629188827096931165
+      test007_layer_03_far_environment_v1_42: 1074800238231859437
+      test007_layer_03_far_environment_v1_43: 8992536532944613046
+      test007_layer_03_far_environment_v1_44: -2510154445130022358
+      test007_layer_03_far_environment_v1_45: -6494556508885495988
+      test007_layer_03_far_environment_v1_46: -403755710389604626
+      test007_layer_03_far_environment_v1_47: 6093228086736658933
+      test007_layer_03_far_environment_v1_48: -3704249881620016292
+      test007_layer_03_far_environment_v1_49: -5434524194368020068
+      test007_layer_03_far_environment_v1_5: 7379062316766988842
+      test007_layer_03_far_environment_v1_50: 8366913527872577243
+      test007_layer_03_far_environment_v1_51: 9210930596550427950
+      test007_layer_03_far_environment_v1_6: -4409677682331963024
+      test007_layer_03_far_environment_v1_7: -4711821721540807152
+      test007_layer_03_far_environment_v1_8: 1194947749430494486
+      test007_layer_03_far_environment_v1_9: -2087436112429703874
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

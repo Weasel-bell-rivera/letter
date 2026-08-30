@@ -71,6 +71,27 @@ Enemy-H1直接固定放置在Scene中，不使用Spawner，不新增房间专用
 - 必须同时可见：左上入口、下落口、下层建议放置区、狭道、投火者和左侧出口。
 - 没有经过批准的镜头例外。
 
+## 视觉分层实现
+
+Scene在房间根下使用`EnvironmentVisuals`承载纯表现内容；现有`Grid`与`Gameplay`继续共同承担第6层玩法地形和角色，不重父级、不改变玩法生命周期。
+
+| 功能层 | Scene根 | 水平跟随倍率 | 当前内容与排序 |
+|---|---|---:|---|
+| 1 色彩与雾背景 | `01 Color and Fog Backdrop` | `1.00` | 暗色火山洞穴底图，Order `-100` |
+| 2 极远轮廓 | `02 Extreme Far Contours` | `0.95` | 顶部岩层剪影，Order `-82～-81` |
+| 3 远景环境 | `03 Far Environment` | `0.85` | 不可玩背景腔体内的岩架，Order `-56～-55` |
+| 4 中景环境 | `04 Mid Environment` | `0.65` | 低对比机械柱和管道，Order `-32～-31` |
+| 5 后景动态雾 | `05 Rear Dynamic Fog (Reserved)` | `0.80` | 预留空根；未引入测试粒子或材质 |
+| 6 玩法层 | 现有`Grid`与`Gameplay` | 不使用视差 | Terrain、Decoration、Player、Mirror、Clone、敌人与出口保持原规则 |
+| 7 前景动态雾 | `07 Front Dynamic Fog (Reserved)` | `0.35` | 预留空根；避免未经批准的前景遮挡和高亮灰烬 |
+| 8 前景遮挡 | `08 Foreground Occlusion` | `0.20` | 只占左右画面外缘的框景，Order `31～32` |
+
+- 所有视差根均显式引用本房`Main Camera`，仅跟随水平方向；固定单屏模式下当前相机位移为零，但序列化配置保持与全局分层约定一致。
+- 背景底图位于`(0,0.5)`并等比缩放`1.55`，覆盖16:9、正交尺寸`7`的完整实际视野。
+- 使用的正式素材来自`Assets/Art/Fire/Backgrounds/`和`Assets/Art/Generated/Fire/`；不引用`test002-1` Scene、`Test002_1_*`材质或高亮熔岩Glow图形。
+- Terrain仅在Scene实例上增加暗色渲染Tint以形成可玩剪影；Tile、Collider、`SurfaceSemantic2D`、`MirrorSurface2D`和青色放镜提示均不变。
+- `EnvironmentVisuals`子树只包含Transform、`ParallaxLayer2D`和SpriteRenderer，不含Collider、Trigger、Rigidbody2D、ParticleSystem或玩法脚本。
+
 ## 预期解法
 
 1. Player从左上入口向右，观察下方狭道和右墙投火者。
@@ -93,6 +114,7 @@ Enemy-H1直接固定放置在Scene中，不使用Spawner，不新增房间专用
 - 实装Scene：`Assets/Scenes/Levels/Fire/Fire_002.unity`。
 - 使用标准Tilemap分层、统一Player生成器、RoomResetSystem及共享敌人/出口Prefab。
 - Scene不序列化Player，不包含房间专用玩法脚本。
+- `Fire002RoomBuilder`会以空Scene重建并覆盖同路径文件，现仅作为历史灰盒bootstrap保留；正式Scene及其增量视觉层为实例配置权威，不得用该Builder覆盖同步。
 - 已加入Build Settings；当前状态为待试玩。
 
 ## 验收标准

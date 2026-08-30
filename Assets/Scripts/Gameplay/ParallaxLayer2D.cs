@@ -12,6 +12,8 @@ public sealed class ParallaxLayer2D : MonoBehaviour
     private Vector3 initialCameraPosition;
 
     public float CameraFollowFactor => cameraFollowFactor;
+    public bool FollowsHorizontal => followHorizontal;
+    public bool FollowsVertical => followVertical;
 
     private void Awake()
     {
