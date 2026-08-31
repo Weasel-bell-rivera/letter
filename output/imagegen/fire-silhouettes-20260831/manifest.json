@@ -1,0 +1,69 @@
+{
+  "generation": "built-in image_gen",
+  "assets": [
+    {
+      "file": "01-fire-fog-light-base.png",
+      "label": "火区雾光底",
+      "prompt": "Use case: stylized-concept. Production asset for a 2D side-scrolling puzzle platformer, original LIMBO-inspired silhouette art. Interpret monochrome photographic VALUES only, not photographic surface textures. Low-saturation dark burgundy, deep warm brown, charcoal black; extremely restrained dim amber only if specified. Massive recognizable natural volcanic shapes, strong designed organic contours, broad concave cuts and blunt heavy lobes. Almost textureless interiors: at most two or three broad shadow planes or one wide stratum; no fine cracks, grain, stippling, realistic rock texture, polygon facets, vector look, cartoon outlines, all-over edge light. Quiet oppressive heat and mystery. Shared light direction: faint broad diffuse light from lower-right, never an orange outline. Isolated SINGLE DEPTH LAYER ONLY, no baked foreground/background, no smoke particles or dust, no lava surface, no fire. No characters, mirrors, enemies, gameplay mechanisms, walkable terrain, routes, doors, exit apertures, lettering, numbers, watermark or contact sheet. Output exactly ONE standalone PNG image, not several panels.\nSpecific asset:\nLandscape EXACT 16:9 opaque image, ideally 1536x864 pixels. Entire image is ONLY smooth diffuse atmospheric light: dark burgundy merging into deep warm brown and charcoal at edges, with ONE broad dim amber light zone right of center and in lower half. Very low brightness, wide soft gradients, quiet and low-detail, no discrete cloud shapes, no horizon, no objects, no visible light source, no rays, no black border. Opaque RGB background, NOT transparent. This is solely the fog-light underlay on which all other sprites will be placed.",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-1726afcb-7639-4916-a353-c7ef46e109df.png",
+      "method": "built-in image_gen",
+      "version": "initial"
+    },
+    {
+      "file": "02-ultra-far-cave-wall.png",
+      "label": "极远洞壁轮廓",
+      "prompt": "生成一张2:1横向宽幅的【极远洞壁剪影层】透明PNG。只有远在洞穴深处的一大片宽大自然火山岩墙侧面，加一个小一点的遥远岩肩，两者位于画面中部，四周留宽阔透明余量，不要左右框景，不要围出洞口，不要柱子，不要钟乳石、石笋、尖刺，不要地面。外轮廓宽阔圆钝且不对称，有宽大凹陷，不是矩形或三角形。低饱和暗红棕，内部明暗差异极小，几乎单一色值，像LIMBO远景一样非常柔和的剪影，内部完全无颗粒、裂纹、笔刷纹理、切面和高光。岩石轮廓自身柔化，但空白处是真正alpha=0，不画背景雾、不画外发光或任何背景底色。只画一个深度的远处岩壁，不画完整房间，无角色、机关、门、可玩平台、其他物体、文字或水印。输出真正RGBA透明PNG，没有棋盘格，整组岩体的上下左右均完整，轮廓距画布边缘至少8%。",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-4f3b448c-c8d6-43a0-9f79-bb036ac125f3.png",
+      "method": "built-in image_gen",
+      "version": "revised"
+    },
+    {
+      "file": "03-far-cavern-rock-masses.png",
+      "label": "远景洞室岩体",
+      "prompt": "ONE transparent PNG, 2:1 wide canvas. A reusable distant cavern rock layer for a 2D platform game, NOT a full scene. Draw THREE isolated natural volcanic rock silhouettes, a very broad massive wall fragment left-of-center and two far narrower rock-column fragments towards the right. The group occupies ONLY THE CENTRAL 65% OF THE CANVAS WIDTH AND CENTRAL 65% OF ITS HEIGHT: a wide empty transparent border surrounds EVERY silhouette on all sides, including the bottom. Each rock has a different irregular rounded bottom endpoint floating at a DIFFERENT height within this asset canvas. No straight baseline, no ground, no cut-off edge anywhere. Broad natural hollows and shoulders, no triangles, rectangles, pointy stalagmites, framing arch or door. LIMBO-style softly resolved muted dark red-brown silhouettes, near-flat quiet interiors, just one broad low-contrast warm dark plane per mass, absolutely no granular surface texture, no cracks or small facets. Soft edges appropriate to far distance but no external glow or background haze. Actual RGBA TRANSPARENCY, alpha zero in the ample empty gaps and margins. Do not paint a checkerboard or opaque backdrop. No text, particles, lava, gameplay terrain, mechanisms, characters, or extra foreground.",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-4f79c6b7-af40-42bc-be23-9a5c19a33c64.png",
+      "method": "built-in image_gen",
+      "version": "revised"
+    },
+    {
+      "file": "04-midground-thick-rock-column.png",
+      "label": "中景粗岩柱",
+      "prompt": "单张2:3竖版透明PNG游戏素材：一根完整粗壮、不对称的天然火山岩柱。LIMBO式低细节剪影画法。形状像一根巨大厚重岩柱，宽钝顶端，沉稳粗底，侧面只有两处宽大凹陷，完整轮廓距离四边至少8%。深暗红棕与近黑色，主体几乎单一暗色，仅留一片极微弱的宽大断面说明体积。内部完全平滑，没有任何石粒、噪点、纹理、细裂纹、多个小切面。不要岩石照片，不要3D材质球或3D资产渲染，不要卡通线描，不要矢量图，不要低多边形。自然不规则、轻微柔化的外边界比内部信息重要得多。只有这一根柱，无地面、底座、碎石、环境、雾、烟、背景光、外发光或均匀亮边。真正透明背景，PNG RGBA格式，全部空白区域alpha=0，不绘制任何底色、棋盘格。微弱的暖棕明暗只能出现在岩体内部右下侧。无角色、文字、水印、可玩平台或机关。只是一张独立中景层素材。",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-9a2baff9-6dd9-4336-ad1c-2fae4118db73.png",
+      "method": "built-in image_gen",
+      "version": "revised"
+    },
+    {
+      "file": "05-midground-overhanging-rock.png",
+      "label": "中景悬垂岩体",
+      "prompt": "单张3:2横版透明PNG游戏素材：一块完整、宽大厚重的火山悬岩。LIMBO式极简剪影，轮廓原创自然，整体上缘是不规则宽钝弧面，下面只有三个短而钝的钟乳状悬垂，绝不画密集尖刺，也没有平整可站立表面。全部实体完整，四边留8%透明余量。主体颜色几乎为单一深暗红棕，腹部有一片接近炭黑的宽大暗面，除此以外完全没有纹理：没有石头颗粒、凹凸噪声、裂纹、亮边、细碎切面。自然柔和剪影画法，不是照片、不渲染复杂3D岩石材质，不画卡通描边、矢量几何或低多边形。只有一块悬岩，没有其他层、顶棚、背景雾、火光、熔岩、粒子、机关、地面、角色、文字或水印。背景必须真正透明，输出RGBA PNG，所有空白区域alpha=0，不附带白底、黑底或棋盘格。无外发光，微弱的暖棕暗面仅在实体右下内部。",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-35c8a062-1ef6-4989-8692-c75ad23e020c.png",
+      "method": "built-in image_gen",
+      "version": "revised"
+    },
+    {
+      "file": "06-charred-pipe-remnant.png",
+      "label": "中景烧焦管段遗迹",
+      "prompt": "A single isolated ruined pipe silhouette for a 2D game, on a REAL transparent RGBA PNG background. Side-on view of one thick gently bent industrial pipe remnant, with a simple broken open end. Dark charcoal with extremely subdued warm brown-red, like an almost-solid shadow in LIMBO. VERY SIMPLE: one large filled dark silhouette and a single broad barely lighter curved plane; the open pipe interior is almost black. No surface texture, no gritty rust, no speckling, no pitting, no fine cracks, no bolts, no valves, no rivets, no glow, no separate pieces. Keep a clearly recognizable thick-walled pipe shape with slightly irregular broken edges, not geometric abstract shapes and not a detailed 3D prop. Landscape 3:2, entire pipe inside frame with generous 10% transparent padding on every side. No ground shadow, no backing panel, no haze outside silhouette. The pipe is inert scenery, no interactive hints. No checkerboard pattern, no white/black backdrop, no text, no watermark. Only one object and one depth layer.",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-db217c98-6d06-452e-af1a-a1e807853812.png",
+      "method": "built-in image_gen",
+      "version": "revised"
+    },
+    {
+      "file": "07-left-foreground-rock-wall.png",
+      "label": "左侧前景岩壁",
+      "prompt": "为2D横版平台游戏生成单张【左侧前景岩壁】透明PNG素材，竖版2:3。LIMBO式极简岩壁剪影，原创天然火山岩造型。只用炭黑和极接近炭黑的暗红棕，岩壁内部几乎完全看不清，只允许一块极微弱的宽阔暗面，完全没有岩石颗粒、裂纹、小切面或表面纹理。主体占左侧约40%，右侧60%纯透明。厚重的大块岩壁，一处宽阔向内凹陷，右侧内缘自然不规则且圆钝，无尖刺，无细碎石头。完整主体四周留6%透明余量，上下端也完整可见。真正RGBA alpha透明，空白处alpha为0，禁止棋盘格、黑底、白底、彩色底、背光、外发光、轮廓描边、烟雾、落地阴影。非卡通、非矢量、非低多边形，用自然柔和轮廓体现剪影。只有一块岩壁，无其他层、角色、机关、岩浆、文字、水印。不要背景光，极微弱环境明暗仅限实体内部。不是完整关卡或展示板。",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-e04383f0-2649-46a3-ad8b-60577db031dd.png",
+      "method": "built-in image_gen",
+      "version": "initial"
+    },
+    {
+      "file": "08-right-foreground-rock-wall.png",
+      "label": "右侧前景岩壁",
+      "prompt": "为2D横版平台游戏生成单张【右侧前景岩壁】透明PNG素材，竖版2:3。LIMBO式极简岩壁剪影，原创天然火山岩造型。只用炭黑和极接近炭黑的暗红棕，岩体内部几乎完全看不清，完全没有颗粒、裂纹、密集切面、岩石纹理。主体在右侧约40%，左侧60%纯透明。一整块近黑、厚重的悬岩壁：宽大圆钝的顶部悬垂，在中下部有不同大小的自然内凹和一个较短的厚重肩部。不规则大轮廓，与左壁配套但不是镜像复制，不形成拱门，不画洞室。完整主体四周留6%透明余量，上下端也完整可见。真正RGBA alpha透明，空白处alpha为0，禁止棋盘格、黑底、白底、彩色底、背光、外发光、轮廓描边、雾、落地阴影。非卡通、非矢量、非低多边形，自然柔和轮廓。无尖刺、碎石、角色、机关、岩浆、其他景深层、文字或水印。唯一极微弱的暗红棕大暗面必须在岩石实体内部，不要任何背景光。不是完整房间或展示板。",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-f1c74014-fa24-49cd-b54c-4b991a129a16.png",
+      "method": "built-in image_gen",
+      "version": "initial"
+    }
+  ]
+}

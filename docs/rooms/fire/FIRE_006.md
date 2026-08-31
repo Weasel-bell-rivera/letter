@@ -1,5 +1,7 @@
 # FIRE_006：上下之间（暂定）
 
+> 2026-08-31：补登记本Scene到Build Settings，修复FIRE_005既有出口无法加载本房的配置遗漏；未改Scene、核心目标或无出口范围。核查记录见[FIRE_REPAIR_REVIEW.md](FIRE_REPAIR_REVIEW.md)。
+
 ## 状态
 
 - 当前状态：待试玩

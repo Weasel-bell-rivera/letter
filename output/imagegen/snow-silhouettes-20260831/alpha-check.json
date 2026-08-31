@@ -1,0 +1,186 @@
+[
+  {
+    "image": "01-fog-light-base.png",
+    "width": 1672,
+    "height": 941,
+    "mode": "RGB",
+    "alpha_range": [
+      255,
+      255
+    ],
+    "transparent_pixels_percent": 0.0,
+    "alpha_bbox": [
+      0,
+      0,
+      1672,
+      941
+    ],
+    "visible_bbox_alpha_gt_16": [
+      0,
+      0,
+      1672,
+      941
+    ]
+  },
+  {
+    "image": "02-extreme-distance-mountains.png",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "transparent_pixels_percent": 84.69,
+    "alpha_bbox": [
+      35,
+      339,
+      1735,
+      790
+    ],
+    "visible_bbox_alpha_gt_16": [
+      46,
+      342,
+      1722,
+      592
+    ]
+  },
+  {
+    "image": "03-distant-ridge.png",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "transparent_pixels_percent": 78.9,
+    "alpha_bbox": [
+      31,
+      217,
+      1754,
+      871
+    ],
+    "visible_bbox_alpha_gt_16": [
+      75,
+      355,
+      1689,
+      678
+    ]
+  },
+  {
+    "image": "04-midground-wind-rock.png",
+    "width": 1448,
+    "height": 1086,
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "transparent_pixels_percent": 66.25,
+    "alpha_bbox": [
+      122,
+      144,
+      1378,
+      1086
+    ],
+    "visible_bbox_alpha_gt_16": [
+      221,
+      147,
+      1226,
+      931
+    ]
+  },
+  {
+    "image": "05-midground-ice-wall.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "transparent_pixels_percent": 68.05,
+    "alpha_bbox": [
+      0,
+      119,
+      1523,
+      998
+    ],
+    "visible_bbox_alpha_gt_16": [
+      168,
+      254,
+      1372,
+      767
+    ]
+  },
+  {
+    "image": "06-midground-sparse-grove.png",
+    "width": 1672,
+    "height": 941,
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      255
+    ],
+    "transparent_pixels_percent": 86.74,
+    "alpha_bbox": [
+      21,
+      13,
+      1654,
+      941
+    ],
+    "visible_bbox_alpha_gt_16": [
+      79,
+      21,
+      1598,
+      898
+    ]
+  },
+  {
+    "image": "07-left-foreground-rock-snow.png",
+    "width": 1024,
+    "height": 1536,
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "transparent_pixels_percent": 65.79,
+    "alpha_bbox": [
+      0,
+      28,
+      836,
+      1536
+    ],
+    "visible_bbox_alpha_gt_16": [
+      17,
+      92,
+      693,
+      1454
+    ]
+  },
+  {
+    "image": "08-right-foreground-rock-snow.png",
+    "width": 1024,
+    "height": 1536,
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "transparent_pixels_percent": 66.01,
+    "alpha_bbox": [
+      193,
+      15,
+      1009,
+      1536
+    ],
+    "visible_bbox_alpha_gt_16": [
+      273,
+      22,
+      1007,
+      1500
+    ]
+  }
+]

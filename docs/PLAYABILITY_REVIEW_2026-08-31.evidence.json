@@ -1,0 +1,5481 @@
+{
+  "review_date": "2026-08-31",
+  "created_at": "2026-08-31T22:19:49.345684+08:00",
+  "git_head": "cfc68ae",
+  "scope": "disk-file inventory and selected static facts only; no Unity, playtest or tests run",
+  "limitations": [
+    "Direct prefab expansion only, not a general Unity deserializer.",
+    "Nested prefab components, array reference overrides and runtime collider baking are not validated by the extraction.",
+    "Selected sampled prefab outer parent transforms verified identity.",
+    "Tile positions are serialized cells with explicit SurfaceSemantic2D, not collision semantics inferred from names.",
+    "Box AABBs are static geometry, not proof of traversal or runtime active state.",
+    "Scores assess documented design hypotheses, not player experience."
+  ],
+  "scene_count": 66,
+  "scenes": [
+    {
+      "path": "Assets/Scenes/Levels/Center/Center_001.unity",
+      "sha256": "fa16923295bf1ef0520b6daa451e8af0081ed4f693f27d7b0ad1766406edef77"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Center/Center_002.unity",
+      "sha256": "acc663abf41a737e0f0f501d902d356218e1f6b8e398a9c29ef573567ec7bfb8"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_001.unity",
+      "sha256": "d50303ee7523ce697af3c03eb25149ec9e37e1fb0946ba1e996035b287ed5120"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_002.unity",
+      "sha256": "9fde4f05980f34947d941eccd94c6e904f9ccad89c007e1022347e8709ec97d6"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_003.unity",
+      "sha256": "715c49154041eff8145f18f5b5138205b5a4a25aab994f56aa82f483a047795b"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_004.unity",
+      "sha256": "88d6a75f36105c7ead43d7f73c2ec8848e8b7754f8f1bde5ea915582446c322f"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_005.unity",
+      "sha256": "1056845e880f9280c65e5fbaa1e31b146d61a59a987cae6f423012e38ad59965"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+      "sha256": "08c88626d30a6f266cc88e47e2ab246ceead614672cbd600af76e3ab1a6141eb"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_007.unity",
+      "sha256": "69662455c1d06c8dc069bc490f0a497355b66a094270231916b5589dcd23fbcf"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_008.unity",
+      "sha256": "75d4db42ddc9f45afaf0c684ec058c99f9518d422a22dba3a572cfe7cca2f2de"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_009.unity",
+      "sha256": "5c12a6480d7018947dcb83864b67651ed82670cfe0abdcc18ec5dcbcef8c5e4e"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_010.unity",
+      "sha256": "bbab15059d32d1351ac7986c8ec7d9ef9ad2a2284d369b3b7d661a80f1293575"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_011.unity",
+      "sha256": "b2ce147ddc234e36ea8f2bd6f6c17f119c800016edc80fb516a9f9a335887de7"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_012.unity",
+      "sha256": "2a6aa1b9b2388b692d361b833961c8a77f8a4c02c19ba71e7c7b38204d2b4242"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_013.unity",
+      "sha256": "fa10394dbb4aa41403a4b028de8ffe5f0d93f4235fea0b9381041809f3c3ad69"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_014.unity",
+      "sha256": "a2b598078d69af69a5bbac1b8cc838389e9daf2ba4a5c6e312cad1e0f65f7dd7"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Earth/Earth_015.unity",
+      "sha256": "307c9fdca3610fad8c37b845726dc6b43040d29f027fb607e00847a8fcfac9d5"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_001.unity",
+      "sha256": "ad6cb6ddeb0d97de81ebf0de7ce17cbd755007d4e5bfae4606e7ede4bbdb4ce5"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_002.unity",
+      "sha256": "b190c4d234d86452b2f9b6c4898f5a1c3a18d3c58fec5aa0114c4566bc5deaad"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_003.unity",
+      "sha256": "b0635ed07217661d98ec271c2faee33bfbbde44113fc7f7257afec86778ef65a"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_004.unity",
+      "sha256": "be3f215ac57f83363651a3f0fcadd6bddd9d8b29b1abef65087d912f496e1c21"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_005.unity",
+      "sha256": "3aacde8713184a9390da12796a5cdee568a49845c09d8c3e7ffd2b93c834089b"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_006.unity",
+      "sha256": "0a4eaeac0dd9f6a786171f237e23ac250cb8e1400b341366d7cb55d240565f24"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_007.unity",
+      "sha256": "9cf9b770d41f3890faab9c10dd4ba3501f146960f4086186c50f92f16d42c3eb"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_008.unity",
+      "sha256": "fe99f8175f3695ccaaed8876aef572812ddbed1e227df73bce18f3f94302c6fa"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_009.unity",
+      "sha256": "d73f5a50ed2d3128e6e087173eca67b31d1d63057a17103bd1003cbbaadc1ea4"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_010.unity",
+      "sha256": "a3817c0ba510c69ed84c5c001ba6264b3878523d073ef241bf8a3e9bd1352ee5"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_011.unity",
+      "sha256": "436e080ed0b9cdb29d34bd805cbb70e0963bba363051097b5670cd3a32b276d2"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_012.unity",
+      "sha256": "e59dbcb445939c1b5acd75a53b48437af7b7ada48dbaf860cfa4709a19e84a37"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_013.unity",
+      "sha256": "2c626899c23752d2b29a49e3398ded991375367493d5f95d060010381bbe6a4c"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_014.unity",
+      "sha256": "353eff26196a387a4fd9440286685728ad7a931afc6a1b8dd269a78b60879e7d"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_015.unity",
+      "sha256": "61c7e55e4f0b054d46ea80e4e8eda0e0ad470b60695f83358557f09d637d2035"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_016.unity",
+      "sha256": "48c08b7c0ec656e1120603730eae9d1b5cd9954b411e18e709e7a608c8d414f0"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_017.unity",
+      "sha256": "2c8571173f93bec91e0c26de61cde63606c847b7f9d9395ace8e164c844bcf4b"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_018.unity",
+      "sha256": "f0819215857d9cd6857dc2161af54cd21e6bceac9351a2b0a419fcd64c406ba5"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Fire/Fire_019.unity",
+      "sha256": "b0f9915020e4a0f6969d0cc482b3b88f3511d501da6ebbf4024958ec4ddd04b2"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_001.unity",
+      "sha256": "b0f9740c187840f8131a932cca5db026ccb2330783ee3a0932d3feb74b538a15"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_002.unity",
+      "sha256": "3df9558941ef0086275d981c38fc3e676cb9a7589f18109920ecefe97ddd0211"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_003.unity",
+      "sha256": "2c023d5724ead353d29059ba97eacc46332406b40e0dba9e067dfbaf6969299e"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_004.unity",
+      "sha256": "d0af8cfdcd50e81f0d5bade9f54af180f42e39baa6b2abe448f05b0c1838be51"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_005.unity",
+      "sha256": "167f9439e7545d10e9426e22eed89def029d239b575044e1dd821d5c8634f8e8"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_006.unity",
+      "sha256": "7c4055b7160cf9c7396a0c6359886c977133c5bcd0045979a0f5ad4e77403f51"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_007.unity",
+      "sha256": "e03819bc92b0c7988b0e5965eaa609db2fb7bb196c47ee0dad5410de4cdb8cf2"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_008.unity",
+      "sha256": "9771ddc2104fa4725dda52504c20aaffb850b1f441f9e81b32658ca639740114"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_009.unity",
+      "sha256": "4b25b2e738d8d6b17f8c6e527e677bd5b369731261255abe887153ef00ee2bb5"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_010.unity",
+      "sha256": "57a7d641fefe85e40bc06472e55b34e064bd8842fbcba1d050ef25c14cac42a9"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_011.unity",
+      "sha256": "1e1105af57d47f9e4ad816ea09a23ac6be0dc1b202b67b5e36f90dade0887c77"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_012.unity",
+      "sha256": "2bf71c4ebc6c2ede7220a8cba96cd5b20aaaf602d43c45be9fbd0052d2409bab"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_013.unity",
+      "sha256": "61703a1aa61e7267096635dc2340a5c7a0b403879f9e1f3e9a217d8c1091ab8e"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_014.unity",
+      "sha256": "f892192dd02a38b8ddd1c00d6e26ef861b7874ec5668d88e9ff6b33855c61b3a"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Snow/Snow_015.unity",
+      "sha256": "6dbe12571420aad8d26575ac94e9a89cea4366d7152ed80247b9baf94b5aed0e"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_001.unity",
+      "sha256": "aa3392d60191634e73cf4c7dcd7d9f60521ed55e66c7fc67f68648ed8b83b2c3"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_002.unity",
+      "sha256": "1d789baf84be2ed555e5ab56b4dcc4e01429f99e61725b7779d6b9145947508d"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_003.unity",
+      "sha256": "85140a2ef19392e9faf581cac6a7b7526102eebe13916ed612eacd672b4da909"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_004.unity",
+      "sha256": "8bc283b0d5f4cff6500e55dc9d408c93c01193f5d5ecda85e5aaeb8202bf2f73"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_005.unity",
+      "sha256": "e10e845c2539712972e324f1cad8eb0bc08b15e4d19f1e91087961b1ac14d794"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_006.unity",
+      "sha256": "cc633538b6970e40857781dda3019a1ce97382f2833de0cba67c9b7430663bfa"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_007.unity",
+      "sha256": "dc83c5ed8b3752e389da0955fcdc3501806146e08f5eb32fb7250a831cbb8644"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_008.unity",
+      "sha256": "0aa9bdb5596b4c3a191ef0dee8adeb5032dea20592250da7057336fa0e733f8d"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_009.unity",
+      "sha256": "c943683232dd6468f854246087afd614583f047b9ffd78e7f550703d0f626f8e"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_010.unity",
+      "sha256": "570996eac2817df98d54abe08160d9421e5ac33e42175965ee1034212227586a"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_011.unity",
+      "sha256": "d445a6973ce149925cbc82d61556b868a6c1f54a302066ab8a5f39aecd300a46"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_012.unity",
+      "sha256": "947dde63e015b6d2a1dda84a77704ea9b22c5c95e77cbfd505a4cfbb52023035"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_013.unity",
+      "sha256": "0cc86ae64bfb926d081ef9b418aa2d46d78b5944d5436ef20a509ac87d91120c"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_014.unity",
+      "sha256": "ad86301d100f90d67ba3d521ec19c59b3bfdd8ca28033d3ee8d3bf22566b31e9"
+    },
+    {
+      "path": "Assets/Scenes/Levels/Wind/Wind_015.unity",
+      "sha256": "320a9f3d208f0bb18fbdea606c41a6b011d39cf78e6bbfeb0978a14ff16cad03"
+    }
+  ],
+  "selected_static_facts": {
+    "Fire_002": [
+      {
+        "file_id_or_prefab_local_id": "392710964",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -11,
+            -6
+          ],
+          [
+            -10,
+            -6
+          ],
+          [
+            -9,
+            -6
+          ],
+          [
+            -8,
+            -6
+          ],
+          [
+            -7,
+            -6
+          ],
+          [
+            -6,
+            -6
+          ],
+          [
+            -5,
+            -6
+          ],
+          [
+            -4,
+            -6
+          ],
+          [
+            -3,
+            -6
+          ],
+          [
+            -2,
+            -6
+          ],
+          [
+            -1,
+            -6
+          ],
+          [
+            0,
+            -6
+          ],
+          [
+            1,
+            -6
+          ],
+          [
+            2,
+            -6
+          ],
+          [
+            3,
+            -6
+          ],
+          [
+            4,
+            -6
+          ],
+          [
+            5,
+            -6
+          ],
+          [
+            6,
+            -6
+          ],
+          [
+            7,
+            -6
+          ],
+          [
+            8,
+            -6
+          ],
+          [
+            9,
+            -6
+          ],
+          [
+            10,
+            -6
+          ],
+          [
+            -11,
+            -5
+          ],
+          [
+            10,
+            -5
+          ],
+          [
+            -11,
+            -4
+          ],
+          [
+            10,
+            -4
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -7,
+            -3
+          ],
+          [
+            -6,
+            -3
+          ],
+          [
+            -5,
+            -3
+          ],
+          [
+            -4,
+            -3
+          ],
+          [
+            -3,
+            -3
+          ],
+          [
+            -2,
+            -3
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            6,
+            -3
+          ],
+          [
+            10,
+            -3
+          ],
+          [
+            -11,
+            -2
+          ],
+          [
+            3,
+            -2
+          ],
+          [
+            10,
+            -2
+          ],
+          [
+            -11,
+            -1
+          ],
+          [
+            3,
+            -1
+          ],
+          [
+            10,
+            -1
+          ],
+          [
+            -11,
+            0
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            10,
+            0
+          ],
+          [
+            -11,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            -11,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            10,
+            2
+          ],
+          [
+            -11,
+            3
+          ],
+          [
+            -10,
+            3
+          ],
+          [
+            -9,
+            3
+          ],
+          [
+            -8,
+            3
+          ],
+          [
+            -7,
+            3
+          ],
+          [
+            -6,
+            3
+          ],
+          [
+            -5,
+            3
+          ],
+          [
+            -4,
+            3
+          ],
+          [
+            -3,
+            3
+          ],
+          [
+            -2,
+            3
+          ],
+          [
+            -1,
+            3
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            10,
+            3
+          ],
+          [
+            -11,
+            4
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            -11,
+            5
+          ],
+          [
+            10,
+            5
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            -11,
+            7
+          ],
+          [
+            -10,
+            7
+          ],
+          [
+            -9,
+            7
+          ],
+          [
+            -8,
+            7
+          ],
+          [
+            -7,
+            7
+          ],
+          [
+            -6,
+            7
+          ],
+          [
+            -5,
+            7
+          ],
+          [
+            -4,
+            7
+          ],
+          [
+            -3,
+            7
+          ],
+          [
+            -2,
+            7
+          ],
+          [
+            -1,
+            7
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            7
+          ],
+          [
+            9,
+            7
+          ],
+          [
+            10,
+            7
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1238364485",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          -9.0,
+          4.92
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1559296075",
+        "object_label_for_navigation_only": "EntranceFromFIRE001",
+        "position_xy": [
+          -9.0,
+          4.92
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_FIRE_001",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "548045696/8529198862699144161",
+        "object_label_for_navigation_only": "FireOrigin",
+        "position_xy": [
+          7.8,
+          -4.5
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1317608903/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-A to FIRE_003",
+        "position_xy": [
+          -9.25,
+          -4.5
+        ],
+        "box_aabb_xyxy": [
+          -9.85,
+          -5.7,
+          -8.65,
+          -3.3
+        ],
+        "RoomExit2D": {
+          "targetScene": "Fire_003",
+          "targetEntranceId": "DEFAULT"
+        }
+      }
+    ],
+    "Fire_004": [
+      {
+        "file_id_or_prefab_local_id": "484142545",
+        "object_label_for_navigation_only": "EntranceFromFIRE003",
+        "position_xy": [
+          -9.5,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1026662686",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -12,
+            -3
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -8,
+            -2
+          ],
+          [
+            -7,
+            -2
+          ],
+          [
+            -7,
+            -1
+          ],
+          [
+            -6,
+            -1
+          ],
+          [
+            -5,
+            -1
+          ],
+          [
+            -4,
+            -1
+          ],
+          [
+            -3,
+            -1
+          ],
+          [
+            -2,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            0,
+            -1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            2,
+            -1
+          ],
+          [
+            3,
+            -1
+          ],
+          [
+            4,
+            -1
+          ],
+          [
+            5,
+            -1
+          ],
+          [
+            6,
+            -1
+          ],
+          [
+            7,
+            -1
+          ],
+          [
+            8,
+            -1
+          ],
+          [
+            9,
+            -1
+          ],
+          [
+            10,
+            -1
+          ],
+          [
+            11,
+            -1
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            -12,
+            1
+          ],
+          [
+            -12,
+            2
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            11,
+            2
+          ],
+          [
+            -12,
+            3
+          ],
+          [
+            8,
+            3
+          ],
+          [
+            11,
+            3
+          ],
+          [
+            -12,
+            4
+          ],
+          [
+            8,
+            4
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            -12,
+            5
+          ],
+          [
+            8,
+            5
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            -12,
+            6
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            -10,
+            6
+          ],
+          [
+            -9,
+            6
+          ],
+          [
+            -8,
+            6
+          ],
+          [
+            -7,
+            6
+          ],
+          [
+            -6,
+            6
+          ],
+          [
+            -5,
+            6
+          ],
+          [
+            -4,
+            6
+          ],
+          [
+            -3,
+            6
+          ],
+          [
+            -2,
+            6
+          ],
+          [
+            -1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            11,
+            6
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1535478120",
+        "object_label_for_navigation_only": "EntranceFromFIRE005",
+        "position_xy": [
+          9.45,
+          0.92
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_FIRE_005",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "9000000406",
+        "object_label_for_navigation_only": "Entrance-FROM_FIRE_003",
+        "position_xy": [
+          -9.5,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_FIRE_003",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "581117156/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-Back-to-FIRE003",
+        "position_xy": [
+          -11.5,
+          -1.1
+        ],
+        "box_aabb_xyxy": [
+          -12.1,
+          -2.3,
+          -10.9,
+          0.1
+        ],
+        "RoomExit2D": {
+          "targetScene": "Fire_003",
+          "targetEntranceId": "FROM_FIRE_004"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "669867601/3437643779240966925",
+        "object_label_for_navigation_only": "Door-A",
+        "position_xy": [
+          8.5,
+          1.0
+        ],
+        "box_aabb_xyxy": [
+          8.0,
+          0.0,
+          9.0,
+          2.0
+        ],
+        "Door2D": {
+          "initiallyOpen": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "851942272/8529198862699144161",
+        "object_label_for_navigation_only": "FireOrigin",
+        "position_xy": [
+          3.2,
+          0.5
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "2060316242/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-To-FIRE005",
+        "position_xy": [
+          11.5,
+          0.9
+        ],
+        "box_aabb_xyxy": [
+          10.9,
+          -0.3,
+          12.1,
+          2.1
+        ],
+        "RoomExit2D": {
+          "targetScene": "Fire_005",
+          "targetEntranceId": "FROM_FIRE_004"
+        }
+      }
+    ],
+    "Fire_009": [
+      {
+        "file_id_or_prefab_local_id": "224710855",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          0.0,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1914167242",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -3
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -7,
+            -3
+          ],
+          [
+            -6,
+            -3
+          ],
+          [
+            -5,
+            -3
+          ],
+          [
+            -4,
+            -3
+          ],
+          [
+            -3,
+            -3
+          ],
+          [
+            -2,
+            -3
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            6,
+            -3
+          ],
+          [
+            7,
+            -3
+          ],
+          [
+            8,
+            -3
+          ],
+          [
+            9,
+            -3
+          ],
+          [
+            10,
+            -3
+          ],
+          [
+            11,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            -13,
+            -2
+          ],
+          [
+            12,
+            -2
+          ],
+          [
+            -13,
+            -1
+          ],
+          [
+            12,
+            -1
+          ],
+          [
+            -13,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            -13,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            -13,
+            2
+          ],
+          [
+            12,
+            2
+          ],
+          [
+            -13,
+            3
+          ],
+          [
+            12,
+            3
+          ],
+          [
+            -13,
+            4
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            -13,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            -12,
+            6
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            -10,
+            6
+          ],
+          [
+            -9,
+            6
+          ],
+          [
+            -8,
+            6
+          ],
+          [
+            -7,
+            6
+          ],
+          [
+            -6,
+            6
+          ],
+          [
+            -5,
+            6
+          ],
+          [
+            -4,
+            6
+          ],
+          [
+            -3,
+            6
+          ],
+          [
+            -2,
+            6
+          ],
+          [
+            -1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            12,
+            6
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "9000000903",
+        "object_label_for_navigation_only": "Entrance-FROM_FIRE_013",
+        "position_xy": [
+          0.0,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_FIRE_013",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "826494266/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-A to FIRE_010",
+        "position_xy": [
+          -7.0,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          -7.6,
+          -2.2,
+          -6.4,
+          0.2
+        ],
+        "RoomExit2D": {
+          "targetScene": "Fire_010",
+          "targetEntranceId": "DEFAULT"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1659747988/8529198862699144161",
+        "object_label_for_navigation_only": "FireOrigin",
+        "position_xy": [
+          6.3,
+          -1.5
+        ]
+      }
+    ],
+    "Fire_010": [
+      {
+        "file_id_or_prefab_local_id": "320989611",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -3
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -7,
+            -3
+          ],
+          [
+            -4,
+            -3
+          ],
+          [
+            -3,
+            -3
+          ],
+          [
+            -2,
+            -3
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            6,
+            -3
+          ],
+          [
+            7,
+            -3
+          ],
+          [
+            8,
+            -3
+          ],
+          [
+            9,
+            -3
+          ],
+          [
+            10,
+            -3
+          ],
+          [
+            11,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            -13,
+            -2
+          ],
+          [
+            8,
+            -2
+          ],
+          [
+            12,
+            -2
+          ],
+          [
+            -13,
+            -1
+          ],
+          [
+            8,
+            -1
+          ],
+          [
+            12,
+            -1
+          ],
+          [
+            -13,
+            0
+          ],
+          [
+            -10,
+            0
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            -13,
+            1
+          ],
+          [
+            -10,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            -13,
+            2
+          ],
+          [
+            -10,
+            2
+          ],
+          [
+            12,
+            2
+          ],
+          [
+            -13,
+            3
+          ],
+          [
+            -10,
+            3
+          ],
+          [
+            12,
+            3
+          ],
+          [
+            -13,
+            4
+          ],
+          [
+            -10,
+            4
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            -13,
+            5
+          ],
+          [
+            -10,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            -12,
+            6
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            -10,
+            6
+          ],
+          [
+            -9,
+            6
+          ],
+          [
+            -8,
+            6
+          ],
+          [
+            -7,
+            6
+          ],
+          [
+            -6,
+            6
+          ],
+          [
+            -5,
+            6
+          ],
+          [
+            -4,
+            6
+          ],
+          [
+            -3,
+            6
+          ],
+          [
+            -2,
+            6
+          ],
+          [
+            -1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            12,
+            6
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "451409697",
+        "object_label_for_navigation_only": "Hazard",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 4,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -6,
+            -3
+          ],
+          [
+            -5,
+            -3
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "2090382606",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          0.0,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "242451708/3437643779240966925",
+        "object_label_for_navigation_only": "Door-A",
+        "position_xy": [
+          -9.5,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          -10.0,
+          -2.0,
+          -9.0,
+          0.0
+        ],
+        "Door2D": {
+          "initiallyOpen": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "509750964/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-A to FIRE_011",
+        "position_xy": [
+          -11.5,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          -12.1,
+          -2.2,
+          -10.9,
+          0.2
+        ],
+        "RoomExit2D": {
+          "targetScene": "Fire_011",
+          "targetEntranceId": "DEFAULT"
+        }
+      }
+    ],
+    "Fire_014": [
+      {
+        "file_id_or_prefab_local_id": "213002265",
+        "object_label_for_navigation_only": "Entrance-FROM_FIRE_013",
+        "position_xy": [
+          -0.5,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_FIRE_013",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "400688529",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          -0.5,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "2116541122",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -15,
+            -3
+          ],
+          [
+            -14,
+            -3
+          ],
+          [
+            -13,
+            -3
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -7,
+            -3
+          ],
+          [
+            -6,
+            -3
+          ],
+          [
+            -5,
+            -3
+          ],
+          [
+            -4,
+            -3
+          ],
+          [
+            -3,
+            -3
+          ],
+          [
+            -2,
+            -3
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            6,
+            -3
+          ],
+          [
+            7,
+            -3
+          ],
+          [
+            8,
+            -3
+          ],
+          [
+            9,
+            -3
+          ],
+          [
+            10,
+            -3
+          ],
+          [
+            11,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            13,
+            -3
+          ],
+          [
+            14,
+            -3
+          ],
+          [
+            15,
+            -3
+          ],
+          [
+            -15,
+            -2
+          ],
+          [
+            7,
+            -2
+          ],
+          [
+            9,
+            -2
+          ],
+          [
+            15,
+            -2
+          ],
+          [
+            -15,
+            -1
+          ],
+          [
+            15,
+            -1
+          ],
+          [
+            -15,
+            0
+          ],
+          [
+            -8,
+            0
+          ],
+          [
+            6,
+            0
+          ],
+          [
+            15,
+            0
+          ],
+          [
+            -15,
+            1
+          ],
+          [
+            -8,
+            1
+          ],
+          [
+            15,
+            1
+          ],
+          [
+            -15,
+            2
+          ],
+          [
+            -8,
+            2
+          ],
+          [
+            15,
+            2
+          ],
+          [
+            -15,
+            3
+          ],
+          [
+            -8,
+            3
+          ],
+          [
+            15,
+            3
+          ],
+          [
+            -15,
+            4
+          ],
+          [
+            -8,
+            4
+          ],
+          [
+            15,
+            4
+          ],
+          [
+            -15,
+            5
+          ],
+          [
+            -8,
+            5
+          ],
+          [
+            15,
+            5
+          ],
+          [
+            -15,
+            6
+          ],
+          [
+            -14,
+            6
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            -12,
+            6
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            -10,
+            6
+          ],
+          [
+            -9,
+            6
+          ],
+          [
+            -8,
+            6
+          ],
+          [
+            -7,
+            6
+          ],
+          [
+            -6,
+            6
+          ],
+          [
+            -5,
+            6
+          ],
+          [
+            -4,
+            6
+          ],
+          [
+            -3,
+            6
+          ],
+          [
+            -2,
+            6
+          ],
+          [
+            -1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            12,
+            6
+          ],
+          [
+            13,
+            6
+          ],
+          [
+            14,
+            6
+          ],
+          [
+            15,
+            6
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "477992587/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-A to FIRE_013",
+        "position_xy": [
+          -10.3,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          -10.9,
+          -2.2,
+          -9.7,
+          0.2
+        ],
+        "RoomExit2D": {
+          "targetScene": "Fire_013",
+          "targetEntranceId": "FROM_FIRE_014"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1091077151/3437643779240966925",
+        "object_label_for_navigation_only": "Door-A Shield",
+        "position_xy": [
+          -7.5,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          -8.0,
+          -2.0,
+          -7.0,
+          0.0
+        ],
+        "Door2D": {
+          "initiallyOpen": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1469376765/8529198862699144161",
+        "object_label_for_navigation_only": "FireOrigin",
+        "position_xy": [
+          -11.8,
+          -1.5
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1842154346/8529198862699144161",
+        "object_label_for_navigation_only": "FireOrigin",
+        "position_xy": [
+          8.8,
+          -0.5
+        ]
+      }
+    ],
+    "Fire_018": [
+      {
+        "file_id_or_prefab_local_id": "1382842091",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -12,
+            -5
+          ],
+          [
+            -11,
+            -5
+          ],
+          [
+            -10,
+            -5
+          ],
+          [
+            -9,
+            -5
+          ],
+          [
+            -8,
+            -5
+          ],
+          [
+            -7,
+            -5
+          ],
+          [
+            -6,
+            -5
+          ],
+          [
+            -5,
+            -5
+          ],
+          [
+            -4,
+            -5
+          ],
+          [
+            -3,
+            -5
+          ],
+          [
+            -2,
+            -5
+          ],
+          [
+            -1,
+            -5
+          ],
+          [
+            0,
+            -5
+          ],
+          [
+            1,
+            -5
+          ],
+          [
+            2,
+            -5
+          ],
+          [
+            3,
+            -5
+          ],
+          [
+            4,
+            -5
+          ],
+          [
+            5,
+            -5
+          ],
+          [
+            6,
+            -5
+          ],
+          [
+            7,
+            -5
+          ],
+          [
+            8,
+            -5
+          ],
+          [
+            9,
+            -5
+          ],
+          [
+            10,
+            -5
+          ],
+          [
+            11,
+            -5
+          ],
+          [
+            -12,
+            -4
+          ],
+          [
+            11,
+            -4
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            11,
+            -3
+          ],
+          [
+            -12,
+            -2
+          ],
+          [
+            11,
+            -2
+          ],
+          [
+            -12,
+            -1
+          ],
+          [
+            11,
+            -1
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            11,
+            0
+          ],
+          [
+            -12,
+            1
+          ],
+          [
+            -11,
+            1
+          ],
+          [
+            -10,
+            1
+          ],
+          [
+            -9,
+            1
+          ],
+          [
+            -8,
+            1
+          ],
+          [
+            -7,
+            1
+          ],
+          [
+            -6,
+            1
+          ],
+          [
+            -5,
+            1
+          ],
+          [
+            -4,
+            1
+          ],
+          [
+            -3,
+            1
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            -12,
+            2
+          ],
+          [
+            11,
+            2
+          ],
+          [
+            -12,
+            3
+          ],
+          [
+            11,
+            3
+          ],
+          [
+            -12,
+            4
+          ],
+          [
+            6,
+            4
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            -12,
+            5
+          ],
+          [
+            6,
+            5
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            -12,
+            6
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            -10,
+            6
+          ],
+          [
+            -9,
+            6
+          ],
+          [
+            -8,
+            6
+          ],
+          [
+            -7,
+            6
+          ],
+          [
+            -6,
+            6
+          ],
+          [
+            -5,
+            6
+          ],
+          [
+            -4,
+            6
+          ],
+          [
+            -3,
+            6
+          ],
+          [
+            -2,
+            6
+          ],
+          [
+            -1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            11,
+            6
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "2008411210",
+        "object_label_for_navigation_only": "Entrance-DEFAULT-From-FIRE_017",
+        "position_xy": [
+          -9.4,
+          2.92
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "9000001803",
+        "object_label_for_navigation_only": "Entrance-FROM_FIRE_017",
+        "position_xy": [
+          -9.4,
+          2.92
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_FIRE_017",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "561953188/3437643779240966925",
+        "object_label_for_navigation_only": "Door-Upper",
+        "position_xy": [
+          6.5,
+          3.0
+        ],
+        "box_aabb_xyxy": [
+          6.0,
+          2.0,
+          7.0,
+          4.0
+        ],
+        "Door2D": {
+          "initiallyOpen": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "663139963/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-Back-to-FIRE_017",
+        "position_xy": [
+          -11.5,
+          3.0
+        ],
+        "box_aabb_xyxy": [
+          -12.1,
+          1.8,
+          -10.9,
+          4.2
+        ],
+        "RoomExit2D": {
+          "targetScene": "Fire_017",
+          "targetEntranceId": "FROM_FIRE_018"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "869918366/8529198862699144161",
+        "object_label_for_navigation_only": "FireOrigin",
+        "position_xy": [
+          9.8,
+          -3.5
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1886926128/8529198862699144161",
+        "object_label_for_navigation_only": "FireOrigin",
+        "position_xy": [
+          3.8,
+          2.5
+        ]
+      }
+    ],
+    "Snow_003": [
+      {
+        "file_id_or_prefab_local_id": "797724083",
+        "object_label_for_navigation_only": "Entrance-DEFAULT from SNOW_002",
+        "position_xy": [
+          -9.0,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "938507694",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -3
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -7,
+            -3
+          ],
+          [
+            -6,
+            -3
+          ],
+          [
+            -5,
+            -3
+          ],
+          [
+            7,
+            -3
+          ],
+          [
+            8,
+            -3
+          ],
+          [
+            9,
+            -3
+          ],
+          [
+            10,
+            -3
+          ],
+          [
+            11,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            7,
+            -2
+          ],
+          [
+            7,
+            -1
+          ],
+          [
+            9,
+            -1
+          ],
+          [
+            10,
+            -1
+          ],
+          [
+            11,
+            -1
+          ],
+          [
+            -10,
+            1
+          ],
+          [
+            -9,
+            1
+          ],
+          [
+            -8,
+            1
+          ],
+          [
+            -7,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            6,
+            1
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            -6,
+            2
+          ],
+          [
+            -6,
+            3
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1239299078",
+        "object_label_for_navigation_only": "FrozenGround",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 1,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -4,
+            -3
+          ],
+          [
+            -3,
+            -3
+          ],
+          [
+            -2,
+            -3
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            6,
+            -3
+          ],
+          [
+            -5,
+            1
+          ],
+          [
+            -4,
+            1
+          ],
+          [
+            -3,
+            1
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            1
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1966722733",
+        "object_label_for_navigation_only": "Entrance-FROM_SNOW_004",
+        "position_xy": [
+          -9.75,
+          2.92
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_SNOW_004",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "762069348/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-Down to SNOW_004",
+        "position_xy": [
+          -8.0,
+          2.0
+        ],
+        "box_aabb_xyxy": [
+          -8.6,
+          0.8,
+          -7.4,
+          3.2
+        ],
+        "RoomExit2D": {
+          "targetScene": "Snow_004",
+          "targetEntranceId": "FROM_SNOW_003"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "985624200/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-Up to SNOW_002",
+        "position_xy": [
+          -11.5,
+          -2.0
+        ],
+        "box_aabb_xyxy": [
+          -12.1,
+          -3.2,
+          -10.9,
+          -0.8
+        ],
+        "RoomExit2D": {
+          "targetScene": "Snow_002",
+          "targetEntranceId": "DEFAULT"
+        }
+      }
+    ],
+    "Earth_003": [
+      {
+        "file_id_or_prefab_local_id": "41947973",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -7
+          ],
+          [
+            -12,
+            -7
+          ],
+          [
+            -11,
+            -7
+          ],
+          [
+            -10,
+            -7
+          ],
+          [
+            -9,
+            -7
+          ],
+          [
+            -8,
+            -7
+          ],
+          [
+            -7,
+            -7
+          ],
+          [
+            -6,
+            -7
+          ],
+          [
+            -5,
+            -7
+          ],
+          [
+            -4,
+            -7
+          ],
+          [
+            -3,
+            -7
+          ],
+          [
+            -2,
+            -7
+          ],
+          [
+            -1,
+            -7
+          ],
+          [
+            0,
+            -7
+          ],
+          [
+            1,
+            -7
+          ],
+          [
+            2,
+            -7
+          ],
+          [
+            3,
+            -7
+          ],
+          [
+            4,
+            -7
+          ],
+          [
+            5,
+            -7
+          ],
+          [
+            6,
+            -7
+          ],
+          [
+            7,
+            -7
+          ],
+          [
+            8,
+            -7
+          ],
+          [
+            9,
+            -7
+          ],
+          [
+            10,
+            -7
+          ],
+          [
+            11,
+            -7
+          ],
+          [
+            12,
+            -7
+          ],
+          [
+            -13,
+            -6
+          ],
+          [
+            12,
+            -6
+          ],
+          [
+            -13,
+            -5
+          ],
+          [
+            12,
+            -5
+          ],
+          [
+            -13,
+            -4
+          ],
+          [
+            -12,
+            -4
+          ],
+          [
+            -11,
+            -4
+          ],
+          [
+            -10,
+            -4
+          ],
+          [
+            -9,
+            -4
+          ],
+          [
+            -8,
+            -4
+          ],
+          [
+            -7,
+            -4
+          ],
+          [
+            -6,
+            -4
+          ],
+          [
+            -5,
+            -4
+          ],
+          [
+            -4,
+            -4
+          ],
+          [
+            -3,
+            -4
+          ],
+          [
+            2,
+            -4
+          ],
+          [
+            3,
+            -4
+          ],
+          [
+            4,
+            -4
+          ],
+          [
+            5,
+            -4
+          ],
+          [
+            6,
+            -4
+          ],
+          [
+            7,
+            -4
+          ],
+          [
+            8,
+            -4
+          ],
+          [
+            9,
+            -4
+          ],
+          [
+            10,
+            -4
+          ],
+          [
+            11,
+            -4
+          ],
+          [
+            12,
+            -4
+          ],
+          [
+            -13,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            -13,
+            -2
+          ],
+          [
+            12,
+            -2
+          ],
+          [
+            -13,
+            -1
+          ],
+          [
+            12,
+            -1
+          ],
+          [
+            -13,
+            0
+          ],
+          [
+            -10,
+            0
+          ],
+          [
+            -9,
+            0
+          ],
+          [
+            -8,
+            0
+          ],
+          [
+            -7,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            -13,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            -13,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            9,
+            2
+          ],
+          [
+            10,
+            2
+          ],
+          [
+            12,
+            2
+          ],
+          [
+            -13,
+            3
+          ],
+          [
+            12,
+            3
+          ],
+          [
+            -13,
+            4
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            -13,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            12,
+            6
+          ],
+          [
+            -13,
+            7
+          ],
+          [
+            -12,
+            7
+          ],
+          [
+            -11,
+            7
+          ],
+          [
+            -10,
+            7
+          ],
+          [
+            -9,
+            7
+          ],
+          [
+            -8,
+            7
+          ],
+          [
+            -7,
+            7
+          ],
+          [
+            -6,
+            7
+          ],
+          [
+            -5,
+            7
+          ],
+          [
+            -4,
+            7
+          ],
+          [
+            -3,
+            7
+          ],
+          [
+            -2,
+            7
+          ],
+          [
+            -1,
+            7
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            7
+          ],
+          [
+            9,
+            7
+          ],
+          [
+            10,
+            7
+          ],
+          [
+            11,
+            7
+          ],
+          [
+            12,
+            7
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "192746704",
+        "object_label_for_navigation_only": "Entrance-FROM_EARTH_001",
+        "position_xy": [
+          -9.5,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_EARTH_001",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "271067907",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          -10.0,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1269814318",
+        "object_label_for_navigation_only": "Entrance-FROM_EARTH_004",
+        "position_xy": [
+          8.5,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_EARTH_004",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "641297243/1100097909064068572",
+        "object_label_for_navigation_only": "Exit to EARTH_001",
+        "position_xy": [
+          -11.0,
+          -3.0
+        ],
+        "box_aabb_xyxy": [
+          -11.6,
+          -4.2,
+          -10.4,
+          -1.8
+        ],
+        "RoomExit2D": {
+          "targetScene": "Earth_001",
+          "targetEntranceId": "DEFAULT"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1251309878/1100097909064068572",
+        "object_label_for_navigation_only": "Exit to EARTH_004",
+        "position_xy": [
+          10.0,
+          -3.0
+        ],
+        "box_aabb_xyxy": [
+          9.4,
+          -4.2,
+          10.6,
+          -1.8
+        ],
+        "RoomExit2D": {
+          "targetScene": "Earth_004",
+          "targetEntranceId": "FROM_EARTH_003"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1927441011/7849574529726608321",
+        "object_label_for_navigation_only": "SinkingBlock-A",
+        "position_xy": [
+          0.0,
+          -3.5
+        ],
+        "box_aabb_xyxy": [
+          -1.5,
+          -4.0,
+          1.5,
+          -3.0
+        ],
+        "SinkingEarthBlock2D": {
+          "sinkDistance": 3.0,
+          "recoverSpeed": 1,
+          "weightForFullSink": 1
+        }
+      }
+    ],
+    "Earth_004": [
+      {
+        "file_id_or_prefab_local_id": "372001729",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          -10.0,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "453891612",
+        "object_label_for_navigation_only": "Entrance-FROM_EARTH_003",
+        "position_xy": [
+          -9.5,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_EARTH_003",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1107905705",
+        "object_label_for_navigation_only": "Entrance-FROM_EARTH_005",
+        "position_xy": [
+          8.5,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_EARTH_005",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1231022454",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -7
+          ],
+          [
+            -12,
+            -7
+          ],
+          [
+            -11,
+            -7
+          ],
+          [
+            -10,
+            -7
+          ],
+          [
+            -9,
+            -7
+          ],
+          [
+            -8,
+            -7
+          ],
+          [
+            -7,
+            -7
+          ],
+          [
+            -6,
+            -7
+          ],
+          [
+            -5,
+            -7
+          ],
+          [
+            -4,
+            -7
+          ],
+          [
+            -3,
+            -7
+          ],
+          [
+            -2,
+            -7
+          ],
+          [
+            -1,
+            -7
+          ],
+          [
+            0,
+            -7
+          ],
+          [
+            1,
+            -7
+          ],
+          [
+            2,
+            -7
+          ],
+          [
+            3,
+            -7
+          ],
+          [
+            4,
+            -7
+          ],
+          [
+            5,
+            -7
+          ],
+          [
+            6,
+            -7
+          ],
+          [
+            7,
+            -7
+          ],
+          [
+            8,
+            -7
+          ],
+          [
+            9,
+            -7
+          ],
+          [
+            10,
+            -7
+          ],
+          [
+            11,
+            -7
+          ],
+          [
+            12,
+            -7
+          ],
+          [
+            -13,
+            -6
+          ],
+          [
+            12,
+            -6
+          ],
+          [
+            -13,
+            -5
+          ],
+          [
+            12,
+            -5
+          ],
+          [
+            -13,
+            -4
+          ],
+          [
+            -12,
+            -4
+          ],
+          [
+            -11,
+            -4
+          ],
+          [
+            -10,
+            -4
+          ],
+          [
+            -9,
+            -4
+          ],
+          [
+            -8,
+            -4
+          ],
+          [
+            -7,
+            -4
+          ],
+          [
+            -4,
+            -4
+          ],
+          [
+            -3,
+            -4
+          ],
+          [
+            -2,
+            -4
+          ],
+          [
+            -1,
+            -4
+          ],
+          [
+            0,
+            -4
+          ],
+          [
+            1,
+            -4
+          ],
+          [
+            2,
+            -4
+          ],
+          [
+            3,
+            -4
+          ],
+          [
+            6,
+            -4
+          ],
+          [
+            7,
+            -4
+          ],
+          [
+            8,
+            -4
+          ],
+          [
+            9,
+            -4
+          ],
+          [
+            10,
+            -4
+          ],
+          [
+            11,
+            -4
+          ],
+          [
+            12,
+            -4
+          ],
+          [
+            -13,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            -13,
+            -2
+          ],
+          [
+            12,
+            -2
+          ],
+          [
+            -13,
+            -1
+          ],
+          [
+            12,
+            -1
+          ],
+          [
+            -13,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            -13,
+            1
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            -13,
+            2
+          ],
+          [
+            12,
+            2
+          ],
+          [
+            -13,
+            3
+          ],
+          [
+            12,
+            3
+          ],
+          [
+            -13,
+            4
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            -13,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            12,
+            6
+          ],
+          [
+            -13,
+            7
+          ],
+          [
+            -12,
+            7
+          ],
+          [
+            -11,
+            7
+          ],
+          [
+            -10,
+            7
+          ],
+          [
+            -9,
+            7
+          ],
+          [
+            -8,
+            7
+          ],
+          [
+            -7,
+            7
+          ],
+          [
+            -6,
+            7
+          ],
+          [
+            -5,
+            7
+          ],
+          [
+            -4,
+            7
+          ],
+          [
+            -3,
+            7
+          ],
+          [
+            -2,
+            7
+          ],
+          [
+            -1,
+            7
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            7
+          ],
+          [
+            9,
+            7
+          ],
+          [
+            10,
+            7
+          ],
+          [
+            11,
+            7
+          ],
+          [
+            12,
+            7
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "183559291/1100097909064068572",
+        "object_label_for_navigation_only": "Exit to EARTH_003",
+        "position_xy": [
+          -11.0,
+          -3.0
+        ],
+        "box_aabb_xyxy": [
+          -11.6,
+          -4.2,
+          -10.4,
+          -1.8
+        ],
+        "RoomExit2D": {
+          "targetScene": "Earth_003",
+          "targetEntranceId": "FROM_EARTH_004"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "835599303/1100097909064068572",
+        "object_label_for_navigation_only": "Exit to EARTH_005",
+        "position_xy": [
+          10.0,
+          -3.0
+        ],
+        "box_aabb_xyxy": [
+          9.4,
+          -4.2,
+          10.6,
+          -1.8
+        ],
+        "RoomExit2D": {
+          "targetScene": "Earth_005",
+          "targetEntranceId": "FROM_EARTH_004"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1035240281/7849574529726608321",
+        "object_label_for_navigation_only": "SinkingBlock-A",
+        "position_xy": [
+          -5.0,
+          -3.5
+        ],
+        "box_aabb_xyxy": [
+          -6.0,
+          -4.0,
+          -4.0,
+          -3.0
+        ],
+        "SinkingEarthBlock2D": {
+          "sinkDistance": 2.0,
+          "recoverSpeed": 1,
+          "weightForFullSink": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1263279215/7849574529726608321",
+        "object_label_for_navigation_only": "SinkingBlock-B",
+        "position_xy": [
+          5.0,
+          -3.5
+        ],
+        "box_aabb_xyxy": [
+          4.0,
+          -4.0,
+          6.0,
+          -3.0
+        ],
+        "SinkingEarthBlock2D": {
+          "sinkDistance": 2.0,
+          "recoverSpeed": 1,
+          "weightForFullSink": 1
+        }
+      }
+    ],
+    "Earth_009": [
+      {
+        "file_id_or_prefab_local_id": "938299327",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -7
+          ],
+          [
+            -12,
+            -7
+          ],
+          [
+            -11,
+            -7
+          ],
+          [
+            -10,
+            -7
+          ],
+          [
+            -9,
+            -7
+          ],
+          [
+            -8,
+            -7
+          ],
+          [
+            -7,
+            -7
+          ],
+          [
+            -6,
+            -7
+          ],
+          [
+            -5,
+            -7
+          ],
+          [
+            -4,
+            -7
+          ],
+          [
+            -3,
+            -7
+          ],
+          [
+            -2,
+            -7
+          ],
+          [
+            -1,
+            -7
+          ],
+          [
+            0,
+            -7
+          ],
+          [
+            1,
+            -7
+          ],
+          [
+            2,
+            -7
+          ],
+          [
+            3,
+            -7
+          ],
+          [
+            4,
+            -7
+          ],
+          [
+            5,
+            -7
+          ],
+          [
+            6,
+            -7
+          ],
+          [
+            7,
+            -7
+          ],
+          [
+            8,
+            -7
+          ],
+          [
+            9,
+            -7
+          ],
+          [
+            10,
+            -7
+          ],
+          [
+            11,
+            -7
+          ],
+          [
+            12,
+            -7
+          ],
+          [
+            -13,
+            -6
+          ],
+          [
+            12,
+            -6
+          ],
+          [
+            -13,
+            -5
+          ],
+          [
+            12,
+            -5
+          ],
+          [
+            -13,
+            -4
+          ],
+          [
+            -12,
+            -4
+          ],
+          [
+            -11,
+            -4
+          ],
+          [
+            -10,
+            -4
+          ],
+          [
+            -9,
+            -4
+          ],
+          [
+            -8,
+            -4
+          ],
+          [
+            -7,
+            -4
+          ],
+          [
+            -6,
+            -4
+          ],
+          [
+            -5,
+            -4
+          ],
+          [
+            -4,
+            -4
+          ],
+          [
+            -1,
+            -4
+          ],
+          [
+            0,
+            -4
+          ],
+          [
+            1,
+            -4
+          ],
+          [
+            4,
+            -4
+          ],
+          [
+            5,
+            -4
+          ],
+          [
+            6,
+            -4
+          ],
+          [
+            7,
+            -4
+          ],
+          [
+            8,
+            -4
+          ],
+          [
+            9,
+            -4
+          ],
+          [
+            10,
+            -4
+          ],
+          [
+            11,
+            -4
+          ],
+          [
+            12,
+            -4
+          ],
+          [
+            -13,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            -13,
+            -2
+          ],
+          [
+            12,
+            -2
+          ],
+          [
+            -13,
+            -1
+          ],
+          [
+            12,
+            -1
+          ],
+          [
+            -13,
+            0
+          ],
+          [
+            -10,
+            0
+          ],
+          [
+            -9,
+            0
+          ],
+          [
+            -8,
+            0
+          ],
+          [
+            -7,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            -13,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            -13,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            8,
+            2
+          ],
+          [
+            9,
+            2
+          ],
+          [
+            10,
+            2
+          ],
+          [
+            12,
+            2
+          ],
+          [
+            -13,
+            3
+          ],
+          [
+            12,
+            3
+          ],
+          [
+            -13,
+            4
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            -13,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            12,
+            6
+          ],
+          [
+            -13,
+            7
+          ],
+          [
+            -12,
+            7
+          ],
+          [
+            -11,
+            7
+          ],
+          [
+            -10,
+            7
+          ],
+          [
+            -9,
+            7
+          ],
+          [
+            -8,
+            7
+          ],
+          [
+            -7,
+            7
+          ],
+          [
+            -6,
+            7
+          ],
+          [
+            -5,
+            7
+          ],
+          [
+            -4,
+            7
+          ],
+          [
+            -3,
+            7
+          ],
+          [
+            -2,
+            7
+          ],
+          [
+            -1,
+            7
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            8,
+            7
+          ],
+          [
+            9,
+            7
+          ],
+          [
+            10,
+            7
+          ],
+          [
+            11,
+            7
+          ],
+          [
+            12,
+            7
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "979520490",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          -10.0,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1056063365",
+        "object_label_for_navigation_only": "Entrance-FROM_EARTH_008",
+        "position_xy": [
+          8.5,
+          -2.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "FROM_EARTH_008",
+          "defaultEntrance": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "528169659/1100097909064068572",
+        "object_label_for_navigation_only": "Exit to EARTH_008",
+        "position_xy": [
+          10.0,
+          -3.0
+        ],
+        "box_aabb_xyxy": [
+          9.4,
+          -4.2,
+          10.6,
+          -1.8
+        ],
+        "RoomExit2D": {
+          "targetScene": "Earth_008",
+          "targetEntranceId": "FROM_EARTH_009"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1157307524/7849574529726608321",
+        "object_label_for_navigation_only": "SinkingBlock-B",
+        "position_xy": [
+          3.0,
+          -3.5
+        ],
+        "box_aabb_xyxy": [
+          2.0,
+          -4.0,
+          4.0,
+          -3.0
+        ],
+        "SinkingEarthBlock2D": {
+          "sinkDistance": 2.0,
+          "recoverSpeed": 1.2,
+          "weightForFullSink": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1849854386/7849574529726608321",
+        "object_label_for_navigation_only": "SinkingBlock-A",
+        "position_xy": [
+          -2.0,
+          -3.5
+        ],
+        "box_aabb_xyxy": [
+          -3.0,
+          -4.0,
+          -1.0,
+          -3.0
+        ],
+        "SinkingEarthBlock2D": {
+          "sinkDistance": 2.0,
+          "recoverSpeed": 0.7,
+          "weightForFullSink": 1
+        }
+      }
+    ],
+    "Wind_011": [
+      {
+        "file_id_or_prefab_local_id": "1204597284",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -3
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -7,
+            -3
+          ],
+          [
+            -6,
+            -3
+          ],
+          [
+            -5,
+            -3
+          ],
+          [
+            -4,
+            -3
+          ],
+          [
+            -3,
+            -3
+          ],
+          [
+            -2,
+            -3
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            6,
+            -3
+          ],
+          [
+            7,
+            -3
+          ],
+          [
+            8,
+            -3
+          ],
+          [
+            9,
+            -3
+          ],
+          [
+            10,
+            -3
+          ],
+          [
+            11,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            -13,
+            -2
+          ],
+          [
+            12,
+            -2
+          ],
+          [
+            -13,
+            -1
+          ],
+          [
+            12,
+            -1
+          ],
+          [
+            -13,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            -13,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            -13,
+            2
+          ],
+          [
+            12,
+            2
+          ],
+          [
+            -13,
+            3
+          ],
+          [
+            12,
+            3
+          ],
+          [
+            -13,
+            4
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            -13,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            -12,
+            6
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            -10,
+            6
+          ],
+          [
+            -9,
+            6
+          ],
+          [
+            -8,
+            6
+          ],
+          [
+            -7,
+            6
+          ],
+          [
+            -6,
+            6
+          ],
+          [
+            -5,
+            6
+          ],
+          [
+            -4,
+            6
+          ],
+          [
+            -3,
+            6
+          ],
+          [
+            -2,
+            6
+          ],
+          [
+            -1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            12,
+            6
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "1575666423",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          -10.0,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "852922746/3437643779240966925",
+        "object_label_for_navigation_only": "Door-Closed",
+        "position_xy": [
+          5.5,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          5.0,
+          -2.0,
+          6.0,
+          0.0
+        ],
+        "Door2D": {
+          "initiallyOpen": 0
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "944118052/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-A to WIND_010",
+        "position_xy": [
+          10.0,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          9.4,
+          -2.2,
+          10.6,
+          0.2
+        ],
+        "RoomExit2D": {
+          "targetScene": "Wind_010",
+          "targetEntranceId": "DEFAULT"
+        }
+      }
+    ],
+    "Wind_014": [
+      {
+        "file_id_or_prefab_local_id": "1452632482",
+        "object_label_for_navigation_only": "Terrain",
+        "position_xy": [
+          0.0,
+          0.0
+        ],
+        "surface_type": 0,
+        "matrix_2d": [
+          1.0,
+          0.0,
+          -0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "cells_xy": [
+          [
+            -13,
+            -3
+          ],
+          [
+            -12,
+            -3
+          ],
+          [
+            -11,
+            -3
+          ],
+          [
+            -10,
+            -3
+          ],
+          [
+            -9,
+            -3
+          ],
+          [
+            -8,
+            -3
+          ],
+          [
+            -7,
+            -3
+          ],
+          [
+            -6,
+            -3
+          ],
+          [
+            -5,
+            -3
+          ],
+          [
+            -4,
+            -3
+          ],
+          [
+            -3,
+            -3
+          ],
+          [
+            -2,
+            -3
+          ],
+          [
+            -1,
+            -3
+          ],
+          [
+            0,
+            -3
+          ],
+          [
+            1,
+            -3
+          ],
+          [
+            2,
+            -3
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            4,
+            -3
+          ],
+          [
+            5,
+            -3
+          ],
+          [
+            6,
+            -3
+          ],
+          [
+            7,
+            -3
+          ],
+          [
+            8,
+            -3
+          ],
+          [
+            9,
+            -3
+          ],
+          [
+            10,
+            -3
+          ],
+          [
+            11,
+            -3
+          ],
+          [
+            12,
+            -3
+          ],
+          [
+            -13,
+            -2
+          ],
+          [
+            12,
+            -2
+          ],
+          [
+            -13,
+            -1
+          ],
+          [
+            12,
+            -1
+          ],
+          [
+            -13,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            -13,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            -13,
+            2
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            12,
+            2
+          ],
+          [
+            -13,
+            3
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            12,
+            3
+          ],
+          [
+            -13,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            12,
+            4
+          ],
+          [
+            -13,
+            5
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            -13,
+            6
+          ],
+          [
+            -12,
+            6
+          ],
+          [
+            -11,
+            6
+          ],
+          [
+            -10,
+            6
+          ],
+          [
+            -9,
+            6
+          ],
+          [
+            -8,
+            6
+          ],
+          [
+            -7,
+            6
+          ],
+          [
+            -6,
+            6
+          ],
+          [
+            -5,
+            6
+          ],
+          [
+            -4,
+            6
+          ],
+          [
+            -3,
+            6
+          ],
+          [
+            -2,
+            6
+          ],
+          [
+            -1,
+            6
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            8,
+            6
+          ],
+          [
+            9,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            12,
+            6
+          ]
+        ]
+      },
+      {
+        "file_id_or_prefab_local_id": "2061769319",
+        "object_label_for_navigation_only": "Entrance-DEFAULT",
+        "position_xy": [
+          -10.0,
+          -1.08
+        ],
+        "RoomEntrance2D": {
+          "entranceId": "DEFAULT",
+          "defaultEntrance": 1
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "1119681261/1100097909064068572",
+        "object_label_for_navigation_only": "Exit-A to WIND_015",
+        "position_xy": [
+          10.0,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          9.4,
+          -2.2,
+          10.6,
+          0.2
+        ],
+        "RoomExit2D": {
+          "targetScene": "Wind_015",
+          "targetEntranceId": "DEFAULT"
+        }
+      },
+      {
+        "file_id_or_prefab_local_id": "2043300324/3437643779240966925",
+        "object_label_for_navigation_only": "Door-Closed",
+        "position_xy": [
+          5.5,
+          -1.0
+        ],
+        "box_aabb_xyxy": [
+          5.0,
+          -2.0,
+          6.0,
+          0.0
+        ],
+        "Door2D": {
+          "initiallyOpen": 0
+        }
+      }
+    ]
+  },
+  "related_source_hashes": {
+    "Assets/Prefabs/Gameplay/Doors/Door2D.prefab": "7910c1f14289de930fc2fb2fa6bcf223325bd7675ba24dc9625eea5565743db9",
+    "Assets/Prefabs/Gameplay/Earth/SinkingEarthBlock2D.prefab": "3d58c3f65a69af6e79734610c505ce930302bb45be1a196881e7787eb6cc1628",
+    "Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab": "b9402f00a7b158f8deaf8a5292f7c0dcfa2b812bf1fe493c8e27d0de85ba531a",
+    "Assets/Prefabs/Gameplay/Exits/RoomExit2D.prefab": "161e0f2c70adfab4ff5327a7062a0b90b67a8e8f197a2cd956f97e3e318d9807",
+    "Assets/Scripts/Gameplay/Door2D.cs": "cb8d6caa1fa91d0eedf5b3f2d6f8645f2e792071168d22feef3333ca549e9712",
+    "Assets/Scripts/Gameplay/HorizontalFireballEnemy2D.cs": "ac5be2dcc52cd43accc2847ef89ef9d586ce00f04f0a805eb450ab72eac66089",
+    "Assets/Scripts/Gameplay/SurfaceSemantic2D.cs": "3ca9e344fa6954135dddc3d7825fe492748c6e46113552e014c546f0d3fbd4c6",
+    "Assets/Scripts/MirrorCloneController2D.cs": "fdad560cf92f0c49d26761b31c01f6603bfc08914c97e5062947834e5fa3bb6c",
+    "Assets/Scripts/PlayerController2D.cs": "b51f13ab6a2a197d92ff96ac353dbeabea742431b1d7a3ad5071a084ee71336b",
+    "Assets/Settings/Enemies/DefaultHorizontalFireballEnemy.asset": "51f1c4112b66d401e985c935d19adc7d2a3514d3d5190294b81c26bce5a11fc0",
+    "Assets/Settings/Player/DefaultPlayerMovement.asset": "a83e6425184cd1f639fbff3a33b32d9549d57a5fc3e17e47c3b6e48a6b4e240a",
+    "docs/LEVEL_BUILDING.md": "6ed682c8fad968651c24c91aabbaee0f931be90df65f53a2b206383a6d0cd544",
+    "docs/MIRROR_MECHANIC.md": "5c2baa505d50483a9ae4699080544cd0ed3506b06e5a1c081b5ea486d8941657",
+    "docs/PLAYER_MOVEMENT.md": "eed16fd10b13570faa565f77a325ba8f483b446a69275cf3a05e911d147d9b2e",
+    "docs/maps/MAP.md": "eb52c3b2e7d7310443e123266ed8dea5c24d251562c74f0f55f3665c897afd4e",
+    "docs/maps/WORLD_PROGRESSION.md": "e072cb5513b4bf0c0f2fa8e74d17dd981fed37bb7c6e2e7221c85cc7987eb4ce",
+    "docs/rooms/center/CENTER_001.md": "0b80d205553004431f223fe800f7ba30550b32fad0ed92438513c3d45963e54b",
+    "docs/rooms/center/CENTER_002.md": "be2bac60e1cd8dcb9ddece1ff8ab561ee9f9db5a46ff66a4e1ad840dda973cf7",
+    "docs/rooms/center/CENTER_003.md": "0afa5a8aefe25b13d69ed9921ffb1cd692355dea733615c24da7627a8407d0f0",
+    "docs/rooms/center/CENTER_004.md": "5764e23d64910757a1ac7945f9941c90abf23006fc7cc559523f19a7ac3e79ec",
+    "docs/rooms/center/CENTER_005.md": "50eed34e865b2ac1830856540db3be07d6afab26c65314e45614f90f57d66f9e",
+    "docs/rooms/center/CENTER_006.md": "8a8cf450c9d751d9e9f9819588a7aaa15fa8eb8e0a029c1f3198289086fd6daa",
+    "docs/rooms/center/CENTER_007.md": "3c75cf04742cf84e0f52f3cdc24504a8264dbc53bcc03c85d8ce8001c92266ce",
+    "docs/rooms/center/CENTER_008.md": "4e67254505d831b679493e402b5234f630b5ecc07ced92bd508018dad270e686",
+    "docs/rooms/center/CENTER_009.md": "6cd44205dbee56e02425be502b4ff2d0ccba340fb50ac737abab48cfebb4500a",
+    "docs/rooms/earth/EARTH_001.md": "b922f8e0c34cdcde00d90c36be265ee20db36c737a3ab9919395951d2fa25377",
+    "docs/rooms/earth/EARTH_002.md": "c49be181748640abe6f8a3b5ab24924a52cc9a767d20ecd452ca1aa12c147070",
+    "docs/rooms/earth/EARTH_003.md": "217ed12331c0bf33e4a755c18caaef6814548ebbd9de5fb4827adfe6f322458f",
+    "docs/rooms/earth/EARTH_004.md": "7d292c895333cd7d7aa44960bd2c59f7accd302af8280b1a6a33387a0ba27b39",
+    "docs/rooms/earth/EARTH_005.md": "0c8f7b5832f2cba7cc509087a6bd801cc0bfdffb674400f81af048082e23ae1d",
+    "docs/rooms/earth/EARTH_006.md": "ca3c06d45b9d595a4ff897a4af54ae0f0c5b3ca7a1e85229c3489b16b7a3a42e",
+    "docs/rooms/earth/EARTH_007.md": "dd9ba9c212c9dcfa21ee2bfb519f333585eb9fd8d6e2d50749b92e84cfba8846",
+    "docs/rooms/earth/EARTH_008.md": "6641c06d68f34bf56fe53a7ddcf3a9ce350753bdffd89a2e96e305f1c9e84809",
+    "docs/rooms/earth/EARTH_009.md": "8d2862fbdf83f2e9c1b0218264c665f3a8499354cd95c79a2df04acba0055e27",
+    "docs/rooms/earth/EARTH_010.md": "dd54ee22951d92cf71b47d98700f554762e0507205c55fd4495b4d8461d8dbbe",
+    "docs/rooms/earth/EARTH_011.md": "71f0ad0cbf347944562b8f20024922f960204b1f3efe6c0652f7a4b9da0a32eb",
+    "docs/rooms/earth/EARTH_012.md": "cafc3ca9ce1a7f4865504cfb06d97d968cdf67c975000f1c6afd8dbd23ff7cd8",
+    "docs/rooms/earth/EARTH_013.md": "685a05b16d993e6bb607c9b60ac59264bea9cac1089f2f9493817d4776962a53",
+    "docs/rooms/earth/EARTH_014.md": "d3553d9cb234bcfaa8ea29c70ad8b46e6fdded7f15d0430fbbf43a54dc45e829",
+    "docs/rooms/earth/EARTH_015.md": "a830ac58b50c88c26af67c538d8940a1e9e804b8d77a2099cd10441a8bd9a9b6",
+    "docs/rooms/earth/EARTH_016.md": "0978179d8cca5603c984b3e7ed8555933c314832020e170af3083d57f6cb89a3",
+    "docs/rooms/earth/EARTH_017.md": "3d5f02f5e04cb52fab6445472299e55cd2d594ddcada8dff662c37a35e3accf7",
+    "docs/rooms/earth/EARTH_018.md": "b0cca10fc1156a94bc4c93c45924aceae4af4926cd49bc5c94a2361c6fb76cbf",
+    "docs/rooms/fire/FIRE_001.md": "4083679009a2a4050e203479cfbd62327c21dcd589514b7f148b6aa500ff882b",
+    "docs/rooms/fire/FIRE_002.md": "cab0ab48ea603082258815d158456a6702264b8b7b38b6176d05d45d02372543",
+    "docs/rooms/fire/FIRE_003.md": "9dd18c64800c1f303745a4f372ba678d4489a4f93badfa0a22a6d8086c3523fa",
+    "docs/rooms/fire/FIRE_004.md": "624ef55ea45054a1680a645f7845d0a46d8dff31ee7f1fab601f53d93a689026",
+    "docs/rooms/fire/FIRE_005.md": "121eb8187eef511a2fc61188530bd0f9c5c186e5a8b71f49ca32500e336eba2d",
+    "docs/rooms/fire/FIRE_006.md": "fdf49978aa69c2e5f86bb3005ca2819fb5af5e048d3043c1426a412f453b3c98",
+    "docs/rooms/fire/FIRE_007.md": "0d857fd6efe75686141265cf04bfea0c29c40341c281ae754fafbf80e44b0413",
+    "docs/rooms/fire/FIRE_008.md": "c140859a6143b8998316eb5d6e7b6b8b65baecfdd4d412717b005a6b357405d3",
+    "docs/rooms/fire/FIRE_009.md": "8af3d013e87a8d562280b3352ddcb314fa5b99eb47435f7c95f081725f67452b",
+    "docs/rooms/fire/FIRE_010.md": "c6517d66d85bb966cebe45db797248e132e1edd93143ae7e8e6f40db48bd60ca",
+    "docs/rooms/fire/FIRE_011.md": "803fb6187349503b218efc733e375cfc60eb67c90d09f6f7cd8e88b132d66afc",
+    "docs/rooms/fire/FIRE_012.md": "230685e7187b8b5ce0ac40b7d73a8380eee9aa00a3225d88030e95b9cf9d80f2",
+    "docs/rooms/fire/FIRE_013.md": "f34a9b500fab6af7150ea95cd8a98042316d6e0d05cf41afeb463205d2177cd2",
+    "docs/rooms/fire/FIRE_014.md": "0ae0340b2caa42a85637dda4621705cfdfbe0d3efcc11c3cc062cb246e440a16",
+    "docs/rooms/fire/FIRE_015.md": "9ab97bcbffc98e6ae9c7882227046d69748fdca2d6ffff84a68a9160dc0b9a42",
+    "docs/rooms/fire/FIRE_016.md": "797685dcc813a553f1d7c0591ff374a7e5704e1d5a0d11a7244f02bea81d1c55",
+    "docs/rooms/fire/FIRE_017.md": "7c636815bfa99b705251f3d2305d12effbd024b86e74de927d2bb1014e307b0a",
+    "docs/rooms/fire/FIRE_018.md": "2745f04e67ef7b639ea056d21276cfdb403043d88c9affb9cdd6a76c9cfed6bf",
+    "docs/rooms/fire/FIRE_019.md": "25c0244df96d0d13f3a9c0c15832b367c7eac2149e0cb0e753619bb3cf3c2ad7",
+    "docs/rooms/snow/SNOW_001.md": "4c0721903e9c96c87013a70578590c9d8d127e14c5172506f89a914edaca4934",
+    "docs/rooms/snow/SNOW_002.md": "2bc44c641aeb66e08f1ee9b343136ffe4a73b6c115e250329709dce182eddc30",
+    "docs/rooms/snow/SNOW_003.md": "90b73600ed8884bed525c7e72cdbed356ed82fd6ee150a39c54b66720e1bfa95",
+    "docs/rooms/snow/SNOW_004.md": "831099e7c685e83760c5328658caa1c9227d6e0294f24c9fefc21035f4c1bc22",
+    "docs/rooms/snow/SNOW_005.md": "3099ac05d431f720fa7807c83eacd57f0ea504d038f71dd849af3769d7a79e59",
+    "docs/rooms/snow/SNOW_006.md": "e91ca9013a602c644635e840e2c3eb03aad76dbc40eb6dd1cc72f613d940c655",
+    "docs/rooms/snow/SNOW_007.md": "ac8dfd49e36df6895ca919742ccd336b520069495104e68ee3b4f5b14c965a18",
+    "docs/rooms/snow/SNOW_008.md": "d31c807a8c027435a34e8c505632e6fcad71d11204919610dd6d8d5b838de8a6",
+    "docs/rooms/snow/SNOW_009.md": "d7018d23f2dcaf6b1c6e215f2890d26c250e9da620e459db04139e6b8775d851",
+    "docs/rooms/snow/SNOW_010.md": "83e3cbcdd19ca6e9a53ecb287cff949883effc491ace302d0160d8d896299fad",
+    "docs/rooms/snow/SNOW_011.md": "7a9a3a75c73d5b7187ca797d61331dbef5330d8adb4b16fadbcfcdd00fea2e93",
+    "docs/rooms/snow/SNOW_012.md": "e3fcdbe71d9281ce4081ce77380c8e530d6139a8ecbacab9ecea8974b74b799a",
+    "docs/rooms/snow/SNOW_013.md": "9da57225fd9df49ef8e16aebf34757781a2b4da9f82aee3a6c10906e20aecd4d",
+    "docs/rooms/snow/SNOW_014.md": "66fa80bc54780acda8536ace0743d34ec84eae954f59679a01112df5eeddc43e",
+    "docs/rooms/snow/SNOW_015.md": "5dffab4272c9525bc2eb4b3d900bcbf0bf2f52aca6e314cc81031d747a043ebd",
+    "docs/rooms/wind/WIND_001.md": "d31335721705b2301152b9dbf352009d30afd7efe8fc6183d8167dfcbb4779e1",
+    "docs/rooms/wind/WIND_002.md": "1a30a12aad753b5779988686a2684adc138bdda0c81dba53207e1c2cb5e90a7d",
+    "docs/rooms/wind/WIND_003.md": "5fe291e7aabaf2a5ec6835bac812f516922abf8cdecd45776d1fb51ad059ec5a",
+    "docs/rooms/wind/WIND_004.md": "7d25fb7f116f6236a40982dfe1c9196426d23fa21295475cd68057481f56a11f",
+    "docs/rooms/wind/WIND_005.md": "1fea5078656c6331fa64d46b9ee00a3307e2dc886e51e06768b834034f8a8b59",
+    "docs/rooms/wind/WIND_006.md": "0566002d7bc3fa1be3ddd6c0946029708cb3d11f0102ee750e0292d0a0edcec4",
+    "docs/rooms/wind/WIND_007.md": "48a4d7851589e22c7116d395988a0089a4364e8ed665e9616bf31c9d439fdd7f",
+    "docs/rooms/wind/WIND_008.md": "785bc91c9a8e67a50ed6e9c1bc4526f41306e50f2d7c796d5b2a83c5a9f2868f",
+    "docs/rooms/wind/WIND_009.md": "6464f64a4c24e82aba8eb1362c86fad02991ee6dd736f52feea3353f4bfc7015",
+    "docs/rooms/wind/WIND_010.md": "2b47d0cbd321d62895f295e69a425dbe55e185b2593b3bf7dc2314ac846513e1",
+    "docs/rooms/wind/WIND_011.md": "ee41fb68f571fcc8c3e011473b4b8968a34a79b92e36ac9ac4330d264e8cb7df",
+    "docs/rooms/wind/WIND_012.md": "2bfa5c0c363e415f538ef95f8197650a6c8361592c5466a84ae3552712f4694a",
+    "docs/rooms/wind/WIND_013.md": "efb533a6060fa5eb793ac0d999b36008e5954ef0b264ade32d7cee4275a13c8c",
+    "docs/rooms/wind/WIND_014.md": "64aa79adefe087b70e826a64c9de6f450323a34e2ac4c70fbaf3ec44079c7be8",
+    "docs/rooms/wind/WIND_015.md": "cc8a4bdc69237b3bec83946e06a20191c01aa8d80bb8dfc35a75c19dfb974253",
+    "docs/rooms/wind/WIND_016.md": "31e57758ed5a30ae98bb2ce1eb92d5f448d84ad31a13680c91e2e710c201bb40",
+    "docs/rooms/wind/WIND_017.md": "dde7e451b0356a6192b6e3e61475d88ff3e03c82d34649fb6ef6a0586e847457",
+    "docs/rooms/wind/WIND_018.md": "1115e51aea938fbff2a63e31e5d86bf7945e4ee4bef10f25b8fcbae1395160c6",
+    "docs/rooms/wind/WIND_019.md": "38c98ffebfe6018ddccef56d2faf5b6ac8968c7f2070feed516d6a86d8976802"
+  },
+  "changed_scenes_during_review": []
+}

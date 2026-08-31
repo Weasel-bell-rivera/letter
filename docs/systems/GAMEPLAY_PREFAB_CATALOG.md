@@ -409,6 +409,7 @@ Prefab验证要求：
 
 - 通用Prefab：`Assets/Prefabs/Gameplay/Hazards/EruptionHazard.prefab`
 - 根对象使用`EruptionHazard2D`，子对象使用通用`Hazard2D` Trigger。
+- 默认危险范围与可见竖柱均为世界空间`1×4 units`，中心为Prefab根位置；不得将视觉缩放再次乘到Collider的目标世界尺寸上。当前共用子Transform缩放为`6.25×25`、Collider局部尺寸为`0.16×0.16`，得到一致的世界边界；修改Sprite或缩放时须同步复核。
 - 默认固定周期为预警`1s`、危险`1s`、冷却`2s`，重置后从预警开始。
 - Prefab负责周期、危险启停和基础颜色反馈；房间不得复制周期运行时代码。
 
@@ -463,10 +464,14 @@ PressurePlate
 
 `Visual`至少包含`SpriteRenderer`，用于显示弹起、临时按下和永久锁存三种可区分状态。
 
-通用压力板使用以下Double目录状态图：
+通用压力板使用中性近黑剪影状态图集
+`Assets/Art/Generated/Gameplay/PressurePlateSilhouetteSheet.png`：
 
-- 弹起：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Switch/switch_yellow.png`
-- 按下或永久锁存：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Switch/switch_yellow_pressed.png`
+- 弹起：子Sprite `PressurePlate_Idle`。
+- 按下或永久锁存：子Sprite `PressurePlate_Pressed`。
+- 两帧使用统一PPU和底部中心Pivot，`Visual`底部保持在根节点局部`Y=-0.15`；仅调整表现子节点尺寸以适配原有约`1.25 × 0.3 units`范围，不修改根节点、Trigger或安装规则。
+- 原始生成图是带浅色底的RGB图，并非透明PNG；必须配套使用`Assets/Materials/Gameplay/PressurePlateSilhouette.mat`和`W1/Gameplay/Silhouette Matte Sprite`，由材质去除浅色底并接收状态色。不可直接换回默认Sprite材质，否则会显示底色。
+- 图集以Bilinear、无MipMap、无压缩和Full Rect导入，不从图片生成物理轮廓。区域背景不改变触发资格或状态含义。
 
 永久锁存继续通过统一青色调、门状态和声音区分，不创建另一套压力板Prefab，也不绘制压力板到门的连线。
 

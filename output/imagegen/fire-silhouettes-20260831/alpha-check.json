@@ -1,0 +1,250 @@
+[
+  {
+    "file": "01-fire-fog-light-base.png",
+    "label": "火区雾光底",
+    "size": [
+      1672,
+      941
+    ],
+    "mode": "RGB",
+    "sha256": "6ef9b5e88250c0b234109acea58adf4d9e215d1708c43b5c33f71f91a0dfdd4e"
+  },
+  {
+    "file": "02-ultra-far-cave-wall.png",
+    "label": "极远洞壁轮廓",
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGBA",
+    "sha256": "a7aa68d63595625adf479261919883de168f4e3db08ee1dd39d8e4bd9799838f",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "fullyTransparentFraction": 0.64194,
+    "alphaBBox": [
+      227,
+      70,
+      1585,
+      855
+    ],
+    "visibleBBoxAbove16": [
+      230,
+      74,
+      1572,
+      737
+    ],
+    "visibleMargins": [
+      230,
+      74,
+      202,
+      150
+    ],
+    "edgeLowAlpha": 0
+  },
+  {
+    "file": "03-far-cavern-rock-masses.png",
+    "label": "远景洞室岩体",
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGBA",
+    "sha256": "7b0764536a79212e2d45e9c4bcfe1d42b84a2a95dd63be2e0c9de2a48d502512",
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "fullyTransparentFraction": 0.7246,
+    "alphaBBox": [
+      251,
+      108,
+      1534,
+      774
+    ],
+    "visibleBBoxAbove16": [
+      253,
+      113,
+      1533,
+      772
+    ],
+    "visibleMargins": [
+      253,
+      113,
+      241,
+      115
+    ],
+    "edgeLowAlpha": 0
+  },
+  {
+    "file": "04-midground-thick-rock-column.png",
+    "label": "中景粗岩柱",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "97c44b5fa487f5e2c82b265b191aec3f2c2fb687db95d400faef3c3ef5b8e28f",
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "fullyTransparentFraction": 0.56108,
+    "alphaBBox": [
+      95,
+      8,
+      1008,
+      1536
+    ],
+    "visibleBBoxAbove16": [
+      164,
+      18,
+      881,
+      1515
+    ],
+    "visibleMargins": [
+      164,
+      18,
+      143,
+      21
+    ],
+    "edgeLowAlpha": 1
+  },
+  {
+    "file": "05-midground-overhanging-rock.png",
+    "label": "中景悬垂岩体",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "sha256": "021072cb7da37342da3a832b5062e5ec319d66fdfb165607ce1c5bede2f4d6c3",
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "fullyTransparentFraction": 0.56532,
+    "alphaBBox": [
+      0,
+      21,
+      1532,
+      998
+    ],
+    "visibleBBoxAbove16": [
+      9,
+      58,
+      1519,
+      847
+    ],
+    "visibleMargins": [
+      9,
+      58,
+      17,
+      177
+    ],
+    "edgeLowAlpha": 1
+  },
+  {
+    "file": "06-charred-pipe-remnant.png",
+    "label": "中景烧焦管段遗迹",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "sha256": "d9ad0b72bae3cbe10d679ab3c581d0b295b6ebcec7da0551dbb19ffbc350bf87",
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "fullyTransparentFraction": 0.65975,
+    "alphaBBox": [
+      73,
+      3,
+      1414,
+      970
+    ],
+    "visibleBBoxAbove16": [
+      123,
+      82,
+      1411,
+      942
+    ],
+    "visibleMargins": [
+      123,
+      82,
+      125,
+      82
+    ],
+    "edgeLowAlpha": 0
+  },
+  {
+    "file": "07-left-foreground-rock-wall.png",
+    "label": "左侧前景岩壁",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "51c5c126794acaf5775f0ade37c332bca875613bd77e5300c16c8c31c111af70",
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "fullyTransparentFraction": 0.65664,
+    "alphaBBox": [
+      0,
+      19,
+      558,
+      1508
+    ],
+    "visibleBBoxAbove16": [
+      15,
+      27,
+      551,
+      1506
+    ],
+    "visibleMargins": [
+      15,
+      27,
+      473,
+      30
+    ],
+    "edgeLowAlpha": 1
+  },
+  {
+    "file": "08-right-foreground-rock-wall.png",
+    "label": "右侧前景岩壁",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "e6b45c74f763619ec2b400a7579065f475c8ff418456e6649fd1ec87a92d6b5b",
+    "alphaExtrema": [
+      0,
+      254
+    ],
+    "fullyTransparentFraction": 0.63963,
+    "alphaBBox": [
+      199,
+      0,
+      1011,
+      1518
+    ],
+    "visibleBBoxAbove16": [
+      248,
+      11,
+      1009,
+      1514
+    ],
+    "visibleMargins": [
+      248,
+      11,
+      15,
+      22
+    ],
+    "edgeLowAlpha": 1
+  }
+]

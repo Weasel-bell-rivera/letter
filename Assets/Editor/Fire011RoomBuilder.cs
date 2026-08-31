@@ -51,6 +51,8 @@ public static class Fire011RoomBuilder
             visual.sortingOrder = 4;
             Vector2 native = visual.sprite.bounds.size;
             visual.transform.localScale = new Vector3(1f / native.x, 4f / native.y, 1f);
+            // Collider and visual share this Transform: apply the world size only once.
+            trigger.size = native;
 
             SerializedObject serialized = new(eruption);
             serialized.FindProperty("warningDuration").floatValue = 1f;

@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: 2d6bdfe9184954663a04ce39dcd51d0f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6839900160255559526
+    second: 05-midground-ice-wall_0
+  - first:
+      213: -7795075109708574952
+    second: 05-midground-ice-wall_1
+  - first:
+      213: 2080164583955718778
+    second: 05-midground-ice-wall_2
+  - first:
+      213: 6419471653500290353
+    second: 05-midground-ice-wall_3
+  - first:
+      213: -1461986714927365767
+    second: 05-midground-ice-wall_4
+  - first:
+      213: 1531124676378923636
+    second: 05-midground-ice-wall_5
+  - first:
+      213: -4229499239016660365
+    second: 05-midground-ice-wall_6
+  - first:
+      213: 1693093026867819997
+    second: 05-midground-ice-wall_7
+  - first:
+      213: 5087778222215689314
+    second: 05-midground-ice-wall_8
+  - first:
+      213: -2671264659349067150
+    second: 05-midground-ice-wall_9
+  - first:
+      213: 82662275244107780
+    second: 05-midground-ice-wall_10
+  - first:
+      213: -2674903849011636950
+    second: 05-midground-ice-wall_11
+  - first:
+      213: 7213719449717981579
+    second: 05-midground-ice-wall_12
+  - first:
+      213: 7585062729710938338
+    second: 05-midground-ice-wall_13
+  - first:
+      213: 2617560868574796636
+    second: 05-midground-ice-wall_14
+  - first:
+      213: -1706055649806216212
+    second: 05-midground-ice-wall_15
+  - first:
+      213: -1442100519573382257
+    second: 05-midground-ice-wall_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 25
+        width: 1460
+        height: 881
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9874d82b0bc311a0800000000000000
+      internalID: -6839900160255559526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_1
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 651
+        width: 60
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81fc450ec7452d390800000000000000
+      internalID: -7795075109708574952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_2
+      rect:
+        serializedVersion: 2
+        x: 1392
+        y: 655
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72670dfaaa3edc10800000000000000
+      internalID: 2080164583955718778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 399
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1350390057b861950800000000000000
+      internalID: 6419471653500290353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_4
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 353
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9710a6624daf5bbe0800000000000000
+      internalID: -1461986714927365767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 265
+        width: 5
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 472966ae7c5af3510800000000000000
+      internalID: 1531124676378923636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_6
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 142
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37280a8d9dccd45c0800000000000000
+      internalID: -4229499239016660365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_7
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 132
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd5b52633231f7710800000000000000
+      internalID: 1693093026867819997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_8
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 115
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 264722f365b6b9640800000000000000
+      internalID: 5087778222215689314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_9
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 109
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27aa17ef1f2cdead0800000000000000
+      internalID: -2671264659349067150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_10
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 125
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4082040c6eca52100800000000000000
+      internalID: 82662275244107780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_11
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 119
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a25165f1f15d0ead0800000000000000
+      internalID: -2674903849011636950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_12
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 123
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8144cd9e974c1460800000000000000
+      internalID: 7213719449717981579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_13
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 125
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e8a9738d5e834960800000000000000
+      internalID: 7585062729710938338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_14
+      rect:
+        serializedVersion: 2
+        x: 1046
+        y: 113
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b1d55ddb1735420800000000000000
+      internalID: 2617560868574796636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_15
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 71
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce39042fc6fd258e0800000000000000
+      internalID: -1706055649806216212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 05-midground-ice-wall_16
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 64
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8b1c60d731acfbe0800000000000000
+      internalID: -1442100519573382257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      05-midground-ice-wall_0: -6839900160255559526
+      05-midground-ice-wall_1: -7795075109708574952
+      05-midground-ice-wall_10: 82662275244107780
+      05-midground-ice-wall_11: -2674903849011636950
+      05-midground-ice-wall_12: 7213719449717981579
+      05-midground-ice-wall_13: 7585062729710938338
+      05-midground-ice-wall_14: 2617560868574796636
+      05-midground-ice-wall_15: -1706055649806216212
+      05-midground-ice-wall_16: -1442100519573382257
+      05-midground-ice-wall_2: 2080164583955718778
+      05-midground-ice-wall_3: 6419471653500290353
+      05-midground-ice-wall_4: -1461986714927365767
+      05-midground-ice-wall_5: 1531124676378923636
+      05-midground-ice-wall_6: -4229499239016660365
+      05-midground-ice-wall_7: 1693093026867819997
+      05-midground-ice-wall_8: 5087778222215689314
+      05-midground-ice-wall_9: -2671264659349067150
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
