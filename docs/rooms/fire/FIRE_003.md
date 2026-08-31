@@ -72,6 +72,7 @@
 - 旧Editor构建器：`Assets/Editor/Fire003RoomBuilder.cs`；其对象数量、坐标和旧谜题组合尚未与当前手工Scene同步，不得直接重建Scene，否则会覆盖手工布局。
 - 编辑用Tile Palette：`Assets/TilePalettes/Fire.prefab`
 - 当前Terrain Tile：`Assets/Tiles/Graybox/Fire003Terrain.asset`
+- `Fire003Terrain`使用`fire_limbo_blocky_brick_v1`进行地面砖块贴图优化，Collider与语义保持不变。
 - 当前提示Tile：`Assets/Tiles/Graybox/Fire003MirrorHint.asset`
 - 使用`PressurePlate2D`、`Door2D`与`RoomExit2D`通用Prefab。
 - 标准Tilemap层齐全；`OneWayPlatform`、`SpecialMirrorWall`与`Hazard`层当前为空。

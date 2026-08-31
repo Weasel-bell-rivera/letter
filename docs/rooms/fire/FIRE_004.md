@@ -143,7 +143,20 @@ C 镜像诱敌位置 D 出口门   E 出口
 - Player、镜子和MirrorClone由通用系统提供，不序列化进房间Scene。
 - 所有动态玩法对象保持通用Prefab连接，不复制逻辑到房间脚本。
 
-当前Scene已按上述结构生成并保存，且已加入Build Settings；Builder、Scene、Tile与提示资产保持一致。
+当前Scene已按上述灰盒结构生成并保存，且已加入Build Settings。下述视觉层由Builder中的安全增量入口`Tools/W1/Apply FIRE-004 Layered Visuals`落盘并保持同步；纯视觉刷新不得运行会新建空Scene并重建整房的灰盒构建入口。
+
+## 环境分层与视觉落点
+
+- 房间根下使用单一`EnvironmentVisuals`表现根；`Grid`、`Gameplay`、`RoomSystems`和`Main Camera`不进入视差层。
+- 固定相机保持`(0,2,-10)`与正交尺寸`7`不变。全部表现层显式引用本Scene的`Main Camera`，只做水平视差，不跟随垂直方向。
+- 七个非玩法层及倍率依次为：`01 Color and Fog Backdrop / 1`、`02 Extreme Far Contours / 0.95`、`03 Far Environment / 0.85`、`04 Mid Environment / 0.65`、`05 Rear Dynamic Fog (Reserved) / 0.8`、`07 Front Dynamic Fog and Particles (Reserved) / 0.35`、`08 Foreground Occlusion / 0.2`。现有世界空间`Grid + Gameplay`承担第06层职责，不添加`ParallaxLayer2D`。
+- 第05与第07层当前明确保留为空，不生成会遮挡弹道或暗示新规则的动态雾、灰烬和粒子。
+- 远景使用`fire_cavern_far_background_v1.png`与`fire_parallax_rock_silhouettes_handpainted_v1.png`；中景使用`fire_midground_ruins_machinery_handpainted_v1.png`；前景框景使用`fire_foreground_edge_modules_handpainted_v1.png`。这些均为项目内原创或已纳入项目的正式资源，不包含LIMBO原作资产。
+- `Terrain`继续使用`Fire004Terrain` Tile、Collider与表面语义；为了突出Limbo风格剪影，`Fire004Terrain`已切换为`fire_limbo_blocky_brick_v1`纹理，并不改变Tilemap结构与任何碰撞。
+- 远景降低对比度、锐度和饱和度；前景只占固定相机左右安全边缘，不覆盖入口、出口、放镜提示、投火者、火球弹道、锁存板、门或镜像诱敌位置。
+- 高亮色继续保留给火球与`FireballLatch`反馈；环境不使用会被误读为火球、岩浆、可放镜表面或机关状态的高亮模块。
+- `EnvironmentVisuals`及其子对象只允许`Transform`、`SpriteRenderer`和`ParallaxLayer2D`，不得包含`Rigidbody2D`、Collider/Trigger、`SurfaceSemantic2D`、`MirrorSurface2D`、重置组件或房间玩法脚本。
+- `Fire004RoomBuilder`同时保留完整灰盒重建能力和安全的视觉增量入口；后续改变本节视觉事实时必须同步更新Builder、Scene与本房文档。
 
 ## 相机与信息可见性
 

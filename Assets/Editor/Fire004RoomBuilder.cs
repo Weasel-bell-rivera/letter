@@ -20,6 +20,14 @@ public static class Fire004RoomBuilder
     private const string DoorPath = "Assets/Prefabs/Gameplay/Doors/Door2D.prefab";
     private const string EnemyPath = "Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab";
     private const string ExitPath = "Assets/Prefabs/Gameplay/Exits/RoomExit2D.prefab";
+    private const string FarBackdropPath =
+        "Assets/Art/Fire/Backgrounds/fire_cavern_far_background_v1.png";
+    private const string RockSilhouettesPath =
+        "Assets/Art/Generated/Fire/fire_parallax_rock_silhouettes_handpainted_v1.png";
+    private const string MidgroundRuinsPath =
+        "Assets/Art/Generated/Fire/fire_midground_ruins_machinery_handpainted_v1.png";
+    private const string ForegroundEdgesPath =
+        "Assets/Art/Generated/Fire/fire_foreground_edge_modules_handpainted_v1.png";
 
     [MenuItem("Tools/W1/Build FIRE-004 Greybox")]
     public static void BuildFromMenu() => Build();
@@ -45,6 +53,36 @@ public static class Fire004RoomBuilder
         Require(EditorSceneManager.SaveScene(scene, ScenePath), "Failed to save FIRE_004 exit gaps.");
     }
 
+    [MenuItem("Tools/W1/Apply FIRE-004 Layered Visuals")]
+    public static void ApplyLayeredVisuals()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        Require(scene.path == ScenePath, "Open FIRE_004 before applying its layered visuals.");
+        GameObject room = scene.GetRootGameObjects()
+            .Single(root => root.name == "FIRE_004 Borrowed Fire Door");
+        Camera camera = scene.GetRootGameObjects()
+            .SelectMany(root => root.GetComponentsInChildren<Camera>(true))
+            .Single();
+        Tilemap terrain = scene.GetRootGameObjects()
+            .SelectMany(root => root.GetComponentsInChildren<Tilemap>(true))
+            .Single(map => map.name == "Terrain");
+
+        Transform existing = room.transform.Find("EnvironmentVisuals");
+        if (existing != null)
+        {
+            ValidateVisualOnly(existing);
+            Undo.DestroyObjectImmediate(existing.gameObject);
+        }
+
+        GameObject visuals = CreateEnvironmentVisuals(room.transform, camera.transform);
+        Undo.RegisterCreatedObjectUndo(visuals, "Apply FIRE-004 layered visuals");
+        Undo.RecordObject(terrain, "Tint FIRE-004 terrain");
+        terrain.color = new Color(.38f, .25f, .24f, 1f);
+        ValidateEnvironmentVisuals(scene, camera, terrain);
+        EditorSceneManager.MarkSceneDirty(scene);
+        Require(EditorSceneManager.SaveScene(scene, ScenePath), "Failed to save FIRE_004 layered visuals.");
+    }
+
     public static void Build()
     {
         Directory.CreateDirectory("Assets/Scenes/Levels/Fire");
@@ -67,6 +105,7 @@ public static class Fire004RoomBuilder
         CreateLayer(gridObject.transform, "Background");
         Tilemap terrain = CreateLayer(gridObject.transform, "Terrain");
         ConfigureTerrain(terrain);
+        terrain.color = new Color(.38f, .25f, .24f, 1f);
         CreateLayer(gridObject.transform, "OneWayPlatform");
         CreateLayer(gridObject.transform, "SpecialMirrorWall");
         CreateLayer(gridObject.transform, "Hazard");
@@ -123,6 +162,7 @@ public static class Fire004RoomBuilder
         Record(forwardExit);
 
         Camera camera = CreateCamera();
+        CreateEnvironmentVisuals(room.transform, camera.transform);
         GameObject lightObject = new("Main Light");
         lightObject.transform.SetParent(room.transform);
         Light2D light = lightObject.AddComponent<Light2D>();
@@ -200,6 +240,173 @@ public static class Fire004RoomBuilder
         Require(forwardExit.TargetScene == "Fire_005" && forwardExit.TargetEntranceId == "DEFAULT", "Forward exit target mismatch.");
         Require(scene.GetRootGameObjects().SelectMany(x => x.GetComponentsInChildren<RoomExit2D>(true)).Count() == 2, "FIRE_004 needs two exits.");
         Require(camera.GetComponent<CameraFollow2D>() == null, "FIRE_004 must use a fixed camera.");
+        ValidateEnvironmentVisuals(scene, camera, terrain);
+    }
+
+    private static GameObject CreateEnvironmentVisuals(Transform room, Transform cameraTransform)
+    {
+        GameObject root = Child(room, "EnvironmentVisuals");
+        root.transform.SetSiblingIndex(0);
+
+        Transform backdrop = CreateParallaxLayer(root.transform, "01 Color and Fog Backdrop",
+            cameraTransform, 1f);
+        CreateSprite(backdrop, "Backdrop_DarkFireCavern",
+            LoadSprite(FarBackdropPath, "fire_cavern_far_background_v1_0"),
+            new Vector2(0f, 2f), 1.6f, new Color(.72f, .67f, .72f, 1f), -100);
+
+        Transform extremeFar = CreateParallaxLayer(root.transform, "02 Extreme Far Contours",
+            cameraTransform, .95f);
+        CreateSprite(extremeFar, "ExtremeFar_CeilingLeft",
+            LoadSprite(RockSilhouettesPath, "fire_parallax_rock_silhouettes_handpainted_v1_0"),
+            new Vector2(-8.7f, 7.25f), 1.12f, new Color(.35f, .27f, .38f, .38f), -82);
+        CreateSprite(extremeFar, "ExtremeFar_CeilingRight",
+            LoadSprite(RockSilhouettesPath, "fire_parallax_rock_silhouettes_handpainted_v1_2"),
+            new Vector2(8.15f, 7.15f), .84f, new Color(.33f, .25f, .36f, .36f), -81);
+
+        Transform far = CreateParallaxLayer(root.transform, "03 Far Environment",
+            cameraTransform, .85f);
+        CreateSprite(far, "Far_RockMassLeft",
+            LoadSprite(RockSilhouettesPath, "fire_parallax_rock_silhouettes_handpainted_v1_10"),
+            new Vector2(-8f, -2.15f), .9f, new Color(.44f, .33f, .43f, .38f), -56);
+        CreateSprite(far, "Far_RockMassRight",
+            LoadSprite(RockSilhouettesPath, "fire_parallax_rock_silhouettes_handpainted_v1_11"),
+            new Vector2(7.8f, -2.05f), 1.05f, new Color(.42f, .31f, .41f, .36f), -55);
+
+        Transform mid = CreateParallaxLayer(root.transform, "04 Mid Environment",
+            cameraTransform, .65f);
+        CreateSprite(mid, "Mid_RuinedPillar",
+            LoadSprite(MidgroundRuinsPath, "fire_midground_ruins_machinery_handpainted_v1_6"),
+            new Vector2(-5.9f, .8f), .72f, new Color(.46f, .36f, .48f, .58f), -32);
+        CreateSprite(mid, "Mid_OverheadPipe",
+            LoadSprite(MidgroundRuinsPath, "fire_midground_ruins_machinery_handpainted_v1_1"),
+            new Vector2(6.9f, 4.65f), .82f, new Color(.45f, .35f, .47f, .56f), -31);
+
+        CreateParallaxLayer(root.transform, "05 Rear Dynamic Fog (Reserved)", cameraTransform, .8f);
+        CreateParallaxLayer(root.transform, "07 Front Dynamic Fog and Particles (Reserved)",
+            cameraTransform, .35f);
+
+        Transform foreground = CreateParallaxLayer(root.transform, "08 Foreground Occlusion",
+            cameraTransform, .2f);
+        CreateSprite(foreground, "Foreground_LeftEdge",
+            LoadSprite(ForegroundEdgesPath, "fire_foreground_edge_modules_handpainted_v1_0"),
+            new Vector2(-13.2f, 2f), .74f, new Color(.38f, .30f, .36f, .82f), 31);
+        CreateSprite(foreground, "Foreground_RightEdge",
+            LoadSprite(ForegroundEdgesPath, "fire_foreground_edge_modules_handpainted_v1_4"),
+            new Vector2(13.45f, 2.2f), .4f, new Color(.37f, .29f, .35f, .8f), 32);
+
+        return root;
+    }
+
+    private static Transform CreateParallaxLayer(Transform parent, string name,
+        Transform cameraTransform, float followFactor)
+    {
+        GameObject layer = Child(parent, name);
+        layer.AddComponent<ParallaxLayer2D>().Configure(cameraTransform, followFactor, true, false);
+        return layer.transform;
+    }
+
+    private static void CreateSprite(Transform parent, string name, Sprite sprite, Vector2 position,
+        float uniformScale, Color color, int sortingOrder)
+    {
+        GameObject visual = Child(parent, name);
+        visual.transform.localPosition = new Vector3(position.x, position.y, 0f);
+        visual.transform.localScale = new Vector3(uniformScale, uniformScale, 1f);
+        SpriteRenderer renderer = visual.AddComponent<SpriteRenderer>();
+        renderer.sprite = sprite;
+        renderer.color = color;
+        renderer.sortingOrder = sortingOrder;
+    }
+
+    private static Sprite LoadSprite(string path, string spriteName)
+    {
+        Sprite sprite = AssetDatabase.LoadAllAssetsAtPath(path)
+            .OfType<Sprite>()
+            .SingleOrDefault(candidate => candidate.name == spriteName);
+        Require(sprite != null, $"Missing sprite '{spriteName}' in {path}.");
+        return sprite;
+    }
+
+    private static void ValidateEnvironmentVisuals(Scene scene, Camera camera, Tilemap terrain)
+    {
+        GameObject environment = scene.GetRootGameObjects()
+            .SelectMany(root => root.GetComponentsInChildren<Transform>(true))
+            .Where(item => item.name == "EnvironmentVisuals")
+            .Select(item => item.gameObject)
+            .Single();
+        ValidateVisualOnly(environment.transform);
+
+        string[] names =
+        {
+            "01 Color and Fog Backdrop",
+            "02 Extreme Far Contours",
+            "03 Far Environment",
+            "04 Mid Environment",
+            "05 Rear Dynamic Fog (Reserved)",
+            "07 Front Dynamic Fog and Particles (Reserved)",
+            "08 Foreground Occlusion"
+        };
+        float[] factors = { 1f, .95f, .85f, .65f, .8f, .35f, .2f };
+        for (int i = 0; i < names.Length; i++)
+        {
+            Transform layer = environment.transform.Find(names[i]);
+            Require(layer != null, $"FIRE_004 is missing visual layer '{names[i]}'.");
+            ParallaxLayer2D parallax = layer.GetComponent<ParallaxLayer2D>();
+            Require(parallax != null && Mathf.Approximately(parallax.CameraFollowFactor, factors[i]) &&
+                    parallax.FollowsHorizontal && !parallax.FollowsVertical,
+                $"FIRE_004 visual layer '{names[i]}' has an invalid parallax configuration.");
+            SerializedObject serializedParallax = new SerializedObject(parallax);
+            Require(serializedParallax.FindProperty("cameraTransform").objectReferenceValue == camera.transform,
+                $"FIRE_004 visual layer '{names[i]}' must explicitly reference Main Camera.");
+        }
+
+        Require(environment.GetComponentsInChildren<ParallaxLayer2D>(true).Length == names.Length,
+            "FIRE_004 must have exactly seven non-gameplay parallax layers.");
+        Require(environment.GetComponentsInChildren<SpriteRenderer>(true).Length == 9,
+            "FIRE_004 layered environment must contain exactly nine visual modules.");
+        Require(scene.GetRootGameObjects().SelectMany(root =>
+                root.GetComponentsInChildren<Transform>(true))
+            .Single(item => item.name == "Gameplay")
+            .GetComponent<ParallaxLayer2D>() == null,
+            "FIRE_004 gameplay layer must remain in world space.");
+        Require(terrain.transform.parent != null && terrain.transform.parent.name == "Grid" &&
+                terrain.transform.parent.parent != null &&
+                terrain.transform.parent.parent.name == "FIRE_004 Borrowed Fire Door",
+            "FIRE_004 terrain must remain under the room Grid, outside EnvironmentVisuals.");
+        Color expectedTerrainColor = new Color(.38f, .25f, .24f, 1f);
+        Require(Vector4.Distance(terrain.color, expectedTerrainColor) < .001f,
+            "FIRE_004 terrain tint must preserve the approved dark gameplay silhouette.");
+
+        SpriteRenderer backdrop = environment.transform
+            .Find("01 Color and Fog Backdrop/Backdrop_DarkFireCavern")
+            .GetComponent<SpriteRenderer>();
+        float requiredWidth = camera.orthographicSize * 2f * (16f / 9f) + 1f;
+        float requiredHeight = camera.orthographicSize * 2f + 1f;
+        Require(backdrop.bounds.size.x >= requiredWidth && backdrop.bounds.size.y >= requiredHeight,
+            "FIRE_004 backdrop does not cover the 16:9 fixed-camera viewport plus padding.");
+
+        foreach (SpriteRenderer renderer in environment.transform
+                     .Find("08 Foreground Occlusion")
+                     .GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            Require(renderer.bounds.max.x <= -11.75f || renderer.bounds.min.x >= 11.75f,
+                $"Foreground module '{renderer.name}' intrudes into the gameplay-readable window.");
+        }
+    }
+
+    private static void ValidateVisualOnly(Transform root)
+    {
+        Require(root.GetComponentsInChildren<Component>(true).All(component =>
+                component is Transform || component is SpriteRenderer ||
+                component is ParallaxLayer2D),
+            "EnvironmentVisuals may contain only Transform, SpriteRenderer, and ParallaxLayer2D components.");
+        Require(root.GetComponentsInChildren<Rigidbody2D>(true).Length == 0,
+            "EnvironmentVisuals must not contain Rigidbody2D components.");
+        Require(root.GetComponentsInChildren<Collider2D>(true).Length == 0,
+            "EnvironmentVisuals must not contain Collider2D components or Triggers.");
+        Require(root.GetComponentsInChildren<SurfaceSemantic2D>(true).Length == 0,
+            "EnvironmentVisuals must not contain surface semantics.");
+        Require(root.GetComponentsInChildren<MirrorSurface2D>(true).Length == 0,
+            "EnvironmentVisuals must not contain mirror surfaces.");
     }
 
     private static GameObject Child(Transform parent, string name) { GameObject go = new(name); go.transform.SetParent(parent, false); return go; }

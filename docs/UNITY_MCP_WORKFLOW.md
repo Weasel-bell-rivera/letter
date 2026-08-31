@@ -7,8 +7,11 @@
 - 游戏与系统行为仍以对应设计文档为准。
 - `AGENTS.md`中的任务范围、耗时操作确认、测试限制和Definition of done继续生效。
 - 使用MCP不能绕过设计审批、测试确认、Unity资源安全或Git改动范围要求。
+- “Scene写入与外部文件同步”同样适用于不经过MCP的文本编辑、外部脚本、Builder和多任务协作。
 
 ## 使用前检查
+
+本节针对需要连接或操作Editor的MCP步骤；外部文件编辑不以MCP就绪为前提。
 
 1. 阅读任务涉及的设计、系统、区域和房间文档。
 2. 检查Git状态，识别并保留用户已有的未提交改动。
@@ -21,7 +24,35 @@
    - 没有待处理的Domain Reload或资源刷新。
    - `ready_for_tools`为`true`。
 
-Editor未就绪时只等待并重新读取状态，不连续提交修改命令。
+Editor未就绪时不连续提交Editor操作命令；可以继续外部文件编辑和静态检查，恢复就绪后再执行同步。
+
+## Scene写入与外部文件同步
+
+外部编辑是agent的正常工作方式。Unity提示`The open scene(s) have been modified externally`，只表示已打开Scene的磁盘文件发生了变化，不表示禁止外部修改；只有Editor中另有需要保留的未保存编辑时，才需要处理两份版本的合并。
+
+### 允许外部编辑
+
+- 可以使用`apply_patch`、Python、Shell等外部工具修改文本序列化的`.unity`和`.prefab`文件，也可以使用Unity MCP或Editor API；根据任务选择合适的方式，不强制走MCP。
+- Unity正在打开目标Scene不阻止外部编辑，也不要求先关闭或卸载目标Scene。MCP不可用、Editor未就绪或无法读取dirty状态时，仍可完成磁盘修改和静态检查；只将无法确认安全的Editor保存、Reload及画面验证延后，并报告待同步状态。
+- 修改前确认目标路径、文本序列化格式和依赖，读取最新内容；落盘前检查文件是否已被其他写入者改变，保留已有Git改动、`.meta`、GUID和无关序列化内容。文件变化时基于最新版本重新应用本轮修改，不覆盖整份旧版本。
+- 同一Scene的写入由一个执行者协调，避免多个任务、脚本和Editor保存相互覆盖。可以并行处理独立资源或准备修改，向同一文件落盘时串行合并。
+- 每轮集中完成一批改动，只对内容确实变化的文件落盘，再统一同步一次；避免每改一个字段就Refresh或Reload。局部视觉任务不因此扩大为整房重建或全项目刷新。
+
+### 外部修改后的同步
+
+- Git工作区有改动不等于Scene在Editor中dirty。同步前分别检查磁盘改动与Editor未保存状态；考虑所有受影响的打开Scene和Prefab Stage，不只检查active Scene。
+- 确认磁盘变化是本轮应接受的结果，且Editor中没有需要保留的未保存编辑时，agent可以直接执行一次Reload或重新打开目标，无需用户逐次确认。允许把这一流程自动化，但不能在状态未知时无条件丢弃内存版本。
+- 如果有用户未保存编辑，先保护内存与磁盘两份内容，再比较、合并；不得从旧内存状态保存覆盖agent的磁盘修改，也不得直接Reload丢弃用户编辑。只保护受影响资源，不复制整个项目。
+- Editor正在Play Mode、编译、Domain Reload或无法安全操作时，延后重载和验证；不因此禁止外部编辑，也不擅自停止用户的游戏运行。已授权的取图流程沿用原授权。
+- 同步完成后重新读取Scene、对象标识和关键字段，避免继续使用重载前的对象句柄；确认Git diff与本轮修改一致。使用Editor保存时只保存明确的目标，不用Save All顺带保存其他Scene。
+
+### Reload弹窗与刷新
+
+- 出现弹窗时按上述同步条件处理，不能仅因弹窗出现就禁止agent后续外部修改；不要在一批文件尚未写完时同步中间版本。
+- Ignore保留当前内存版本，不会合并外部变化，后续保存可能覆盖磁盘上的优化结果。只有明确需要保留内存版本时才选择它，不能当作已同步。
+- Auto Refresh控制自动导入，不等于自动确认Reload。是否调整它取决于实际工作流；关闭它并不能完成版本合并。只在必要时导入受影响资源，不追加全项目刷新。
+
+Unity的刷新触发条件和Scene保存行为参考：[资源数据库刷新](https://docs.unity3d.com/6000.0/Documentation/Manual/AssetDatabaseRefreshing.html)、[EditorSceneManager.SaveScene](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/SceneManagement.EditorSceneManager.SaveScene.html)。
 
 ## 标准工作流
 

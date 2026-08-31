@@ -182,6 +182,10 @@ T  Player从FIRE_005进入后的出生与重置位置
 - 中央固定岩浆位于`Grid/Hazard`，可见Tile边界与Trigger边界一致，并显式配置`Hazard`表面语义和通用`Hazard2D`。
 - 中央岩浆的可见格使用`Assets/Tiles/Fire/Fire006Lava.asset`，其Sprite来自`Assets/Art/Generated/Fire/Fire006LavaTile.png`；该房间专用美术Tile不改变8格危险范围、Trigger或表面语义。
 - `Background`、`OneWayPlatform`、`SpecialMirrorWall`、`Decoration`和`Foreground`标准层已保留为空层；本房没有借此新增对应玩法语义。
+- 纯表现根`EnvironmentVisuals/01 Color and Fog Backdrop`使用最远景倍率`1.00`并显式引用主相机，仅水平跟随；`Backdrop_FireCavern`使用本房专用`Assets/Art/Fire/Backgrounds/fire006_fog_light_v1.png`作为颜色/烟雾底，Unlit Sprite、`Sorting Order -100`、缩放`1.8`。不烘焙玩法布局。
+- 独立`EnvironmentVisuals/03 Far Environment`使用标准倍率`0.85`并显式引用同一相机，仅水平跟随；左右岩柱复用透明模块`Assets/Art/Fire/Backgrounds/fire006_far_buttress_v1.png`，位于`(-9,-1)`和`(10,0)`，缩放分别`1.5`和`1.25`，`Sorting Order -60`、Alpha `0.38`。子对象仅含Transform与SpriteRenderer，无碰撞或玩法语义。无内容的第2、4、5、7层暂省略，不宣称完整八层已实现。
+- `Grid/Terrain`继续使用同一`FireTerrainBasaltCenter` Tile与原有70格布局，仅将Tilemap表现乘色设为`(0.78, 0.58, 0.62, 1)`，使玩法岩体融入火区暖暗调色；Collider、Tile引用、表面语义和镜子放置语义均保持不变。
+- 纯表现根`EnvironmentVisuals/08 Foreground Occlusion`使用标准倍率`0.20`，显式引用主相机且仅水平跟随；两个Sprite复用`Assets/Art/Fire/Decorations/fire006_low_rubble_v1.png`，中心分别为`(-12,-7.5)`、`(10,-7.5)`，缩放`0.5`，`Sorting Order 25`。可见顶部低于地面，不覆盖Player、镜子、落点或岩浆边界；仅Transform与SpriteRenderer，无碰撞、触发或玩法脚本。
 - 使用共享Palette `Assets/TilePalettes/Fire.prefab`，迁移工具提供独立Palette同步入口，不需要重建Scene。
 - 固定正交镜头尺寸：`7.5`；可一次观察完整构图。
 - 左右安全平台各宽`8 units`，中央岩浆沟宽`8 units`；岩浆可见边界与Trigger Collider一致。
