@@ -77,3 +77,13 @@ Production 2D game sprite. One isolated connected low cluster of heavy volcanic 
 
 生成提示词：Production seamless square texture tile for a 2D side-view volcanic puzzle game, opaque edge-to-edge. Flat orthographic front view of solid matte warm-black basalt interior. Very low detail hand-painted storybook texture. Deep charcoal brown base, subtle broad dark umber mineral clouds and two barely perceptible broad diagonal strata, low contrast. No individual stones, no brick pattern, no regular cell border, no bevel, no illuminated rim, no lava or glowing fissures, no pits, no cracks reaching borders, no shadows suggesting depth outside the plane, no speckles, no photographic grain, no highlights, no objects, no text. All four borders match seamlessly when repeated. A quiet dark solid rock mass that lets the EXTERNAL tilemap silhouette communicate traversable surfaces; do not draw an external silhouette or platform top. Original muted artwork, not flat one-color placeholder, but the texture should nearly disappear at game scale.
 
+## 第9轮：地形明度补偿（撤销并停止循环）
+
+- 仅在Unity内将原70格切换至第8轮独立Tile，Tilemap乘色由(0.78,0.58,0.62,1)改为(1.3,1.2,1.3,1)，验证暗部合并是否仅由明度造成。
+- 同条件运行态截图：Temp/W1VisualOptimize/Fire_006/iteration_09/fire006_iter09_matte_lift_runtime.png，1920×1080、原相机、右侧出生玩家。
+- 暂评63.5，低于保留版本64（小于3分仍属近似平手，不宣称明显退步），无有效提升。九项原始分：6、7、8、7、5、7、7、4、5；加权12、10.5、8、7、7.5、7、7、2、2.5。LIMBO固定87.5，差值-24。
+- 相比第7轮：技术6→7（+1，砖缝消失，置信度中）；风格6→5（-1.5，均匀斜条纹像平面板材，岩体材质辨识减弱，置信度中）；其余维度不变。
+- 已在Unity内恢复70格原Tile及原乘色，并只保存Fire_006；Scene clean，PlayMode已退出。无玩法参数变更。
+- 第8、9轮连续未产生有效提升，触发用户目标的停止条件。停止不是达到90分；当前最高/最终可比较运行态分仍为64。
+- 下一条值得尝试的路线是独立边缘模块与内部纹理分离，而不是继续整块纹理换色；需要在停止后明确重启新的迭代批次。
+
