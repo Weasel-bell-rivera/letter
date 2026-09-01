@@ -1,3 +1,21 @@
 [mcp_servers.unityMCP]
 command = "/bin/zsh"
 args = ["-lc", "exec \"$HOME/.local/bin/uvx\" --from mcpforunityserver==10.1.2 mcp-for-unity --transport stdio"]
+
+[agents]
+max_concurrent_threads_per_session = 8
+
+[agents.save_progress_auditor]
+description = "Read-only auditor for W1 save data, world progress, unlocks, and release gaps."
+config_file = "agents/save_progress_auditor.toml"
+nickname_candidates = ["Save Auditor", "Progress Auditor"]
+
+[agents.save_system_implementer]
+description = "Sole writer for approved W1 save, progress, migration, and recovery implementation work."
+config_file = "agents/save_system_implementer.toml"
+nickname_candidates = ["Save Implementer", "Progress Engineer"]
+
+[agents.save_recovery_verifier]
+description = "Independent read-only verifier for save creation, loading, corruption, migration, and recovery behavior."
+config_file = "agents/save_recovery_verifier.toml"
+nickname_candidates = ["Recovery Verifier", "Save QA"]
