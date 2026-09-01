@@ -29,7 +29,7 @@
 - 概念可玩边界：`x=-12～12，y=-5～6`；灰盒前可以收紧，但不得改变谜题关系。
 - 左侧入口、中央土块、右侧水平往返平台；土块未下沉时两者高度错开2格。
 - 静态地形使用标准`Terrain` Tilemap；镜子放置点必须是安全`StaticSolid`。
-- `Terrain` Tilemap使用`Assets/Tiles/Earth/Earth006/Earth006Terrain.asset`呈现粗颗粒low-poly土地纹理；该视觉替换不改变格子布局、碰撞或`StaticSolid`表面语义。
+- `Terrain` Tilemap使用`Assets/Tiles/Earth/Earth006/Earth006Terrain.asset`与纯色Sprite `Assets/Art/Earth/Terrain/Earth006TerrainSolid.png`呈现近黑暖褐剪影；单格内部不包含纹理、裂纹、渐变或烘焙明暗。该视觉替换不改变格子布局、碰撞或`StaticSolid`表面语义。
 - 动态对象完整行程不得夹住角色、侵入出口或形成存活软锁。
 
 ## Prefab需求
@@ -46,6 +46,18 @@
 - 使用全局默认角色占屏比例，正交尺寸基准为`7`。
 - 相机边界不得显示房外内容；MirrorClone参与时必须同时显示双方、操作对象和结果对象。
 - 无构图例外，不修改Player尺寸。
+
+## 环境视觉分层
+
+- 使用`EARTH_006 Environment Visuals`纯表现根，所有子对象只包含`Transform`、`SpriteRenderer`和`ParallaxLayer2D`，不包含Collider、Trigger、Rigidbody2D或玩法语义。
+- `01 Color and Fog Backdrop`：`cameraFollowFactor=1.00`，使用`earth-fog-light.png`建立暖褐雾光底。
+- `02 Extreme Far Contours`：`cameraFollowFactor=0.95`，使用`earth-extreme-far-shaft.png`建立极远深井轮廓。
+- `03 Far Environment`：`cameraFollowFactor=0.85`，使用`earth-far-strata-tunnel.png`建立低对比远景坑道。
+- `04 Mid Environment`：`cameraFollowFactor=0.65`，使用承重岩柱、矿井支撑与层状岩体三个独立透明模块。
+- `08 Foreground Occlusion`：`cameraFollowFactor=0.20`，使用左右独立近黑框景，限制在画面边缘，不承担地形、危险或镜子放置语义。
+- 本次没有配置后部动态尘雾和前部落尘粒子；对应功能层保持省略，不把空层记录为已实现表现。
+- 本房沿用全局默认水平视差，不启用纵向跟随；固定单屏构图下仍保留各层独立职责和显式Main Camera引用。
+- 素材来自`Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/`，均为极少纹理的独立模块，不包含完整房间布局或可玩地形。
 
 ## 预期流程
 
@@ -68,4 +80,6 @@
 - 操作前可看清因果关系；镜子合法性可预判；土块全行程安全；解法不依赖帧率或盲跳。
 - 已使用标准Tilemap骨架、通用压沉土块Prefab及本文列出的通用动态对象完成灰盒。
 - 已完成Unity序列化保存、Builder内部结构校验和低成本静态检查；未运行PlayMode、完整EditMode或人工试玩。
+- 已完成环境表现增量重构的静态相机截图检查；Gameplay Tilemap、入口出口、相机参数、压沉土块与移动平台配置未因环境分层改变。
 - 尚需人工试玩校正实际Collider净空、跳跃节奏、动态表面换乘窗口和镜像路线可读性。
+- 尚需Play Mode观察确认运行时Player与MirrorClone不会被左右前景遮挡，并确认固定镜头下不同画面比例没有透明接缝。

@@ -201,6 +201,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Fire/Fire_019.unity
     guid: 54937a857592346bda771b91815cbef3
   - enabled: 1
+    path: Assets/Scenes/Levels/Fire/Fire_020.unity
+    guid: 2c68c7940dcee4f7baab794b40ee0e1c
+  - enabled: 1
     path: Assets/Scenes/Levels/Fire/Fire_006.unity
     guid: fc9c4c4495b62fd4aaa4a30954ce6083
   m_configObjects:

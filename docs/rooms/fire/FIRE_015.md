@@ -5,7 +5,16 @@
 - 状态：灰盒中；Scene：`Assets/Scenes/Levels/Fire/Fire_015.unity`。
 - 连接：`FIRE_013—FIRE_015—FIRE_016`，右侧近入口出口返回`FIRE_013`，左侧门后出口前往`FIRE_016`。
 - 入口与出口：保留唯一`DEFAULT`安全入口；FIRE_013至FIRE_017之间的已实现双向连接使用`FROM_<来源房间ID>`入口。
-- 固定单屏，Grid `1×1`，边界`X[-15,15] Y[-7,7]`，正交尺寸`7`。
+- 固定单屏，Grid `1×1`，边界`X[-15,15] Y[-7,7]`，正交尺寸`7.5`。
+
+## 2026-09-01 增量视觉优化
+
+- Scene新增`Fire015 Environment Visuals`，按`01/02/03/04/05/07/08`组织背景、极远景、远景、中景、近景雾、前层粒子和前景遮幅；玩法层仍使用原有Grid、Prefab与Sorting关系。
+- 复用火区手绘洞窟、岩层、机械遗迹和前景模块，增加低密度灰烬/火星、局部暖雾与危险路线光区。所有新对象均为纯表现对象，不带Collider、Hazard或表面语义。
+- `Eruption-A/B`保留原`Warning 1s / Dangerous 1s / Cooldown 2s`与1×4危险边界；房间实例关闭旧红色占位柱，改用`EruptionPresentation2D`读取既有相位，呈现预警热柱、危险火焰与冷却余烟。粒子随机种子固定为`1501/1502/1503`，不写入玩法计时或伤害状态。
+- 压力板、门与出口仅调整颜色、材质和标签显示；位置、引用、碰撞与开门规则不变。MirrorClone生成后由`MirrorCloneReadabilityHalo2D`提供低强度青色轮廓，便于与Player和镜子本体区分，不改变分身移动或碰撞。
+- `Decoration`的`Tilemap Renderer`继续保持关闭；本轮未修改Terrain/Hazard Tile、关卡几何、相机、入口出口、场景连接或Player移动参数。
+- 已在Play Mode进行固定相机截图及连续帧观察；未运行PlayMode自动测试、完整测试、完整编译、全量重导入或完整人工试玩。
 
 ## 2026-08-31 房间几何修复
 

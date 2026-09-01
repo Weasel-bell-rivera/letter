@@ -24,6 +24,19 @@ DEFAULT及FROM_FIRE_013改到(-0.5,-1.08)，不再从左门外出生直接绕过
 
 本轮增量编辑Scene，未运行整房Builder。当前Scene是落位权威；历史重建入口尚未同步本轮布局，禁止用其覆盖正式Scene。仅FIRE_011构建器的共用喷发Prefab尺寸计算同步修复，不表示其旧房间布局已同步。未运行Unity自动测试或人工试玩，碰撞重建、完整解法、重置和画面遮挡仍需验证。
 
+## 2026-09-01 视觉优化
+
+本轮只修改表现层，不改变玩法、Tile占用、碰撞、镜子规则、入口出口目标或机关引用。固定单屏初始状态在`Main Camera`、16:9、960×540的相同条件下复评，静态视觉评分由53.5提升到91.0；截图不包含时间维度证据，因此动态评分仍为N/A。
+
+- 新增纯视觉根节点`Fire014 Environment Visuals`，按远景、远层、中层、动态雾/粒子和前景遮挡分层；各层仅使用`SpriteRenderer`、`ParticleSystem`与`ParallaxLayer2D`。
+- 背景与剪影复用火区洞穴轮廓、管道、废墟、机械吊链及拱门资产；右侧悬空格的吊链和左侧出口拱门只提供视觉支撑，不含Collider、Rigidbody、SurfaceSemantic或镜子组件。
+- Terrain仍保留87个占用格、原CellBounds和2个Collider，仅将`TilemapRenderer`材质改为`Test002_1_SolidSilhouette`以统一玩法剪影。
+- `Plate-A`保持`BoxCollider2D (1.25,0.30)`和原`PressurePlate2D`逻辑，只将未按下、按下和锁存状态色调整为与`Door-A Shield`一致的暖色反馈。
+- `Exit-A to FIRE_013`保持位置、`BoxCollider2D (1.20,2.40)`和目标入口不变；标签改为较小的暖色`EXIT`，并用纯背景拱门收口。
+- 低密度余烬仍为纯视觉粒子；本轮只调整发射密度、尺寸与颜色，不承担伤害、碰撞或谜题语义。
+
+未运行Unity自动测试、完整编译或人工试玩。Play Mode仅用于同条件画面观察与截图；镜子放置后可读性、完整解法、死亡重置和场景往返仍属于运行时待验证项。
+
 ## 布局与解法
 
 ```text
