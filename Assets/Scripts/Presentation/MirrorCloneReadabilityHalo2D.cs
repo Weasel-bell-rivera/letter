@@ -1,4 +1,5 @@
 using UnityEngine;
+using W1.Accessibility;
 
 [DisallowMultipleComponent]
 public sealed class MirrorCloneReadabilityHalo2D : MonoBehaviour
@@ -41,7 +42,9 @@ public sealed class MirrorCloneReadabilityHalo2D : MonoBehaviour
             transform.position = target.transform.position + new Vector3(0f, .04f, 0f);
 
         if (halo == null) return;
-        float pulse = 1f + Mathf.Sin(Time.time * 4.8f) * .025f;
+        float pulse = AccessibilityMotionPolicy.AllowDecorativeLoop
+            ? 1f + Mathf.Sin(Time.time * 4.8f) * .025f
+            : 1f;
         halo.transform.localScale = baseScale * pulse;
 
         Color color = haloColor;

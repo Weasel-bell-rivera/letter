@@ -16,6 +16,7 @@ public sealed class RisingLava2D : MonoBehaviour, IRoomResettable, IOrderedRoomR
     [SerializeField] private Phase initialPhase = Phase.Warning;
 
     private Vector3 bottomLocalPosition;
+    private LineRenderer warningShapeCue;
     private float phaseTimer;
     private bool bottomCaptured;
 
@@ -28,6 +29,7 @@ public sealed class RisingLava2D : MonoBehaviour, IRoomResettable, IOrderedRoomR
         if (movingRoot == null) movingRoot = transform;
         bottomLocalPosition = movingRoot.localPosition;
         bottomCaptured = true;
+        EnsureWarningShapeCue();
         ResetRoomState();
     }
 
@@ -83,6 +85,36 @@ public sealed class RisingLava2D : MonoBehaviour, IRoomResettable, IOrderedRoomR
     {
         if (visual != null)
             visual.color = CurrentPhase == Phase.Warning ? new Color(1f, .82f, .45f) : Color.white;
+        EnsureWarningShapeCue();
+        if (warningShapeCue != null)
+            warningShapeCue.enabled = CurrentPhase == Phase.Warning;
+    }
+
+    private void EnsureWarningShapeCue()
+    {
+        if (warningShapeCue != null || visual == null || movingRoot == null)
+            return;
+        GameObject cue = new("Lava Warning Shape Cue");
+        cue.transform.SetParent(movingRoot, false);
+        cue.transform.localPosition = new Vector3(0f, .35f, -.01f);
+        warningShapeCue = cue.AddComponent<LineRenderer>();
+        warningShapeCue.useWorldSpace = false;
+        warningShapeCue.loop = false;
+        warningShapeCue.positionCount = 4;
+        warningShapeCue.SetPositions(new[]
+        {
+            new Vector3(-.42f, 0f, 0f),
+            new Vector3(0f, .58f, 0f),
+            new Vector3(.42f, 0f, 0f),
+            new Vector3(-.42f, 0f, 0f)
+        });
+        warningShapeCue.startWidth = .08f;
+        warningShapeCue.endWidth = .08f;
+        warningShapeCue.startColor = Color.white;
+        warningShapeCue.endColor = Color.white;
+        warningShapeCue.sharedMaterial = visual.sharedMaterial;
+        warningShapeCue.sortingLayerID = visual.sortingLayerID;
+        warningShapeCue.sortingOrder = visual.sortingOrder + 2;
     }
 
     private void ApplyPosition()

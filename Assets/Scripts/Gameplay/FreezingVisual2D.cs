@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using W1.Accessibility;
 
 /// <summary>Presentation-only feedback driven by the shared freezing progress component.</summary>
 [DisallowMultipleComponent]
@@ -104,7 +105,9 @@ public sealed class FreezingVisual2D : MonoBehaviour
             pair.Key.color = value;
         }
         if (overlay == null) return;
-        float warningPulse = amount < .75f ? 0f : (Mathf.Sin(Time.time * 12f) * .5f + .5f) * .1f * amount;
+        float warningPulse = amount < .75f || !AccessibilityMotionPolicy.AllowDecorativeLoop
+            ? 0f
+            : (Mathf.Sin(Time.time * 12f) * .5f + .5f) * .1f * amount;
         overlay.color = new Color(frozenTint.r, frozenTint.g, frozenTint.b,
             Mathf.Clamp01(amount * maximumOverlayAlpha + warningPulse));
         SyncOverlay(overlayTarget);

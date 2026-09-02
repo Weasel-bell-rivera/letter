@@ -1,31 +1,64 @@
 {
   "name": "InputSystem_Actions",
-  "maps": [{
-    "name": "Player",
-    "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
-    "actions": [
-      {"name":"Move","type":"Value","id":"351f2ccd-1f9f-44bf-9bec-d62ac5c5f408","expectedControlType":"Axis"},
-      {"name":"Jump","type":"Button","id":"f1ba0d36-48eb-4cd5-b651-1c94a6531f70","expectedControlType":"Button"},
-      {"name":"PlaceMirror","type":"Button","id":"a1111111-1111-4111-8111-111111111111","expectedControlType":"Button"},
-      {"name":"RecallMirror","type":"Button","id":"a2222222-2222-4222-8222-222222222222","expectedControlType":"Button"},
-      {"name":"ResetRoom","type":"Button","id":"a3333333-3333-4333-8333-333333333333","expectedControlType":"Button"},
-      {"name":"Interact","type":"Button","id":"852140f2-7766-474d-8707-702459ba45f3","expectedControlType":"Button"},
-      {"name":"Pause","type":"Button","id":"a4444444-4444-4444-8444-444444444444","expectedControlType":"Button"}
-    ],
-    "bindings": [
-      {"name":"Horizontal","id":"b1000000-0000-4000-8000-000000000001","path":"1DAxis","action":"Move","isComposite":true},
-      {"name":"negative","id":"b1000000-0000-4000-8000-000000000002","path":"<Keyboard>/a","action":"Move","isPartOfComposite":true},
-      {"name":"positive","id":"b1000000-0000-4000-8000-000000000003","path":"<Keyboard>/d","action":"Move","isPartOfComposite":true},
-      {"name":"Arrows","id":"b1000000-0000-4000-8000-000000000004","path":"1DAxis","action":"Move","isComposite":true},
-      {"name":"negative","id":"b1000000-0000-4000-8000-000000000005","path":"<Keyboard>/leftArrow","action":"Move","isPartOfComposite":true},
-      {"name":"positive","id":"b1000000-0000-4000-8000-000000000006","path":"<Keyboard>/rightArrow","action":"Move","isPartOfComposite":true},
-      {"id":"b2000000-0000-4000-8000-000000000001","path":"<Keyboard>/space","action":"Jump"},
-      {"id":"b2000000-0000-4000-8000-000000000002","path":"<Mouse>/leftButton","action":"PlaceMirror"},
-      {"id":"b2000000-0000-4000-8000-000000000003","path":"<Mouse>/rightButton","action":"RecallMirror"},
-      {"id":"b2000000-0000-4000-8000-000000000004","path":"<Keyboard>/r","action":"ResetRoom"},
-      {"id":"b2000000-0000-4000-8000-000000000005","path":"<Keyboard>/e","action":"Interact"},
-      {"id":"b2000000-0000-4000-8000-000000000006","path":"<Keyboard>/escape","action":"Pause"}
-    ]
-  }],
+  "maps": [
+    {
+      "name": "Player",
+      "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
+      "actions": [
+        {"name":"Move","type":"Value","id":"351f2ccd-1f9f-44bf-9bec-d62ac5c5f408","expectedControlType":"Axis"},
+        {"name":"Jump","type":"Button","id":"f1ba0d36-48eb-4cd5-b651-1c94a6531f70","expectedControlType":"Button"},
+        {"name":"PlaceMirror","type":"Button","id":"a1111111-1111-4111-8111-111111111111","expectedControlType":"Button"},
+        {"name":"RecallMirror","type":"Button","id":"a2222222-2222-4222-8222-222222222222","expectedControlType":"Button"},
+        {"name":"ResetRoom","type":"Button","id":"a3333333-3333-4333-8333-333333333333","expectedControlType":"Button"},
+        {"name":"Interact","type":"Button","id":"852140f2-7766-474d-8707-702459ba45f3","expectedControlType":"Button"},
+        {"name":"Pause","type":"Button","id":"a4444444-4444-4444-8444-444444444444","expectedControlType":"Button"}
+      ],
+      "bindings": [
+        {"name":"Horizontal","id":"b1000000-0000-4000-8000-000000000001","path":"1DAxis","action":"Move","isComposite":true},
+        {"name":"negative","id":"b1000000-0000-4000-8000-000000000002","path":"<Keyboard>/a","action":"Move","isPartOfComposite":true},
+        {"name":"positive","id":"b1000000-0000-4000-8000-000000000003","path":"<Keyboard>/d","action":"Move","isPartOfComposite":true},
+        {"name":"Arrows","id":"b1000000-0000-4000-8000-000000000004","path":"1DAxis","action":"Move","isComposite":true},
+        {"name":"negative","id":"b1000000-0000-4000-8000-000000000005","path":"<Keyboard>/leftArrow","action":"Move","isPartOfComposite":true},
+        {"name":"positive","id":"b1000000-0000-4000-8000-000000000006","path":"<Keyboard>/rightArrow","action":"Move","isPartOfComposite":true},
+        {"id":"b2000000-0000-4000-8000-000000000001","path":"<Keyboard>/space","action":"Jump"},
+        {"id":"b2000000-0000-4000-8000-000000000002","path":"<Mouse>/leftButton","action":"PlaceMirror"},
+        {"id":"b2000000-0000-4000-8000-000000000003","path":"<Mouse>/rightButton","action":"RecallMirror"},
+        {"id":"b2000000-0000-4000-8000-000000000004","path":"<Keyboard>/r","action":"ResetRoom"},
+        {"id":"b2000000-0000-4000-8000-000000000005","path":"<Keyboard>/e","action":"Interact"},
+        {"id":"b2000000-0000-4000-8000-000000000006","path":"<Keyboard>/escape","action":"Pause"}
+      ]
+    },
+    {
+      "name": "UI",
+      "id": "ce729205-b246-4a80-98b0-47c635430850",
+      "actions": [
+        {"name":"Navigate","type":"PassThrough","id":"29ce86d9-47b8-4dcf-9660-cc78a8c85d00","expectedControlType":"Vector2"},
+        {"name":"Confirm","type":"Button","id":"b16143dc-8051-4991-bcd1-263e3ad8014f","expectedControlType":"Button"},
+        {"name":"Cancel","type":"Button","id":"fca4a29e-9772-4087-8f4f-afe5361bcba7","expectedControlType":"Button"},
+        {"name":"Point","type":"PassThrough","id":"782e4440-0761-45d1-adc6-55a2320ada94","expectedControlType":"Vector2"},
+        {"name":"Click","type":"PassThrough","id":"d552330f-925d-48cc-adfd-950e5875bbcd","expectedControlType":"Button"},
+        {"name":"Scroll","type":"PassThrough","id":"bdbb2f53-016c-4876-8dd2-78b8e58f7a99","expectedControlType":"Vector2"}
+      ],
+      "bindings": [
+        {"name":"WASD","id":"a38bd39e-e670-4d59-b2d3-3529830f7b75","path":"2DVector","action":"Navigate","isComposite":true},
+        {"name":"up","id":"83add336-b147-4168-8de5-4a0d4662ed77","path":"<Keyboard>/w","action":"Navigate","isPartOfComposite":true},
+        {"name":"down","id":"9ce5d115-d93e-40e0-9239-f407509ee28c","path":"<Keyboard>/s","action":"Navigate","isPartOfComposite":true},
+        {"name":"left","id":"60540f42-3776-4d21-998d-4a427b9606e0","path":"<Keyboard>/a","action":"Navigate","isPartOfComposite":true},
+        {"name":"right","id":"7df92ee9-6feb-4df1-9972-1922ca85f3e4","path":"<Keyboard>/d","action":"Navigate","isPartOfComposite":true},
+        {"name":"Arrows","id":"3de6e087-9bf7-493b-986d-47c4b84e0e5a","path":"2DVector","action":"Navigate","isComposite":true},
+        {"name":"up","id":"7b6492ad-b699-4ff4-96ed-ff8872d2e952","path":"<Keyboard>/upArrow","action":"Navigate","isPartOfComposite":true},
+        {"name":"down","id":"4c15b7ff-a317-4838-80dd-2bf8970f9846","path":"<Keyboard>/downArrow","action":"Navigate","isPartOfComposite":true},
+        {"name":"left","id":"a21f44fd-7c15-4472-816a-e3f2e5b362b2","path":"<Keyboard>/leftArrow","action":"Navigate","isPartOfComposite":true},
+        {"name":"right","id":"5a1399c7-d9f7-47be-9894-c669ab4ca4e0","path":"<Keyboard>/rightArrow","action":"Navigate","isPartOfComposite":true},
+        {"id":"1ea02d16-2698-4f82-9f5a-53d744f8d22a","path":"<Keyboard>/enter","action":"Confirm"},
+        {"id":"aecf8437-66e9-4057-a645-3b77279dbafb","path":"<Keyboard>/numpadEnter","action":"Confirm"},
+        {"id":"bd0376ac-f9f9-4ec8-a841-576038182173","path":"<Keyboard>/space","action":"Confirm"},
+        {"id":"61afc0cd-5a88-4ac2-b349-62408c30f05b","path":"<Keyboard>/escape","action":"Cancel"},
+        {"id":"1f957112-7545-4dfd-8979-d601111caa34","path":"<Mouse>/position","action":"Point"},
+        {"id":"a90e331c-1481-4be8-a890-3b93dbd8c536","path":"<Mouse>/leftButton","action":"Click"},
+        {"id":"e0968040-a128-4936-aa6b-bcbf840625b9","path":"<Mouse>/scroll","action":"Scroll"}
+      ]
+    }
+  ],
   "controlSchemes": [{"name":"Keyboard&Mouse","bindingGroup":"Keyboard&Mouse","devices":[{"devicePath":"<Keyboard>","isOptional":false,"isOR":false},{"devicePath":"<Mouse>","isOptional":false,"isOR":false}]}]
 }

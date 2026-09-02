@@ -1,5 +1,13 @@
 # FIRE_017：升降熔潮
 
+## 2026-09-02 视觉优化
+
+- 复用火区现有剪影、雾光、材质和火星资源，新增可复用环境Prefab：`Assets/Prefabs/Visual/Regions/Fire/FireCavernLayeredEnvironment2D.prefab`；本房以单个`Fire017 Environment Visuals`实例接入，并将全部`ParallaxLayer2D`显式绑定本房`Main Camera`。
+- 环境Prefab按全局功能层组织最远雾光、极远轮廓、远景、中景、后部动态雾、前部低密度火星和前景框景；纯表现层及子对象不包含Collider、Trigger、Rigidbody2D、SurfaceSemantic2D或MirrorSurface2D。
+- `Terrain`仅改用现有纯色剪影材质与深暖棕Tint；Tile内容、Collider、表面语义、可放镜面和Transform不变。
+- 两个喷发器复用`Assets/Prefabs/Visual/Regions/Fire/EruptionPresentation2D.prefab`表现预警、危险和冷却；旧红色占位Sprite已隐藏，`EruptionHazard2D`的`1s/1s/2s`时序、危险Trigger、伤害和重置不变。
+- 固定条件证据位于`Temp/W1VisualOptimize/Fire_017/20260902/`：1280×720、16:9、原`Main Camera`、初始无输入状态、约3秒预热、每轮约12秒/96帧时间序列。最终静态`S=73.0/100`，动态`D=76.0/100`；详细评分见同目录`review.md`。未运行PlayMode自动测试、完整测试或人工试玩。
+
 > 2026-08-31 显示调整：按用户要求关闭本房 `Decoration` 的 `Tilemap Renderer`，保留对象、Tile 与坐标；本文中的该层提示位置仅作设计参考，当前不显示、不再要求提示标记可见。碰撞、镜子放置规则与解法不变。
 
 ## 2026-08-31 房间几何修复

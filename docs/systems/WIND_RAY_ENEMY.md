@@ -152,7 +152,7 @@ Returning
 
 - 逐风鳐是动态玩法对象，不属于Tilemap。
 - 首版身体与伤害轮廓约为`1.15 × 0.7 units`，属于普通小怪尺寸；游戏中不绘制外围探测圈。
-- 身体使用Kenney Double Bee三帧素材，按`rest → a → b → a`、`8 FPS`循环播放；动画只改变Sprite，不改变碰撞、感知或攻击计时。
+- 身体使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/`中的`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影素材，按`rest → a → b → a`、`8 FPS`循环播放；动画只改变Sprite，不改变碰撞、感知或攻击计时。
 - 逐风鳐不受Player或MirrorClone推动，不把角色持续挤向墙壁，也不夹住角色。
 - Player和MirrorClone不能站在逐风鳐上。
 - 逐风鳐不能触发压力板，不能推动门或移动平台，也不破坏镜子。

@@ -1,4 +1,5 @@
 using UnityEngine;
+using W1.Accessibility;
 
 public sealed class MirrorPlatformerBootstrap : MonoBehaviour
 {
@@ -121,21 +122,64 @@ public sealed class MirrorPlatformerBootstrap : MonoBehaviour
 
     private void OnGUI()
     {
+        Font localizedFont = LocalizedFontProvider.GetFont();
+        if (localizedFont == null) return;
+        AccessibilityPreferences preferences = AccessibilityPreferencesService.Instance.Current;
+        float textScale = preferences.TextScaleMultiplier;
+
         GUIStyle title = new(GUI.skin.label)
         {
-            fontSize = 22,
+            font = localizedFont,
+            fontSize = Mathf.RoundToInt(22f * textScale),
             fontStyle = FontStyle.Bold,
+            wordWrap = true,
             normal = { textColor = Color.white }
         };
         GUIStyle help = new(GUI.skin.label)
         {
-            fontSize = 16,
-            normal = { textColor = new Color(0.82f, 0.88f, 0.96f) }
+            font = localizedFont,
+            fontSize = Mathf.RoundToInt(16f * textScale),
+            wordWrap = true,
+            normal = { textColor = preferences.HighContrast
+                ? Color.white
+                : new Color(0.82f, 0.88f, 0.96f) }
         };
 
-        GUI.Label(new Rect(20, 16, 600, 35), "Mirror Player Prototype", title);
-        GUI.Label(new Rect(20, 50, 700, 28), "A/D 或方向键移动 · Space/W/↑ 跳跃", help);
-        GUI.Label(new Rect(20, 76, 820, 28), "鼠标左键在脚下放置镜子并生成物理镜像 · 右键收回 · 橙色压力板控制红门", help);
-        GUI.Label(new Rect(20, 102, 820, 28), "拾取左侧紫色道具后，镜像将关闭重力并固定当前高度", help);
+        Rect safe = Screen.safeArea;
+        float left = safe.xMin + 20f;
+        float top = Screen.height - safe.yMax + 16f;
+        float width = Mathf.Max(1f, safe.width - 40f);
+        string[] lines =
+        {
+            LocalizationService.Get("prototype.title"),
+            LocalizationService.Get("prototype.move_help"),
+            LocalizationService.Get("prototype.mirror_help"),
+            LocalizationService.Get("prototype.pickup_help")
+        };
+
+        float[] heights =
+        {
+            title.CalcHeight(new GUIContent(lines[0]), width),
+            help.CalcHeight(new GUIContent(lines[1]), width),
+            help.CalcHeight(new GUIContent(lines[2]), width),
+            help.CalcHeight(new GUIContent(lines[3]), width)
+        };
+        float totalHeight = heights[0] + heights[1] + heights[2] + heights[3] + 18f;
+        if (preferences.HighContrast)
+        {
+            Color previous = GUI.color;
+            GUI.color = new Color(0f, 0f, 0f, .9f);
+            GUI.DrawTexture(new Rect(left - 8f, top - 6f, width + 16f, totalHeight + 12f),
+                Texture2D.whiteTexture);
+            GUI.color = previous;
+        }
+
+        GUI.Label(new Rect(left, top, width, heights[0]), lines[0], title);
+        top += heights[0] + 6f;
+        for (int i = 1; i < lines.Length; i++)
+        {
+            GUI.Label(new Rect(left, top, width, heights[i]), lines[i], help);
+            top += heights[i] + 4f;
+        }
     }
 }

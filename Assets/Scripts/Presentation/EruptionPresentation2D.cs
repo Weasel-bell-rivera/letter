@@ -1,4 +1,5 @@
 using UnityEngine;
+using W1.Accessibility;
 
 [DisallowMultipleComponent]
 [DefaultExecutionOrder(100)]
@@ -65,7 +66,8 @@ public sealed class EruptionPresentation2D : MonoBehaviour
             hasPhase = true;
         }
 
-        float pulse = .5f + .5f * Mathf.Sin(Time.time * 11f + phaseOffset);
+        bool reducedMotion = !AccessibilityMotionPolicy.AllowDecorativeLoop;
+        float pulse = reducedMotion ? .5f : .5f + .5f * Mathf.Sin(Time.time * 11f + phaseOffset);
         float targetGround = phase == EruptionHazard2D.Phase.Warning
             ? .34f + pulse * .24f
             : phase == EruptionHazard2D.Phase.Dangerous ? .68f : 0f;
@@ -86,13 +88,20 @@ public sealed class EruptionPresentation2D : MonoBehaviour
         SetRendererAmount(dangerCore, dangerAmount, 1f);
         if (dangerCore != null)
         {
-            float breathe = phase == EruptionHazard2D.Phase.Dangerous
+            float breathe = phase == EruptionHazard2D.Phase.Dangerous && !reducedMotion
                 ? 1f + Mathf.Sin(Time.time * 17f + phaseOffset) * .025f
                 : 1f;
             dangerCore.transform.localScale = new Vector3(
                 dangerBaseScale.x / breathe,
                 dangerBaseScale.y * breathe,
                 dangerBaseScale.z);
+        }
+
+        if (reducedMotion)
+        {
+            StopEmitting(warningSparks);
+            StopEmitting(dangerFlames);
+            StopEmitting(cooldownSmoke);
         }
     }
 

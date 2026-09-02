@@ -1,4 +1,5 @@
 using UnityEngine;
+using W1.Accessibility;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -28,6 +29,12 @@ public sealed class AmbientSpritePulse2D : MonoBehaviour
     private void Update()
     {
         if (spriteRenderer == null) CacheBaseState();
+        if (!AccessibilityMotionPolicy.AllowDecorativeLoop)
+        {
+            spriteRenderer.color = baseColor;
+            transform.localScale = baseScale;
+            return;
+        }
         float wave = Mathf.Sin((Time.time / cycleSeconds) * Mathf.PI * 2f + phaseOffset);
         Color color = baseColor;
         color.a = Mathf.Clamp01(baseColor.a * (1f + wave * alphaVariation));

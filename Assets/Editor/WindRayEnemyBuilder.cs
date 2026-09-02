@@ -11,11 +11,11 @@ public static class WindRayEnemyBuilder
     public const string SacrificialPrefabPath =
         "Assets/Prefabs/Gameplay/Enemies/SacrificialWindRayEnemy2D.prefab";
     public const string RestSpritePath =
-        "Assets/Art/Kenney/NewPlatformerPack/Sprites/Enemies/Double/Bee/bee_rest.png";
+        "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_rest.png";
     public const string WingUpSpritePath =
-        "Assets/Art/Kenney/NewPlatformerPack/Sprites/Enemies/Double/Bee/bee_a.png";
+        "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_a.png";
     public const string WingDownSpritePath =
-        "Assets/Art/Kenney/NewPlatformerPack/Sprites/Enemies/Double/Bee/bee_b.png";
+        "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_b.png";
     public const string FlyClipPath = "Assets/Animations/Enemies/WindRay/WindRayFly.anim";
     public const string AnimatorControllerPath =
         "Assets/Animations/Enemies/WindRay/WindRayAnimator.controller";
@@ -153,6 +153,9 @@ public static class WindRayEnemyBuilder
             bodyVisual.sprite = rest;
             bodyVisual.color = Color.white;
             bodyVisual.sortingOrder = 5;
+            Vector2 bodyNativeSize = rest.bounds.size;
+            bodyObject.transform.localScale =
+                new Vector3(1.15f / bodyNativeSize.x, .7f / bodyNativeSize.y, 1f);
 
             GameObject marker = Child("TargetMarker", visualRoot.transform);
             SpriteRenderer markerVisual = marker.AddComponent<SpriteRenderer>();

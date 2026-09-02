@@ -19,3 +19,53 @@ nickname_candidates = ["Save Implementer", "Progress Engineer"]
 description = "Independent read-only verifier for save creation, loading, corruption, migration, and recovery behavior."
 config_file = "agents/save_recovery_verifier.toml"
 nickname_candidates = ["Recovery Verifier", "Save QA"]
+
+[agents.input_ui_implementer]
+description = "Sole writer for W1 keyboard/mouse input flow, pause UI, navigation, restart, and confirmed application exit."
+config_file = "agents/input_ui_implementer.toml"
+nickname_candidates = ["Input UI", "Pause UI Engineer"]
+
+[agents.settings_audio_implementer]
+description = "Sole writer for W1 display, quality, audio settings, mixer integration, and preference persistence."
+config_file = "agents/settings_audio_implementer.toml"
+nickname_candidates = ["Settings Audio", "Settings Engineer"]
+
+[agents.input_ui_audio_verifier]
+description = "Independent read-only verifier for W1 input, pause UI, settings persistence, audio behavior, and release evidence."
+config_file = "agents/input_ui_audio_verifier.toml"
+nickname_candidates = ["UI Audio QA", "Settings Verifier"]
+
+[agents.localization_accessibility_auditor]
+description = "Read-only auditor for W1 localization coverage, fonts, accessibility, and multi-resolution readiness."
+config_file = "agents/localization_accessibility_auditor.toml"
+nickname_candidates = ["Locale A11y Auditor", "Readability Auditor"]
+
+[agents.localization_font_implementer]
+description = "Sole writer for W1 localization infrastructure, formal language coverage, and bundled font fallback."
+config_file = "agents/localization_font_implementer.toml"
+nickname_candidates = ["Localization Engineer", "Font Locale Engineer"]
+
+[agents.accessibility_resolution_implementer]
+description = "Sole writer for W1 accessibility preferences, readable UI behavior, and responsive resolution support."
+config_file = "agents/accessibility_resolution_implementer.toml"
+nickname_candidates = ["Accessibility Engineer", "Responsive UI Engineer"]
+
+[agents.localization_accessibility_verifier]
+description = "Independent read-only verifier for W1 language coverage, glyphs, accessibility, and resolution evidence."
+config_file = "agents/localization_accessibility_verifier.toml"
+nickname_candidates = ["Locale A11y QA", "Resolution Verifier"]
+
+[agents.visual_score_reviewer]
+description = "Read-only visual reviewer that scores repeatable W1 scene evidence with the project visual-review rubric."
+config_file = "agents/visual_score_reviewer.toml"
+nickname_candidates = ["Visual Reviewer", "Scene Scorer"]
+
+[agents.visual_scene_optimizer]
+description = "Sole writer for one scoped, presentation-only W1 scene optimization iteration."
+config_file = "agents/visual_scene_optimizer.toml"
+nickname_candidates = ["Visual Optimizer", "Scene Polish"]
+
+[agents.visual_optimization_orchestrator]
+description = "Coordinates repeatable score-driven W1 scene optimization loops using separate reviewer and optimizer agents."
+config_file = "agents/visual_optimization_orchestrator.toml"
+nickname_candidates = ["Visual Loop", "Scene Art Director"]

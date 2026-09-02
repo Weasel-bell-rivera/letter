@@ -1,0 +1,353 @@
+{
+  "wind-fog-light.png": {
+    "mode": "RGB",
+    "size": [
+      1672,
+      941
+    ],
+    "sha256": "d9ba274a42cd5cbc2abf937879db80b323258e67ed9efb86115e0b65539ee7c6"
+  },
+  "wind-extreme-far-mountains.png": {
+    "mode": "RGBA",
+    "size": [
+      1774,
+      887
+    ],
+    "sha256": "fb0a6b4aa6a45b4fa1a8b9a8e251162cb62b4a881a1df468c82d4394ad5e433d",
+    "alpha_gt_0_bbox": [
+      0,
+      29,
+      1757,
+      887
+    ],
+    "alpha_gt_1_bbox": [
+      17,
+      213,
+      1757,
+      710
+    ],
+    "alpha_gt_16_bbox": [
+      26,
+      215,
+      1755,
+      706
+    ],
+    "alpha_gt_64_bbox": [
+      40,
+      216,
+      1754,
+      706
+    ],
+    "alpha_gt_128_bbox": [
+      54,
+      216,
+      1754,
+      705
+    ],
+    "alpha_gt_240_bbox": [
+      80,
+      217,
+      1751,
+      704
+    ],
+    "boundary_alpha_max": 1,
+    "boundary_nonzero": 19,
+    "alpha_zero_fraction": 0.686938,
+    "alpha_opaque_fraction": 0.000768,
+    "alpha_mean": 73.77
+  },
+  "wind-far-cloud-sea.png": {
+    "mode": "RGBA",
+    "size": [
+      1672,
+      941
+    ],
+    "sha256": "566c0a1ae2fe95bd0c96318b2f70a9417da5bcd4d484f35b491b4be754f3dc46",
+    "alpha_gt_0_bbox": [
+      0,
+      0,
+      1658,
+      941
+    ],
+    "alpha_gt_1_bbox": [
+      67,
+      102,
+      1621,
+      844
+    ],
+    "alpha_gt_16_bbox": [
+      87,
+      114,
+      1608,
+      835
+    ],
+    "alpha_gt_64_bbox": [
+      114,
+      128,
+      1596,
+      826
+    ],
+    "alpha_gt_128_bbox": [
+      147,
+      141,
+      1589,
+      814
+    ],
+    "alpha_gt_240_bbox": [
+      249,
+      171,
+      1562,
+      773
+    ],
+    "boundary_alpha_max": 1,
+    "boundary_nonzero": 280,
+    "alpha_zero_fraction": 0.472305,
+    "alpha_opaque_fraction": 0.0,
+    "alpha_mean": 92.548
+  },
+  "wind-mid-weathered-pillar.png": {
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "sha256": "1fa8a44362a01147bae13aad7e857bcf5da9f06ee24cb2ba0a581fb28b2fee16",
+    "alpha_gt_0_bbox": [
+      187,
+      56,
+      814,
+      1488
+    ],
+    "alpha_gt_1_bbox": [
+      234,
+      56,
+      810,
+      1488
+    ],
+    "alpha_gt_16_bbox": [
+      236,
+      58,
+      808,
+      1486
+    ],
+    "alpha_gt_64_bbox": [
+      236,
+      58,
+      808,
+      1486
+    ],
+    "alpha_gt_128_bbox": [
+      236,
+      59,
+      808,
+      1485
+    ],
+    "alpha_gt_240_bbox": [
+      237,
+      59,
+      807,
+      1485
+    ],
+    "boundary_alpha_max": 0,
+    "boundary_nonzero": 0,
+    "alpha_zero_fraction": 0.751149,
+    "alpha_opaque_fraction": 0.0,
+    "alpha_mean": 61.716
+  },
+  "wind-mid-floating-rock.png": {
+    "mode": "RGBA",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "40e953e1706401c7e39b5aec7d9bbd8dabf9a7a8ce2de767e6b8b5427132653a",
+    "alpha_gt_0_bbox": [
+      58,
+      79,
+      1477,
+      1000
+    ],
+    "alpha_gt_1_bbox": [
+      59,
+      79,
+      1477,
+      945
+    ],
+    "alpha_gt_16_bbox": [
+      61,
+      81,
+      1475,
+      943
+    ],
+    "alpha_gt_64_bbox": [
+      62,
+      81,
+      1474,
+      943
+    ],
+    "alpha_gt_128_bbox": [
+      62,
+      82,
+      1474,
+      942
+    ],
+    "alpha_gt_240_bbox": [
+      63,
+      83,
+      1473,
+      942
+    ],
+    "boundary_alpha_max": 0,
+    "boundary_nonzero": 0,
+    "alpha_zero_fraction": 0.672046,
+    "alpha_opaque_fraction": 0.0,
+    "alpha_mean": 81.168
+  },
+  "wind-mid-weathered-wall.png": {
+    "mode": "RGBA",
+    "size": [
+      1942,
+      809
+    ],
+    "sha256": "5318951fb93b450b51e6723492d11046fd5e0810c6f54fd41ff615e5eed7f9a4",
+    "alpha_gt_0_bbox": [
+      34,
+      63,
+      1893,
+      809
+    ],
+    "alpha_gt_1_bbox": [
+      35,
+      83,
+      1893,
+      715
+    ],
+    "alpha_gt_16_bbox": [
+      37,
+      85,
+      1891,
+      713
+    ],
+    "alpha_gt_64_bbox": [
+      37,
+      86,
+      1891,
+      713
+    ],
+    "alpha_gt_128_bbox": [
+      37,
+      86,
+      1890,
+      713
+    ],
+    "alpha_gt_240_bbox": [
+      38,
+      87,
+      1890,
+      712
+    ],
+    "boundary_alpha_max": 1,
+    "boundary_nonzero": 3,
+    "alpha_zero_fraction": 0.685251,
+    "alpha_opaque_fraction": 0.001379,
+    "alpha_mean": 78.129
+  },
+  "wind-foreground-left.png": {
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "sha256": "155a6b9ed7b3c7d718defa1a4a814a9d70ba10f9461139fb1bbaac990aaf353e",
+    "alpha_gt_0_bbox": [
+      17,
+      0,
+      640,
+      1536
+    ],
+    "alpha_gt_1_bbox": [
+      22,
+      108,
+      640,
+      1453
+    ],
+    "alpha_gt_16_bbox": [
+      25,
+      110,
+      638,
+      1451
+    ],
+    "alpha_gt_64_bbox": [
+      25,
+      110,
+      638,
+      1451
+    ],
+    "alpha_gt_128_bbox": [
+      25,
+      111,
+      638,
+      1450
+    ],
+    "alpha_gt_240_bbox": [
+      26,
+      111,
+      637,
+      1450
+    ],
+    "boundary_alpha_max": 1,
+    "boundary_nonzero": 36,
+    "alpha_zero_fraction": 0.736232,
+    "alpha_opaque_fraction": 0.0,
+    "alpha_mean": 64.675
+  },
+  "wind-foreground-right.png": {
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "sha256": "1b8b946ba47064a96a0615c4b1b9d3c2f168ca4b2445decdbe4e67f28c846755",
+    "alpha_gt_0_bbox": [
+      522,
+      47,
+      1011,
+      1536
+    ],
+    "alpha_gt_1_bbox": [
+      523,
+      47,
+      1010,
+      1441
+    ],
+    "alpha_gt_16_bbox": [
+      525,
+      49,
+      1008,
+      1439
+    ],
+    "alpha_gt_64_bbox": [
+      525,
+      49,
+      1008,
+      1439
+    ],
+    "alpha_gt_128_bbox": [
+      525,
+      49,
+      1007,
+      1439
+    ],
+    "alpha_gt_240_bbox": [
+      526,
+      50,
+      1007,
+      1438
+    ],
+    "boundary_alpha_max": 1,
+    "boundary_nonzero": 16,
+    "alpha_zero_fraction": 0.777663,
+    "alpha_opaque_fraction": 0.0,
+    "alpha_mean": 54.759
+  }
+}

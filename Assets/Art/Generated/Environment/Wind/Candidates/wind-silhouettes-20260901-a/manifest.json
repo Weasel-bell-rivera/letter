@@ -1,0 +1,88 @@
+{
+  "set": "wind-silhouettes-20260901-a",
+  "region": "Wind",
+  "purpose": "Eight separately layerable environment candidates for a 2D side-view puzzle platformer.",
+  "scene_changes": false,
+  "pixel_postprocessing": false,
+  "final_review": {
+    "status": "candidate-set-complete",
+    "notes": [
+      "Slot 3 was regenerated once because the initial cloud sea touched the canvas edges.",
+      "Slot 5 was regenerated once because the initial floating-rock upper edge read as a playable platform.",
+      "Slots 4 and 6 were each regenerated once to remove excessive rock texture and platform-like ledges.",
+      "The final cloud sea has meaningful visible-alpha padding; a few alpha=1/255 fringe pixels remain at the canvas boundary and should be checked under the Unity sprite importer.",
+      "No room Scene, Prefab, gameplay code, or design document was changed.",
+      "After direct user feedback, slots 4 and 6 were replaced again with strict contour-led near-flat silhouettes; the earlier textured renders are not used by the project candidate set."
+    ]
+  },
+  "files": [
+    {
+      "slot": 1,
+      "file": "wind-fog-light.png",
+      "role": "opaque cloud-light backdrop",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-7084ab73-b9bc-43f2-8100-81c578cc0a4a.png",
+      "review": "pass",
+      "sha256": "d9ba274a42cd5cbc2abf937879db80b323258e67ed9efb86115e0b65539ee7c6"
+    },
+    {
+      "slot": 2,
+      "file": "wind-extreme-far-mountains.png",
+      "role": "transparent extreme-far mountains",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-c2b2ab18-4058-4c4d-a6b3-d766f4659375.png",
+      "review": "pass",
+      "sha256": "fb0a6b4aa6a45b4fa1a8b9a8e251162cb62b4a881a1df468c82d4394ad5e433d"
+    },
+    {
+      "slot": 3,
+      "file": "wind-far-cloud-sea.png",
+      "role": "semi-transparent far cloud sea",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-1b89f45a-9fbd-4928-9433-9b162cf3c28a.png",
+      "review": "conditional-pass: meaningful alpha padding is present; importer fringe check remains",
+      "targeted_regeneration": true,
+      "sha256": "566c0a1ae2fe95bd0c96318b2f70a9417da5bcd4d484f35b491b4be754f3dc46"
+    },
+    {
+      "slot": 4,
+      "file": "wind-mid-weathered-pillar.png",
+      "role": "transparent midground weathered pillar",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-22496788-368f-44f8-991b-9cff213edfcf.png",
+      "review": "pass: strict near-flat silhouette",
+      "targeted_regeneration": true,
+      "sha256": "1fa8a44362a01147bae13aad7e857bcf5da9f06ee24cb2ba0a581fb28b2fee16"
+    },
+    {
+      "slot": 5,
+      "file": "wind-mid-floating-rock.png",
+      "role": "transparent midground floating rock",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-4a43bad6-3026-44ee-ac23-8adb492bbc46.png",
+      "review": "pass",
+      "targeted_regeneration": true,
+      "sha256": "40e953e1706401c7e39b5aec7d9bbd8dabf9a7a8ce2de767e6b8b5427132653a"
+    },
+    {
+      "slot": 6,
+      "file": "wind-mid-weathered-wall.png",
+      "role": "transparent midground weathered wall",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-14660444-e5b9-4a3c-9463-dde6c9925c36.png",
+      "review": "pass: strict near-flat silhouette",
+      "targeted_regeneration": true,
+      "sha256": "5318951fb93b450b51e6723492d11046fd5e0810c6f54fd41ff615e5eed7f9a4"
+    },
+    {
+      "slot": 7,
+      "file": "wind-foreground-left.png",
+      "role": "transparent left foreground framing rock",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-fdfa3261-5aa0-442e-87f7-2d34bb4085c7.png",
+      "review": "pass",
+      "sha256": "155a6b9ed7b3c7d718defa1a4a814a9d70ba10f9461139fb1bbaac990aaf353e"
+    },
+    {
+      "slot": 8,
+      "file": "wind-foreground-right.png",
+      "role": "transparent right foreground framing rock",
+      "source": "/Users/liuxingliang/.codex/generated_images/01a05666-f4b4-7ad2-aea6-bd3da8e2955e/exec-a9558c35-a9ac-4445-aa66-cf4f62465795.png",
+      "review": "pass",
+      "sha256": "1b8b946ba47064a96a0615c4b1b9d3c2f168ca4b2445decdbe4e67f28c846755"
+    }
+  ]
+}

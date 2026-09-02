@@ -195,7 +195,7 @@ Prefab Variant不得：
 | 墙面探测距离 | `0.16 unit` |
 | 墙面法线阈值 | 墙面法线与敌人离墙方向点积不小于`0.65` |
 
-默认视觉使用`Assets/Art/Kenney/NewPlatformerPack/Sprites/Enemies/Double/Snail/snail_walk_a.png`。根对象始终无旋转；仅旋转`BodyVisual`使蜗牛腹足朝向配置墙面。向上和向下移动时必须翻转视觉朝向，让头部指向实际移动方向。视觉、实体Collider、Damage Trigger和WallProbe必须在左右墙面配置间同步镜像。
+默认视觉使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol.png`剪影素材。根对象始终无旋转；仅旋转`BodyVisual`使敌人的攀附面朝向配置墙面。向上和向下移动时必须翻转视觉朝向，让头部指向实际移动方向。视觉、实体Collider、Damage Trigger和WallProbe必须在左右墙面配置间同步镜像。
 
 ## 可冻结地面巡逻敌人状态模型
 

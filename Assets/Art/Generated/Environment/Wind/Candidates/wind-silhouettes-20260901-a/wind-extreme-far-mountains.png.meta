@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: e2fdd8532e7ee46f3ab6d0029e0a0667
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6528362566503312949
+    second: wind-extreme-far-mountains_0
+  - first:
+      213: -2295179024759181834
+    second: wind-extreme-far-mountains_1
+  - first:
+      213: 7236278996312969473
+    second: wind-extreme-far-mountains_2
+  - first:
+      213: 1818542796708367255
+    second: wind-extreme-far-mountains_3
+  - first:
+      213: -2292156743448430022
+    second: wind-extreme-far-mountains_4
+  - first:
+      213: -3511564645717110129
+    second: wind-extreme-far-mountains_5
+  - first:
+      213: -8656211409375843279
+    second: wind-extreme-far-mountains_6
+  - first:
+      213: 3811536576617633252
+    second: wind-extreme-far-mountains_7
+  - first:
+      213: 2672578661712860222
+    second: wind-extreme-far-mountains_8
+  - first:
+      213: -8143008778478934407
+    second: wind-extreme-far-mountains_9
+  - first:
+      213: 8404430879065377121
+    second: wind-extreme-far-mountains_10
+  - first:
+      213: 73129329281415390
+    second: wind-extreme-far-mountains_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1758
+        height: 859
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53e236d5a27699a50800000000000000
+      internalID: 6528362566503312949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_1
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 63
+        width: 25
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fd2d4d56d2e520e0800000000000000
+      internalID: -2295179024759181834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_2
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 76
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 101dade586d6c6460800000000000000
+      internalID: 7236278996312969473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_3
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 69
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79bc5aed903cc3910800000000000000
+      internalID: 1818542796708367255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_4
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 47
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3a7d31169f9030e0800000000000000
+      internalID: -2292156743448430022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_5
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 63
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f82163e4f8a644fc0800000000000000
+      internalID: -3511564645717110129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_6
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 152
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c2873f595fed780800000000000000
+      internalID: -8656211409375843279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_7
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 148
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e5d3b1725c45e430800000000000000
+      internalID: 3811536576617633252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_8
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 144
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e341fa50228e61520800000000000000
+      internalID: 2672578661712860222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_9
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 94
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97620e3d8a83efe80800000000000000
+      internalID: -8143008778478934407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_10
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 96
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 169040e1b5982a470800000000000000
+      internalID: 8404430879065377121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wind-extreme-far-mountains_11
+      rect:
+        serializedVersion: 2
+        x: 1484
+        y: 98
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed83b7eccbec30100800000000000000
+      internalID: 73129329281415390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      wind-extreme-far-mountains_0: 6528362566503312949
+      wind-extreme-far-mountains_1: -2295179024759181834
+      wind-extreme-far-mountains_10: 8404430879065377121
+      wind-extreme-far-mountains_11: 73129329281415390
+      wind-extreme-far-mountains_2: 7236278996312969473
+      wind-extreme-far-mountains_3: 1818542796708367255
+      wind-extreme-far-mountains_4: -2292156743448430022
+      wind-extreme-far-mountains_5: -3511564645717110129
+      wind-extreme-far-mountains_6: -8656211409375843279
+      wind-extreme-far-mountains_7: 3811536576617633252
+      wind-extreme-far-mountains_8: 2672578661712860222
+      wind-extreme-far-mountains_9: -8143008778478934407
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -14,12 +14,17 @@ public sealed class SaveService : MonoBehaviour
     private bool writing;
     private float retryAt;
     private float activePlayStart;
+    private bool gameplayPaused;
+    private bool applicationPaused;
+    private bool applicationFocused;
+    private bool playTimeRunning;
     private const float RetryDelaySeconds = 2f;
 
     public static SaveService Instance => EnsureInstance();
     public static bool IsReady => instance != null && instance.data != null;
     public SaveData Data => data;
     public bool HasUnsavedChanges => dirty;
+    public bool IsPlayTimeRunning => playTimeRunning;
     public string LastWriteError { get; private set; }
     public LoadOutcome LastLoadOutcome { get; private set; }
 
@@ -32,7 +37,7 @@ public sealed class SaveService : MonoBehaviour
     private static SaveService EnsureInstance()
     {
         if (instance != null) return instance;
-        instance = FindFirstObjectByType<SaveService>();
+        instance = FindAnyObjectByType<SaveService>();
         if (instance == null)
         {
             GameObject host = new("Save Service");
@@ -48,7 +53,8 @@ public sealed class SaveService : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         store ??= new LocalSaveStore(Application.persistentDataPath);
         LoadOrCreate();
-        activePlayStart = Time.realtimeSinceStartup;
+        applicationFocused = Application.isFocused;
+        RefreshPlayTimeTracking();
     }
 
     private void Update()
@@ -58,12 +64,45 @@ public sealed class SaveService : MonoBehaviour
 
     private void OnApplicationPause(bool paused)
     {
-        AccumulatePlayTime();
+        applicationPaused = paused;
+        RefreshPlayTimeTracking();
         if (paused) TrySaveNow();
-        else activePlayStart = Time.realtimeSinceStartup;
     }
 
-    private void OnApplicationQuit() { AccumulatePlayTime(); TrySaveNow(); }
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        applicationFocused = hasFocus;
+        RefreshPlayTimeTracking();
+        if (!hasFocus) TrySaveNow();
+    }
+
+    private void OnApplicationQuit()
+    {
+        StopPlayTimeTracking();
+        TrySaveNow();
+    }
+
+    public void SetGameplayPaused(bool paused)
+    {
+        if (gameplayPaused == paused) return;
+        gameplayPaused = paused;
+        RefreshPlayTimeTracking();
+    }
+
+    public bool TryPrepareForQuit()
+    {
+        SetGameplayPaused(true);
+        if (data == null)
+        {
+            LastWriteError = "Save data is unavailable.";
+            SaveCompleted?.Invoke(false);
+            return false;
+        }
+
+        dirty = true;
+        retryAt = 0f;
+        return TrySaveNow();
+    }
 
     public bool HasAbility(string abilityId) => data != null && data.unlockedAbilities.Contains(abilityId);
     public bool HasCollected(string pickupId) => data != null && data.collectedPermanentIds.Contains(pickupId);
@@ -120,6 +159,7 @@ public sealed class SaveService : MonoBehaviour
         if (hasExistingProgress && !confirmedOverwrite) return false;
         store.PreserveAndDeleteForNewGame();
         data = SaveData.CreateNew();
+        if (playTimeRunning) activePlayStart = Time.realtimeSinceStartup;
         LastLoadOutcome = LoadOutcome.NewProfile;
         dirty = true;
         return TrySaveNow();
@@ -148,12 +188,28 @@ public sealed class SaveService : MonoBehaviour
 
     private void MarkDirtyAndSave() { dirty = true; retryAt = 0; TrySaveNow(); }
     private int CountPrefix(string prefix) => data == null ? 0 : data.collectedPermanentIds.FindAll(id => id.StartsWith(prefix, StringComparison.Ordinal)).Count;
-    private void AccumulatePlayTime()
+    private void RefreshPlayTimeTracking()
     {
-        if (data == null) return;
+        bool shouldRun = data != null && !gameplayPaused && !applicationPaused && applicationFocused;
+        if (shouldRun == playTimeRunning) return;
+        if (shouldRun)
+        {
+            activePlayStart = Time.realtimeSinceStartup;
+            playTimeRunning = true;
+        }
+        else
+        {
+            StopPlayTimeTracking();
+        }
+    }
+
+    private void StopPlayTimeTracking()
+    {
+        if (!playTimeRunning) return;
         float now = Time.realtimeSinceStartup;
         data.playTimeSeconds += Math.Max(0, now - activePlayStart);
         activePlayStart = now;
+        playTimeRunning = false;
         dirty = true;
     }
 
@@ -165,6 +221,11 @@ public sealed class SaveService : MonoBehaviour
             Application.temporaryCachePath, "W1SaveTests", Guid.NewGuid().ToString("N")));
         dirty = false;
         LastWriteError = null;
+        gameplayPaused = false;
+        applicationPaused = false;
+        applicationFocused = true;
+        playTimeRunning = false;
+        RefreshPlayTimeTracking();
     }
 #endif
 }

@@ -9,11 +9,13 @@ public static class HorizontalFireballEnemyBuilder
     public const string EnemyPrefabPath =
         "Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab";
     public const string EnemyBodySpritePath =
-        "Assets/Art/Generated/Enemies/FurnaceToad.png";
+        "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/furnace_toad.png";
     public const string ProjectilePrefabPath =
         "Assets/Prefabs/Gameplay/Enemies/Projectiles/HorizontalFireballProjectile2D.prefab";
     public const string ProjectileSpritePath =
-        "Assets/Art/Generated/Enemies/Projectiles/Fireball.png";
+        "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/horizontal_fireball.png";
+    private static readonly Color EnemySilhouetteColor =
+        new(.035f, .028f, .03f, 1f);
 
     [MenuItem("Tools/W1/Build Horizontal Fireball Enemy Assets")]
     public static void BuildFromMenu() => BuildFromCommandLine();
@@ -118,7 +120,7 @@ public static class HorizontalFireballEnemyBuilder
 
             GameObject visualRoot = Child("Visual", root.transform);
             SpriteRenderer bodyVisual = Visual("BodyVisual", visualRoot.transform,
-                new Vector2(1.15f, 1f), Color.white, 5, EnemyBodySprite());
+                new Vector2(1.15f, 1f), EnemySilhouetteColor, 5, EnemyBodySprite());
             SpriteRenderer muzzleVisual = Visual("MuzzleVisual", visualRoot.transform,
                 new Vector2(.2f, .2f), new Color(1f, .45f, .08f, 1f), 6, BuiltinMuzzleSprite());
             muzzleVisual.transform.localPosition = new Vector3(.55f, 0f, 0f);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using W1.Accessibility;
 
 public sealed class ConveyorVisual2D : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public sealed class ConveyorVisual2D : MonoBehaviour
 
     private void Update()
     {
-        if (!conveyorActive || markers == null || markers.Length == 0) return;
+        if (!conveyorActive || !AccessibilityMotionPolicy.AllowDecorativeLoop ||
+            markers == null || markers.Length == 0) return;
         float halfSpan = markerSpan * .5f;
         float delta = speed * scrollScale * Time.deltaTime;
         foreach (Transform marker in markers)
@@ -56,6 +58,7 @@ public sealed class ConveyorVisual2D : MonoBehaviour
         }
         if (indicatorRoot != null)
         {
+            indicatorRoot.gameObject.SetActive(active);
             Vector3 scale = indicatorRoot.localScale;
             scale.x = Mathf.Abs(scale.x) * (directionSign < 0 ? -1f : 1f);
             indicatorRoot.localScale = scale;

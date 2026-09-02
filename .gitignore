@@ -12,6 +12,7 @@
 # IDE-generated files
 .vscode/
 .idea/
+.env.local
 *.csproj
 *.sln
 *.slnx

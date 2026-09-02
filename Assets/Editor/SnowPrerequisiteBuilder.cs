@@ -12,6 +12,12 @@ public static class SnowPrerequisiteBuilder
     public const string FrozenGroundTilePath = "Assets/Tiles/Snow/FrozenGroundSnowBlock.asset";
     public const string FrozenGroundMaterialPath = "Assets/Settings/Physics/FrozenGround.physicsMaterial2D";
     public const string EnemyPrefabPath = "Assets/Prefabs/Gameplay/Enemies/FreezablePatrolEnemy2D.prefab";
+    private const string EnemyWalkFrameAPath =
+        "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_a.png";
+    private const string EnemyWalkFrameBPath =
+        "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b.png";
+    private static readonly Color EnemySilhouetteColor =
+        new(.035f, .028f, .03f, 1f);
 
     [MenuItem("Tools/W1/Build Snow Prerequisite Assets")]
     public static void BuildFromMenu() => BuildFromCommandLine();
@@ -22,7 +28,11 @@ public static class SnowPrerequisiteBuilder
         Directory.CreateDirectory(Path.GetDirectoryName(FrozenGroundMaterialPath));
         Directory.CreateDirectory(Path.GetDirectoryName(EnemyPrefabPath));
         Require(File.Exists(SnowTexturePath), $"Missing imported snow texture at {SnowTexturePath}.");
+        Require(File.Exists(EnemyWalkFrameAPath) && File.Exists(EnemyWalkFrameBPath),
+            "Missing snail enemy animation frames.");
         ConfigureSnowTexture();
+        ConfigureEnemySprite(EnemyWalkFrameAPath);
+        ConfigureEnemySprite(EnemyWalkFrameBPath);
         CreateFrozenGroundTile();
         CreateFrozenGroundMaterial();
         CreateEnemyPrefab();
@@ -76,6 +86,21 @@ public static class SnowPrerequisiteBuilder
         EditorUtility.SetDirty(tile);
     }
 
+    private static void ConfigureEnemySprite(string path)
+    {
+        AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+        TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;
+        Require(importer != null, $"Enemy sprite importer is unavailable: {path}");
+        importer.textureType = TextureImporterType.Sprite;
+        importer.spriteImportMode = SpriteImportMode.Single;
+        importer.spritePixelsPerUnit = 128f;
+        importer.filterMode = FilterMode.Point;
+        importer.textureCompression = TextureImporterCompression.Uncompressed;
+        importer.alphaIsTransparency = true;
+        importer.mipmapEnabled = false;
+        importer.SaveAndReimport();
+    }
+
     private static void CreateEnemyPrefab()
     {
         GameObject root = new("FreezablePatrolEnemy2D");
@@ -91,11 +116,19 @@ public static class SnowPrerequisiteBuilder
             freezeAudio.spatialBlend = 0f;
 
             GameObject visualRoot = Child(root.transform, "Visual", Vector3.zero);
+            Sprite walkFrameA = AssetDatabase.LoadAssetAtPath<Sprite>(EnemyWalkFrameAPath);
+            Sprite walkFrameB = AssetDatabase.LoadAssetAtPath<Sprite>(EnemyWalkFrameBPath);
+            Require(walkFrameA != null && walkFrameB != null, "Snail enemy animation frames are not imported.");
             GameObject activeVisual = Visual(visualRoot.transform, "ActiveVisual", new Vector2(1.2f, 1f),
-                new Color(.85f, .28f, .32f));
+                EnemySilhouetteColor);
+            SpriteRenderer activeRenderer = activeVisual.GetComponent<SpriteRenderer>();
+            activeRenderer.sprite = walkFrameA;
+            activeVisual.transform.localScale = Fit(activeRenderer.sprite, new Vector2(1.2f, 1f));
+            activeVisual.AddComponent<SpriteFrameAnimator2D>()
+                .Configure(activeRenderer, new[] { walkFrameA, walkFrameB }, 8f);
             GameObject frozenVisual = Visual(visualRoot.transform, "FrozenVisual", new Vector2(1.2f, 1f),
                 new Color(.55f, .9f, 1f, .72f));
-            frozenVisual.GetComponent<SpriteRenderer>().sprite = activeVisual.GetComponent<SpriteRenderer>().sprite;
+            frozenVisual.GetComponent<SpriteRenderer>().sprite = walkFrameA;
             frozenVisual.transform.localScale = activeVisual.transform.localScale;
             GameObject freezeEffect = Visual(visualRoot.transform, "FreezeEffect", new Vector2(1.42f, 1.2f),
                 new Color(.75f, .95f, 1f, .35f));
@@ -148,6 +181,12 @@ public static class SnowPrerequisiteBuilder
         Vector2 nativeSize = renderer.sprite.bounds.size;
         visual.transform.localScale = new Vector3(size.x / nativeSize.x, size.y / nativeSize.y, 1f);
         return visual;
+    }
+
+    private static Vector3 Fit(Sprite sprite, Vector2 size)
+    {
+        Vector2 nativeSize = sprite.bounds.size;
+        return new Vector3(size.x / nativeSize.x, size.y / nativeSize.y, 1f);
     }
 
     private static void Require(bool condition, string message)

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using W1.Accessibility;
 
 [DefaultExecutionOrder(120)]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -32,7 +33,7 @@ public sealed class WindTurbineSwitch2D : MonoBehaviour, IRoomResettable, IOrder
     {
         bool active = ValidateConfiguration() && HasMatchingWind();
         SetActive(active);
-        if (active && rotorVisual != null)
+        if (active && rotorVisual != null && AccessibilityMotionPolicy.AllowDecorativeLoop)
             rotorVisual.transform.Rotate(0f, 0f, activeRotationSpeed * Time.fixedDeltaTime);
     }
 
@@ -117,8 +118,14 @@ public sealed class WindTurbineSwitch2D : MonoBehaviour, IRoomResettable, IOrder
     private void ApplyVisual()
     {
         if (rotorVisual != null)
+        {
             rotorVisual.color = IsActive
                 ? new Color(.35f, 1f, .55f, 1f)
                 : new Color(.38f, .62f, .7f, 1f);
+            if (IsActive && !AccessibilityMotionPolicy.AllowDecorativeLoop)
+                rotorVisual.transform.localRotation = initialRotorRotation * Quaternion.Euler(0f, 0f, 45f);
+            else if (!IsActive)
+                rotorVisual.transform.localRotation = initialRotorRotation;
+        }
     }
 }

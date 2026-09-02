@@ -59,7 +59,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4, y: 2, z: 1}
+  m_LocalScale: {x: 0.0871, y: 0.1033, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4596212114996753768}
@@ -113,8 +113,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c69d65338c254693ad6473cc78c7bb47, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 1682f1fbe97144fdaa35af089138779f, type: 3}
+  m_Color: {r: 0.035, g: 0.028, b: 0.03, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,8 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: W1.Runtime::SpriteFrameAnimator2D
   target: {fileID: 6315217875705112616}
   frames:
-  - {fileID: 21300000, guid: c69d65338c254693ad6473cc78c7bb47, type: 3}
-  - {fileID: 21300000, guid: 4d1775049ce54f45a3cf9e0e315fb8e0, type: 3}
+  - {fileID: 21300000, guid: 1682f1fbe97144fdaa35af089138779f, type: 3}
+  - {fileID: 21300000, guid: fc54073f9189446c0bdca02a28eb615b, type: 3}
   framesPerSecond: 8
 --- !u!1 &1529269149026369623
 GameObject:
@@ -718,7 +718,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4, y: 2, z: 1}
+  m_LocalScale: {x: 0.0871, y: 0.1033, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4596212114996753768}
@@ -772,7 +772,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c69d65338c254693ad6473cc78c7bb47, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1682f1fbe97144fdaa35af089138779f, type: 3}
   m_Color: {r: 0.55, g: 0.9, b: 1, a: 0.72}
   m_FlipX: 0
   m_FlipY: 0

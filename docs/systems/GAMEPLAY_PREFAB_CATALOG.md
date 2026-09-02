@@ -328,7 +328,7 @@ Prefab验证要求：
 - Player和MirrorClone分别触发正确死亡流程，敌人不推动、夹住或形成可站立表面。
 - 手动重置、Player死亡和重新进入房间完整恢复初始状态；MirrorClone单独死亡不重置敌人。
 
-Prefab默认使用`Assets/Art/Kenney/NewPlatformerPack/Sprites/Enemies/Double/Snail/snail_walk_a.png`，实体Collider为`0.72 × 0.90 units`，Damage Trigger为`0.82 × 0.98 units`，二者中心均向配置墙面偏移`0.10 unit`；墙面探测距离为`0.16 unit`。
+Prefab默认使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol.png`剪影素材，实体Collider为`0.72 × 0.90 units`，Damage Trigger为`0.82 × 0.98 units`，二者中心均向配置墙面偏移`0.10 unit`；墙面探测距离为`0.16 unit`。
 
 ## `WindRayEnemy2D.prefab`
 
@@ -349,7 +349,7 @@ WindRayEnemy2D
 - Kinematic `Rigidbody2D`，禁止物理旋转。
 - 与可见身体轮廓一致的伤害Trigger。
 - 身体与伤害轮廓约为`1.15 × 0.7 units`；游戏中不显示外围探测圈。
-- `BodyVisual`使用Kenney Double Bee三帧循环飞行动画；Animator只负责Sprite表现，不驱动玩法位移或伤害。
+- `BodyVisual`使用`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影循环飞行动画；Animator只负责Sprite表现，不驱动玩法位移或伤害。
 - 管理`Guarding`、`Windup`、`Dashing`、`Recovering`和`Returning`的通用组件。
 - 统一房间重置接口。
 - 读取风区统一逐风鳐数值配置的引用；Prefab和房间实例不复制感知与攻击常量。
@@ -498,7 +498,8 @@ Prefab不负责：
 ```text
 Door
 ├─ Visual
-└─ Blocker
+├─ TopVisual
+└─ PassageBackdrop
 ```
 
 Prefab至少包含：
@@ -507,12 +508,13 @@ Prefab至少包含：
 - 与可见门体一致的实体Collider。
 - 关闭、临时开启和永久开启的可区分表现。
 
-门体视觉由上下两段Double目录Sprite组成：
+门体视觉由上下两段剪影Sprite组成：
 
-- 关闭：`door_closed.png`与`door_closed_top.png`
-- 开启：`door_open.png`与`door_open_top.png`
+- 关闭：`DoorSilhouetteClosedBody.png`与`DoorSilhouetteClosedTop.png`
+- 开启：`DoorSilhouetteOpenBody.png`与`DoorSilhouetteOpenTop.png`
+- 门洞内衬：`DoorSilhouetteBackdrop.png`
 
-四张图片位于`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Door/`。上下两张图各保持一个标准地形格高，整扇门固定为两个格子高并完整占据一个标准格宽，标准Collider为`1 × 2 units`，不得在房间实例中拉伸。临时开启使用原色开启图，永久锁存使用统一青色调；两种开启状态仍复用同一个`Door2D.prefab`。
+五张图片位于`Assets/Art/Generated/Gameplay/`。上下两张门体图各保持一个标准地形格高，整扇门固定为两个格子高，门框可以在标准`1 × 2 units` Collider两侧形成少量无碰撞轮廓外伸，不得在房间实例中拉伸。`PassageBackdrop`是不参与碰撞的固定深灰内衬，排序位于Player与MirrorClone之后，用于遮挡四个区域的背景细节；门框和闸板位于角色之前。临时开启使用原色开启图，永久锁存使用统一青色调；两种开启状态仍复用同一个`Door2D.prefab`。
 
 Prefab负责：
 

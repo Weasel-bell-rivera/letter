@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using W1.Accessibility;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class GroundFireThrowerEnemy2D : MonoBehaviour, IRoomResettable
@@ -267,12 +268,13 @@ public sealed class GroundFireThrowerEnemy2D : MonoBehaviour, IRoomResettable
     {
         if (State != EnemyState.Windup || settings == null) return;
         float progress = 1f - Mathf.Clamp01(phaseRemaining / settings.WindupDuration);
+        bool animate = AccessibilityMotionPolicy.AllowDecorativeLoop;
         if (chargeVisual != null)
-            chargeVisual.transform.localScale = Vector3.one * Mathf.Lerp(.25f, 1f, progress);
+            chargeVisual.transform.localScale = Vector3.one * (animate ? Mathf.Lerp(.25f, 1f, progress) : 1f);
         if (targetMarker != null)
         {
             targetMarker.transform.position = lockedPoint;
-            float pulse = .9f + Mathf.Sin(progress * Mathf.PI * 4f) * .15f;
+            float pulse = animate ? .9f + Mathf.Sin(progress * Mathf.PI * 4f) * .15f : 1f;
             targetMarker.transform.localScale = Vector3.one * pulse;
         }
     }

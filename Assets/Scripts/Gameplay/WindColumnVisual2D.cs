@@ -1,4 +1,5 @@
 using UnityEngine;
+using W1.Accessibility;
 
 /// <summary>Presentation-only animation for a wind column; gameplay remains in WindColumn2D.</summary>
 public sealed class WindColumnVisual2D : MonoBehaviour
@@ -68,6 +69,14 @@ public sealed class WindColumnVisual2D : MonoBehaviour
 
     private void Update()
     {
+        if (!AccessibilityMotionPolicy.AllowDecorativeLoop)
+        {
+            ApplyReducedMotionShape();
+            ApplyStreakColor(false);
+            return;
+        }
+        if (farStreaks != null) farStreaks.enabled = true;
+        if (nearStreaks != null) nearStreaks.enabled = true;
         float rate = blowing ? driftSpeed : state == WindColumn2D.WindState.Warning ? driftSpeed * .7f : .12f;
         phase += Time.deltaTime * rate;
         warningPulse += Time.deltaTime * (state == WindColumn2D.WindState.Warning ? 5.5f : 1.5f);
@@ -77,13 +86,23 @@ public sealed class WindColumnVisual2D : MonoBehaviour
         if (nearMaterial != null)
             nearMaterial.mainTextureOffset = new Vector2(Mathf.Repeat(phase * .11f + .37f, 1f),
                 Mathf.Sin(phase * .65f + .8f) * .025f);
-        ApplyStreakColor();
+        ApplyStreakColor(true);
     }
 
-    private void ApplyStreakColor()
+    private void ApplyReducedMotionShape()
     {
-        float pulse = .88f + Mathf.Sin(phase * 2f) * .12f;
-        float warningGlow = .68f + Mathf.Sin(warningPulse) * .22f;
+        // Two bands = blowing, upper band only = calm, lower band only = warning.
+        // Direction remains encoded by the oriented streak sprites themselves.
+        if (farStreaks != null)
+            farStreaks.enabled = state != WindColumn2D.WindState.Warning;
+        if (nearStreaks != null)
+            nearStreaks.enabled = state != WindColumn2D.WindState.Calm;
+    }
+
+    private void ApplyStreakColor(bool animate = true)
+    {
+        float pulse = animate ? .88f + Mathf.Sin(phase * 2f) * .12f : .88f;
+        float warningGlow = animate ? .68f + Mathf.Sin(warningPulse) * .22f : .68f;
         if (farStreaks != null) farStreaks.color = blowing
             ? new Color(.45f, .9f, 1f, .4f * pulse)
             : state == WindColumn2D.WindState.Warning
