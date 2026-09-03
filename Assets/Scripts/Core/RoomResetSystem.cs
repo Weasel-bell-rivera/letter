@@ -42,6 +42,7 @@ public sealed class RoomResetSystem : MonoBehaviour
         if (resetting || player == null) return;
         resetting = true;
         player.SetControlEnabled(false);
+        if (SaveService.IsReady) SaveService.Instance.SetPlayerOperable(false);
         mirror?.RecallImmediate();
         List<IRoomResettable> resettables = new();
         foreach (MonoBehaviour behaviour in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
@@ -58,6 +59,7 @@ public sealed class RoomResetSystem : MonoBehaviour
             else cameraFollow.SnapToTarget();
         }
         player.SetControlEnabled(true);
+        if (SaveService.IsReady) SaveService.Instance.SetPlayerOperable(true);
         resetting = false;
     }
 

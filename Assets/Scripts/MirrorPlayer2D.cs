@@ -195,7 +195,11 @@ public sealed class MirrorPlayer2D : MonoBehaviour
         GameObject cloneVisual = player.VisualRoot != null ? Instantiate(player.VisualRoot.gameObject, cloneObject.transform) : CreateVisual("Visual", playerCollider.bounds.size, new Color(.3f,.8f,1f,.45f), cloneObject.transform);
         cloneVisual.name = "Visual"; cloneVisual.transform.localPosition = Vector3.zero; cloneVisual.transform.localRotation = Quaternion.identity;
         Vector3 mirroredScale = cloneVisual.transform.localScale; mirroredScale.x = -mirroredScale.x; cloneVisual.transform.localScale = mirroredScale;
-        foreach (SpriteRenderer renderer in cloneVisual.GetComponentsInChildren<SpriteRenderer>()) { renderer.sortingOrder = -10; Color c = renderer.color; c.a *= .45f; renderer.color = c; }
+        foreach (SpriteRenderer renderer in cloneVisual.GetComponentsInChildren<SpriteRenderer>())
+        {
+            renderer.sortingOrder = -10;
+            renderer.color = new Color(.92f, .95f, 1f, renderer.color.a * .45f);
+        }
         Clone = cloneObject.AddComponent<MirrorCloneController2D>(); Clone.Configure(player, moveAxis, gravity); Clone.SetGravityDisabled(gravityDisabled); Clone.Died += OnCloneDied;
         Physics2D.IgnoreCollision(playerCollider, box, true); State = MirrorState.Placed; RefreshHeldVisual(); return true;
     }

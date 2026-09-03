@@ -195,8 +195,8 @@ public sealed class AccessibilityFoundationTests
     public void StaticNonColorHazardCues_ArePresentInAuditedSources()
     {
         string lava = File.ReadAllText(Path.Combine(Application.dataPath, "Scripts/Gameplay/RisingLava2D.cs"));
-        StringAssert.Contains("Lava Warning Shape Cue", lava);
         StringAssert.Contains("CurrentPhase == Phase.Warning", lava);
+        StringAssert.DoesNotContain("Lava Warning Shape Cue", lava);
         string conveyor = File.ReadAllText(Path.Combine(Application.dataPath, "Scripts/Gameplay/ConveyorVisual2D.cs"));
         StringAssert.Contains("indicatorRoot.gameObject.SetActive(active)", conveyor);
         string wind = File.ReadAllText(Path.Combine(Application.dataPath, "Scripts/Gameplay/WindColumnVisual2D.cs"));

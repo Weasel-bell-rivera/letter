@@ -190,9 +190,9 @@ public sealed class PauseMenuView
     public void ShowQuitSaveFailure(string error)
     {
         quitTitle.text = LocalizationService.Get("quit.save_failed_title");
-        quitMessage.text = LocalizationService.Get("quit.save_failed");
+        quitMessage.text = LocalizationService.Get("save_flow.save_failed_message");
         SetButtonLabel(ConfirmQuitButton, LocalizationService.Get("quit.retry_save"));
-        SetButtonLabel(CancelQuitButton, LocalizationService.Get("quit.return"));
+        SetButtonLabel(CancelQuitButton, LocalizationService.Get("save_flow.return_title"));
         Select(ConfirmQuitButton.gameObject);
     }
 

@@ -52,6 +52,25 @@
     { "key": "settings.high_contrast", "value": "高对比度" },
     { "key": "settings.reduced_motion", "value": "减少动态效果" },
     { "key": "settings.on", "value": "开启" },
-    { "key": "settings.off", "value": "关闭" }
+    { "key": "settings.off", "value": "关闭" },
+    { "key": "save_flow.title", "value": "W1" },
+    { "key": "save_flow.continue", "value": "继续游戏" },
+    { "key": "save_flow.new_game", "value": "新游戏" },
+    { "key": "save_flow.no_profile", "value": "开始新的本地游戏。" },
+    { "key": "save_flow.ready", "value": "本地进度已就绪。" },
+    { "key": "save_flow.backup_recovered", "value": "已从本地备份恢复进度。" },
+    { "key": "save_flow.corrupt_blocked", "value": "主存档与备份均无效。开始新游戏时会先保留这些文件。" },
+    { "key": "save_flow.future_version", "value": "此存档由更新版本的游戏创建，当前无法读取，也不会被覆盖。" },
+    { "key": "save_flow.new_game_confirm_title", "value": "开始新游戏？" },
+    { "key": "save_flow.new_game_confirm_message", "value": "当前本地进度将被替换，旧文件会保留用于故障恢复。" },
+    { "key": "save_flow.confirm", "value": "开始新游戏" },
+    { "key": "save_flow.saving", "value": "正在保存……" },
+    { "key": "save_flow.saved", "value": "已保存" },
+    { "key": "save_flow.save_failed_title", "value": "保存失败" },
+    { "key": "save_flow.save_failed_message", "value": "进度仍保留在内存中，但尚未同步到磁盘。" },
+    { "key": "save_flow.retry", "value": "重试" },
+    { "key": "save_flow.return_title", "value": "返回标题" },
+    { "key": "save_flow.error_title", "value": "无法开始" },
+    { "key": "save_flow.error_message", "value": "无法安全完成请求的本地存档流程。" }
   ]
 }

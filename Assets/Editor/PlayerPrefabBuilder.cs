@@ -15,7 +15,9 @@ public static class PlayerPrefabBuilder
     public const string MirrorVisualPrefabPath = "Assets/Prefabs/Gameplay/Mirrors/PlacedMirror.prefab";
     public const string MirrorSpritePath =
         "Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Coin/coin_gold_side.png";
-    public const string SpriteDirectory =
+    public const string MovementSpriteDirectory =
+        "Assets/Art/Characters/Player/SilhouetteV1";
+    public const string LegacySpriteDirectory =
         "Assets/Art/Characters/Player/HandDrawn";
 
     private const string MovementSettingsPath = "Assets/Settings/Player/DefaultPlayerMovement.asset";
@@ -141,7 +143,7 @@ public static class PlayerPrefabBuilder
         PlayerMovementSettings movement = AssetDatabase.LoadAssetAtPath<PlayerMovementSettings>(MovementSettingsPath);
         InputActionAsset inputActions = AssetDatabase.LoadAssetAtPath<InputActionAsset>(InputActionsPath);
         Sprite[] idleFrames = LoadFrames("idle", 2);
-        Sprite[] walkFrames = LoadFrames("walk", 4);
+        Sprite[] walkFrames = LoadFrames("walk", 8);
         Sprite[] jumpFrames = LoadFrames("jump", 11);
         float[] jumpFrameVerticalOffsets =
         {
@@ -171,10 +173,11 @@ public static class PlayerPrefabBuilder
         visualObject.transform.SetParent(root.transform, false);
         SpriteRenderer renderer = visualObject.AddComponent<SpriteRenderer>();
         renderer.sprite = idleFrames[0];
+        renderer.color = new Color(.035f, .04f, .05f, 1f);
         renderer.sortingOrder = 10;
         PlayerVisual2D visual = visualObject.AddComponent<PlayerVisual2D>();
         visual.Configure(renderer, idleFrames, walkFrames, jumpFrames, hitFrames, happyFrames,
-            jumpVerticalOffsets: jumpFrameVerticalOffsets);
+            walkFps: 12f, jumpVerticalOffsets: jumpFrameVerticalOffsets);
 
         PlayerController2D controller = root.AddComponent<PlayerController2D>();
         controller.Configure(visualObject.transform, movement);
@@ -334,15 +337,23 @@ public static class PlayerPrefabBuilder
         return sprite;
     }
 
-    private static Sprite[] LoadFrames(string animation, int count) => Enumerable.Range(0, count)
-        .Select(index => LoadSprite($"{SpriteDirectory}/player_{animation}_{index:00}.png"))
+    private static Sprite[] LoadFrames(string animation, int count)
+    {
+        string directory = animation is "hit" or "happy" ? LegacySpriteDirectory : MovementSpriteDirectory;
+        return Enumerable.Range(0, count)
+        .Select(index => LoadSprite($"{directory}/player_{animation}_{index:00}.png"))
         .ToArray();
+    }
 
     private static string[] AllSpritePaths() => new[]
     {
-        ("idle", 2), ("walk", 4), ("jump", 11), ("hit", 4), ("happy", 2)
-    }.SelectMany(animation => Enumerable.Range(0, animation.Item2)
-        .Select(index => $"{SpriteDirectory}/player_{animation.Item1}_{index:00}.png"))
+        (MovementSpriteDirectory, "idle", 2),
+        (MovementSpriteDirectory, "walk", 8),
+        (MovementSpriteDirectory, "jump", 11),
+        (LegacySpriteDirectory, "hit", 4),
+        (LegacySpriteDirectory, "happy", 2)
+    }.SelectMany(animation => Enumerable.Range(0, animation.Item3)
+        .Select(index => $"{animation.Item1}/player_{animation.Item2}_{index:00}.png"))
         .ToArray();
 
     private static void Require(bool condition, string message)

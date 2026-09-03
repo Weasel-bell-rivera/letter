@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 3b64e72d7428423fa351f750a3dd5f7c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c16524fc9eb04906abbfd42c8c312e3e, type: 3}
+  m_Color: {r: 0.035, g: 0.04, b: 0.05, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,36 +107,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: W1.Runtime::PlayerVisual2D
   spriteRenderer: {fileID: 8624046566166828307}
   idleFrames:
-  - {fileID: 21300000, guid: 3b64e72d7428423fa351f750a3dd5f7c, type: 3}
-  - {fileID: 21300000, guid: 88224c7b398542539b2e5d3f2fc092e4, type: 3}
+  - {fileID: 21300000, guid: c16524fc9eb04906abbfd42c8c312e3e, type: 3}
+  - {fileID: 21300000, guid: 1d796d9362d84b19b7da791df2ed0e86, type: 3}
   walkFrames:
-  - {fileID: 21300000, guid: 22362038207f4c059b29eca3698a9fca, type: 3}
-  - {fileID: 21300000, guid: fbad091b5ad2421a942b3b5c4070adb6, type: 3}
-  - {fileID: 21300000, guid: e113c98197604f4a9a3dcc0e0e6d3251, type: 3}
-  - {fileID: 21300000, guid: 520dc6cb338848dc810d8a9e0e4e6e86, type: 3}
+  - {fileID: 21300000, guid: 5dc76627a9e545deb5f9be3d1dfc0617, type: 3}
+  - {fileID: 21300000, guid: 3c752448e28e47209aa1846bcb38b510, type: 3}
+  - {fileID: 21300000, guid: f5ef0499cf0c4e2ea341356f42e96317, type: 3}
+  - {fileID: 21300000, guid: d13153c08d074618ad32d7980b9153ff, type: 3}
+  - {fileID: 21300000, guid: 3aed0622ad4b455f9903d3ec11301574, type: 3}
+  - {fileID: 21300000, guid: 08856ba98f23431e8b26f4e415d75251, type: 3}
+  - {fileID: 21300000, guid: dba722cd1cda44ed8d9b46081d7e788d, type: 3}
+  - {fileID: 21300000, guid: 35a925f4028c4277bb257c26a27769d4, type: 3}
   jumpFrames:
-  - {fileID: 21300000, guid: bbbeb9eb58a44838917501c4bfb7c1e8, type: 3}
-  - {fileID: 21300000, guid: 82bcd5a53c9b48668b1794e40dd5daca, type: 3}
-  - {fileID: 21300000, guid: d21f372637604b55bd535c089cf99fa0, type: 3}
-  - {fileID: 21300000, guid: 6b13d7fe484f4dcebd91b414f1e8c9d3, type: 3}
-  - {fileID: 21300000, guid: a4c18c277e204547bcefa7d9a63a7c5c, type: 3}
-  - {fileID: 21300000, guid: 8a2403e58bae4f24907202b189d8cdef, type: 3}
-  - {fileID: 21300000, guid: 860f8ce912014b85965b8e417a5b707f, type: 3}
-  - {fileID: 21300000, guid: c1d486854c92435693b18e297714a07d, type: 3}
-  - {fileID: 21300000, guid: ebd31bba21a2499b84791aea2700efea, type: 3}
-  - {fileID: 21300000, guid: d57f0ddaef9c4f2495d67e1f86f4f977, type: 3}
-  - {fileID: 21300000, guid: 90b831cd5d0a4757a8b00bdd93f6a08a, type: 3}
+  - {fileID: 21300000, guid: 1b5dd7736e9d4d3baaac8a76097dcd13, type: 3}
+  - {fileID: 21300000, guid: 697ad71ec1b543c9a4d3ec9f9e1ea065, type: 3}
+  - {fileID: 21300000, guid: 29b3d3e3038841079981c08013023935, type: 3}
+  - {fileID: 21300000, guid: 2d7b5fb57aa245fb865bba35e68066b2, type: 3}
+  - {fileID: 21300000, guid: 44b7edfbb2054dc5a553b2837701daf0, type: 3}
+  - {fileID: 21300000, guid: 45800c4b9afb4792b4c8d4b75469e205, type: 3}
+  - {fileID: 21300000, guid: c1099900b8f34e2da4f472521ed3c408, type: 3}
+  - {fileID: 21300000, guid: c6bd8993e34d4fbf9d9c6073c4615dba, type: 3}
+  - {fileID: 21300000, guid: 42fdf20bc06d44de84493786638d63cf, type: 3}
+  - {fileID: 21300000, guid: 446adf05bf5742c09949074311df7a05, type: 3}
+  - {fileID: 21300000, guid: 3004795223104b46902e75ddc8577dcc, type: 3}
   jumpFrameVerticalOffsets:
   - 0
-  - -0.00703125
-  - -0.00703125
-  - -0.07382812
-  - -0.13710937
-  - -0.15117186
-  - -0.09140625
   - 0
   - 0
-  - -0.01054687
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 0
   hitFrames:
   - {fileID: 21300000, guid: 3ce5b2a06def4c0dab0277df9879c23f, type: 3}
@@ -147,7 +151,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6990d957fc514d4b8ce78e44fde2837c, type: 3}
   - {fileID: 21300000, guid: 9a7584c786464e2eabf524e1be30247a, type: 3}
   idleFramesPerSecond: 2
-  walkFramesPerSecond: 8
+  walkFramesPerSecond: 12
   jumpFramesPerSecond: 12
   hitFramesPerSecond: 10
 --- !u!1 &4870972150017224388

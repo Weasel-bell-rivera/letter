@@ -54,6 +54,8 @@ SaveData
 - 机关组首次锁存时立即把组ID加入`latchedDoorGroupIds`并请求写入。已有ID不得重复添加或重复播放首次锁存流程。
 - 集合字段按唯一值处理，不依赖数组顺序表达逻辑。
 - `regionProgress[]`的首版元素为`regionId`、`collectedCount`和`totalCount`，只表达收藏完成度，不隐含区域完成或解锁规则。
+- 可选收藏品的全世界配置总数为`7`。当前已落位的`FIRE_006:COLLECTIBLE:01`使`FIRE`区域配置总数为`1`；其余实例落位时必须同步扩展统一数据层的区域总数配置。
+- `collectedPermanentIds`是收藏领取去重的权威记录；每次领取永久收藏以及每次读档后，`SaveService`必须由该集合重算对应`regionProgress[].collectedCount`，并同步已配置的`totalCount`，不得由房间脚本直接维护统计字段。
 
 ## 不保存的内容
 
@@ -71,7 +73,7 @@ SaveData
 
 1. 创建默认数据并生成 `saveId`。
 2. 起点设置为 `CENTER_001` 的新游戏出生点。
-3. 初始能力、收藏和区域进度为空。
+3. Initial ability, permanent-pickup, completion, region-unlock, latch, and progression-flag sets are empty. Configured collection statistics begin at zero (`FIRE` is `0/1`) and do not imply a region unlock.
 4. 请求首次写入，再加载起点；写入失败时保留内存状态并重试。
 5. Player按 `CENTER_001` 房间文档获得镜子。
 
@@ -149,6 +151,28 @@ SaveData
 - 首版只实现本地存档，文件根目录使用`Application.persistentDataPath`，不实现云存档。
 - 首版可以提供房间、区域、全世界三级收藏统计查询接口，但正式统计UI不属于本次范围。
 - `ProgressionItem`只提供数据与提交接口；世界进度规则批准前不得配置会解锁区域的实例。
+
+## First-version technical contract (implemented)
+
+The active local profile uses schema version `2`. Loading applies registered migrations one version at a time (`v0 -> v1 -> v2`), canonicalizes set-like fields with ordinal ordering, reconciles `MIRROR` with `CENTER_001:ABILITY:01`, and validates the complete candidate before it can become runtime state. Reapplying migration to current canonical data is idempotent. No room, collectible, or door-group rename mapping is registered because no approved rename currently exists.
+
+The local store reports one of four structured results: `Success`, `Missing`, `Corrupt`, or `UnsupportedFutureVersion`. A future-version main file blocks loading immediately and is never replaced by an older backup. A corrupt main file may recover from a valid backup; the corrupt original is moved to a collision-safe preservation name before the recovered snapshot becomes main. A missing main file may also recover from a valid backup. If neither active file is valid, no default profile is created automatically and gameplay remains blocked until the player chooses New Game or returns to the title state.
+
+Each write captures a canonical snapshot at one monotonic in-memory revision. Requests are coalesced until the runtime update processes them, and only one write may execute at a time. The temporary file is written and flushed, read back, migrated, validated, and compared with the candidate before replacement. A valid previous main file becomes the single active backup. A successful write only synchronizes the captured revision; progress submitted at a later revision remains pending. Failed writes leave the in-memory revision unchanged and retry on an unscaled-time schedule.
+
+When New Game replaces a valid profile, the previous valid main file becomes the backup. When New Game is explicitly chosen while corrupt or unsupported files are blocking startup, every active main, backup, and temporary file is moved first to a collision-safe name in the same directory:
+
+```text
+profile.<role>.preserved.<UTC timestamp>[.<counter>]
+```
+
+The preservation move must complete before a new `profile.json` may be created. The runtime never logs the JSON payload.
+
+New Game creates `CENTER_001` with entrance `DEFAULT`, empty permanent-progress sets, the configured `FIRE` collection statistic at `0/1`, and a new stable save ID. Continue resolves `lastRoomId` only against runtime build-scene paths. An unavailable room is repaired to `CENTER_001/DEFAULT`. The requested entrance is resolved inside the loaded room; an absent or unsafe requested entrance falls back to that room's safe `DEFAULT`. The continuation location is committed only after the target Scene has loaded and the full Player collider has spawned safely. A failed load or failed spawn does not advance the continuation location.
+
+`SaveService` exposes idempotent, typed submission methods for permanent pickup IDs, completed room IDs, explicitly approved region IDs, progression flags, and permanent door-group IDs. These APIs provide storage boundaries only. No caller or Scene configuration is added for unresolved region order, region unlock/completion conditions, free region selection, fast travel, final-region access, endings, or unplaced collectibles.
+
+The runtime save-flow overlay provides New Game, Continue, overwrite confirmation, backup-recovery notice, corrupt/future-version blocking messages, a non-blocking saving indicator, and persistent-write-failure actions for Retry and Return to Title. Return to Title performs one final write attempt while retaining any still-unsynchronized state in memory. Display, audio, quality, accessibility, and locale preferences remain in their existing files or local preference key and are never included in `SaveData`. Version one does not implement Steam Cloud.
 
 ## 与重置、切场景的关系
 

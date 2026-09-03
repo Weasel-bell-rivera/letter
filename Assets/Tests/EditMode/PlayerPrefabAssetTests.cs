@@ -49,7 +49,7 @@ public sealed class PlayerPrefabAssetTests
             visual.DuckSprite, visual.FrontSprite, visual.HitSprite
         }.All(sprite => sprite != null), Is.True);
         Assert.That(visual.IdleFrameCount, Is.EqualTo(2));
-        Assert.That(visual.WalkFrameCount, Is.EqualTo(4));
+        Assert.That(visual.WalkFrameCount, Is.EqualTo(8));
         Assert.That(visual.JumpFrameCount, Is.EqualTo(11));
         Assert.That(visual.JumpFrameVerticalOffsetCount, Is.EqualTo(visual.JumpFrameCount),
             "Every jump frame must keep a stable visual foot anchor.");

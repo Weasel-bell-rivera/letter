@@ -15,7 +15,7 @@ public sealed class PlayerVisual2D : MonoBehaviour
     [SerializeField] private Sprite[] hitFrames;
     [SerializeField] private Sprite[] happyFrames;
     [SerializeField, Min(1f)] private float idleFramesPerSecond = 2f;
-    [SerializeField, Min(1f)] private float walkFramesPerSecond = 8f;
+    [SerializeField, Min(1f)] private float walkFramesPerSecond = 12f;
     [SerializeField, Min(1f)] private float jumpFramesPerSecond = 12f;
     [SerializeField, Min(1f)] private float hitFramesPerSecond = 10f;
 

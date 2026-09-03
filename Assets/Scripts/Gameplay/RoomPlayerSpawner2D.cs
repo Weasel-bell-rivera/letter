@@ -24,6 +24,9 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
     public PlayerController2D SpawnPlayer()
     {
         if (SpawnedPlayer != null) return SpawnedPlayer;
+        SaveService save = SaveService.Instance;
+        save.SetPlayerOperable(false);
+        if (!save.GameplayAuthorized) return null;
 
         Scene scene = gameObject.scene;
         PlayerController2D existing = FindInScene<PlayerController2D>(scene).FirstOrDefault();
@@ -42,7 +45,8 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
         }
 
         RoomEntrance2D[] entrances = FindInScene<RoomEntrance2D>(scene).ToArray();
-        string requestedId = RoomTransitionState.ConsumeEntrance(scene.name);
+        bool shouldRecordContinuation = RoomTransitionState.TryConsumeEntrance(scene.name,
+            out string requestedId, out string completedSourceRoomId);
         SpawnedEntrance = SelectEntrance(entrances, requestedId);
         if (SpawnedEntrance == null)
         {
@@ -50,25 +54,34 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
             return null;
         }
 
-        GameObject instance = Instantiate(registry.PlayerPrefab, SpawnedEntrance.transform.position,
-            Quaternion.identity);
-        instance.name = "Player";
-        SceneManager.MoveGameObjectToScene(instance, scene);
+        GameObject instance = CreatePlayerInstance(registry.PlayerPrefab, SpawnedEntrance, scene);
         SpawnedPlayer = instance.GetComponent<PlayerController2D>();
-        MirrorPlayer2D mirror = instance.GetComponent<MirrorPlayer2D>();
-        SpawnedPlayer.SetControlEnabled(false);
-        SpawnedPlayer.SetFacing(SpawnedEntrance.FacingRight);
-
         Physics2D.SyncTransforms();
-        if (!IsSpawnPositionClear(SpawnedPlayer))
+        if (!IsSpawnPositionClear(SpawnedPlayer) && !SpawnedEntrance.IsDefault)
         {
-            Debug.LogError($"{scene.name} entrance {SpawnedEntrance.EntranceId} cannot contain the full Player collider.",
-                SpawnedEntrance);
             instance.SetActive(false);
             Destroy(instance);
+            SpawnedEntrance = entrances.FirstOrDefault(entrance => entrance.IsDefault);
+            if (SpawnedEntrance != null)
+            {
+                instance = CreatePlayerInstance(registry.PlayerPrefab, SpawnedEntrance, scene);
+                SpawnedPlayer = instance.GetComponent<PlayerController2D>();
+                Physics2D.SyncTransforms();
+            }
+        }
+        if (SpawnedPlayer == null || !IsSpawnPositionClear(SpawnedPlayer))
+        {
+            Debug.LogError($"{scene.name} has no safe requested or default RoomEntrance2D.", this);
+            if (instance != null)
+            {
+                instance.SetActive(false);
+                Destroy(instance);
+            }
             SpawnedPlayer = null;
             return null;
         }
+
+        MirrorPlayer2D mirror = instance.GetComponent<MirrorPlayer2D>();
 
         RoomResetSystem reset = FindInScene<RoomResetSystem>(scene).FirstOrDefault();
         CameraFollow2D cameraFollow = ResolveRoomCamera(scene);
@@ -81,7 +94,21 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
 
         Physics2D.SyncTransforms();
         SpawnedPlayer.SetControlEnabled(true);
+        save.SetPlayerOperable(true);
+        RoomTransitionState.CommitSuccessfulSpawn(save, scene.name.ToUpperInvariant(),
+            SpawnedEntrance.EntranceId, shouldRecordContinuation, completedSourceRoomId);
         return SpawnedPlayer;
+    }
+
+    private static GameObject CreatePlayerInstance(GameObject prefab, RoomEntrance2D entrance, Scene scene)
+    {
+        GameObject instance = Instantiate(prefab, entrance.transform.position, Quaternion.identity);
+        instance.name = "Player";
+        SceneManager.MoveGameObjectToScene(instance, scene);
+        PlayerController2D controller = instance.GetComponent<PlayerController2D>();
+        controller.SetControlEnabled(false);
+        controller.SetFacing(entrance.FacingRight);
+        return instance;
     }
 
     private CameraFollow2D ResolveRoomCamera(Scene scene)
@@ -118,8 +145,14 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
         if (body == null) return false;
         foreach (Collider2D overlap in Physics2D.OverlapBoxAll(body.bounds.center, body.bounds.size * .95f, 0f))
         {
-            if (overlap == body || overlap.isTrigger || overlap.GetComponent<PlayerController2D>() != null)
-                continue;
+            if (overlap == body || overlap.GetComponentInParent<PlayerController2D>() != null) continue;
+            Hazard2D hazard = overlap.GetComponentInParent<Hazard2D>();
+            if (hazard != null && hazard.Active) return false;
+            SurfaceSemantic2D semantic = overlap.GetComponent<SurfaceSemantic2D>() ??
+                                         overlap.GetComponentInParent<SurfaceSemantic2D>();
+            if (semantic != null && (!semantic.IsSafe ||
+                                     semantic.Type == SurfaceSemantic2D.SurfaceType.Hazard)) return false;
+            if (overlap.isTrigger) continue;
             return false;
         }
         return true;
@@ -137,30 +170,69 @@ public static class RoomTransitionState
 {
     private static string targetScene;
     private static string targetEntrance;
+    private static bool recordOnSuccessfulSpawn;
+    private static string completedSourceRoom;
 
-    public static void Request(string sceneName, string entranceId)
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics() => Cancel();
+
+    public static void Request(string sceneName, string entranceId, bool recordContinuation = true,
+        string completedSourceRoomId = null)
     {
         targetScene = sceneName;
         targetEntrance = string.IsNullOrWhiteSpace(entranceId) ? SaveIds.DefaultEntrance : entranceId;
+        recordOnSuccessfulSpawn = recordContinuation;
+        completedSourceRoom = SaveIdRules.IsRoomId(completedSourceRoomId)
+            ? completedSourceRoomId
+            : null;
+    }
+
+    public static bool TryConsumeEntrance(string loadedScene, out string entranceId)
+        => TryConsumeEntrance(loadedScene, out entranceId, out _);
+
+    public static bool TryConsumeEntrance(string loadedScene, out string entranceId,
+        out string completedSourceRoomId)
+    {
+        entranceId = null;
+        completedSourceRoomId = null;
+        if (string.IsNullOrWhiteSpace(targetScene) ||
+            !string.Equals(targetScene, loadedScene, StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        entranceId = targetEntrance;
+        completedSourceRoomId = completedSourceRoom;
+        bool result = recordOnSuccessfulSpawn;
+        Cancel();
+        return result;
     }
 
     public static string ConsumeEntrance(string loadedScene)
     {
-        if (string.IsNullOrWhiteSpace(targetScene) ||
-            !string.Equals(targetScene, loadedScene, StringComparison.OrdinalIgnoreCase))
-            return null;
+        TryConsumeEntrance(loadedScene, out string result);
+        return result;
+    }
 
-        string result = targetEntrance;
+    public static void CommitSuccessfulSpawn(SaveService save, string loadedRoomId,
+        string actualEntranceId, bool recordContinuation, string completedSourceRoomId)
+    {
+        if (save == null) return;
+        if (recordContinuation) save.RecordRoomEntered(loadedRoomId, actualEntranceId);
+        if (SaveIdRules.IsRoomId(completedSourceRoomId))
+            save.TryCompleteRoom(completedSourceRoomId);
+    }
+
+    public static void Cancel()
+    {
         targetScene = null;
         targetEntrance = null;
-        return result;
+        recordOnSuccessfulSpawn = false;
+        completedSourceRoom = null;
     }
 
 #if UNITY_INCLUDE_TESTS
     public static void ClearForTests()
     {
-        targetScene = null;
-        targetEntrance = null;
+        Cancel();
     }
 #endif
 }

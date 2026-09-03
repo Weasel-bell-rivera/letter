@@ -52,6 +52,25 @@
     { "key": "settings.high_contrast", "value": "High Contrast" },
     { "key": "settings.reduced_motion", "value": "Reduced Motion" },
     { "key": "settings.on", "value": "On" },
-    { "key": "settings.off", "value": "Off" }
+    { "key": "settings.off", "value": "Off" },
+    { "key": "save_flow.title", "value": "W1" },
+    { "key": "save_flow.continue", "value": "Continue" },
+    { "key": "save_flow.new_game", "value": "New Game" },
+    { "key": "save_flow.no_profile", "value": "Start a new local game." },
+    { "key": "save_flow.ready", "value": "Local progress is ready." },
+    { "key": "save_flow.backup_recovered", "value": "Progress was recovered from the local backup." },
+    { "key": "save_flow.corrupt_blocked", "value": "The main save and backup are invalid. They will be preserved if you start a new game." },
+    { "key": "save_flow.future_version", "value": "This save was created by a newer game version and cannot be loaded. It will not be overwritten." },
+    { "key": "save_flow.new_game_confirm_title", "value": "Start a New Game?" },
+    { "key": "save_flow.new_game_confirm_message", "value": "Current local progress will be replaced. The previous file will be retained for recovery." },
+    { "key": "save_flow.confirm", "value": "Start New Game" },
+    { "key": "save_flow.saving", "value": "Saving..." },
+    { "key": "save_flow.saved", "value": "Saved" },
+    { "key": "save_flow.save_failed_title", "value": "Save Failed" },
+    { "key": "save_flow.save_failed_message", "value": "Progress is still held in memory but is not synchronized to disk." },
+    { "key": "save_flow.retry", "value": "Retry" },
+    { "key": "save_flow.return_title", "value": "Return to Title" },
+    { "key": "save_flow.error_title", "value": "Unable to Start" },
+    { "key": "save_flow.error_message", "value": "The requested local save flow could not be completed safely." }
   ]
 }

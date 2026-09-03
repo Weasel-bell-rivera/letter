@@ -24,19 +24,20 @@
 - Player Prefab：`Assets/Prefabs/Gameplay/Characters/Player.prefab`
 - 基础移动参数：`Assets/Settings/Player/DefaultPlayerMovement.asset`
 - 输入动作：`Assets/Settings/InputSystem_Actions.inputactions`
-- 角色图片目录：`Assets/Art/Characters/Player/HandDrawn/`
+- 正式移动剪影目录：`Assets/Art/Characters/Player/SilhouetteV1/`
+- 保留表现帧目录：`Assets/Art/Characters/Player/HandDrawn/`
 - 放置镜图片：`Assets/Art/Kenney/NewPlatformerPack/Sprites/Tiles/Double/Coin/coin_gold_side.png`
 - 放置镜视觉Prefab：`Assets/Prefabs/Gameplay/Mirrors/PlacedMirror.prefab`
 
-正式Player视觉使用由手绘角色动画图集切分出的透明PNG帧：
+正式Player移动视觉使用从已确认男孩动作稿制作的透明剪影PNG帧：
 
 - `player_idle_00.png`至`player_idle_01.png`
-- `player_walk_00.png`至`player_walk_03.png`
+- `player_walk_00.png`至`player_walk_07.png`
 - `player_jump_00.png`至`player_jump_10.png`
-- `player_hit_00.png`至`player_hit_03.png`
-- `player_happy_00.png`至`player_happy_01.png`
+- `player_hit_00.png`至`player_hit_03.png`（暂时继续使用`HandDrawn/`资源）
+- `player_happy_00.png`至`player_happy_01.png`（暂时继续使用`HandDrawn/`资源）
 
-所有图片使用一致的`512 × 512`画布、中心Pivot、约`284.444 Pixels Per Unit`、Bilinear Filter和无压缩配置，使完整画布高度保持`1.8 Unity units`。不得在房间中替换单张图片形成不同尺寸或碰撞轮廓的Player变体。
+所有图片使用一致的`512 × 512`画布、中心Pivot、约`284.444 Pixels Per Unit`、Bilinear Filter和无压缩配置，使完整画布高度保持`1.8 Unity units`。移动剪影使用白色透明蒙版，由Player的`SpriteRenderer`染为近黑色；MirrorClone复用同一帧并染为浅白色。不得在房间中替换单张图片形成不同尺寸或碰撞轮廓的Player变体。
 
 ## Prefab层级
 
@@ -74,7 +75,7 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 ## 视觉状态
 
 - 稳定站立且无水平输入：2帧`idle`循环。
-- 稳定落地且存在水平输入：4帧`walk`循环。
+- 稳定落地且存在水平输入：8帧`walk`循环，以`12 FPS`播放。
 - 离地：从头播放11帧`jump`，到达末帧后保持，直到重新落地；不得因滞空过长循环播放起跳动作。
 - `duck`表现暂时回退到`idle`；当前没有Duck输入，不得仅因素材存在而新增下蹲玩法。
 - `front`使用2帧`happy`，只用于明确的正面展示、交互或过场表现；当前普通移动不自动转为正面。
@@ -106,6 +107,8 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 6. 将Player和MirrorPlayer显式绑定到`RoomResetSystem`。
 7. 将Player Transform绑定到当前房间的`CameraFollow2D`，先应用房间相机边界，再建立构图。
 8. 同步物理Transform，确认生成位置安全后恢复Player输入。
+
+If the requested entrance exists but cannot safely contain the complete Player collider at runtime, the spawner retries once at the room's explicit `DEFAULT` entrance. It restores Player control only after that fallback also passes the same safety test. The save service records the actual resolved entrance after successful spawning, never the rejected requested entrance.
 
 生成流程不得依赖GameObject名称查找Player Prefab，不得在运行时用`AddComponent`重新拼装Player。
 
@@ -164,7 +167,7 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 ### EditMode
 
 - Player Prefab可独立加载，必需组件与内部引用完整。
-- Collider、Rigidbody、PlayerInput、移动资产和五组共23帧视觉图片配置正确。
+- Collider、Rigidbody、PlayerInput、移动资产和五组共27帧视觉图片配置正确。
 - Prefab根坐标为零、缩放为一，不含房间对象引用。
 - 所有正式房间Scene都没有序列化Player实例，并且恰好有一个`DEFAULT`入口和一个通用生成组件。
 - 房间Builder不再调用`AddComponent`拼装Player。

@@ -23,7 +23,7 @@
 | FIRE_003 | 手工灰盒已同步，待运行时验证 | `docs/rooms/fire/FIRE_003.md` | `Assets/Scenes/Levels/Fire/Fire_003.unity` | 顶部放镜、纵向分路与两段持续占板交叉门 |
 | FIRE_004 | 待试玩 | `docs/rooms/fire/FIRE_004.md` | `Assets/Scenes/Levels/Fire/Fire_004.unity` | 用镜像引导水平火球命中锁存板并打开机关门 |
 | FIRE_005 | 待试玩 | `docs/rooms/fire/FIRE_005.md` | `Assets/Scenes/Levels/Fire/Fire_005.unity` | 三层横向折返；双投火者、中部锁存板、单格背板与右侧出口门 |
-| FIRE_006 | 待试玩 | `docs/rooms/fire/FIRE_006.md` | `Assets/Scenes/Levels/Fire/Fire_006.unity` | 上下双层空间灰盒；T为FIRE_005出生点 |
+| FIRE_006 | 待试玩 | `docs/rooms/fire/FIRE_006.md` | `Assets/Scenes/Levels/Fire/Fire_006.unity` | 左侧攀爬并取得全游戏7个永久收藏品之一 |
 | FIRE_007 | 待试玩 | `docs/rooms/fire/FIRE_007.md` | `Assets/Scenes/Levels/Fire/Fire_007.unity` | 永久锁存双压力板门控组灰盒 |
 | FIRE_008 | 灰盒中 | `docs/rooms/fire/FIRE_008.md` | `Assets/Scenes/Levels/Fire/Fire_008.unity` | 三段地形错位与双压力板组合房 |
 | FIRE_009 | 灰盒中 | `docs/rooms/fire/FIRE_009.md` | `Assets/Scenes/Levels/Fire/Fire_009.unity` | 水平投火者与镜像替身巩固房 |

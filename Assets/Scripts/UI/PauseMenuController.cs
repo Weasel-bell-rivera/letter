@@ -34,6 +34,7 @@ public sealed class PauseMenuController : MonoBehaviour
     private bool cancelRequested;
     private bool resumeRequested;
     private bool restartRequested;
+    private bool quitSaveFailed;
 
     public static PauseMenuController Instance => instance;
     public bool IsPaused => paused;
@@ -85,7 +86,7 @@ public sealed class PauseMenuController : MonoBehaviour
         view.RestartButton.onClick.AddListener(RestartRoom);
         view.QuitButton.onClick.AddListener(OpenQuitConfirmation);
         view.ConfirmQuitButton.onClick.AddListener(ConfirmQuit);
-        view.CancelQuitButton.onClick.AddListener(ReturnToMain);
+        view.CancelQuitButton.onClick.AddListener(CancelQuitOrReturnTitle);
         view.SettingsBackButton.onClick.AddListener(CancelSettings);
         settingsPanel.ApplyRequested += ApplySettings;
     }
@@ -173,6 +174,13 @@ public sealed class PauseMenuController : MonoBehaviour
         resumeRequested = true;
     }
 
+    public void CloseForTitle()
+    {
+        if (!paused) return;
+        settingsPanel.CancelEdit();
+        RestoreGameplayState();
+    }
+
     public void OpenSettings()
     {
         if (!paused || CurrentPanel != PanelState.Main) return;
@@ -189,6 +197,7 @@ public sealed class PauseMenuController : MonoBehaviour
     public void OpenQuitConfirmation()
     {
         if (!paused || CurrentPanel != PanelState.Main) return;
+        quitSaveFailed = false;
         CurrentPanel = PanelState.QuitConfirmation;
         view.ShowQuitConfirmation();
     }
@@ -230,6 +239,7 @@ public sealed class PauseMenuController : MonoBehaviour
             return;
         }
 
+        quitSaveFailed = true;
         view.ShowQuitSaveFailure(save.LastWriteError);
     }
 
@@ -242,7 +252,7 @@ public sealed class PauseMenuController : MonoBehaviour
                 CancelSettings();
                 break;
             case PanelState.QuitConfirmation:
-                ReturnToMain();
+                CancelQuitOrReturnTitle();
                 break;
             default:
                 ResumeGame();
@@ -266,8 +276,23 @@ public sealed class PauseMenuController : MonoBehaviour
     private void ReturnToMain()
     {
         if (!paused) return;
+        quitSaveFailed = false;
         CurrentPanel = PanelState.Main;
         view.ShowMain();
+    }
+
+    private void CancelQuitOrReturnTitle()
+    {
+        if (!quitSaveFailed)
+        {
+            ReturnToMain();
+            return;
+        }
+
+        SaveService.Instance.TryPrepareForTitle();
+        RestoreGameplayState();
+        SaveFlowController.Instance?.ShowTitle();
+        quitSaveFailed = false;
     }
 
     private bool CanActivateUiInput()

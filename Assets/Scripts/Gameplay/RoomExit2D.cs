@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -46,22 +47,28 @@ public sealed class RoomExit2D : MonoBehaviour, IRoomResettable
     {
         if (!other.TryGetComponent<PlayerController2D>(out PlayerController2D player)) return;
         if (!armed) return;
-        Completed = true;
         if (!string.IsNullOrWhiteSpace(targetScene) && Application.CanStreamedLevelBeLoaded(targetScene))
         {
+            Completed = true;
             player.SetControlEnabled(false);
             player.GetComponent<MirrorPlayer2D>()?.RecallImmediate();
-            RoomTransitionState.Request(targetScene, targetEntranceId);
-            SceneManager.sceneLoaded += OnTargetLoaded;
-            SceneManager.LoadScene(targetScene);
+            SaveService.Instance.SetPlayerOperable(false);
+            string completedSourceRoomId = gameObject.scene.name.ToUpperInvariant();
+            RoomTransitionState.Request(targetScene, targetEntranceId, true,
+                completedSourceRoomId);
+            try
+            {
+                SceneManager.LoadScene(targetScene);
+            }
+            catch (Exception exception)
+            {
+                RoomTransitionState.Cancel();
+                Completed = false;
+                player.SetControlEnabled(true);
+                SaveService.Instance.SetPlayerOperable(true);
+                Debug.LogError($"Room transition failed: {exception.GetType().Name}", this);
+            }
         }
-    }
-
-    private void OnTargetLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SceneManager.sceneLoaded -= OnTargetLoaded;
-        string roomId = scene.name.ToUpperInvariant();
-        SaveService.Instance.RecordRoomEntered(roomId, targetEntranceId);
     }
 
     public void ResetRoomState()
