@@ -7,7 +7,12 @@ public sealed class Hazard2D : MonoBehaviour, IRoomResettable
     private Collider2D trigger;
     public bool Active => active;
 
-    private void Awake() { trigger = GetComponent<Collider2D>(); trigger.isTrigger = true; }
+    private void Awake()
+    {
+        trigger = GetComponent<Collider2D>();
+        trigger.isTrigger = true;
+        trigger.enabled = active;
+    }
     public void SetActive(bool value) { active = value; if (trigger != null) trigger.enabled = value; }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -15,7 +20,7 @@ public sealed class Hazard2D : MonoBehaviour, IRoomResettable
         if (!active) return;
         if (other.TryGetComponent(out MirrorCloneController2D clone)) clone.Die();
         else if (other.TryGetComponent(out PlayerController2D player))
-            FindFirstObjectByType<RoomResetSystem>()?.ResetRoom();
+            FindAnyObjectByType<RoomResetSystem>()?.ResetRoom();
     }
 
     public void ResetRoomState() => SetActive(true);

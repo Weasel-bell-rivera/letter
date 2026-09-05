@@ -25,10 +25,13 @@ public sealed class RoomPlayerSpawner2D : MonoBehaviour
     {
         if (SpawnedPlayer != null) return SpawnedPlayer;
         SaveService save = SaveService.Instance;
+        Scene scene = gameObject.scene;
+#if UNITY_EDITOR
+        save.TryAuthorizeEditorSceneDebug(scene.name);
+#endif
         save.SetPlayerOperable(false);
         if (!save.GameplayAuthorized) return null;
 
-        Scene scene = gameObject.scene;
         PlayerController2D existing = FindInScene<PlayerController2D>(scene).FirstOrDefault();
         if (existing != null)
         {

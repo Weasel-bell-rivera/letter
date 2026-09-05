@@ -156,7 +156,7 @@ public sealed class MirrorPlayer2D : MonoBehaviour
         if (ground == null || !ground.safe || ground.kind != MirrorSurface2D.SurfaceKind.Ground) { LastFailure = PlacementFailure.NoSurface; return false; }
         float axisX = pb.center.x;
         Vector2 clonePosition = pb.center;
-        return Spawn(new Vector2(axisX, groundHit.point.y), clonePosition, Vector2.left, Vector2.down, 0f);
+        return Spawn(new Vector2(axisX, groundHit.point.y), clonePosition, Vector2.left, Vector2.down, 0f, ground);
     }
 
     private RaycastHit2D FindSurface(Vector2 origin, Vector2 direction, float distance, MirrorSurface2D.SurfaceKind kind)
@@ -175,7 +175,8 @@ public sealed class MirrorPlayer2D : MonoBehaviour
         return Spawn(new Vector2(point.x, mirrorY), clonePosition, moveAxis, gravity, 90f);
     }
 
-    private bool Spawn(Vector2 mirrorPosition, Vector2 clonePosition, Vector2 moveAxis, Vector2 gravity, float rotation)
+    private bool Spawn(Vector2 mirrorPosition, Vector2 clonePosition, Vector2 moveAxis, Vector2 gravity,
+        float rotation, MirrorSurface2D placementSurface = null)
     {
         foreach (Collider2D overlap in Physics2D.OverlapBoxAll(clonePosition, playerCollider.size * .95f, 0f))
         {
@@ -201,7 +202,16 @@ public sealed class MirrorPlayer2D : MonoBehaviour
             renderer.color = new Color(.92f, .95f, 1f, renderer.color.a * .45f);
         }
         Clone = cloneObject.AddComponent<MirrorCloneController2D>(); Clone.Configure(player, moveAxis, gravity); Clone.SetGravityDisabled(gravityDisabled); Clone.Died += OnCloneDied;
-        Physics2D.IgnoreCollision(playerCollider, box, true); State = MirrorState.Placed; RefreshHeldVisual(); return true;
+        Physics2D.IgnoreCollision(playerCollider, box, true); State = MirrorState.Placed; RefreshHeldVisual();
+        NotifyPlacementEffects(placementSurface);
+        return true;
+    }
+
+    private void NotifyPlacementEffects(MirrorSurface2D placementSurface)
+    {
+        if (placementSurface == null) return;
+        foreach (MonoBehaviour behaviour in placementSurface.GetComponents<MonoBehaviour>())
+            if (behaviour is IMirrorPlacementEffect2D effect) effect.OnMirrorPlaced(this);
     }
 
     private static GameObject CreateVisual(string name, Vector2 size, Color color, Transform parent = null)
@@ -211,6 +221,10 @@ public sealed class MirrorPlayer2D : MonoBehaviour
         if (heldMirrorVisual != null) heldMirrorVisual.SetActive(false);
     }
     private void OnCloneDied() { RecallImmediate(); }
+    public void DestroyPlacedMirrorImmediate()
+    {
+        if (State == MirrorState.Placed) RecallImmediate();
+    }
     public void RecallImmediate()
     { if (Clone != null) Clone.Died -= OnCloneDied; if (cloneObject != null) { cloneObject.SetActive(false); Destroy(cloneObject); } if (placedMirror != null) { placedMirror.SetActive(false); Destroy(placedMirror); } cloneObject = null; placedMirror = null; Clone = null; if (State != MirrorState.Unobtained) State = MirrorState.Held; RefreshHeldVisual(); }
     public void DisableMirrorGravity() { gravityDisabled = true; Clone?.SetGravityDisabled(true); }

@@ -126,6 +126,7 @@ Hazard
 DynamicSurface
 Conveyor
 Spring
+OverheatingGround
 ```
 
 该列表可以随已批准的新机制扩展，不是对未来表面类型的封闭限制。新增类别必须定义其碰撞、镜子交互、重置和场景切换规则。
@@ -185,6 +186,16 @@ Spring
 - 特殊垂直镜墙必须具有统一的表面语义和视觉标识。
 - 危险、动态、倾斜、可破坏或空间不足的表面按镜子机制文档拒绝放置。
 - 使用Tilemap不得改变镜像生成、输入映射、碰撞或生命周期规则。
+
+## `OverheatingGround` Prefab
+
+`OverheatingGround`是火区专属的静态地面语义。首版使用`Assets/Prefabs/Gameplay/Surfaces/OverheatingMirrorGround2D.prefab`按标准一格一个实例组合；完整生命周期规则见`docs/regions/FIRE_REGION.md`和`docs/MIRROR_MECHANIC.md`。
+
+- 标准Prefab包含一格大小的可见Sprite、实体`BoxCollider2D`、Static `Rigidbody2D`、显式`SurfaceSemantic2D`、`MirrorSurface2D`和`OverheatingMirrorGround2D`。
+- 它是安全、水平、可站立且允许放镜的地面；过热行为只作用于直接放置在该实例上的镜子，不伤害Player或MirrorClone。
+- 因为具有放置回调、计时、反馈和重置状态，它必须使用Prefab实现，不得混入普通Terrain Tilemap或根据Tile名称推断。
+- 可见边界、实体碰撞边界和`OverheatingGround`语义边界必须一致；相邻实例不得产生阻碍Player或MirrorClone的碰撞接缝。
+- 首版不允许运行时生成、删除或移动该地面，房间也不得覆盖统一的`3 seconds`过热时间。
 
 ## 动态玩法对象
 

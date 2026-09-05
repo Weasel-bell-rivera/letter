@@ -16,7 +16,8 @@ public sealed class SurfaceSemantic2D : MonoBehaviour
         DynamicSurface,
         Conveyor,
         FreezingGround,
-        Spring
+        Spring,
+        OverheatingGround
     }
 
     [SerializeField] private SurfaceType surfaceType = SurfaceType.StaticSolid;

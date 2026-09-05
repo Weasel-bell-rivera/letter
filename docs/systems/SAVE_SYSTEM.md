@@ -151,6 +151,7 @@ SaveData
 - 首版只实现本地存档，文件根目录使用`Application.persistentDataPath`，不实现云存档。
 - 首版可以提供房间、区域、全世界三级收藏统计查询接口，但正式统计UI不属于本次范围。
 - `ProgressionItem`只提供数据与提交接口；世界进度规则批准前不得配置会解锁区域的实例。
+- 当前为了房间测试，Unity Editor中的进度系统临时全局关闭：进入Play Mode时始终启动仅限本次运行的内存调试档，跳过标题与读档流程，并默认视为已经获得镜子。调试档的永久拾取、房间完成、继续位置和游玩时间均不得写入磁盘；正式构建中的新游戏、继续游戏、损坏恢复和持久化实现保持不变。恢复进度系统时将`SaveService.EditorProgressionBypassEnabled`改回`false`。
 
 ## First-version technical contract (implemented)
 

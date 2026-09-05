@@ -32,6 +32,12 @@ public sealed class SaveService : MonoBehaviour
     private int consecutiveWriteFailures;
     private long stateRevision;
     private long syncedRevision;
+#if UNITY_EDITOR
+    // Temporary project-wide test switch. Keep the release save/progression flow compiled and intact,
+    // but bypass it while entering Play Mode in the Unity Editor.
+    private const bool EditorProgressionBypassEnabled = true;
+    private bool editorSceneDebugSession;
+#endif
     private const float RetryDelaySeconds = 2f;
     private const int PersistentFailureThreshold = 3;
     private const int WorldCollectibleTotal = 7;
@@ -88,7 +94,12 @@ public sealed class SaveService : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         store ??= new LocalSaveStore(Application.persistentDataPath);
         applicationFocused = Application.isFocused;
+#if UNITY_EDITOR
+        if (EditorProgressionBypassEnabled) InitializeEditorProgressionBypass();
+        else InitializeProfile();
+#else
         InitializeProfile();
+#endif
         RefreshPlayTimeTracking();
     }
 
@@ -252,6 +263,18 @@ public sealed class SaveService : MonoBehaviour
     public bool TrySaveNow()
     {
         if (data == null || writing || !HasUnsavedChanges) return data != null && !HasUnsavedChanges;
+#if UNITY_EDITOR
+        if (editorSceneDebugSession)
+        {
+            CaptureActivePlayTime();
+            syncedRevision = stateRevision;
+            LastWriteError = null;
+            consecutiveWriteFailures = 0;
+            persistentFailureRaised = false;
+            SaveCompleted?.Invoke(true);
+            return true;
+        }
+#endif
         CaptureActivePlayTime();
         writing = true;
         long writeRevision = stateRevision;
@@ -343,6 +366,59 @@ public sealed class SaveService : MonoBehaviour
         PlayerController2D player = FindAnyObjectByType<PlayerController2D>();
         player?.SetControlEnabled(false);
     }
+
+#if UNITY_EDITOR
+    private void InitializeEditorProgressionBypass()
+    {
+        data = SaveData.CreateNew();
+        data.unlockedAbilities.Add(SaveIds.MirrorAbility);
+        data.collectedPermanentIds.Add(SaveIds.MirrorPickup);
+        SyncCollectibleProgress();
+
+        stateRevision = 0;
+        syncedRevision = 0;
+        gameplayAuthorized = true;
+        gameplayPaused = false;
+        playerOperable = false;
+        editorSceneDebugSession = true;
+        StartupFlowSuppressed = true;
+        LastLoadOutcome = LoadOutcome.NewProfile;
+        LastWriteError = null;
+        consecutiveWriteFailures = 0;
+        persistentFailureRaised = false;
+    }
+
+    public bool TryAuthorizeEditorSceneDebug(string sceneName)
+    {
+        if (GameplayAuthorized) return true;
+
+        string roomId = sceneName?.Trim().ToUpperInvariant();
+        if (!SaveIdRules.IsRoomId(roomId) || !TryResolveBuildScene(roomId, out _)) return false;
+
+        data = SaveData.CreateNew();
+        data.lastRoomId = roomId;
+        data.lastEntranceId = SaveIds.DefaultEntrance;
+        if (!string.Equals(roomId, SaveIds.DefaultRoom, StringComparison.Ordinal))
+        {
+            data.unlockedAbilities.Add(SaveIds.MirrorAbility);
+            data.collectedPermanentIds.Add(SaveIds.MirrorPickup);
+        }
+        SyncCollectibleProgress();
+
+        stateRevision = 0;
+        syncedRevision = 0;
+        gameplayAuthorized = true;
+        gameplayPaused = false;
+        playerOperable = false;
+        editorSceneDebugSession = true;
+        StartupFlowSuppressed = true;
+        LastWriteError = null;
+        consecutiveWriteFailures = 0;
+        persistentFailureRaised = false;
+        RefreshPlayTimeTracking();
+        return true;
+    }
+#endif
 
     private void InitializeProfile()
     {

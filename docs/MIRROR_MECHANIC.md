@@ -38,6 +38,14 @@
 - MirrorClone死亡、镜子回收或镜像清除时，其传送带接触和表面速度状态随对象生命周期立即清除。
 - 完整规则见`docs/systems/CONVEYOR_SYSTEM.md`。
 
+### 周期障碍交互（已确定）
+
+- 伸缩长矛和水晶激光通过通用`Hazard2D`对Player与MirrorClone使用相同危险判定；命中MirrorClone沿用镜像死亡与镜子自动回收，命中Player沿用完整房间重置。
+- 普通伸缩长矛和水晶激光不破坏、推动或移动已放置镜子，也不改变任何表面语义。
+- 翻转定时平台稳定和警告阶段可以分别支撑Player与MirrorClone；翻转阶段关闭支撑Collider，双方按各自重力和物理自然离开，不建立父子Transform关系。
+- 翻转定时平台始终返回`DynamicSurface`，停止、警告、翻转和恢复状态都不能放置镜子。
+- 三者的周期、Prefab和重置规则见`docs/systems/PERIODIC_OBSTACLE_SYSTEM.md`。
+
 ### 压沉土块交互（已确定）
 
 - Player与MirrorClone以各自`Rigidbody2D.mass`参与压沉土块承重，身份不改变重量规则。
@@ -251,6 +259,16 @@
 - 周期落雪命中Player时沿用Player死亡与完整房间重置规则。
 - 落雪不破坏或推动镜子，也不修改镜子放置表面。
 - 雪区临时胡萝卜只有Player可以拾取；MirrorClone接触胡萝卜或雪人不会改变道具与挡路状态。
+
+### 火区过热地面（已确定）
+
+- `OverheatingGround`是火区专属的静态、水平、安全地面语义；在满足通用空间条件时允许放置镜子。
+- 镜子成功放置后立即生成MirrorClone，并从该次成功放置起开始固定`3 seconds`过热倒计时；Player或MirrorClone是否继续站在地面上不改变倒计时。
+- 倒计时期间镜子视觉从原色连续转为炽红，并在开始过热时播放明确警告音；玩家可以随时右键正常回收镜子以取消本次倒计时。
+- 倒计时结束时按“镜子被特定危险破坏”处理：镜子立即消失，MirrorClone立即清理全部Trigger、压力板和事件占用后消失，Player不死亡，房间不整体重置，镜子立即回到Held状态且没有重新放置冷却。
+- 过热地面不伤害Player或MirrorClone，不改变角色移动、重力、碰撞或输入映射；它只影响直接放置在该表面的镜子。
+- 手动重置、Player死亡重置、场景切换和重新进入房间均取消过热倒计时，不保存剩余时间。普通地面、岩浆、周期喷发和周期升降岩浆的镜子规则保持不变。
+- 玩法系统必须通过显式`OverheatingGround`表面语义和`OverheatingMirrorGround2D`组件识别该机制，不得根据Tile、Sprite、GameObject、Prefab或房间名称推断。
 
 ### 特殊墙壁放置（姿态已确定）
 
