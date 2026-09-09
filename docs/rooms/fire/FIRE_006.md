@@ -1,5 +1,7 @@
 # FIRE_006：上下之间（暂定）
 
+> 2026-09-05 地面显示更新：普通静态地面统一为纯黑色 `#000000`（Alpha=1），使用现有 Solid Silhouette Sprite 材质和黑色渲染 Tint，保留原 Sprite Alpha 轮廓。本文先前的地面颜色、纹理显示记录由本条替代；地形布局、Tile 数据、碰撞、表面语义及玩法反馈不变。后续 Builder 生成须沿用该区域规则。
+
 > 2026-08-31：补登记本Scene到Build Settings，修复FIRE_005既有出口无法加载本房的配置遗漏；未改Scene、核心目标或无出口范围。核查记录见[FIRE_REPAIR_REVIEW.md](FIRE_REPAIR_REVIEW.md)。
 
 ## 状态

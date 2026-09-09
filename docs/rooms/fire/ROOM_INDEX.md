@@ -38,6 +38,17 @@
 | FIRE_018 | 灰盒中 | `docs/rooms/fire/FIRE_018.md` | `Assets/Scenes/Levels/Fire/Fire_018.unity` | 上下双通道；镜像与本体分别诱导火球命中双锁存板，AND开启上方门 |
 | FIRE_019 | 灰盒中 | `docs/rooms/fire/FIRE_019.md` | `Assets/Scenes/Levels/Fire/Fire_019.unity` | 三通道接力；先放行巡逻投火者，再用MirrorClone在底层诱火锁存并打开FIRE_020出口 |
 | FIRE_020 | 灰盒中 | `docs/rooms/fire/FIRE_020.md` | `Assets/Scenes/Levels/Fire/Fire_020.unity` | 火窗协作；镜像占板、Player穿越周期喷发诱火，锁存开启下层目标门 |
+| FIRE_021 | 灰盒中 | `docs/rooms/fire/FIRE_021.md` | `Assets/Scenes/Levels/Fire/Fire_021.unity` | 用户已批准基础房间：60 格黑色地面、最远橙色背景；无出口及谜题机关 |
+| FIRE_022 | 灰盒中 | `docs/rooms/fire/FIRE_022.md` | `Assets/Scenes/Levels/Fire/Fire_022.unity` | 用户已批准：参照FIRE_021尺寸的60格贯通道路与灰色背景；无出口和谜题机关 |
+| FIRE_023 | 灰盒中 | `docs/rooms/fire/FIRE_023.md` | `Assets/Scenes/Levels/Fire/Fire_023.unity` | 用户已批准：类似FIRE_022的60格道路、灰色背景，无山体；无出口 |
+| FIRE_024 | 灰盒中 | `docs/rooms/fire/FIRE_024.md` | `Assets/Scenes/Levels/Fire/Fire_024.unity` | 用户已批准：类似FIRE_023的60格道路基础场景，灰色底、无山体和出口 |
+| FIRE_025 | 灰盒中 | `docs/rooms/fire/FIRE_025.md` | `Assets/Scenes/Levels/Fire/Fire_025.unity` | 用户已批准：类似FIRE_024的60格黑色道路与灰底；无山体、出口或机关 |
+| FIRE_026 | 灰盒中；环境定位已确认 | `docs/rooms/fire/FIRE_026.md` | `Assets/Scenes/Levels/Fire/Fire_026.unity` | 白色蒸汽与黑色烟雾交织的山洞，从温泉区过渡到岩浆区；当前Scene仍为60格道路与灰底，环境美术待实现；无已批准连接 |
+| FIRE_027 | 灰盒中 | `docs/rooms/fire/FIRE_027.md` | `Assets/Scenes/Levels/Fire/Fire_027.unity` | 用户已批准：类似FIRE_024的60格黑色道路与灰底；无山体、出口或机关 |
+| FIRE_028 | 灰盒中 | `docs/rooms/fire/FIRE_028.md` | `Assets/Scenes/Levels/Fire/Fire_028.unity` | 用户已批准中量岩浆洞穴美术；保留60格黑色道路，远景岩浆与分层烟雾已落盘，画面待验收；无出口或机关 |
+| FIRE_029 | 定位已确认；基础灰盒保留 | `docs/rooms/fire/FIRE_029.md` | `Assets/Scenes/Levels/Fire/Fire_029.unity` | 超大岩浆洞穴Boss战房；当前仍为60格道路灰底，洞穴布局与Boss具体规则待设计确认 |
+| FIRE_030 | 灰盒中 | `docs/rooms/fire/FIRE_030.md` | `Assets/Scenes/Levels/Fire/Fire_030.unity` | 用户已确认：Boss战后出口洞穴，仅步行过渡，无解谜；当前60格道路灰盒，洞穴美术与连接待制作 |
+| FIRE_031 | 灰盒中 | `docs/rooms/fire/FIRE_031.md` | `Assets/Scenes/Levels/Fire/Fire_031.unity` | 用户已批准：类似FIRE_024的60格黑色道路与灰底；无山体、出口或机关 |
 
 FIRE_001、FIRE_002、FIRE_004、FIRE_005、FIRE_006与FIRE_007当前处于待试玩状态；FIRE_003与FIRE_008至FIRE_017已由用户明确要求实现，当前处于灰盒中。FIRE_006本次只批准并实现空间灰盒，不包含核心解法、完成目标或出口。
 
@@ -45,4 +56,4 @@ FIRE_018已由用户确认与FIRE_017相连并进入灰盒实现；当前采用F
 
 FIRE_019已按用户确认补全底层火球锁存步骤，并与右侧FIRE_020建立双向连接。地图中的FIRE_018—FIRE_019仍表示规划连接，本次未修改FIRE_018 Scene。
 
-FIRE_020已由用户确认进入可玩灰盒实现；右侧完成区只设置`FutureExitAnchor-FIRE021`，FIRE_021尚未批准，因此没有正式出口或场景连接。
+FIRE_020已由用户确认进入可玩灰盒实现；右侧完成区只设置`FutureExitAnchor-FIRE021`，FIRE_021已于2026-09-05获准创建基础地面与背景；双方连接尚未批准，仍没有正式出口或场景连接。

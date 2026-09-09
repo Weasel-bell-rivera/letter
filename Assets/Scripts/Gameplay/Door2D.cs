@@ -181,7 +181,7 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
         if (!HasControlSource()) return VisualState.Closed;
         if (controlSources == null || controlSources.Length == 0)
             return controlSource.IsActive
-                ? controlSource.IsFireballLatched ? VisualState.LatchedOpen : VisualState.TemporaryOpen
+                ? controlSource.IsLatchedSignal ? VisualState.LatchedOpen : VisualState.TemporaryOpen
                 : VisualState.Closed;
 
         bool active = controlLogic == ControlLogic.And;
@@ -190,7 +190,7 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
         {
             bool sourceActive = source != null && source.IsActive;
             active = controlLogic == ControlLogic.And ? active && sourceActive : active || sourceActive;
-            allFireballLatched &= source != null && source.IsFireballLatched;
+            allFireballLatched &= source != null && source.IsLatchedSignal;
         }
         if (!active) return VisualState.Closed;
         return allFireballLatched ? VisualState.LatchedOpen : VisualState.TemporaryOpen;

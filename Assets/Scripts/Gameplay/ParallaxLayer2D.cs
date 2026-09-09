@@ -7,6 +7,11 @@ public sealed class ParallaxLayer2D : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float cameraFollowFactor = .9f;
     [SerializeField] private bool followHorizontal = true;
     [SerializeField] private bool followVertical;
+    [SerializeField] private bool useFixedReferencePose;
+    [SerializeField, Tooltip("World-space camera position used when authoring this layer.")]
+    private Vector3 referenceCameraPosition;
+    [SerializeField, Tooltip("World-space layer position at the reference camera position.")]
+    private Vector3 referenceLayerPosition;
 
     private Vector3 initialLayerPosition;
     private Vector3 initialCameraPosition;
@@ -19,6 +24,7 @@ public sealed class ParallaxLayer2D : MonoBehaviour
     {
         ResolveCamera();
         CaptureReferencePose();
+        if (useFixedReferencePose) LateUpdate();
     }
 
     private void LateUpdate()
@@ -48,6 +54,13 @@ public sealed class ParallaxLayer2D : MonoBehaviour
 
     public void CaptureReferencePose()
     {
+        if (useFixedReferencePose)
+        {
+            initialLayerPosition = referenceLayerPosition;
+            initialCameraPosition = referenceCameraPosition;
+            return;
+        }
+
         initialLayerPosition = transform.position;
         initialCameraPosition = cameraTransform != null ? cameraTransform.position : Vector3.zero;
     }

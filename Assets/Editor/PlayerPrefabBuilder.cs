@@ -177,7 +177,7 @@ public static class PlayerPrefabBuilder
         renderer.sortingOrder = 10;
         PlayerVisual2D visual = visualObject.AddComponent<PlayerVisual2D>();
         visual.Configure(renderer, idleFrames, walkFrames, jumpFrames, hitFrames, happyFrames,
-            walkFps: 12f, jumpVerticalOffsets: jumpFrameVerticalOffsets);
+            walkFps: 8f, jumpVerticalOffsets: jumpFrameVerticalOffsets);
 
         PlayerController2D controller = root.AddComponent<PlayerController2D>();
         controller.Configure(visualObject.transform, movement);

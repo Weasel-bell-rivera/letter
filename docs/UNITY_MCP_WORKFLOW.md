@@ -83,6 +83,9 @@ Unity的刷新触发条件和Scene保存行为参考：[资源数据库刷新](h
 ## Scene与Prefab操作
 
 - 修改Scene或Prefab前，先确认当前Scene、Prefab Stage和目标资产路径。
+- 含`Light2D.Global`的独立房间不要为批量检查而使用`OpenSceneMode.Additive`叠加打开。URP会跨普通已加载Scene检查全局灯；同一Sorting Layer和Blend Style存在多盏时会报`More than one global light`，即使每个房间自身只有一盏。
+- 批量只读检查优先读取文本资产；必须加载时，可以使用`EditorSceneManager.OpenPreviewScene`隔离检查，并在`finally`中通过`ClosePreviewScene`关闭。需要正常显示房间时，在确认所有受影响Scene没有未保存编辑、没有Prefab Stage且未处于Play Mode后使用`OpenSceneMode.Single`。有未保存编辑时先按上文同步规则保护，不能直接切换。
+- 遇到重复全局灯报错，先检查所有已加载Scene和有效灯光的Sorting Layer、Blend Style；不要为消除跨Scene冲突删除各房间唯一的全局灯，也不要修改URP包或屏蔽日志。
 - 正式房间仍采用标准Tilemap静态地形与通用Prefab动态对象组合。
 - 房间Scene只保存房间实例配置，不复制Player、镜子、存档或全局状态系统。
 - 通用行为不得写死在具体房间Scene或房间专用脚本中。
@@ -162,4 +165,3 @@ Unity的刷新触发条件和Scene保存行为参考：[资源数据库刷新](h
 - 已运行且获准的测试及结果。
 - 未运行的PlayMode、完整测试或人工试玩及对应风险。
 - Git diff中是否存在任务开始前已有或与任务无关的改动。
-

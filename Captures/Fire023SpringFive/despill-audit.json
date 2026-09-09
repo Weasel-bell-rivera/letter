@@ -1,0 +1,22 @@
+[
+  {
+    "file": "fire-spring-cave-roof.png",
+    "despilled_pixels": 10420
+  },
+  {
+    "file": "fire-spring-far-bank.png",
+    "despilled_pixels": 5013
+  },
+  {
+    "file": "fire-spring-left-wall.png",
+    "despilled_pixels": 12036
+  },
+  {
+    "file": "fire-spring-right-wall.png",
+    "despilled_pixels": 9249
+  },
+  {
+    "file": "fire-spring-water.png",
+    "despilled_pixels": 110
+  }
+]

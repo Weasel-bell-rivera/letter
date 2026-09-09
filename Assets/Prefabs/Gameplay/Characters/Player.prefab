@@ -151,7 +151,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6990d957fc514d4b8ce78e44fde2837c, type: 3}
   - {fileID: 21300000, guid: 9a7584c786464e2eabf524e1be30247a, type: 3}
   idleFramesPerSecond: 2
-  walkFramesPerSecond: 12
+  walkFramesPerSecond: 8
   jumpFramesPerSecond: 12
   hitFramesPerSecond: 10
 --- !u!1 &4870972150017224388

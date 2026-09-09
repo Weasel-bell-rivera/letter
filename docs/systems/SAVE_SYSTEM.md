@@ -206,3 +206,5 @@ The runtime save-flow overlay provides New Game, Continue, overwrite confirmatio
 - 继续游戏从最近成功进入房间时的入口恢复，失败时按安全回退链处理。
 - 仅本地存档，不实现云存档。
 - 自动保存、持续失败和备份恢复使用本文件定义的提示规则。
+
+`latchedDoorGroupIds`同时保存下沉永久开关的完成ID；与双压力板门控组共享唯一ID空间和即时保存流程，不保存未完成的下沉进度，无需新增存档字段。

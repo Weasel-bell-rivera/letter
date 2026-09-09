@@ -1,0 +1,16 @@
+{
+  "new_blocks": 20,
+  "removed_blocks": 0,
+  "preserved_external_fixed_reference_updates": 13,
+  "other_changed_blocks": [
+    [
+      "927026369",
+      "SpriteRenderer:"
+    ],
+    [
+      "44550092",
+      "Transform:"
+    ]
+  ],
+  "gameplay_blocks_unchanged": true
+}

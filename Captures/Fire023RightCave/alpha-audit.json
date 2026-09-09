@@ -1,0 +1,16 @@
+{
+  "size": [
+    3168,
+    1344
+  ],
+  "mode": "RGBA",
+  "alpha_bbox": [
+    72,
+    62,
+    3096,
+    1282
+  ],
+  "transparent_fraction": 0.28295886694324196,
+  "tolerance": 100,
+  "edge_tolerance": 200
+}
