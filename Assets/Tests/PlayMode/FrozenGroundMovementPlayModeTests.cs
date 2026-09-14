@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -147,7 +146,6 @@ public sealed class FrozenGroundMovementPlayModeTests
 
     private static void SetHorizontalInput(PlayerController2D player, float value)
     {
-        typeof(PlayerController2D).GetField("input", BindingFlags.Instance | BindingFlags.NonPublic)
-            ?.SetValue(player, value);
+        player.SetMoveInput(Vector2.right * value);
     }
 }

@@ -21,7 +21,8 @@ Assets/Prefabs/Gameplay/
 │  ├─ GroundConveyor2D.prefab
 │  └─ FreezingGroundCell2D.prefab
 ├─ Devices/
-│  └─ Spring2D.prefab
+│  ├─ Spring2D.prefab
+│  └─ Ladder2D.prefab
 ├─ Snow/
 │  ├─ SnowmanGate2D.prefab
 │  └─ TemporaryCarrotPickup2D.prefab
@@ -183,6 +184,16 @@ Prefab验证要求：
 - 顶面、左右侧面、角点、连续接触和离开后重触发结果确定。
 - Player与MirrorClone规则一致，死亡、镜子回收和房间重置不残留状态。
 - Prefab不包含房间编号、正式世界坐标或房间专用引用。
+
+## `Ladder2D.prefab`
+
+资产路径：`Assets/Prefabs/Gameplay/Devices/Ladder2D.prefab`
+
+根对象包含`BoxCollider2D(isTrigger=true)`和`Ladder2D`，子对象`Visual`包含`SpriteRenderer`；不包含Rigidbody2D、实体支撑Collider或`SurfaceSemantic2D`。默认Trigger为`1 × 4 units`，使用`Assets/Art/Generated/Environment/black_wooden_ladder_silhouette.png`作为首版视觉，视觉由通用组件按Trigger高度等比同步。
+
+Prefab负责显式定义固定竖直梯子的中心线、有效攀爬范围和顶部出口基准。Player与MirrorClone通过共享`CharacterLadderMotor2D`处理进入、上下移动、停止、Space脱离、安全登顶和重置清理；完整规则以`docs/systems/LADDER_SYSTEM.md`为准。
+
+房间实例允许覆盖位置、Trigger高度以及与同一有效范围对齐的视觉高度；不得旋转或移动梯子，不得覆盖宽度、`3 units/s`速度、角色资格、镜子交互、顶部安全检测或重置规则。视觉和对象名称不携带攀爬资格。
 
 ## `MovingPlatform2D.prefab`
 
@@ -645,3 +656,11 @@ Room
 - 投火兵按距离、视线和最近目标规则锁定Player或MirrorClone，锁定后火球不追踪。
 - 投火兵的在途火球在Player死亡与手动重置时全部清除；MirrorClone单独死亡不会重置敌人攻击阶段。
 - Scene中没有为单个房间解包并复制通用玩法逻辑。
+
+## `HazardVolume2D.prefab`
+
+- 通用Prefab：`Assets/Prefabs/Gameplay/Hazards/HazardVolume2D.prefab`。用于已批准、边界不适合整数Tile的固定危险体；不替代普通网格Hazard Tilemap。
+- 组件：Transform、PolygonCollider2D(isTrigger=true)、Hazard2D(active=true)，Layer=Default（沿用现有危险Prefab，未新增Physics Layer）；无Renderer、Rigidbody2D和实体支撑。默认轮廓为中心原点1×1矩形。
+- 允许实例覆盖名称、位置和PolygonCollider2D轮廓；旋转0、缩放1，按世界实际可见危险边界配置。禁止通过实例改变Hazard2D的Player/MirrorClone/镜子语义。
+- Player触碰使用完整房间重置；MirrorClone触碰只销毁镜像并回收镜子；镜子本体不被普通Hazard破坏。重置后危险保持启用，不写入存档。
+- 初次落位：FIRE_023固定致命水，水面Y=-0.65，轮廓和验证记录见对应房间文档。

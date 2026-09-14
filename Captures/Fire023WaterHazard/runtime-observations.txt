@@ -1,0 +1,3 @@
+After player drop: player=(80.00, 0.91, 0.00) grounded=True mirror=Held clone=False placedMirror=False hazard=True
+
+Clone-only water observation: player=(82.00, 0.91, 0.00) grounded=True mirror=Held cloneNull=True placedMirrorNull=True playing=True

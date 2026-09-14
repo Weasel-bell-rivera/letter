@@ -33,6 +33,7 @@ public sealed class PlayerPrefabAssetTests
         Assert.That(player.GetComponent<Rigidbody2D>(), Is.Not.Null);
         Assert.That(player.GetComponent<BoxCollider2D>()?.size, Is.EqualTo(new Vector2(.8f, 1.8f)));
         Assert.That(player.GetComponent<PlayerController2D>(), Is.Not.Null);
+        Assert.That(player.GetComponent<CharacterLadderMotor2D>(), Is.Not.Null);
         Assert.That(player.GetComponent<PlayerInput>()?.defaultActionMap, Is.EqualTo("Player"));
         MirrorPlayer2D mirror = player.GetComponent<MirrorPlayer2D>();
         Assert.That(mirror, Is.Not.Null);
@@ -51,6 +52,7 @@ public sealed class PlayerPrefabAssetTests
         Assert.That(visual.IdleFrameCount, Is.EqualTo(2));
         Assert.That(visual.WalkFrameCount, Is.EqualTo(8));
         Assert.That(visual.JumpFrameCount, Is.EqualTo(11));
+        Assert.That(visual.ClimbFrameCount, Is.EqualTo(8));
         Assert.That(visual.JumpFrameVerticalOffsetCount, Is.EqualTo(visual.JumpFrameCount),
             "Every jump frame must keep a stable visual foot anchor.");
         Assert.That(visual.HitFrameCount, Is.EqualTo(4));

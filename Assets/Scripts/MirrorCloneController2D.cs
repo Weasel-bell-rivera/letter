@@ -16,6 +16,7 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     private float freezingMovementMultiplier = 1f;
     private Vector2 springContactVelocity;
     private bool springAntiGravityLaunchActive;
+    private CharacterLadderMotor2D ladderMotor;
     public Vector2 GravityAxis => gravityAxis;
     public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
     public Collider2D SupportCollider => supportCollider;
@@ -25,14 +26,30 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     public Rigidbody2D FreezingBody => body;
     public Collider2D FreezingCollider => box;
     public Vector2 FreezingUpAxis => -gravityAxis;
-    public bool IsGroundedNow => box != null && TryGetGroundSurface(out _, out _);
-    public bool IsOnFrozenGround => TryGetGroundSurface(out SurfaceSemantic2D surface, out _) && IsFrozenGround(surface);
+    public bool IsGroundedNow => !IsClimbing && box != null && TryGetGroundSurface(out _, out _);
+    public bool IsOnFrozenGround => !IsClimbing && TryGetGroundSurface(out SurfaceSemantic2D surface, out _) && IsFrozenGround(surface);
     public event Action Died;
+    public bool IsClimbing => ladderMotor != null && ladderMotor.IsClimbing;
+    public float ClimbInput => ladderMotor != null ? ladderMotor.VerticalInput : 0f;
     public void Configure(PlayerController2D player, Vector2 transformedMoveAxis, Vector2 localGravity)
-    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); supportCollider = null; surfaceMotionCollider = null; appliedSurfaceVelocity = Vector2.zero; freezingMovementMultiplier = 1f; springContactVelocity = Vector2.zero; springAntiGravityLaunchActive = false; FreezingGroundActor2D.Ensure(gameObject); FreezingVisual2D.Ensure(gameObject); }
+    { source = player; settings = player.Settings; moveAxis = transformedMoveAxis.normalized; gravityAxis = localGravity.normalized; body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>(); body.gravityScale = 0f; body.freezeRotation = true; ladderMotor = GetComponent<CharacterLadderMotor2D>() ?? gameObject.AddComponent<CharacterLadderMotor2D>(); observedJumpInput = source.JumpInputSequence; visualRoot = transform.Find("Visual"); supportCollider = null; surfaceMotionCollider = null; appliedSurfaceVelocity = Vector2.zero; freezingMovementMultiplier = 1f; springContactVelocity = Vector2.zero; springAntiGravityLaunchActive = false; FreezingGroundActor2D.Ensure(gameObject); FreezingVisual2D.Ensure(gameObject); }
     private void FixedUpdate()
     {
         if (source == null || settings == null) return;
+        bool ladderConsumedJump = false;
+        bool ladderHandled = ladderMotor != null &&
+            ladderMotor.ProcessMovement(source.MoveInput, source.JumpInputSequence, out ladderConsumedJump);
+        if (ladderConsumedJump) lastJumpPressed = float.NegativeInfinity;
+        if (ladderHandled)
+        {
+            observedJumpInput = source.JumpInputSequence;
+            supportCollider = null;
+            surfaceMotionCollider = null;
+            appliedSurfaceVelocity = Vector2.zero;
+            springAntiGravityLaunchActive = false;
+            springContactVelocity = body.linearVelocity;
+            return;
+        }
         Vector2 velocity = body.linearVelocity;
         bool grounded = TryGetGroundSurface(out SurfaceSemantic2D groundSurface, out RaycastHit2D supportHit);
         supportCollider = grounded ? supportHit.collider : null;
@@ -122,5 +139,5 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
         }
         return true;
     }
-    public void Die() { Died?.Invoke(); Destroy(gameObject); }
+    public void Die() { ladderMotor?.ClearAll(); Died?.Invoke(); Destroy(gameObject); }
 }

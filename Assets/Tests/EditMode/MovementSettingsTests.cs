@@ -13,12 +13,12 @@ public sealed class MovementSettingsTests
     }
     [Test] public void MirrorAndPlayerCanShareOneSettingsAsset()
     { var settings = ScriptableObject.CreateInstance<PlayerMovementSettings>(); Assert.That(settings.maxSpeed, Is.EqualTo(6f)); Assert.That(settings.jumpHeight, Is.EqualTo(3f)); }
-    [Test] public void HorizontalMoveActionUsesFloatAxis()
+    [Test] public void MoveActionUsesUnnormalizedTwoDimensionalComposite()
     {
         InputActionAsset asset = AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/InputSystem_Actions.inputactions");
         InputAction move = asset.FindAction("Player/Move", true);
-        Assert.That(move.expectedControlType, Is.EqualTo("Axis"));
+        Assert.That(move.expectedControlType, Is.EqualTo("Vector2"));
         Assert.That(move.bindings[0].isComposite, Is.True);
-        Assert.That(move.bindings[0].path, Is.EqualTo("1DAxis"));
+        Assert.That(move.bindings[0].path, Is.EqualTo("2DVector(mode=1)"));
     }
 }

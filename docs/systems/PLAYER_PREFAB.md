@@ -52,6 +52,7 @@ Player根对象包含：
 - `BoxCollider2D`
 - `PlayerInput`
 - `PlayerController2D`
+- `CharacterLadderMotor2D`
 - `MirrorPlayer2D`
 
 `Visual`包含一个`SpriteRenderer`和`PlayerVisual2D`。Player和MirrorClone必须复用同一视觉尺寸、Pivot、基础Sprite轮廓和朝向规则；MirrorClone只通过透明度、颜色、材质、排序或已批准特效区分身份。
@@ -66,6 +67,7 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 - `Rigidbody2D`使用Dynamic Body、Continuous Collision Detection和Interpolate，并禁止物理旋转。
 - 重力由`PlayerController2D`依据`DefaultPlayerMovement.asset`计算，不在Prefab或房间中复制重力常量。
 - `PlayerInput`引用统一Input Action Asset，默认Action Map为`Player`，通知模式为`Send Messages`。
+- `Move`为二维Vector2输入；普通移动读取X，显式梯子攀爬读取Y。
 - Player根Transform缩放固定为`1,1,1`。
 - Visual只允许通过统一配置校准显示高度，必须保持图片原始宽高比，不得非等比压缩到Collider宽度。
 - Prefab不得包含房间编号、世界坐标、入口ID、检查点或房间专用对象引用。
@@ -77,6 +79,7 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 - 稳定站立且无水平输入：2帧`idle`循环。
 - 稳定落地且存在水平输入：8帧`walk`循环，以`8 FPS`播放，完整循环为1秒；通过降低迈步频率增大每个周期的行进距离，保持原始动作帧、角色尺寸和基础移动速度不变。Player与MirrorClone共用该配置。
 - 离地：从头播放11帧`jump`，到达末帧后保持，直到重新落地；不得因滞空过长循环播放起跳动作。
+- 梯子附着且无竖直输入：保持攀爬起始帧；存在竖直输入：循环播放攀爬帧。首版原型复用8帧移动序列建立独立Climb状态，正式攀爬帧以后只能替换表现，不得改变物理位置、速度或Collider。
 - `duck`表现暂时回退到`idle`；当前没有Duck输入，不得仅因素材存在而新增下蹲玩法。
 - `front`使用2帧`happy`，只用于明确的正面展示、交互或过场表现；当前普通移动不自动转为正面。
 - `hit`使用4帧受击表现；当前死亡和重置时序未批准额外延迟，不得为了播放完动画延迟伤害结算。

@@ -10,7 +10,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
     [SerializeField] private LayerMask groundMask = ~0;
     private Rigidbody2D body;
     private BoxCollider2D bodyCollider;
-    private float input;
+    private Vector2 input;
     private float lastGrounded = float.NegativeInfinity;
     private float lastJumpPressed = float.NegativeInfinity;
     private bool jumpConsumedSinceGrounded;
@@ -30,15 +30,18 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
     private float frozenGroundFreezeAmount;
     private Vector2 springContactVelocity;
     private bool springAntiGravityLaunchActive;
-    public float HorizontalInput => input;
+    private CharacterLadderMotor2D ladderMotor;
+    public Vector2 MoveInput => input;
+    public float HorizontalInput => input.x;
+    public float VerticalInput => input.y;
     public bool JumpHeld => jumpHeld;
     public int JumpSequence { get; private set; }
     public int JumpInputSequence { get; private set; }
     public PlayerMovementSettings Settings => settings;
     public Transform VisualRoot => visualRoot;
     public bool FacingRight { get; private set; } = true;
-    public bool IsGroundedNow => IsGrounded(Vector2.down);
-    public bool IsOnFrozenGround => IsGroundedOnFrozenSurface(Vector2.down);
+    public bool IsGroundedNow => !IsClimbing && IsGrounded(Vector2.down);
+    public bool IsOnFrozenGround => !IsClimbing && IsGroundedOnFrozenSurface(Vector2.down);
     public bool ControlEnabled => controlEnabled;
     public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
     public Collider2D SupportCollider => supportCollider;
@@ -48,10 +51,13 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
     public float FrozenGroundFreezeAmount => frozenGroundFreezeAmount;
     public float SpringGravityMagnitude => settings != null ? settings.Gravity : 0f;
     public Vector2 SpringContactVelocity => springContactVelocity;
+    public bool IsClimbing => ladderMotor != null && ladderMotor.IsClimbing;
+    public float ClimbInput => ladderMotor != null ? ladderMotor.VerticalInput : 0f;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>(); bodyCollider = GetComponent<BoxCollider2D>(); body.freezeRotation = true; body.gravityScale = 0f;
+        ladderMotor = GetComponent<CharacterLadderMotor2D>() ?? gameObject.AddComponent<CharacterLadderMotor2D>();
         FreezingGroundActor2D.Ensure(gameObject);
         FreezingVisual2D.Ensure(gameObject);
         NormalizeVisualToCollider();
@@ -73,7 +79,8 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
         float uniformScale = bodyCollider.bounds.size.y / currentSize.y;
         visualRoot.localScale = new Vector3(facing * uniformScale, uniformScale, 1f);
     }
-    public void OnMove(InputValue value) => input = controlEnabled ? value.Get<float>() : 0f;
+    public void OnMove(InputValue value) => SetMoveInput(value.Get<Vector2>());
+    public void SetMoveInput(Vector2 value) => input = controlEnabled ? Vector2.ClampMagnitude(value, 1.414214f) : Vector2.zero;
     public void OnJump(InputValue value)
     {
         // PlayerInput uses SendMessages for the other actions. Jump is sampled from
@@ -84,7 +91,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
     {
         BindJumpAction();
         PollJumpAction();
-        if (input != 0f) { FacingRight = input > 0f; Face(input); }
+        if (Mathf.Abs(input.x) > .01f) { FacingRight = input.x > 0f; Face(input.x); }
     }
     private void FixedUpdate()
     {
@@ -106,12 +113,29 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
         }
         bool onFrozenGround = IsFrozenGround(groundSurface);
         if (!frozenGroundFreezing && onFrozenGround &&
-            (Mathf.Abs(body.linearVelocity.x) > .01f || Mathf.Abs(input) > .01f))
+            (Mathf.Abs(body.linearVelocity.x) > .01f || Mathf.Abs(input.x) > .01f))
             BeginFrozenGroundFreezing(supportHit);
         if (frozenGroundFreezing && UpdateFrozenGroundFreezing()) return;
+        bool ladderConsumedJump = false;
+        bool ladderHandled = ladderMotor != null &&
+            ladderMotor.ProcessMovement(input, JumpInputSequence, out ladderConsumedJump);
+        if (ladderConsumedJump)
+        {
+            lastJumpPressed = float.NegativeInfinity;
+            velocity = body.linearVelocity;
+        }
+        if (ladderHandled)
+        {
+            supportCollider = null;
+            surfaceMotionCollider = null;
+            appliedSurfaceVelocity = Vector2.zero;
+            springAntiGravityLaunchActive = false;
+            springContactVelocity = body.linearVelocity;
+            return;
+        }
         Vector2 relativeVelocity = SurfaceMotion2D.RemoveRepeatedContribution(velocity,
             surfaceMotionCollider, nextMotionCollider, appliedSurfaceVelocity);
-        float target = input * settings.maxSpeed * freezingMovementMultiplier;
+        float target = input.x * settings.maxSpeed * freezingMovementMultiplier;
         float accel = onFrozenGround
             ? 0f
             : (Mathf.Abs(target) > 0.01f ? settings.groundAcceleration : settings.groundDeceleration) * freezingMovementMultiplier;
@@ -210,7 +234,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
         frozenGroundEntryX = body.position.x;
         frozenGroundDirection = Mathf.Abs(body.linearVelocity.x) > .01f
             ? Mathf.Sign(body.linearVelocity.x)
-            : Mathf.Sign(input);
+            : Mathf.Sign(input.x);
         frozenGroundEntrySpeed = Mathf.Max(Mathf.Abs(body.linearVelocity.x), settings.maxSpeed * .5f);
 
         Tilemap tilemap = supportHit.collider != null ? supportHit.collider.GetComponent<Tilemap>() : null;
@@ -248,7 +272,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
         FindAnyObjectByType<RoomResetSystem>()?.ResetRoom();
         return true;
     }
-    public void SetControlEnabled(bool value) { controlEnabled = value; if (!value) { input = 0f; jumpHeld = false; } }
+    public void SetControlEnabled(bool value) { controlEnabled = value; if (!value) { input = Vector2.zero; jumpHeld = false; ladderMotor?.CancelAndStop(); } }
     public void SetFreezingMovementMultiplier(float multiplier)
         => freezingMovementMultiplier = Mathf.Clamp01(multiplier);
     public void CompleteFreezingGround()
@@ -277,6 +301,7 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
     }
     public void TeleportTo(Vector3 position)
     {
+        ladderMotor?.ClearAll();
         transform.position = position;
         body.position = position;
         body.linearVelocity = Vector2.zero;

@@ -19,6 +19,8 @@
 
 - 向左：`A` 或左方向键。
 - 向右：`D` 或右方向键。
+- 梯子向上：`W` 或上方向键。
+- 梯子向下：`S` 或下方向键。
 - 跳跃：`Space`。
 - 鼠标左键：尝试放置镜子。
 - 鼠标右键：收回镜子。
@@ -40,6 +42,6 @@
 - `Interact`
 - `Pause`
 
-方向键和 `A`/`D` 必须映射到同一个 `Move` Action，玩法代码不得分别处理。
+`Move`使用二维Vector2 Action；`WASD`和方向键必须分别映射到同一个2D Composite，玩法代码不得分别读取具体按键。非攀爬状态只消费水平分量，梯子规则见`docs/systems/LADDER_SYSTEM.md`。
 
 具体放置目标与合法性规则见 `docs/MIRROR_MECHANIC.md`。

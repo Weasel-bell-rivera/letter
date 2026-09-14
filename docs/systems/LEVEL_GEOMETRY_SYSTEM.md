@@ -29,6 +29,8 @@
 
 不得因为一个对象在视觉上接近地形，就把具有运行时状态的玩法对象直接实现为普通Tile。
 
+固定竖直梯子使用`Ladder2D.prefab`及显式Trigger实现，不混入Terrain或其他表面语义Tilemap。梯子不提供实体支撑、不加入`SurfaceType`，其完整规则见`docs/systems/LADDER_SYSTEM.md`。
+
 ## 标准房间结构
 
 ```text

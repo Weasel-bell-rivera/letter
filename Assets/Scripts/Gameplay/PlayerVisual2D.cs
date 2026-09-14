@@ -5,18 +5,20 @@ public sealed class PlayerVisual2D : MonoBehaviour
 {
     public enum PresentationPose { Automatic, Duck, Front, Hit }
 
-    private enum AnimationState { Idle, Walk, Jump, Duck, Front, Hit }
+    private enum AnimationState { Idle, Walk, Jump, ClimbIdle, ClimbMove, Duck, Front, Hit }
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite[] idleFrames;
     [SerializeField] private Sprite[] walkFrames;
     [SerializeField] private Sprite[] jumpFrames;
+    [SerializeField] private Sprite[] climbFrames;
     [SerializeField] private float[] jumpFrameVerticalOffsets;
     [SerializeField] private Sprite[] hitFrames;
     [SerializeField] private Sprite[] happyFrames;
     [SerializeField, Min(1f)] private float idleFramesPerSecond = 2f;
     [SerializeField, Min(1f)] private float walkFramesPerSecond = 8f;
     [SerializeField, Min(1f)] private float jumpFramesPerSecond = 12f;
+    [SerializeField, Min(1f)] private float climbFramesPerSecond = 8f;
     [SerializeField, Min(1f)] private float hitFramesPerSecond = 10f;
 
     private PlayerController2D player;
@@ -36,6 +38,7 @@ public sealed class PlayerVisual2D : MonoBehaviour
     public int IdleFrameCount => idleFrames?.Length ?? 0;
     public int WalkFrameCount => walkFrames?.Length ?? 0;
     public int JumpFrameCount => jumpFrames?.Length ?? 0;
+    public int ClimbFrameCount => climbFrames?.Length ?? 0;
     public int JumpFrameVerticalOffsetCount => jumpFrameVerticalOffsets?.Length ?? 0;
     public int HitFrameCount => hitFrames?.Length ?? 0;
     public float WalkFrameSeconds => 1f / Mathf.Max(1f, walkFramesPerSecond);
@@ -43,18 +46,21 @@ public sealed class PlayerVisual2D : MonoBehaviour
 
     public void Configure(SpriteRenderer targetRenderer, Sprite[] idle, Sprite[] walk, Sprite[] jump,
         Sprite[] hit, Sprite[] happy, float idleFps = 2f, float walkFps = 8f,
-        float jumpFps = 12f, float hitFps = 10f, float[] jumpVerticalOffsets = null)
+        float jumpFps = 12f, float hitFps = 10f, float[] jumpVerticalOffsets = null,
+        Sprite[] climb = null, float climbFps = 8f)
     {
         spriteRenderer = targetRenderer;
         idleFrames = idle;
         walkFrames = walk;
         jumpFrames = jump;
+        climbFrames = climb ?? walk;
         hitFrames = hit;
         happyFrames = happy;
         jumpFrameVerticalOffsets = jumpVerticalOffsets;
         idleFramesPerSecond = Mathf.Max(1f, idleFps);
         walkFramesPerSecond = Mathf.Max(1f, walkFps);
         jumpFramesPerSecond = Mathf.Max(1f, jumpFps);
+        climbFramesPerSecond = Mathf.Max(1f, climbFps);
         hitFramesPerSecond = Mathf.Max(1f, hitFps);
         SetAnimationState(AnimationState.Idle);
     }
@@ -92,9 +98,13 @@ public sealed class PlayerVisual2D : MonoBehaviour
         }
         else
         {
+            bool climbing = player != null ? player.IsClimbing : clone != null && clone.IsClimbing;
+            float climbInput = player != null ? player.ClimbInput : clone != null ? clone.ClimbInput : 0f;
             bool grounded = player != null ? player.IsGroundedNow : clone != null && clone.IsGroundedNow;
             float horizontal = player != null ? player.HorizontalInput : clone != null ? clone.MovementInput : 0f;
-            nextState = !grounded ? AnimationState.Jump :
+            nextState = climbing
+                ? (Mathf.Abs(climbInput) > .01f ? AnimationState.ClimbMove : AnimationState.ClimbIdle)
+                : !grounded ? AnimationState.Jump :
                 Mathf.Abs(horizontal) > .01f ? AnimationState.Walk : AnimationState.Idle;
         }
 
@@ -125,7 +135,7 @@ public sealed class PlayerVisual2D : MonoBehaviour
 
         float fps = FramesPerSecondFor(animationState);
         int elapsedFrames = Mathf.FloorToInt((Time.unscaledTime - stateStartedAt) * fps);
-        bool loop = animationState is AnimationState.Idle or AnimationState.Walk;
+        bool loop = animationState is AnimationState.Idle or AnimationState.Walk or AnimationState.ClimbMove;
         int index = loop ? elapsedFrames % frames.Length : Mathf.Min(elapsedFrames, frames.Length - 1);
         index = Mathf.Max(0, index);
         float verticalOffset = animationState == AnimationState.Jump &&
@@ -140,6 +150,8 @@ public sealed class PlayerVisual2D : MonoBehaviour
     {
         AnimationState.Walk => walkFrames,
         AnimationState.Jump => jumpFrames,
+        AnimationState.ClimbIdle => ClimbFrames(),
+        AnimationState.ClimbMove => ClimbFrames(),
         AnimationState.Front => happyFrames,
         AnimationState.Hit => hitFrames,
         _ => idleFrames
@@ -149,6 +161,8 @@ public sealed class PlayerVisual2D : MonoBehaviour
     {
         AnimationState.Walk => walkFramesPerSecond,
         AnimationState.Jump => jumpFramesPerSecond,
+        AnimationState.ClimbIdle => climbFramesPerSecond,
+        AnimationState.ClimbMove => climbFramesPerSecond,
         AnimationState.Hit => hitFramesPerSecond,
         _ => idleFramesPerSecond
     };
@@ -162,6 +176,7 @@ public sealed class PlayerVisual2D : MonoBehaviour
     };
 
     private static Sprite First(Sprite[] frames) => Frame(frames, 0);
+    private Sprite[] ClimbFrames() => climbFrames != null && climbFrames.Length > 0 ? climbFrames : walkFrames;
     private static Sprite Frame(Sprite[] frames, int index) =>
         frames != null && index >= 0 && index < frames.Length ? frames[index] : null;
 

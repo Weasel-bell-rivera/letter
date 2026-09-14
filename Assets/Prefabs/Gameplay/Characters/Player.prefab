@@ -130,6 +130,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 42fdf20bc06d44de84493786638d63cf, type: 3}
   - {fileID: 21300000, guid: 446adf05bf5742c09949074311df7a05, type: 3}
   - {fileID: 21300000, guid: 3004795223104b46902e75ddc8577dcc, type: 3}
+  climbFrames:
+  - {fileID: 21300000, guid: 5dc76627a9e545deb5f9be3d1dfc0617, type: 3}
+  - {fileID: 21300000, guid: 3c752448e28e47209aa1846bcb38b510, type: 3}
+  - {fileID: 21300000, guid: f5ef0499cf0c4e2ea341356f42e96317, type: 3}
+  - {fileID: 21300000, guid: d13153c08d074618ad32d7980b9153ff, type: 3}
+  - {fileID: 21300000, guid: 3aed0622ad4b455f9903d3ec11301574, type: 3}
+  - {fileID: 21300000, guid: 08856ba98f23431e8b26f4e415d75251, type: 3}
+  - {fileID: 21300000, guid: dba722cd1cda44ed8d9b46081d7e788d, type: 3}
+  - {fileID: 21300000, guid: 35a925f4028c4277bb257c26a27769d4, type: 3}
   jumpFrameVerticalOffsets:
   - 0
   - 0
@@ -153,6 +162,7 @@ MonoBehaviour:
   idleFramesPerSecond: 2
   walkFramesPerSecond: 8
   jumpFramesPerSecond: 12
+  climbFramesPerSecond: 8
   hitFramesPerSecond: 10
 --- !u!1 &4870972150017224388
 GameObject:
@@ -166,6 +176,7 @@ GameObject:
   - component: {fileID: 959257955181451684}
   - component: {fileID: 1482101246329654329}
   - component: {fileID: 6222223618308208636}
+  - component: {fileID: 7776256054135851912}
   - component: {fileID: 2132907618264157923}
   - component: {fileID: 407268682359017066}
   - component: {fileID: 1850427081392992475}
@@ -282,6 +293,18 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7776256054135851912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870972150017224388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a1e76536be4209ade427d790819baa, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: W1.Runtime::CharacterLadderMotor2D
 --- !u!114 &2132907618264157923
 MonoBehaviour:
   m_ObjectHideFlags: 0
