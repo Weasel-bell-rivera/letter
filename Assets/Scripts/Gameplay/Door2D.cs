@@ -142,8 +142,9 @@ public sealed class Door2D : MonoBehaviour, IRoomResettable, IOrderedRoomResetta
         foreach (Collider2D overlap in Physics2D.OverlapBoxAll(center, size, angle))
         {
             Rigidbody2D body = overlap.attachedRigidbody;
-            if (body == null) continue;
+            if (body == null || overlap.isTrigger || !body.simulated) continue;
             if (body.GetComponent<PlayerController2D>() != null || body.GetComponent<MirrorCloneController2D>() != null ||
+                body.GetComponent<PushableCrate2D>() != null ||
                 body.GetComponent<FreezablePatrolEnemy2D>() != null || body.GetComponent<WindRayEnemy2D>() != null ||
                 body.GetComponent<VerticalWallPatrolEnemy2D>() != null ||
                 body.GetComponent<HorizontalFireballEnemy2D>() != null)

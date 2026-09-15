@@ -1,5 +1,0 @@
-Generator: built-in imagegen (not Labnana).
-Imported asset: Assets/Art/Generated/Environment/Fire/Fire023Pillars/BankTopRim.png
-Original result: exec-89e3004b-dcc2-4281-89d9-6718cd27b3bd.png
-Prompt:
-Use case: stylized-concept. Asset type: one isolated reusable decorative rock bank top rim sprite for a 2D side-scrolling silhouette cave game. Transparent RGBA background, no baked checkerboard. A single long horizontal thin shelf rim, ratio roughly 8:1, floating alone in center with generous transparent space. Its TOP silhouette edge is PERFECTLY STRAIGHT and HORIZONTAL for almost full length, ends vertical. Its lower edge is irregular with 5 or 6 large gently angular chipped downward lobes, NOT many little teeth. Fill entire rock with ONE SOLID flat dark gray tone. Absolutely no interior details, no gradients, no texture, no cracks, no faceting, no highlights, no outline. Only the outer silhouette defines a natural broad volcanic rock lip. Front elevation. No full platform underneath, no plants, no water, no scene, no characters, no text. The rim is shallow, only about one eighth its width, silhouette clean with asymmetric underside. Real transparent background.

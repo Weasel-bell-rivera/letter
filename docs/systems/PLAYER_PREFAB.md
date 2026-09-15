@@ -34,6 +34,8 @@
 - `player_idle_00.png`至`player_idle_01.png`
 - `player_walk_00.png`至`player_walk_07.png`
 - `player_jump_00.png`至`player_jump_10.png`
+- `player_climb_00.png`至`player_climb_07.png`（Labnana生成的背面梯子攀爬剪影，四个原始姿态与左右翻转姿态组成循环）
+- `player_push_00.png`至`player_push_03.png`（Labnana生成的侧面前倾推箱剪影，双手抵住箱子，脚步循环）
 - `player_hit_00.png`至`player_hit_03.png`（暂时继续使用`HandDrawn/`资源）
 - `player_happy_00.png`至`player_happy_01.png`（暂时继续使用`HandDrawn/`资源）
 
@@ -63,13 +65,15 @@ Player Prefab不包含常驻的手持镜子子对象。镜子处于`Held`状态�
 
 Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGroundActor2D`进度以及Player的`FrozenGround`首格渐冻进度，控制Player视觉子树的冰蓝染色和霜层Overlay，不自行修改移动、碰撞、输入或死亡规则。MirrorClone运行时创建后使用同一个表现组件。
 
-- `BoxCollider2D`尺寸固定为`0.8 × 1.8 Unity units`。
+- `BoxCollider2D`使用平底、侧面平直的小圆角矩形（用户已批准）。完整外廓固定为`0.50 × 1.50 Unity units`；`edgeRadius = 0.04`，内部`size = (0.42, 1.42)`，`offset = (0, 0)`。Unity圆角向内部矩形外扩，必须按两侧各一个半径扣减size，不能直接在旧size上增加圆角。
+- 底部平直段长`0.42 units`，两侧平直段长`1.42 units`；按待机剪影约0.60×1.59 units向内收缩。动画不改变碰撞形状。
+- MirrorClone生成时复制Player的`size`、`edgeRadius`和`offset`。生成空间检查使用完整外廓，不能把内部size作为完整占用尺寸；既有查询容差不变。
 - `Rigidbody2D`使用Dynamic Body、Continuous Collision Detection和Interpolate，并禁止物理旋转。
 - 重力由`PlayerController2D`依据`DefaultPlayerMovement.asset`计算，不在Prefab或房间中复制重力常量。
 - `PlayerInput`引用统一Input Action Asset，默认Action Map为`Player`，通知模式为`Send Messages`。
 - `Move`为二维Vector2输入；普通移动读取X，显式梯子攀爬读取Y。
 - Player根Transform缩放固定为`1,1,1`。
-- Visual只允许通过统一配置校准显示高度，必须保持图片原始宽高比，不得非等比压缩到Collider宽度。
+- Visual保留原始1.8 units画布高度及等比缩放，不随Collider尺寸自动缩放。统一基础视觉偏移Y=0.12，使可见脚底接近Collider底部；推箱额外沿面向反方向偏移0.15 units，使手掌贴近缩小后的侧面。Player与MirrorClone共用该配置。
 - Prefab不得包含房间编号、世界坐标、入口ID、检查点或房间专用对象引用。
 
 房间不得覆盖Player尺寸、Collider、Rigidbody、移动资产、Input Actions、镜子规则、视觉缩放、死亡流程或场景切换生命周期。
@@ -79,7 +83,8 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 - 稳定站立且无水平输入：2帧`idle`循环。
 - 稳定落地且存在水平输入：8帧`walk`循环，以`8 FPS`播放，完整循环为1秒；通过降低迈步频率增大每个周期的行进距离，保持原始动作帧、角色尺寸和基础移动速度不变。Player与MirrorClone共用该配置。
 - 离地：从头播放11帧`jump`，到达末帧后保持，直到重新落地；不得因滞空过长循环播放起跳动作。
-- 梯子附着且无竖直输入：保持攀爬起始帧；存在竖直输入：循环播放攀爬帧。首版原型复用8帧移动序列建立独立Climb状态，正式攀爬帧以后只能替换表现，不得改变物理位置、速度或Collider。
+- 梯子附着且无竖直输入：保持攀爬起始帧；存在竖直输入：以`8 FPS`循环播放8帧专用`climb`背面攀爬序列。Player与MirrorClone共用图片与播放配置；这些帧只负责表现，不改变物理位置、速度或Collider。
+- 落地并持续朝显式`PushableCrate2D`侧面输入时：以`6 FPS`循环播放4帧`push`，优先于普通走路；允许`0.035 units`的物理解算接触间隙。检测使用角色实际移动轴和侧面法线，排除当前支撑箱、普通墙壁、Trigger和忽略碰撞的对象。松键、反向、离开箱子、离地或进入梯子立即按当前状态恢复其他动画；箱子受阻不阻止显示用力动作。手掌对齐标准角色Collider正面，脚底与既有帧一致。
 - `duck`表现暂时回退到`idle`；当前没有Duck输入，不得仅因素材存在而新增下蹲玩法。
 - `front`使用2帧`happy`，只用于明确的正面展示、交互或过场表现；当前普通移动不自动转为正面。
 - `hit`使用4帧受击表现；当前死亡和重置时序未批准额外延迟，不得为了播放完动画延迟伤害结算。
@@ -108,7 +113,7 @@ Player根对象同时挂载通用`FreezingVisual2D`。该组件读取`FreezingGr
 4. 实例化唯一的`Player.prefab`。
 5. 从存档服务应用镜子能力等永久状态；房间不得覆盖解锁状态。
 6. 将Player和MirrorPlayer显式绑定到`RoomResetSystem`。
-7. 将Player Transform绑定到当前房间的`CameraFollow2D`，先应用房间相机边界，再建立构图。
+7. 将Player Transform绑定到当前房间的`CameraFollow2D`，在恢复输入前按房间跟随轴和构图偏移立即对准Player，并以相机边界钳制完整视野；不等待跨越初始跟随线。
 8. 同步物理Transform，确认生成位置安全后恢复Player输入。
 
 If the requested entrance exists but cannot safely contain the complete Player collider at runtime, the spawner retries once at the room's explicit `DEFAULT` entrance. It restores Player control only after that fallback also passes the same safety test. The save service records the actual resolved entrance after successful spawning, never the rejected requested entrance.
@@ -170,7 +175,7 @@ If the requested entrance exists but cannot safely contain the complete Player c
 ### EditMode
 
 - Player Prefab可独立加载，必需组件与内部引用完整。
-- Collider、Rigidbody、PlayerInput、移动资产和五组共27帧视觉图片配置正确。
+- Collider、Rigidbody、PlayerInput、移动资产和七组共39帧视觉图片配置正确，正式攀爬与推箱序列不得引用走路帧。
 - Prefab根坐标为零、缩放为一，不含房间对象引用。
 - 所有正式房间Scene都没有序列化Player实例，并且恰好有一个`DEFAULT`入口和一个通用生成组件。
 - 房间Builder不再调用`AddComponent`拼装Player。

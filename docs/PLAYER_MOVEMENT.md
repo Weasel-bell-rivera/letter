@@ -22,6 +22,7 @@
 - 特殊元素影响移动时，必须通过明确的状态或区域效果实现。
 - 玩家、镜像以及关卡尺寸必须基于同一套移动尺度设计。
 - MirrorClone复用Player的Collider尺寸、移动速度、加速度、减速度、跳跃高度、土狼时间、输入缓冲和最大下落速度。
+- 角色碰撞轮廓采用完整外廓`0.50 × 1.50 units`、圆角半径`0.04`的小圆角矩形；内部尺寸与复制规则见`docs/systems/PLAYER_PREFAB.md`。碰撞体按剪影内缩，图片保持原大小；视觉脚底校准见Prefab文档，基础移动参数不变。
 - MirrorClone复用Player的视觉尺寸、Pivot、Sprite轮廓和动画基础配置，不得通过额外Transform缩放改变角色大小。
 - Jump的按下、持续和松开同时传给Player与MirrorClone；双方分别使用自身的落地状态、土狼时间和输入缓冲决定是否起跳。
 - Player未成功起跳不阻止MirrorClone起跳，MirrorClone未成功起跳也不影响Player。

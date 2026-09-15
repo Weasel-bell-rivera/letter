@@ -23,7 +23,8 @@ public sealed class MirrorHarness2D : IDisposable
         Player = player.AddComponent<PlayerController2D>();
         PlayerBody = player.GetComponent<Rigidbody2D>();
         PlayerCollider = player.GetComponent<BoxCollider2D>();
-        PlayerCollider.size = new Vector2(.8f, 1.8f);
+        PlayerCollider.size = new Vector2(.42f, 1.42f);
+        PlayerCollider.edgeRadius = .04f;
         Mirror = player.AddComponent<MirrorPlayer2D>();
         Mirror.Configure(Player);
         Mirror.SetInitiallyUnlocked(initiallyUnlocked);

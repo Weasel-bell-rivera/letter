@@ -238,6 +238,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982df92537984b15963161d48f2a9bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: W1.Runtime::PressurePlate2D
+--- !u!1001 &23009000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 170881188}
+    m_Modifications:
+    - target: {fileID: 467545827049398394, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_Name
+      value: FIRE_023_Crate_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 72.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4405843061c014e6699462d7190b8134, type: 3}
+--- !u!4 &23009001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8388740947355065087, guid: 4405843061c014e6699462d7190b8134, type: 3}
+  m_PrefabInstance: {fileID: 23009000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &24000101
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +421,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: 44, y: 5.775, z: 0}
@@ -464,6 +514,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 23009001}
   - {fileID: 23000101}
   - {fileID: 23000201}
   - {fileID: 552344622}
@@ -579,7 +630,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 80, y: 3, z: -10}
   referenceLayerPosition: {x: 80, y: 5.2, z: 0}
@@ -631,7 +682,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: 18, y: 3.325, z: 0}
@@ -790,7 +841,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 80, y: 3, z: -10}
   referenceLayerPosition: {x: 80, y: 0.6, z: 0}
@@ -1000,6 +1051,30 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 507717112}
     m_ColliderPaths:
+    - - X: 740000000
+        Y: 50000000
+      - X: 710000000
+        Y: 50000000
+      - X: 710000000
+        Y: 40000000
+      - X: 740000000
+        Y: 40000000
+    - - X: 700000000
+        Y: 30000000
+      - X: 670000000
+        Y: 30000000
+      - X: 670000000
+        Y: 20000000
+      - X: 700000000
+        Y: 20000000
+    - - X: 810000000
+        Y: 30000000
+      - X: 780000000
+        Y: 30000000
+      - X: 780000000
+        Y: 20000000
+      - X: 810000000
+        Y: 20000000
     - - X: 780000000
         Y: -10000000
       - X: 830000000
@@ -1034,6 +1109,18 @@ CompositeCollider2D:
         Y: -50000000
   m_CompositePaths:
     m_Paths:
+    - - {x: 73.99997, y: 4}
+      - {x: 73.99997, y: 5}
+      - {x: 71, y: 4.999971}
+      - {x: 71.00003, y: 4}
+    - - {x: 80.99997, y: 2}
+      - {x: 80.99997, y: 3}
+      - {x: 78, y: 2.999971}
+      - {x: 78.00003, y: 2}
+    - - {x: 69.99997, y: 2}
+      - {x: 69.99997, y: 3}
+      - {x: 67, y: 2.999971}
+      - {x: 67.00003, y: 2}
     - - {x: 109.99998, y: -4}
       - {x: 109.99998, y: 0}
       - {x: 86, y: -0.000029300001}
@@ -5656,18 +5743,108 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 2147483649
+  - first: {x: 67, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 68, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 69, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 78, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 79, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 80, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 71, y: 4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 72, y: 4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 73, y: 4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - serializedVersion: 2
-    m_RefCount: 451
+    m_RefCount: 460
     m_Data: {fileID: 11400000, guid: 6e3635b7dabce43a5b31b28786a830c6, type: 2}
   m_TileSpriteArray:
   - serializedVersion: 2
-    m_RefCount: 451
+    m_RefCount: 460
     m_Data: {fileID: 21300000, guid: ed08e709520254bf8a5b000e51381224, type: 3}
   m_TileMatrixArray:
   - serializedVersion: 2
-    m_RefCount: 451
+    m_RefCount: 460
     m_Data:
       e00: 1
       e01: 0
@@ -5687,13 +5864,13 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - serializedVersion: 2
-    m_RefCount: 451
+    m_RefCount: 460
     m_Data: {r: 0, g: 0, b: 0, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Origin: {x: -10, y: -5, z: 0}
-  m_Size: {x: 120, y: 5, z: 1}
+  m_Size: {x: 120, y: 10, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -5761,7 +5938,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.2
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: -3, y: -1.4, z: 0}
@@ -5905,7 +6082,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 1
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 80, y: 3, z: -10}
   referenceLayerPosition: {x: 80, y: 3, z: 0}
@@ -6017,7 +6194,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 80, y: 3, z: -10}
   referenceLayerPosition: {x: 95, y: 6.3, z: 0}
@@ -6129,7 +6306,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: -7, y: 3.8500001, z: 0}
@@ -6241,7 +6418,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: 34, y: 4.2000003, z: 0}
@@ -6353,7 +6530,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: -3, y: 3.3, z: 0}
@@ -6687,7 +6864,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: 29, y: 4.2000003, z: 0}
@@ -6799,7 +6976,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 80, y: 3, z: -10}
   referenceLayerPosition: {x: 65, y: 6.3, z: 0}
@@ -6911,7 +7088,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.2
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: -2, y: 7.7, z: 0}
@@ -7244,7 +7421,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: 1.5, y: 3, z: 0}
@@ -7356,7 +7533,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 1
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: -2, y: 3.7, z: 0}
@@ -7616,6 +7793,7 @@ GameObject:
   - component: {fileID: 1520032833}
   - component: {fileID: 1520032832}
   - component: {fileID: 1520032831}
+  - component: {fileID: 1520032835}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7636,9 +7814,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: W1.Runtime::CameraFollow2D
   target: {fileID: 0}
-  followVertical: 0
+  followVertical: 1
   smoothTime: 0
-  framingOffset: {x: 0, y: 0}
+  framingOffset: {x: 0, y: 0.56}
   useExplicitFramingOffset: 1
   constrainToRoomBounds: 1
   roomBounds:
@@ -7646,7 +7824,7 @@ MonoBehaviour:
     x: -10
     y: -4
     width: 120
-    height: 14
+    height: 18
   alignEntryFramingToBounds: 0
   entryFramingBounds:
     serializedVersion: 2
@@ -7728,6 +7906,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1252378388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1520032835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520032830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1586388837
 GameObject:
   m_ObjectHideFlags: 0
@@ -7821,7 +8043,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 0, y: 3, z: -10}
   referenceLayerPosition: {x: 14, y: 5.25, z: 0}
@@ -8000,6 +8222,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4000000000000000002, guid: 59cec891094845fd8067c4f791f8532e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.8043
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000000000000000002, guid: 59cec891094845fd8067c4f791f8532e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8043
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000000000000000002, guid: 59cec891094845fd8067c4f791f8532e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.8043
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000000000000000002, guid: 59cec891094845fd8067c4f791f8532e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.87
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8163,7 +8401,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
   useFixedReferencePose: 1
   referenceCameraPosition: {x: 80, y: 3, z: -10}
   referenceLayerPosition: {x: 80, y: 11, z: 0}

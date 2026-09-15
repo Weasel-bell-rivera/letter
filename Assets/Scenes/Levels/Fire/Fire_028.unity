@@ -3046,7 +3046,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 1
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &564884631
 SpriteRenderer:
   serializedVersion: 3
@@ -3176,9 +3176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: W1.Runtime::CameraFollow2D
   target: {fileID: 0}
-  followVertical: 0
-  smoothTime: 0.15
-  framingOffset: {x: 0, y: 0}
+  followVertical: 1
+  smoothTime: 0
+  framingOffset: {x: 0, y: 0.56}
   useExplicitFramingOffset: 1
   constrainToRoomBounds: 1
   roomBounds:
@@ -3186,7 +3186,7 @@ MonoBehaviour:
     x: -10
     y: -4
     width: 60
-    height: 14
+    height: 18
   alignEntryFramingToBounds: 0
   entryFramingBounds:
     serializedVersion: 2
@@ -3525,7 +3525,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.95
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280003
 SpriteRenderer:
   serializedVersion: 3
@@ -3635,7 +3635,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280013
 SpriteRenderer:
   serializedVersion: 3
@@ -3761,7 +3761,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280023
 SpriteRenderer:
   serializedVersion: 3
@@ -3887,7 +3887,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280033
 SpriteRenderer:
   serializedVersion: 3
@@ -4013,7 +4013,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280043
 SpriteRenderer:
   serializedVersion: 3
@@ -4139,7 +4139,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280053
 SpriteRenderer:
   serializedVersion: 3
@@ -4265,7 +4265,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.85
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280063
 SpriteRenderer:
   serializedVersion: 3
@@ -4390,7 +4390,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280073
 SpriteRenderer:
   serializedVersion: 3
@@ -4499,7 +4499,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280083
 SpriteRenderer:
   serializedVersion: 3
@@ -4608,7 +4608,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280093
 SpriteRenderer:
   serializedVersion: 3
@@ -4717,7 +4717,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280103
 SpriteRenderer:
   serializedVersion: 3
@@ -4826,7 +4826,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280113
 SpriteRenderer:
   serializedVersion: 3
@@ -4935,7 +4935,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.65
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280123
 SpriteRenderer:
   serializedVersion: 3
@@ -5044,7 +5044,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.8
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280133
 SpriteRenderer:
   serializedVersion: 3
@@ -5153,7 +5153,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.8
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280143
 SpriteRenderer:
   serializedVersion: 3
@@ -5262,7 +5262,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.8
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280153
 SpriteRenderer:
   serializedVersion: 3
@@ -5371,7 +5371,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.35
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280163
 SpriteRenderer:
   serializedVersion: 3
@@ -5480,7 +5480,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.35
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280173
 SpriteRenderer:
   serializedVersion: 3
@@ -5589,7 +5589,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.35
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280183
 SpriteRenderer:
   serializedVersion: 3
@@ -5698,7 +5698,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.2
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280193
 SpriteRenderer:
   serializedVersion: 3
@@ -5807,7 +5807,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.2
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280203
 SpriteRenderer:
   serializedVersion: 3
@@ -5916,7 +5916,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.2
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280213
 SpriteRenderer:
   serializedVersion: 3
@@ -6025,7 +6025,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1520032834}
   cameraFollowFactor: 0.2
   followHorizontal: 1
-  followVertical: 0
+  followVertical: 1
 --- !u!212 &280223
 SpriteRenderer:
   serializedVersion: 3

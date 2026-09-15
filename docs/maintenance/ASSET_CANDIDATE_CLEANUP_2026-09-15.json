@@ -1,0 +1,547 @@
+{
+  "date": "2026-09-15",
+  "archive_directory_relative_to_repository_parent": "W1-local-archive/2026-09-15-130046-unused-assets",
+  "asset_count": 53,
+  "file_count_including_meta": 106,
+  "bytes": 142393412,
+  "static_scan_files": 1547,
+  "static_references": [],
+  "unity_asset_roots": 902,
+  "unity_dependency_hits": [],
+  "unity_loaded_scene": "Assets/Scenes/Levels/Fire/Fire_024.unity",
+  "unity_scene_dirty": false,
+  "unity_live_dependency_hits": [],
+  "prefab_stage_open": false,
+  "files": [
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v2.png",
+      "bytes": 1516613,
+      "sha256": "830bfc09feb7b4d092419ec7c318afd3029cd614126a1190025f37dd8dd649f7"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v2.png.meta",
+      "bytes": 3306,
+      "sha256": "a1c79e00f273687bccf878b615e21bf2c68fab9df540f69f98e6e12a56d27c8e"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v3.png",
+      "bytes": 1454380,
+      "sha256": "d288d84bd4ab0bdcbcd8e2ef261a6d65966b5fa9711301011547bd8609832eff"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v3.png.meta",
+      "bytes": 3309,
+      "sha256": "e74a5ac642e1f5b8615c726cf31d4f1a4eafde8b480d0a8de7709025980c2961"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v4.png",
+      "bytes": 861481,
+      "sha256": "d69dc629e92af033c2053ed45ef5584d0da2a3241e468241504c3a0fc60fa0ea"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v4.png.meta",
+      "bytes": 3306,
+      "sha256": "a139dcb75c2ee2ee0e07ec67b06a480eb2d9f750f2ae8899f5b5073759127edc"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v5.png",
+      "bytes": 604475,
+      "sha256": "d70c9be64d7b8a44d827309f38d8b804b281b5508f0a6ac99d8333d650d393c6"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v5.png.meta",
+      "bytes": 15937,
+      "sha256": "c8d2cfc9b402ecc60b7467148ca16816d213dae6273855b5c0563657f2d46b9e"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v6-r1.png",
+      "bytes": 3666773,
+      "sha256": "cb67b8885c4c8f24ff434f02de075c528640bb41cdd1d07acf32f0c71eb3bd9d"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v6-r1.png.meta",
+      "bytes": 3318,
+      "sha256": "0ff6f93a9811945e348979bf9db83a920975c15df5cce825998ff022141d1976"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v6.png",
+      "bytes": 3896916,
+      "sha256": "9c9f5fbf9f9847c66ce1cca0e5d2c25c7254d2fc3c260dae77525f6c8906d86a"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v6.png.meta",
+      "bytes": 3306,
+      "sha256": "cc238bba7ca04837fd33466f186123bd2b4d6e93346cde010d66d21a3f13dc82"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v7.png",
+      "bytes": 3723816,
+      "sha256": "03ccf7496b995bc0f5aa93337ffb9068551166ae525225b88a6d7f489819c3d2"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v7.png.meta",
+      "bytes": 3306,
+      "sha256": "c2964fc821bd9b2faf33bb87f8c408d6d81edefd477d6d089e63c7b1fd017591"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v8-r1.png",
+      "bytes": 3687387,
+      "sha256": "bf31f808fa604e8c9f7cc7a5ba52cb2c7a8ab88b255c096c3ad1ac436e4c2631"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v8-r1.png.meta",
+      "bytes": 3315,
+      "sha256": "659ddfc7a1ed78ae672ed4f3a902a479b1cce2ef5c6e5cbbac641736c7444b0f"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v8.png",
+      "bytes": 3477074,
+      "sha256": "928ca222e0715e63a323028ce3ee0b5df6064b0125b615ee747f8182181da4ba"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v8.png.meta",
+      "bytes": 3309,
+      "sha256": "8111c6abba0b2031ee4f3e2e73244015b2eb20fc23909b7bbe6ca9f1008aad7d"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v9.png",
+      "bytes": 3886119,
+      "sha256": "514bc3bcfc52d8915bf5757ea3379b3baa87f1f2f562360f7d477792baca0dea"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v9.png.meta",
+      "bytes": 3306,
+      "sha256": "c6cbf2c54a13a0d6037490567b22446ecbb689306459d0461d2d0c4f6199a7b9"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource.png",
+      "bytes": 2156171,
+      "sha256": "13c035df4239716dcde46107ab2f28774cef079785671a939dcceaeea170b603"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource.png.meta",
+      "bytes": 3300,
+      "sha256": "8814f3361008d9d731b47f87b0d25c5daa6b998ed847ca5ee95d8e87e6ab48a0"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/icon-matched-walk-cycle-8frame-reference.png",
+      "bytes": 1336315,
+      "sha256": "7d82abe5cc11e1744d44ab9e08ad516a4b83a01763a26f1620bced87e1833ff8"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/icon-matched-walk-cycle-8frame-reference.png.meta",
+      "bytes": 3344,
+      "sha256": "bb58a1c16f87b49932e1e9dd39180d262753df5386b199e9e651c78310d890a9"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/icon-matched-walk-cycle-reference.png",
+      "bytes": 1080413,
+      "sha256": "ad4249ddc86158157b6785f40d239428440ed0f82a6775bf9916be20d32d5a65"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/icon-matched-walk-cycle-reference.png.meta",
+      "bytes": 3326,
+      "sha256": "90ca8652f4c32dd331b8b3e46fb194a87ad4804cf58bee57e55519d1949ff45d"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/natural-walk-cycle-reference.png",
+      "bytes": 3952242,
+      "sha256": "6a4a74f2f4155dfb298e73e0560d428f1439d18fe582acc00959fe1811c3aadd"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/natural-walk-cycle-reference.png.meta",
+      "bytes": 3309,
+      "sha256": "1e6fd00d282d335d4a66c775f89928e29486650459bc99687e603ebbbe3b648e"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/player-and-clone-action-reference.png",
+      "bytes": 4154215,
+      "sha256": "68974d4e2fe0a18abcacce72b341cee3649ef3a2d9d6b2ce67ef8b6d41442af2"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/player-and-clone-action-reference.png.meta",
+      "bytes": 3327,
+      "sha256": "1ddcd009bddfdb4b034548b2e2d8295e69580b55d0e1a55a9619a090cc51b4fc"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_a-chroma-source.png",
+      "bytes": 3471769,
+      "sha256": "db622ad5821e564ed054482a85f749096ac0a0d7db981357110aeb61c99e6773"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_a-chroma-source.png.meta",
+      "bytes": 3336,
+      "sha256": "be45fd939d98e1a60302bbea0edcd1b1d9475945c9f552644d18df4b8512e6e5"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-chroma-source.png",
+      "bytes": 2836691,
+      "sha256": "83e7fd3fdd9d4b4eafbf735f7de8c453a5093648481b6daff912e407213bdddf"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-chroma-source.png.meta",
+      "bytes": 3336,
+      "sha256": "8a6021cefa28a8d614a4264ce732796df6874a4d4188cdc0c7b955af8dd39444"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-retry-chroma-source.png",
+      "bytes": 3644534,
+      "sha256": "12fa48b7231c4597ac27a51f73fef372f842977ee46d5b24d0aa18a138aeed30"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-retry-chroma-source.png.meta",
+      "bytes": 3357,
+      "sha256": "da1e0a51424b82cd67049d511ecde7f9fcbac58481a720ac88333bfbb30415fe"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/furnace_toad-chroma-source.png",
+      "bytes": 3533942,
+      "sha256": "dbb15ec831a6a9fea38a6d95a0ef650e42f644b7c3d1b4caaacd4e54b3421248"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/furnace_toad-chroma-source.png.meta",
+      "bytes": 3303,
+      "sha256": "b4f945bb33999cbe58f7de791a2dfd75fba9f1e14c975fd3d09d92e6ef29926e"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/horizontal_fireball-chroma-source.png",
+      "bytes": 3235924,
+      "sha256": "c7e9bb68b4cab2e2f6688ae38e64700d181e1483b20dd858bb178525d093356b"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/horizontal_fireball-chroma-source.png.meta",
+      "bytes": 3327,
+      "sha256": "2060bc989559446ad6d2b5e0c4c135b622ff2369212ff3e090e3398340231fdc"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol-chroma-source.png",
+      "bytes": 3198050,
+      "sha256": "8bc7ad420af37195188be7f313733ac93475c802895519021f649f49c6fb4a45"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol-chroma-source.png.meta",
+      "bytes": 3327,
+      "sha256": "50b97227457bd678ecd7561d4abc32f8722bbcd14975e5de8485978e3d5a816b"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_a-chroma-source.png",
+      "bytes": 3223016,
+      "sha256": "929dc9f680b760e269ff85bce874d438f30b53a43272484a5fdd6a696b2267c3"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_a-chroma-source.png.meta",
+      "bytes": 3309,
+      "sha256": "0c8cd3ca3ba298e81faa6c4fa65ac1a140d7102112c1383db6124e61202b2cd6"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_b-chroma-source.png",
+      "bytes": 3433475,
+      "sha256": "3c22d1f358e2d22e2c26e837951a345b6c2a3a0e9f7c80228ef1e51f026cd76a"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_b-chroma-source.png.meta",
+      "bytes": 3306,
+      "sha256": "2552dc5f529bb6fef565af1c6d67866bcf8d239d98f6e8d8194b6c167b9e40e2"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_rest-chroma-source.png",
+      "bytes": 3387993,
+      "sha256": "d99de522ad1c6c623fdd393b9d3fb8653adec3e3f1fd74ff360fdfac67d799f2"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_rest-chroma-source.png.meta",
+      "bytes": 3309,
+      "sha256": "94d3bec82b94e786f03620b7f55b1edad8d3f1b38bc3227c07e97d43ec5d8324"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-extreme-far-mountains.png",
+      "bytes": 4812369,
+      "sha256": "91e9911d2837c75610789dd30eff143d1d2dcfae08cc33ecc0208196590cb602"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-extreme-far-mountains.png.meta",
+      "bytes": 3308,
+      "sha256": "d2b4a92a5f69a47529c1d2a1d85e5ccaa645161252b34e3669accc667e1003b0"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-foreground-right.png",
+      "bytes": 4057555,
+      "sha256": "a04070bf94d6e11d29c58b93050954629cbed69d3a42c00700a3a801729180ec"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-foreground-right.png.meta",
+      "bytes": 3293,
+      "sha256": "b162f7f5dcd14d2f4a1b81e42cd29f7696aff0366f070beecfe48313d8b4622f"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-far-ridge.png",
+      "bytes": 4190585,
+      "sha256": "dd76ee412241669d5692a9fd91e5e1b42fa024cfc264baa6b08fa32d51d32701"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-far-ridge.png.meta",
+      "bytes": 4526,
+      "sha256": "96b12eb879d4a7a6a8f0c3acee2b0bb17b1b33a92438809189c47913c9dc628e"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-fog-light.png",
+      "bytes": 2275066,
+      "sha256": "92d6ea3493bb23fc8c198fc52fcaac5fefacce5065e306f9eec980a7ba31ec35"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-fog-light.png.meta",
+      "bytes": 3267,
+      "sha256": "045eecdc95903baef71682fa2e946acc82a72cf9804989d5a7bc397d148b657c"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-foreground-left.png",
+      "bytes": 4084860,
+      "sha256": "a48fed04d7913dd180356e34638d780ad8fa9d487b5b24739eb40d5c98ebcaec"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-foreground-left.png.meta",
+      "bytes": 3282,
+      "sha256": "48063c6566388538947d610d088ffb3995b0f254c62eb488b03a814398e3ddbf"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-ice-wall.png",
+      "bytes": 4334653,
+      "sha256": "7528c3a481234e36c789f60eb3e8be0459fc9b74a52a76b2a6a460818e9c1b55"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-ice-wall.png.meta",
+      "bytes": 3914,
+      "sha256": "ed6e4a9f0e132bc6e13c2a102b2a9df8e457f1fe32c3db457bed27ba8fbd7481"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-sparse-trees.png",
+      "bytes": 4645489,
+      "sha256": "1a5d99cbdb9c36e4933b0948d555587ac9ee104b9c3bc16c4aca3ecf0528c4b7"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-sparse-trees.png.meta",
+      "bytes": 6518,
+      "sha256": "27c016afa4accf7869fcd8aacab8dc0c033439ceb9dfd86ad17a19645a276105"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-wind-rock.png",
+      "bytes": 4207663,
+      "sha256": "7be073e4695e5f3df968349f33ac3544488f726b00dbb89c49703f25dca52a56"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-wind-rock.png.meta",
+      "bytes": 1467730,
+      "sha256": "dce9e4b3247483db0c86e58f7735f57a038cfca750eb372f9f11ca28d3b956b4"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-extreme-far-mountains.png",
+      "bytes": 4173125,
+      "sha256": "6a55583f128d456fc4e62354f7d9396142f5a73c64b41c03eff28a7feedd0294"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-extreme-far-mountains.png.meta",
+      "bytes": 3306,
+      "sha256": "42f7f3ae34548aa981ebe1d90f7238b4e5788a73d1d35823653ef9ac973b56c2"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-far-ridge.png",
+      "bytes": 3773637,
+      "sha256": "edf368ed4b8799c7c43d4296cb7d75be8e55bdc368b8a09775115272cdceb9a4"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-far-ridge.png.meta",
+      "bytes": 3270,
+      "sha256": "d658062e8aa9309828d891c48b347c7845fcc6b719c0779867ac39b8241a87b0"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light-r1.png",
+      "bytes": 2275066,
+      "sha256": "92d6ea3493bb23fc8c198fc52fcaac5fefacce5065e306f9eec980a7ba31ec35"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light-r1.png.meta",
+      "bytes": 3279,
+      "sha256": "eeb9b65c4e5323b39bc65f20957a1d977e0ce5467a4f81c7694ca8d1786b9ff5"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light.png",
+      "bytes": 2446428,
+      "sha256": "cd3cb26a51cc189b1fc1839dd5651c2c2a781613779fa7533fced2b1f9fc66f0"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light.png.meta",
+      "bytes": 3267,
+      "sha256": "a8dec23e32c57356a6aac79f831a0ff45b07f4d976dc6622dd491a11b542a307"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-left.png",
+      "bytes": 3708237,
+      "sha256": "2a8501d27b2c66296afc2fedcc4f803962127396c71fd3d958999f1d49373c07"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-left.png.meta",
+      "bytes": 3282,
+      "sha256": "b3e712eeab6454ffd532af6ea0c90236a974a39f55badb93c0be6eac0a842fc5"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-right.png",
+      "bytes": 3660393,
+      "sha256": "789763d14e13c48edcb9f70e8ccf7c8e8e5d3b92010283ba77013b6ddf4915be"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-right.png.meta",
+      "bytes": 3291,
+      "sha256": "260853b675b6cf8601d5a7bb7e49bf0ee50da570d32f115119a766a1aae78cb8"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-ice-wall.png",
+      "bytes": 3875337,
+      "sha256": "69bbcc2907eb614a89d7314b3bfbdff2dec0509106fb850594a0baa99f3f7ff3"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-ice-wall.png.meta",
+      "bytes": 3276,
+      "sha256": "461d91f3de4d89e97fbd5f309d8573f89c3ce6c4ca433a9d0385d7270a3e28d4"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-sparse-trees.png",
+      "bytes": 4069850,
+      "sha256": "a83b824cd7f24d513fbb6c45c0ff7f17bd390baa351ea7f8a2d35d4a4f56a2b6"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-sparse-trees.png.meta",
+      "bytes": 3288,
+      "sha256": "03f3e92613e75d04bb70503dcbd6e633b8715fdee0cc8b7f291c1f79685527b2"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-wind-rock.png",
+      "bytes": 3731971,
+      "sha256": "df6e54ba4401ca5d5813d235960890ce079a00883321afa0084c4fd0eaf4298d"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-wind-rock.png.meta",
+      "bytes": 3279,
+      "sha256": "b42a1e34302a606f6e980e6ac2ac2e919db341b598ae7d9a6ffc6a6dda0c268f"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+      "bytes": 4086,
+      "sha256": "ce78f86b1b7bfe747c7d51b6d9e170ee06f8062fe7326a50e8a9f8ec4ec094cb"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json.meta",
+      "bytes": 158,
+      "sha256": "f4f8bf4136024129e8af2f74ae1f9cc52637bccb73c490224206011b25f92530"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+      "bytes": 5731,
+      "sha256": "1c878588bd67ffeb23b78856ef48131cccb1158f8bf933c1dde07fcca1e50a29"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json.meta",
+      "bytes": 158,
+      "sha256": "62710c07d68e162f51e7bf8a46751d02bd3af948085c84dc80f0a688a204542e"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+      "bytes": 4413,
+      "sha256": "be3609e329385bc1790b7ce4d0f30da757f0067a54ec9137d15261d060127327"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json.meta",
+      "bytes": 158,
+      "sha256": "165964cc2126bb222c9a6416ef89bcc8a0ec1c39df12ffeb6b0ad33ed18c4b54"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+      "bytes": 6667,
+      "sha256": "3c9bc8fbd4cb8cacb6103eeaf7ea04607fda80b1b24b9599d297d8a6822c9e1c"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json.meta",
+      "bytes": 158,
+      "sha256": "48928a387c46dc2066a312644c74f95828c41c9465be562ce5f7ecf2ab0129cf"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-extreme-far-mountains.png",
+      "bytes": 565985,
+      "sha256": "fb0a6b4aa6a45b4fa1a8b9a8e251162cb62b4a881a1df468c82d4394ad5e433d"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-extreme-far-mountains.png.meta",
+      "bytes": 10566,
+      "sha256": "f5ccddb1c7ff7619b3960c413e3b68f5d30f246644fc35ffc408c22db962e873"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-far-cloud-sea.png",
+      "bytes": 1209900,
+      "sha256": "566c0a1ae2fe95bd0c96318b2f70a9417da5bcd4d484f35b491b4be754f3dc46"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-far-cloud-sea.png.meta",
+      "bytes": 4546,
+      "sha256": "a983221136ad77bb47fdf407f67fb12877a3b25b7984e60b89ac28d13df11d86"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-fog-light.png",
+      "bytes": 1159811,
+      "sha256": "d9ba274a42cd5cbc2abf937879db80b323258e67ed9efb86115e0b65539ee7c6"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-fog-light.png.meta",
+      "bytes": 3266,
+      "sha256": "a4a991c61ec380812a80439541413c62d6b1333b8f9c3c456873ab07481f4f08"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-foreground-left.png",
+      "bytes": 879259,
+      "sha256": "155a6b9ed7b3c7d718defa1a4a814a9d70ba10f9461139fb1bbaac990aaf353e"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-foreground-left.png.meta",
+      "bytes": 3285,
+      "sha256": "d2973b8859f3149b59a7a722c1a04c9fca9985bab9ee65f6e51bb39dc72bb7d3"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-foreground-right.png",
+      "bytes": 709192,
+      "sha256": "1b8b946ba47064a96a0615c4b1b9d3c2f168ca4b2445decdbe4e67f28c846755"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-foreground-right.png.meta",
+      "bytes": 3292,
+      "sha256": "a2627f6218e1082636c43cc264a13f4d102a6b5ba7e8b62ea5826af89fbbb64b"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-floating-rock.png",
+      "bytes": 1132434,
+      "sha256": "40e953e1706401c7e39b5aec7d9bbd8dabf9a7a8ce2de767e6b8b5427132653a"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-floating-rock.png.meta",
+      "bytes": 3288,
+      "sha256": "2a891e151eb666308f8a3fe13b01bb8230e80c4230e053a6017330c42a92968d"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-weathered-pillar.png",
+      "bytes": 882902,
+      "sha256": "1fa8a44362a01147bae13aad7e857bcf5da9f06ee24cb2ba0a581fb28b2fee16"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-weathered-pillar.png.meta",
+      "bytes": 3301,
+      "sha256": "6a45ac31603035e5f6febdf2b448d1b3a2cbe81a782a842b71076ce3166c0f5a"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-weathered-wall.png",
+      "bytes": 436577,
+      "sha256": "5318951fb93b450b51e6723492d11046fd5e0810c6f54fd41ff615e5eed7f9a4"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-weathered-wall.png.meta",
+      "bytes": 4601,
+      "sha256": "945f66dfd603db34d7da2f0679ff4aaf3a1bef8f2034bd207ce578a4c175aa21"
+    }
+  ]
+}

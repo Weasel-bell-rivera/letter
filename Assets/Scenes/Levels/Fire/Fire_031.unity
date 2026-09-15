@@ -3154,7 +3154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: W1.Runtime::CameraFollow2D
   target: {fileID: 0}
   followVertical: 0
-  smoothTime: 0.15
+  smoothTime: 0
   framingOffset: {x: 0, y: 0}
   useExplicitFramingOffset: 1
   constrainToRoomBounds: 1

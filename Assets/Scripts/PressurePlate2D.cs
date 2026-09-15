@@ -235,8 +235,10 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMo
         if (body == null || !body.simulated || other.isTrigger) return null;
         PlayerController2D player = body.GetComponent<PlayerController2D>();
         MirrorCloneController2D clone = body.GetComponent<MirrorCloneController2D>();
-        if (player == null && clone == null) return null;
-        Collider2D actor = player != null ? player.FreezingCollider : clone.FreezingCollider;
+        PushableCrate2D crate = body.GetComponent<PushableCrate2D>();
+        if (player == null && clone == null && (crate == null || !crate.isActiveAndEnabled)) return null;
+        Collider2D actor = player != null ? player.FreezingCollider :
+            clone != null ? clone.FreezingCollider : crate.SolidCollider;
         if (actor == null || !actor.enabled || !actor.gameObject.activeInHierarchy) return null;
 
         // Measure the whole physical body in plate space, independent of animation.
@@ -258,6 +260,8 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMo
         if (min.x < plateMin.x - tolerance || max.x > plateMax.x + tolerance
             || min.y < plateMin.y - tolerance || min.y > plateMax.y + tolerance)
             return null;
+        if (player == null && clone == null)
+            return crate.HasPressureSupport(transform.up) ? body : null;
         Vector2 actorUp = player != null ? Vector2.up : -clone.GravityAxis;
         if (Vector2.Dot(actorUp, transform.up) < .99f) return null;
         return (player != null ? player.IsGroundedNow : clone.IsGroundedNow) ? body : null;

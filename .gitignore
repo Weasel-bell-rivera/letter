@@ -38,3 +38,8 @@ crashlytics-build.properties
 # Local Unity screenshots
 Assets/Screenshots/
 Assets/Screenshots.meta
+
+# Local review captures and unimported generation/audio candidates
+/Captures/
+/output/
+/TempAudioCandidates/

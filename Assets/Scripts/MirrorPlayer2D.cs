@@ -178,7 +178,8 @@ public sealed class MirrorPlayer2D : MonoBehaviour
     private bool Spawn(Vector2 mirrorPosition, Vector2 clonePosition, Vector2 moveAxis, Vector2 gravity,
         float rotation, MirrorSurface2D placementSurface = null)
     {
-        foreach (Collider2D overlap in Physics2D.OverlapBoxAll(clonePosition, playerCollider.size * .95f, 0f))
+        // BoxCollider2D.size excludes its rounded edge radius; use the full world envelope.
+        foreach (Collider2D overlap in Physics2D.OverlapBoxAll(clonePosition, playerCollider.bounds.size * .95f, 0f))
         {
             if (overlap == playerCollider || overlap.isTrigger || overlap.GetComponent<PlayerController2D>() != null) continue;
             MirrorSurface2D surface = overlap.GetComponent<MirrorSurface2D>();
@@ -192,9 +193,13 @@ public sealed class MirrorPlayer2D : MonoBehaviour
         foreach (SpriteRenderer renderer in placedMirror.GetComponentsInChildren<SpriteRenderer>()) renderer.sortingOrder = 20;
         cloneObject = new GameObject("MirrorClone"); cloneObject.transform.position = clonePosition;
         Rigidbody2D rb = cloneObject.AddComponent<Rigidbody2D>(); rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-        BoxCollider2D box = cloneObject.AddComponent<BoxCollider2D>(); box.size = playerCollider.size;
+        BoxCollider2D box = cloneObject.AddComponent<BoxCollider2D>();
+        box.size = playerCollider.size;
+        box.edgeRadius = playerCollider.edgeRadius;
+        box.offset = playerCollider.offset;
         GameObject cloneVisual = player.VisualRoot != null ? Instantiate(player.VisualRoot.gameObject, cloneObject.transform) : CreateVisual("Visual", playerCollider.bounds.size, new Color(.3f,.8f,1f,.45f), cloneObject.transform);
-        cloneVisual.name = "Visual"; cloneVisual.transform.localPosition = Vector3.zero; cloneVisual.transform.localRotation = Quaternion.identity;
+        // PlayerVisual2D initializes the shared foot anchor during Instantiate/Awake.
+        cloneVisual.name = "Visual"; cloneVisual.transform.localRotation = Quaternion.identity;
         Vector3 mirroredScale = cloneVisual.transform.localScale; mirroredScale.x = -mirroredScale.x; cloneVisual.transform.localScale = mirroredScale;
         foreach (SpriteRenderer renderer in cloneVisual.GetComponentsInChildren<SpriteRenderer>())
         {

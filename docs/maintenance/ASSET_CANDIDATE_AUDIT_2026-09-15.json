@@ -1,0 +1,1462 @@
+{
+  "commit": "5ee6c7d9dc6bd97a4efc3b3aca0b6724675d34d9",
+  "rows": [
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v2.png",
+      "bytes": 1516613,
+      "guid": "df2fa9bc3cbe84f23aef01d9c406a87b",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v3.png",
+      "bytes": 1454380,
+      "guid": "fcafea82c51444acf892ef221257f12a",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v4.png",
+      "bytes": 861481,
+      "guid": "72a00148ac19d4f8db45a707919e9685",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v5.png",
+      "bytes": 604475,
+      "guid": "d5a27af92bdde4569b09dcb1ca2444bd",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v6-r1.png",
+      "bytes": 3666773,
+      "guid": "ad93e6068a88f485fba2540f777eee63",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v6.png",
+      "bytes": 3896916,
+      "guid": "18820a3f1518b4b8f864a18c310a743d",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v6-r1.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v6-r1_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v7.png",
+      "bytes": 3723816,
+      "guid": "861f28f03f1e4492f9231c176869ed75",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v8-r1.png",
+      "bytes": 3687387,
+      "guid": "8a532a2dee6f949f6a6e12b00e6bae03",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v8.png",
+      "bytes": 3477074,
+      "guid": "1b31f6acd797342f4ad70c3908ffed15",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v8-r1.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v8-r1_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v9-r1.png",
+      "bytes": 4498505,
+      "guid": "e0765a1c45844b2fa02eaa83a3105fb2",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 304,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        },
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 309,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        },
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 314,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        },
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 319,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        },
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 324,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        },
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 329,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        },
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 334,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        },
+        {
+          "file": "ProjectSettings/ProjectSettings.asset",
+          "line": 339,
+          "kind": "GUID",
+          "text": "m_Icon: {fileID: 2800000, guid: e0765a1c45844b2fa02eaa83a3105fb2, type: 3}"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource-v9.png",
+      "bytes": 3886119,
+      "guid": "3c24651999b834848b55a2a78fceb339",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Branding/MagicMirrorAppIconSource.png",
+      "bytes": 2156171,
+      "guid": "599f393a897b24f55811d416c105df0d",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v6.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v6_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v7.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v7_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v6-r1.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v6-r1_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v8-r1.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v8-r1_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v5.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v5_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v4.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v4_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v8.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v8_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v9.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v9_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v2.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v2_0"
+        },
+        {
+          "file": "Assets/Art/Branding/MagicMirrorAppIconSource-v3.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: MagicMirrorAppIconSource-v3_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/icon-matched-walk-cycle-8frame-reference.png",
+      "bytes": 1336315,
+      "guid": "4b3be41f622214d048f9f861545b4508",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/icon-matched-walk-cycle-reference.png",
+      "bytes": 1080413,
+      "guid": "584f3cfcfacb44ab8842fd38b384b782",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/natural-walk-cycle-reference.png",
+      "bytes": 3952242,
+      "guid": "6cd380408236849fca12cab8d23239a9",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Characters/Player/Candidates/boy-silhouette-actions-v1/player-and-clone-action-reference.png",
+      "bytes": 4154215,
+      "guid": "fa8aed4509b094305a7ea1ecaaf08fc7",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_a-chroma-source.png",
+      "bytes": 3471769,
+      "guid": "3ff37150612824d26842cd2a38d7c0dc",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_a.png",
+      "bytes": 3846251,
+      "guid": "1682f1fbe97144fdaa35af089138779f",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Editor/SnowPrerequisiteBuilder.cs",
+          "line": 16,
+          "kind": "path",
+          "text": "\"Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_a.png\";"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/FreezablePatrolEnemy2D.prefab",
+          "line": 116,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: 1682f1fbe97144fdaa35af089138779f, type: 3}"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/FreezablePatrolEnemy2D.prefab",
+          "line": 141,
+          "kind": "GUID",
+          "text": "- {fileID: 21300000, guid: 1682f1fbe97144fdaa35af089138779f, type: 3}"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/FreezablePatrolEnemy2D.prefab",
+          "line": 775,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: 1682f1fbe97144fdaa35af089138779f, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_a-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: freezable_patrol_walk_a-chroma-source_0"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-chroma-source.png",
+      "bytes": 2836691,
+      "guid": "02e8e737d20a5445c982747f870dbe91",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-retry-chroma-source.png",
+      "bytes": 3644534,
+      "guid": "f74b485a48041445ca9e6f821517afca",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b.png",
+      "bytes": 4090315,
+      "guid": "fc54073f9189446c0bdca02a28eb615b",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Editor/SnowPrerequisiteBuilder.cs",
+          "line": 18,
+          "kind": "path",
+          "text": "\"Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b.png\";"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/FreezablePatrolEnemy2D.prefab",
+          "line": 142,
+          "kind": "GUID",
+          "text": "- {fileID: 21300000, guid: fc54073f9189446c0bdca02a28eb615b, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-retry-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: freezable_patrol_walk_b-retry-chroma-source_0"
+        },
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/freezable_patrol_walk_b-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: freezable_patrol_walk_b-chroma-source_0"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/furnace_toad-chroma-source.png",
+      "bytes": 3533942,
+      "guid": "0f86da2ea6bf34f45b7f80344c0e8bb7",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/furnace_toad.png",
+      "bytes": 3946750,
+      "guid": "e3503148f8cf04156a5d439feb549708",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Editor/HorizontalFireballEnemyBuilder.cs",
+          "line": 12,
+          "kind": "path",
+          "text": "\"Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/furnace_toad.png\";"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/HorizontalFireballEnemy2D.prefab",
+          "line": 84,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: e3503148f8cf04156a5d439feb549708, type: 3}"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/PatrollingHorizontalFireballEnemy2D.prefab",
+          "line": 209,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: e3503148f8cf04156a5d439feb549708, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/furnace_toad-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: furnace_toad-chroma-source_0"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/horizontal_fireball-chroma-source.png",
+      "bytes": 3235924,
+      "guid": "4d3bfa109950e4a57b52ce637b5fa811",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/horizontal_fireball.png",
+      "bytes": 3534534,
+      "guid": "8ba2b046b45cc4d24bf9097a570268bd",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Editor/HorizontalFireballEnemyBuilder.cs",
+          "line": 16,
+          "kind": "path",
+          "text": "\"Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/horizontal_fireball.png\";"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/Projectiles/HorizontalFireballProjectile2D.prefab",
+          "line": 235,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: 8ba2b046b45cc4d24bf9097a570268bd, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/horizontal_fireball-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: horizontal_fireball-chroma-source_0"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol-chroma-source.png",
+      "bytes": 3198050,
+      "guid": "88960b7bfd3f7438781cca4d34e05f8d",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol.png",
+      "bytes": 3491655,
+      "guid": "ced610b58971f4c92af021f06da6a1d2",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/VerticalWallPatrolEnemy2D.prefab",
+          "line": 202,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: ced610b58971f4c92af021f06da6a1d2, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: vertical_wall_patrol-chroma-source_0"
+        },
+        {
+          "file": "docs/systems/GAMEPLAY_PREFAB_CATALOG.md",
+          "line": 342,
+          "kind": "path",
+          "text": "Prefab默认使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol.png`剪影素材，实体Collider为`0.72 × 0.90 units`，Damage Trigger为`0.82 × 0.98 units`，二者中心均向配置墙面偏移`0.10 unit`；墙面探测距离为`0.16 unit`。"
+        },
+        {
+          "file": "docs/systems/ENEMY_SYSTEM.md",
+          "line": 198,
+          "kind": "path",
+          "text": "默认视觉使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/vertical_wall_patrol.png`剪影素材。根对象始终无旋转；仅旋转`BodyVisual`使敌人的攀附面朝向配置墙面。向上和向下移动时必须翻转视觉朝向，让头部指向实际移动方向。视觉、实体Collider、Damage Trigger和WallProbe必须在左右墙面配置间同步镜像。"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_a-chroma-source.png",
+      "bytes": 3223016,
+      "guid": "fd50ed3cfe40142c2b45aed69260d9f4",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_a.png",
+      "bytes": 3546867,
+      "guid": "99c74f16a23f04f36947f2ee8a021179",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Editor/WindRayEnemyBuilder.cs",
+          "line": 16,
+          "kind": "path",
+          "text": "\"Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_a.png\";"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 26,
+          "kind": "GUID",
+          "text": "value: {fileID: 21300000, guid: 99c74f16a23f04f36947f2ee8a021179, type: 3}"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 30,
+          "kind": "GUID",
+          "text": "value: {fileID: 21300000, guid: 99c74f16a23f04f36947f2ee8a021179, type: 3}"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 57,
+          "kind": "GUID",
+          "text": "- {fileID: 21300000, guid: 99c74f16a23f04f36947f2ee8a021179, type: 3}"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 59,
+          "kind": "GUID",
+          "text": "- {fileID: 21300000, guid: 99c74f16a23f04f36947f2ee8a021179, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_a-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: wind_ray_fly_a-chroma-source_0"
+        },
+        {
+          "file": "docs/systems/WIND_RAY_ENEMY.md",
+          "line": 155,
+          "kind": "name",
+          "text": "- 身体使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/`中的`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影素材，按`rest → a → b → a`、`8 FPS`循环播放；动画只改变Sprite，不改变碰撞、感知或攻击计时。"
+        },
+        {
+          "file": "docs/systems/GAMEPLAY_PREFAB_CATALOG.md",
+          "line": 363,
+          "kind": "name",
+          "text": "- `BodyVisual`使用`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影循环飞行动画；Animator只负责Sprite表现，不驱动玩法位移或伤害。"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_b-chroma-source.png",
+      "bytes": 3433475,
+      "guid": "c93d8151d4edf4e0abcc7c362bad9f66",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_b.png",
+      "bytes": 3779735,
+      "guid": "4118cd0ce18174e59a0f9d530b5b83fe",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Editor/WindRayEnemyBuilder.cs",
+          "line": 18,
+          "kind": "path",
+          "text": "\"Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_b.png\";"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 28,
+          "kind": "GUID",
+          "text": "value: {fileID: 21300000, guid: 4118cd0ce18174e59a0f9d530b5b83fe, type: 3}"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 58,
+          "kind": "GUID",
+          "text": "- {fileID: 21300000, guid: 4118cd0ce18174e59a0f9d530b5b83fe, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_fly_b-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: wind_ray_fly_b-chroma-source_0"
+        },
+        {
+          "file": "docs/systems/WIND_RAY_ENEMY.md",
+          "line": 155,
+          "kind": "name",
+          "text": "- 身体使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/`中的`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影素材，按`rest → a → b → a`、`8 FPS`循环播放；动画只改变Sprite，不改变碰撞、感知或攻击计时。"
+        },
+        {
+          "file": "docs/systems/GAMEPLAY_PREFAB_CATALOG.md",
+          "line": 363,
+          "kind": "name",
+          "text": "- `BodyVisual`使用`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影循环飞行动画；Animator只负责Sprite表现，不驱动玩法位移或伤害。"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_rest-chroma-source.png",
+      "bytes": 3387993,
+      "guid": "16d4a93ffca894223aa6c7493c5cfe0c",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_rest.png",
+      "bytes": 3719385,
+      "guid": "ad420ab40a5e84c56924afa1ab38ec5b",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Editor/WindRayEnemyBuilder.cs",
+          "line": 14,
+          "kind": "path",
+          "text": "\"Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_rest.png\";"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 24,
+          "kind": "GUID",
+          "text": "value: {fileID: 21300000, guid: ad420ab40a5e84c56924afa1ab38ec5b, type: 3}"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 32,
+          "kind": "GUID",
+          "text": "value: {fileID: 21300000, guid: ad420ab40a5e84c56924afa1ab38ec5b, type: 3}"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 56,
+          "kind": "GUID",
+          "text": "- {fileID: 21300000, guid: ad420ab40a5e84c56924afa1ab38ec5b, type: 3}"
+        },
+        {
+          "file": "Assets/Animations/Enemies/WindRay/WindRayFly.anim",
+          "line": 60,
+          "kind": "GUID",
+          "text": "- {fileID: 21300000, guid: ad420ab40a5e84c56924afa1ab38ec5b, type: 3}"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/WindRayEnemy2D.prefab",
+          "line": 176,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: ad420ab40a5e84c56924afa1ab38ec5b, type: 3}"
+        },
+        {
+          "file": "Assets/Prefabs/Gameplay/Enemies/SacrificialWindRayEnemy2D.prefab",
+          "line": 532,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: ad420ab40a5e84c56924afa1ab38ec5b, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/wind_ray_rest-chroma-source.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: wind_ray_rest-chroma-source_0"
+        },
+        {
+          "file": "docs/systems/WIND_RAY_ENEMY.md",
+          "line": 155,
+          "kind": "name",
+          "text": "- 身体使用`Assets/Art/Generated/Enemies/Candidates/enemy-silhouette-labnana-20260902/`中的`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影素材，按`rest → a → b → a`、`8 FPS`循环播放；动画只改变Sprite，不改变碰撞、感知或攻击计时。"
+        },
+        {
+          "file": "docs/systems/GAMEPLAY_PREFAB_CATALOG.md",
+          "line": 363,
+          "kind": "name",
+          "text": "- `BodyVisual`使用`wind_ray_rest.png`、`wind_ray_fly_a.png`和`wind_ray_fly_b.png`三帧剪影循环飞行动画；Animator只负责Sprite表现，不驱动玩法位移或伤害。"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-extreme-far-shaft.png",
+      "bytes": 1346829,
+      "guid": "3a2bbc56134f6407b8664e130f2ae0da",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 3842,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: 3a2bbc56134f6407b8664e130f2ae0da, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "docs/rooms/earth/EARTH_006.md",
+          "line": 54,
+          "kind": "name",
+          "text": "- `02 Extreme Far Contours`：`cameraFollowFactor=0.95`，使用`earth-extreme-far-shaft.png`建立极远深井轮廓。"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-far-strata-tunnel.png",
+      "bytes": 1337869,
+      "guid": "e31ca850f012749e08b2493cea7e3230",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 579,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: e31ca850f012749e08b2493cea7e3230, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "docs/rooms/earth/EARTH_006.md",
+          "line": 55,
+          "kind": "name",
+          "text": "- `03 Far Environment`：`cameraFollowFactor=0.85`，使用`earth-far-strata-tunnel.png`建立低对比远景坑道。"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-fog-light.png",
+      "bytes": 1119764,
+      "guid": "bd6d93b7edb1c4223bf16484c224a4fc",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 4252,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: bd6d93b7edb1c4223bf16484c224a4fc, type: 3}"
+        }
+      ],
+      "mentions": [
+        {
+          "file": "docs/rooms/earth/EARTH_006.md",
+          "line": 53,
+          "kind": "name",
+          "text": "- `01 Color and Fog Backdrop`：`cameraFollowFactor=1.00`，使用`earth-fog-light.png`建立暖褐雾光底。"
+        }
+      ]
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-foreground-left.png",
+      "bytes": 819193,
+      "guid": "e7011209f68b84960b9b97e92e24035b",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 1022,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: e7011209f68b84960b9b97e92e24035b, type: 3}"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-foreground-right.png",
+      "bytes": 820690,
+      "guid": "6022139ee95574cea9e3b0692b89f51a",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 930,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: 6022139ee95574cea9e3b0692b89f51a, type: 3}"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-mid-layered-rock.png",
+      "bytes": 765692,
+      "guid": "03e5a2571c049498ba4c206996ab0d7e",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 1381,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: 03e5a2571c049498ba4c206996ab0d7e, type: 3}"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-mid-load-pillar.png",
+      "bytes": 1322811,
+      "guid": "b2fadb5809555464d9133425d0fc375c",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 3587,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: b2fadb5809555464d9133425d0fc375c, type: 3}"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Earth/Candidates/earth-lowtexture-20260901/earth-mid-timber-support.png",
+      "bytes": 1159217,
+      "guid": "36679c9eb3d064987953252a9d54cd2c",
+      "status": "保留：存在项目引用",
+      "references": [
+        {
+          "file": "Assets/Scenes/Levels/Earth/Earth_006.unity",
+          "line": 3294,
+          "kind": "GUID",
+          "text": "m_Sprite: {fileID: 21300000, guid: 36679c9eb3d064987953252a9d54cd2c, type: 3}"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-extreme-far-mountains.png",
+      "bytes": 4812369,
+      "guid": "cb1a33f8ace944593aff1463526727b4",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-extreme-far-mountains.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-extreme-far-mountains_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-foreground-right.png",
+      "bytes": 4057555,
+      "guid": "d4326c85dc6494adb86b33b66aa2fc20",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-right.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-foreground-right_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-far-ridge.png",
+      "bytes": 4190585,
+      "guid": "12c685a033fec4fbebbadaa50a29ba49",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-far-ridge.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-far-ridge_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-fog-light.png",
+      "bytes": 2275066,
+      "guid": "c51b6b49650a444f2afb7949734b22ee",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light-r1.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-fog-light-r1_0"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-fog-light_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-foreground-left.png",
+      "bytes": 4084860,
+      "guid": "1def06c1683664e53b2559dd1f72e8a4",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-left.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-foreground-left_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-ice-wall.png",
+      "bytes": 4334653,
+      "guid": "207e5118f257e4194ab881f82a9c13f4",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-ice-wall.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-mid-ice-wall_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-sparse-trees.png",
+      "bytes": 4645489,
+      "guid": "9fb9ec63e213648889fc335f9686f107",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-sparse-trees.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-mid-sparse-trees_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-wind-rock.png",
+      "bytes": 4207663,
+      "guid": "c2fc50225b88c4b64a092f8f637a543f",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-wind-rock.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-mid-wind-rock_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-extreme-far-mountains.png",
+      "bytes": 4173125,
+      "guid": "06198335a4b444981b0957b84b511432",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-extreme-far-mountains.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-extreme-far-mountains_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-far-ridge.png",
+      "bytes": 3773637,
+      "guid": "d84fc0cbf35ae4f3e8a6af3224a86d23",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-far-ridge.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-far-ridge_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light-r1.png",
+      "bytes": 2275066,
+      "guid": "42834254247b74e9fbef895c4e1cf7ce",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light.png",
+      "bytes": 2446428,
+      "guid": "e8195b11a8a6246e6a12f09df30ed4f5",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-fog-light-r1.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-fog-light-r1_0"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-fog-light.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-fog-light_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-left.png",
+      "bytes": 3708237,
+      "guid": "4e8618d3bded54dba82c883f8594ddfe",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-foreground-left.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-foreground-left_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-foreground-right.png",
+      "bytes": 3660393,
+      "guid": "cf6467347572049beadde8f54a39b2ce",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/rejected/snow-foreground-right.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-foreground-right_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-ice-wall.png",
+      "bytes": 3875337,
+      "guid": "2324199502539449aa0ada2fd7aeabc0",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-ice-wall.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-mid-ice-wall_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-sparse-trees.png",
+      "bytes": 4069850,
+      "guid": "b3b6f70d7a4d84eb589ef27205ad2179",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-sparse-trees.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-mid-sparse-trees_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/snow-mid-wind-rock.png",
+      "bytes": 3731971,
+      "guid": "3e615b5c84b714b6380142d1ee093f45",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Snow/Candidates/labnana-pro-20260902-set-01/recovered-alpha/snow-mid-wind-rock.png.meta",
+          "line": 7,
+          "kind": "name",
+          "text": "second: snow-mid-wind-rock_0"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+      "bytes": 4086,
+      "guid": "d1607fd200aa1496a803b3006c1328cb",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+      "bytes": 5731,
+      "guid": "2ec2d394fc5a340da8321523d2851806",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+      "bytes": 4413,
+      "guid": "90700556a32bf431f9529bb889a78da2",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "docs/rooms/fire/FIRE_028.md",
+          "line": 58,
+          "kind": "name",
+          "text": "- 证据目录：`Temp/W1VisualOptimize/Fire_028/20260906/`，包含修改前Scene、逐对象manifest和verification.json，可用于精确回退本轮内容。"
+        },
+        {
+          "file": "docs/rooms/fire/FIRE_018.md",
+          "line": 180,
+          "kind": "name",
+          "text": "证据目录：`Temp/W1VisualOptimize/Fire_018/20260831/`。`baseline.unity`保留任务开始时已含用户修改的版本；`change-manifest.json`、`refinement-manifest.json`、`edge-clearance.json`记录本轮增量；`contract-check.json`记录序列化对照；`review.md`包含九项评分和截图。"
+        },
+        {
+          "file": "docs/rooms/fire/FIRE_027.md",
+          "line": 69,
+          "kind": "name",
+          "text": "- `Temp/W1VisualOptimize/Fire_027/20260906/`保存before.unity与change-manifest.json。原有序列化块仅EnvironmentVisuals子列表及背景Tint变化，新增8个纯表现对象；原玩法、240格Terrain、碰撞/语义、入口、相机和Reset块逐字未变。anchor唯一、本地引用闭合；新增素材GUID均存在。"
+        },
+        {
+          "file": "docs/rooms/fire/FIRE_024.md",
+          "line": 88,
+          "kind": "name",
+          "text": "- 增量前快照`Temp/W1VisualOptimize/Fire_024/20260906/before-rocks.unity`；新增对象及参数清单`rocks-manifest.json`。回退只移除此清单的六个对象及对应父引用，不覆盖后续编辑。"
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+      "bytes": 6667,
+      "guid": "f099309114f514d6fabf823f57373ac8",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-extreme-far-mountains.png",
+      "bytes": 565985,
+      "guid": "e2fdd8532e7ee46f3ab6d0029e0a0667",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 10,
+          "kind": "name",
+          "text": "\"wind-extreme-far-mountains.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 3,
+          "kind": "name",
+          "text": "\"file\": \"wind-extreme-far-mountains.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 12,
+          "kind": "name",
+          "text": "\"file\": \"wind-extreme-far-mountains.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 29,
+          "kind": "name",
+          "text": "\"file\": \"wind-extreme-far-mountains.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-far-cloud-sea.png",
+      "bytes": 1209900,
+      "guid": "e084807b8894341d3ab0b574ff65ade2",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 59,
+          "kind": "name",
+          "text": "\"wind-far-cloud-sea.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 29,
+          "kind": "name",
+          "text": "\"file\": \"wind-far-cloud-sea.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 17,
+          "kind": "name",
+          "text": "\"file\": \"wind-far-cloud-sea.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 37,
+          "kind": "name",
+          "text": "\"file\": \"wind-far-cloud-sea.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-fog-light.png",
+      "bytes": 1159811,
+      "guid": "2dba81c58d8c5472a99d3e36639ce9ee",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 2,
+          "kind": "name",
+          "text": "\"wind-fog-light.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 55,
+          "kind": "name",
+          "text": "\"file\": \"wind-fog-light.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 7,
+          "kind": "name",
+          "text": "\"file\": \"wind-fog-light.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 21,
+          "kind": "name",
+          "text": "\"file\": \"wind-fog-light.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-foreground-left.png",
+      "bytes": 879259,
+      "guid": "122d50cf9a1a041e2b25939fffdc2b37",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 255,
+          "kind": "name",
+          "text": "\"wind-foreground-left.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 81,
+          "kind": "name",
+          "text": "\"file\": \"wind-foreground-left.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 37,
+          "kind": "name",
+          "text": "\"file\": \"wind-foreground-left.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 73,
+          "kind": "name",
+          "text": "\"file\": \"wind-foreground-left.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-foreground-right.png",
+      "bytes": 709192,
+      "guid": "6c5dc34bb47354b9ba2b243dcd4260a0",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 304,
+          "kind": "name",
+          "text": "\"wind-foreground-right.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 107,
+          "kind": "name",
+          "text": "\"file\": \"wind-foreground-right.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 42,
+          "kind": "name",
+          "text": "\"file\": \"wind-foreground-right.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 81,
+          "kind": "name",
+          "text": "\"file\": \"wind-foreground-right.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-floating-rock.png",
+      "bytes": 1132434,
+      "guid": "3f8033bc461d046cc9d4bc22835f09f0",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 157,
+          "kind": "name",
+          "text": "\"wind-mid-floating-rock.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 133,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-floating-rock.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 27,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-floating-rock.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 55,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-floating-rock.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-weathered-pillar.png",
+      "bytes": 882902,
+      "guid": "ce1948fa0be2f4895b1c80f7336c85b6",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 108,
+          "kind": "name",
+          "text": "\"wind-mid-weathered-pillar.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 159,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-weathered-pillar.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 22,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-weathered-pillar.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 46,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-weathered-pillar.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    },
+    {
+      "path": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/wind-mid-weathered-wall.png",
+      "bytes": 436577,
+      "guid": "d55a8bdd7ee794205b078f3f13a8b32d",
+      "status": "未发现项目静态引用",
+      "references": [],
+      "mentions": [
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit.json",
+          "line": 206,
+          "kind": "name",
+          "text": "\"wind-mid-weathered-wall.png\": {"
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/alpha-audit-initial.json",
+          "line": 185,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-weathered-wall.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/prompts.json",
+          "line": 32,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-weathered-wall.png\","
+        },
+        {
+          "file": "Assets/Art/Generated/Environment/Wind/Candidates/wind-silhouettes-20260901-a/manifest.json",
+          "line": 64,
+          "kind": "name",
+          "text": "\"file\": \"wind-mid-weathered-wall.png\","
+        }
+      ],
+      "cleanup_status": "已授权清理：素材与原始 .meta 成对移出项目并归档"
+    }
+  ],
+  "text_files_scanned": 1741,
+  "unreadable_files": [
+    "Assets/.DS_Store",
+    "Assets/Art/Environment/.DS_Store",
+    "Assets/Art/Generated/Enemies/.DS_Store",
+    "Assets/Art/Generated/Environment/Snow/.DS_Store",
+    "Assets/Art/Generated/Environment/Snow/Candidates/.DS_Store"
+  ],
+  "scene_sha256": "50999efe86d92c888660b06d38e316f31a81eadc843d6b711e60fed0ee3ef34f",
+  "cleanup": {
+    "manifest": "ASSET_CANDIDATE_CLEANUP_2026-09-15.json",
+    "removed_assets": 53,
+    "retained_assets": 17
+  }
+}

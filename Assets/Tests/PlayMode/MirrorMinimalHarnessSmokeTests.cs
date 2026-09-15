@@ -30,6 +30,8 @@ public sealed class MirrorMinimalHarnessSmokeTests
         Assert.That(harness.Mirror.Clone, Is.Not.Null);
         Assert.That(harness.Mirror.PlacedMirror, Is.Not.Null);
 
+        AssertMatchingRoundedCollider(harness);
+
         harness.Recall();
         Assert.That(harness.Mirror.State, Is.EqualTo(MirrorPlayer2D.MirrorState.Held));
         Assert.That(harness.Mirror.Clone, Is.Null);
@@ -78,6 +80,7 @@ public sealed class MirrorMinimalHarnessSmokeTests
 
         Assert.That(harness.Place(), Is.True, harness.Mirror.LastFailure.ToString());
         Assert.That(harness.Mirror.Clone.GravityAxis, Is.EqualTo(Vector2.left));
+        AssertMatchingRoundedCollider(harness);
     }
 
     [UnityTest]
@@ -93,6 +96,17 @@ public sealed class MirrorMinimalHarnessSmokeTests
 
         Assert.That(harness.Place(), Is.True, harness.Mirror.LastFailure.ToString());
         Assert.That(harness.Mirror.Clone.GravityAxis, Is.EqualTo(Vector2.right));
+    }
+
+    private static void AssertMatchingRoundedCollider(MirrorHarness2D harness)
+    {
+        BoxCollider2D clone = harness.Mirror.Clone.GetComponent<BoxCollider2D>();
+        Assert.That(clone.size, Is.EqualTo(harness.PlayerCollider.size));
+        Assert.That(clone.edgeRadius, Is.EqualTo(.04f));
+        Assert.That(clone.offset, Is.EqualTo(harness.PlayerCollider.offset));
+        Physics2D.SyncTransforms();
+        Assert.That(clone.bounds.size.x, Is.EqualTo(.5f).Within(.001f));
+        Assert.That(clone.bounds.size.y, Is.EqualTo(1.5f).Within(.001f));
     }
 
     private MirrorHarness2D CreateHarness(bool initiallyUnlocked = true)

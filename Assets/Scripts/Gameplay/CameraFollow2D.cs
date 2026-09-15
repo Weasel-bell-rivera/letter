@@ -15,16 +15,7 @@ public sealed class CameraFollow2D : MonoBehaviour
 
     private Camera controlledCamera;
     private Vector3 followVelocity;
-    private Vector3 initialRoomCameraPosition;
-    private Vector2 entryCameraPosition;
-    private int horizontalEntrySide;
-    private int verticalEntrySide;
-    private bool horizontalAcquired;
-    private bool verticalAcquired;
-    private bool initialRoomPositionCaptured;
-
     private const float VerticalViewportAnchor = .46f;
-    private const float AcquisitionTolerance = .01f;
 
     public Transform Target => target;
     public bool FollowsVertical => followVertical;
@@ -52,8 +43,7 @@ public sealed class CameraFollow2D : MonoBehaviour
     {
         target = followTarget;
         followVelocity = Vector3.zero;
-        horizontalAcquired = false;
-        verticalAcquired = false;
+        if (target != null) SnapToTarget();
     }
 
     public void ConfigureDamping(float seconds)
@@ -87,7 +77,6 @@ public sealed class CameraFollow2D : MonoBehaviour
     private void Awake()
     {
         controlledCamera = GetComponent<Camera>();
-        CaptureInitialRoomPosition();
     }
 
     private void Start()
@@ -99,7 +88,6 @@ public sealed class CameraFollow2D : MonoBehaviour
     {
         if (target == null) return;
 
-        UpdateAcquisition();
         Vector3 desired = ConstrainToRoom(DesiredTargetPosition());
         Vector3 next = smoothTime > 0f
             ? Vector3.SmoothDamp(transform.position, desired, ref followVelocity, smoothTime,
@@ -113,57 +101,21 @@ public sealed class CameraFollow2D : MonoBehaviour
     {
         if (target == null) return;
         followVelocity = Vector3.zero;
-        horizontalAcquired = true;
-        verticalAcquired = followVertical;
         transform.position = ConstrainToRoom(DesiredTargetPosition());
     }
 
-    public void BeginEntryFraming()
-    {
-        if (target == null) return;
-        CaptureInitialRoomPosition();
-        followVelocity = Vector3.zero;
-        Vector3 initialPosition = initialRoomCameraPosition;
-        int initialHorizontalSide = SideOf(TargetCameraX(), initialPosition.x);
-        int initialVerticalSide = followVertical ? SideOf(TargetCameraY(), initialPosition.y) : 0;
-        if (alignEntryFramingToBounds)
-            initialPosition = AlignEntryViewToBounds(initialPosition, initialHorizontalSide, initialVerticalSide);
-        transform.position = ConstrainToRoom(initialPosition);
-        entryCameraPosition = transform.position;
-
-        horizontalEntrySide = SideOf(TargetCameraX(), entryCameraPosition.x);
-        verticalEntrySide = followVertical ? SideOf(TargetCameraY(), entryCameraPosition.y) : 0;
-        horizontalAcquired = horizontalEntrySide == 0;
-        verticalAcquired = followVertical && verticalEntrySide == 0;
-    }
+    // Compatibility for existing callers: entry framing now immediately follows the Player.
+    public void BeginEntryFraming() => SnapToTarget();
 
     private Vector3 DesiredTargetPosition()
     {
         Vector3 desired = transform.position;
-        desired.x = horizontalAcquired ? TargetCameraX() : entryCameraPosition.x;
-        if (followVertical)
-            desired.y = verticalAcquired ? TargetCameraY() : entryCameraPosition.y;
+        desired.x = TargetCameraX();
+        if (followVertical) desired.y = TargetCameraY();
         return desired;
     }
 
-    private void UpdateAcquisition()
-    {
-        if (!horizontalAcquired && HasCrossedEntryLine(TargetCameraX(), entryCameraPosition.x, horizontalEntrySide))
-            horizontalAcquired = true;
-
-        if (followVertical && !verticalAcquired &&
-            HasCrossedEntryLine(TargetCameraY(), entryCameraPosition.y, verticalEntrySide))
-            verticalAcquired = true;
-    }
-
     private float TargetCameraX() => target.position.x + (useExplicitFramingOffset ? framingOffset.x : 0f);
-
-    private void CaptureInitialRoomPosition()
-    {
-        if (initialRoomPositionCaptured) return;
-        initialRoomCameraPosition = transform.position;
-        initialRoomPositionCaptured = true;
-    }
 
     private float TargetCameraY()
     {
@@ -174,42 +126,6 @@ public sealed class CameraFollow2D : MonoBehaviour
             : 0f;
         float playerOffsetFromCenter = (VerticalViewportAnchor - .5f) * halfHeight * 2f;
         return target.position.y - playerOffsetFromCenter;
-    }
-
-    private static int SideOf(float value, float anchor)
-    {
-        float delta = value - anchor;
-        if (Mathf.Abs(delta) <= AcquisitionTolerance) return 0;
-        return delta < 0f ? -1 : 1;
-    }
-
-    private static bool HasCrossedEntryLine(float value, float anchor, int entrySide)
-    {
-        if (entrySide == 0) return true;
-        float delta = value - anchor;
-        return entrySide < 0 ? delta >= -AcquisitionTolerance : delta <= AcquisitionTolerance;
-    }
-
-    private Vector3 AlignEntryViewToBounds(Vector3 position, int horizontalSide, int verticalSide)
-    {
-        if (controlledCamera == null) controlledCamera = GetComponent<Camera>();
-        if (controlledCamera == null || !controlledCamera.orthographic) return position;
-
-        float halfHeight = controlledCamera.orthographicSize;
-        float halfWidth = halfHeight * controlledCamera.aspect;
-        position.x = AlignAxis(position.x, entryFramingBounds.xMin, entryFramingBounds.xMax,
-            halfWidth, horizontalSide);
-        if (followVertical)
-            position.y = AlignAxis(position.y, entryFramingBounds.yMin, entryFramingBounds.yMax,
-                halfHeight, verticalSide);
-        return position;
-    }
-
-    private static float AlignAxis(float fallback, float minimum, float maximum, float halfViewExtent, int entrySide)
-    {
-        if (entrySide == 0) return fallback;
-        if (maximum - minimum <= halfViewExtent * 2f) return (minimum + maximum) * .5f;
-        return entrySide < 0 ? minimum + halfViewExtent : maximum - halfViewExtent;
     }
 
     private Vector3 ConstrainToRoom(Vector3 position)

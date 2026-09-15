@@ -18,6 +18,7 @@ public sealed class MirrorCloneController2D : MonoBehaviour, IFreezingGroundActo
     private bool springAntiGravityLaunchActive;
     private CharacterLadderMotor2D ladderMotor;
     public Vector2 GravityAxis => gravityAxis;
+    public Vector2 MoveAxis => moveAxis;
     public Vector2 AppliedSurfaceVelocity => appliedSurfaceVelocity;
     public Collider2D SupportCollider => supportCollider;
     public float SpringGravityMagnitude => settings != null ? settings.Gravity : 0f;

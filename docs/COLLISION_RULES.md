@@ -54,3 +54,7 @@
 - 只有已开启的门收到控制源的关闭命令后，Player或MirrorClone占用关闭路径才会暂停物理关闭；对象离开后继续完成关闭。完全关闭的门被角色从外侧接触时保持关闭和实体阻挡，不得开门、变色或禁用Collider。门不得压死、推出或穿过角色。
 - 门、压力板和移动对象的完整规则见 `docs/systems/DOOR_SYSTEM.md` 与 `docs/systems/MOVING_OBJECTS.md`。
 - 地面传送带的支撑、表面速度和安全规则见`docs/systems/CONVEYOR_SYSTEM.md`。
+
+## 可推动箱子（2026-09-15已确认）
+
+Player与MirrorClone都与PushableCrate2D实体碰撞、推动并可站立；箱子接触本身不伤害角色。箱子可压Occupancy和DescendingLatch开关，不激活FireballLatch；无该组件的普通动态物体仍不触发。箱子占据已请求关闭的门路径时延迟关门，接触已关闭门不改变门信号。箱子禁止放镜，完整规则见`docs/systems/PUSHABLE_CRATE_SYSTEM.md`。

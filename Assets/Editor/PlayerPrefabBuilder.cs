@@ -145,6 +145,8 @@ public static class PlayerPrefabBuilder
         Sprite[] idleFrames = LoadFrames("idle", 2);
         Sprite[] walkFrames = LoadFrames("walk", 8);
         Sprite[] jumpFrames = LoadFrames("jump", 11);
+        Sprite[] climbFrames = LoadFrames("climb", 8);
+        Sprite[] pushFrames = LoadFrames("push", 4);
         float[] jumpFrameVerticalOffsets =
         {
             0f, -.00703125f, -.00703125f, -.07382812f, -.13710937f, -.15117186f,
@@ -167,7 +169,9 @@ public static class PlayerPrefabBuilder
         body.interpolation = RigidbodyInterpolation2D.Interpolate;
 
         BoxCollider2D collider = root.AddComponent<BoxCollider2D>();
-        collider.size = new Vector2(.8f, 1.8f);
+        // Inset the collider within the silhouette; retain the authored sprite size.
+        collider.edgeRadius = .04f;
+        collider.size = new Vector2(.42f, 1.42f);
 
         GameObject visualObject = new("Visual");
         visualObject.transform.SetParent(root.transform, false);
@@ -177,7 +181,8 @@ public static class PlayerPrefabBuilder
         renderer.sortingOrder = 10;
         PlayerVisual2D visual = visualObject.AddComponent<PlayerVisual2D>();
         visual.Configure(renderer, idleFrames, walkFrames, jumpFrames, hitFrames, happyFrames,
-            walkFps: 8f, jumpVerticalOffsets: jumpFrameVerticalOffsets);
+            walkFps: 8f, jumpVerticalOffsets: jumpFrameVerticalOffsets, climb: climbFrames, push: pushFrames,
+            visualOffset: new Vector2(0f, .12f), pushOffset: -.15f);
 
         PlayerController2D controller = root.AddComponent<PlayerController2D>();
         controller.Configure(visualObject.transform, movement);
@@ -350,6 +355,8 @@ public static class PlayerPrefabBuilder
         (MovementSpriteDirectory, "idle", 2),
         (MovementSpriteDirectory, "walk", 8),
         (MovementSpriteDirectory, "jump", 11),
+        (MovementSpriteDirectory, "climb", 8),
+        (MovementSpriteDirectory, "push", 4),
         (LegacySpriteDirectory, "hit", 4),
         (LegacySpriteDirectory, "happy", 2)
     }.SelectMany(animation => Enumerable.Range(0, animation.Item3)

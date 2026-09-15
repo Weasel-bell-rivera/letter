@@ -68,6 +68,8 @@ public sealed class PlayerController2D : MonoBehaviour, IFreezingGroundActor2D, 
     private void NormalizeVisualToCollider()
     {
         if (visualRoot == null || bodyCollider == null) return;
+        // Authored sprite scale is independent of the inset collision shape.
+        if (visualRoot.GetComponent<PlayerVisual2D>() != null) return;
         visualRoot.localPosition = Vector3.zero;
         visualRoot.localRotation = Quaternion.identity;
         SpriteRenderer renderer = visualRoot.GetComponentInChildren<SpriteRenderer>();

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2670366535898969443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,14 +131,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 446adf05bf5742c09949074311df7a05, type: 3}
   - {fileID: 21300000, guid: 3004795223104b46902e75ddc8577dcc, type: 3}
   climbFrames:
-  - {fileID: 21300000, guid: 5dc76627a9e545deb5f9be3d1dfc0617, type: 3}
-  - {fileID: 21300000, guid: 3c752448e28e47209aa1846bcb38b510, type: 3}
-  - {fileID: 21300000, guid: f5ef0499cf0c4e2ea341356f42e96317, type: 3}
-  - {fileID: 21300000, guid: d13153c08d074618ad32d7980b9153ff, type: 3}
-  - {fileID: 21300000, guid: 3aed0622ad4b455f9903d3ec11301574, type: 3}
-  - {fileID: 21300000, guid: 08856ba98f23431e8b26f4e415d75251, type: 3}
-  - {fileID: 21300000, guid: dba722cd1cda44ed8d9b46081d7e788d, type: 3}
-  - {fileID: 21300000, guid: 35a925f4028c4277bb257c26a27769d4, type: 3}
+  - {fileID: 21300000, guid: 21b6b80c53c74b8ba7209f93f0fc5194, type: 3}
+  - {fileID: 21300000, guid: dd8bec562ad0453bb54bce42986c0ddc, type: 3}
+  - {fileID: 21300000, guid: 687dd9f7ac4347f88ea5b8b1308d3fee, type: 3}
+  - {fileID: 21300000, guid: 94b007773ea446249a697d1ba0f22893, type: 3}
+  - {fileID: 21300000, guid: 94fd2f0d37024c0bab7a9800e1c3daee, type: 3}
+  - {fileID: 21300000, guid: 859b0a54c0494be2873281d068a3c4a2, type: 3}
+  - {fileID: 21300000, guid: 5bf332b425274405a8a84a5dab0535ba, type: 3}
+  - {fileID: 21300000, guid: 15da41cc02294e51b7ee4b6f94bd83dc, type: 3}
+  pushFrames:
+  - {fileID: 21300000, guid: 6539d168be9d4faebddfdd3d6fb19009, type: 3}
+  - {fileID: 21300000, guid: cd6c673f26724963893dce953b6f3adf, type: 3}
+  - {fileID: 21300000, guid: db832f7d07a540179fd862c957896c62, type: 3}
+  - {fileID: 21300000, guid: b18fadea56114900aee9c71e381d71f3, type: 3}
   jumpFrameVerticalOffsets:
   - 0
   - 0
@@ -163,6 +168,9 @@ MonoBehaviour:
   walkFramesPerSecond: 8
   jumpFramesPerSecond: 12
   climbFramesPerSecond: 8
+  baseVisualOffset: {x: 0, y: 0.12}
+  pushFacingOffset: -0.15
+  pushFramesPerSecond: 6
   hitFramesPerSecond: 10
 --- !u!1 &4870972150017224388
 GameObject:
@@ -274,8 +282,8 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8, y: 1.8}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.42, y: 1.42}
+  m_EdgeRadius: 0.04
 --- !u!114 &6222223618308208636
 MonoBehaviour:
   m_ObjectHideFlags: 0

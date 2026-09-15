@@ -94,6 +94,52 @@ public sealed class Center001CameraAssetTests
         }
     }
 
+    [Test]
+    public void BindingFarSpawnClampsImmediatelyAndLegacyEntryFramingCannotOverrideIt()
+    {
+        GameObject cameraObject = new("Test Camera");
+        GameObject first = new("Player");
+        GameObject replacement = new("Replacement Player");
+        try
+        {
+            Camera camera = cameraObject.AddComponent<Camera>();
+            camera.orthographic = true;
+            camera.orthographicSize = 7f;
+            camera.aspect = 1f;
+            cameraObject.transform.position = new Vector3(-100f, 3f, -10f);
+            CameraFollow2D follow = cameraObject.AddComponent<CameraFollow2D>();
+            follow.ConfigureFraming(new Vector2(0f, .56f));
+            follow.ConfigureBounds(new Rect(-10f, -4f, 148f, 18f));
+            follow.ConfigureEntryFramingBounds(new Rect(-10f, -4f, 30f, 14f));
+            follow.ConfigureDamping(1f);
+            first.transform.position = new Vector3(100f, 5f, 0f);
+            follow.Configure(first.transform, true);
+            Assert.That(follow.transform.position.x, Is.EqualTo(100f).Within(.001f));
+            Assert.That(follow.transform.position.y, Is.EqualTo(5.56f).Within(.001f));
+            follow.BeginEntryFraming();
+            Assert.That(follow.transform.position.x, Is.EqualTo(100f).Within(.001f));
+
+            // Rebinding at a room edge must disregard the old target and smoothing state.
+            replacement.transform.position = new Vector3(138f, 30f, 0f);
+            follow.BindTarget(replacement.transform);
+            Assert.That(follow.Target, Is.SameAs(replacement.transform));
+            Assert.That(follow.transform.position, Is.EqualTo(new Vector3(131f, 7f, -10f)));
+            replacement.transform.position = new Vector3(-10f, -10f, 0f);
+            follow.SnapToTarget();
+            Assert.That(follow.transform.position, Is.EqualTo(new Vector3(-3f, 3f, -10f)));
+            follow.BindTarget(null);
+            follow.BeginEntryFraming();
+            Assert.That(follow.Target, Is.Null);
+            Assert.That(follow.transform.position, Is.EqualTo(new Vector3(-3f, 3f, -10f)));
+        }
+        finally
+        {
+            Object.DestroyImmediate(first);
+            Object.DestroyImmediate(replacement);
+            Object.DestroyImmediate(cameraObject);
+        }
+    }
+
     private static T[] ComponentsInScene<T>(Scene scene) where T : Component
         => scene.GetRootGameObjects().SelectMany(root => root.GetComponentsInChildren<T>(true)).ToArray();
 }

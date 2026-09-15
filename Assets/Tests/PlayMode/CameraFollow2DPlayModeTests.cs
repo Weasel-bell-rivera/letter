@@ -6,19 +6,20 @@ using UnityEngine.TestTools;
 public sealed class CameraFollow2DPlayModeTests
 {
     [UnityTest]
-    public IEnumerator LeftAndBottomEntryAxesAcquireIndependently()
+    public IEnumerator LeftAndBottomSpawnImmediatelyCentersAndContinuesFollowing()
     {
         CameraFollow2D follow = CreateCameraAndTarget(new Vector2(-4f, -4f), out Transform target);
-        Vector3 entryCameraPosition = follow.transform.position;
+        Vector3 entryCameraPosition = target.position + new Vector3(0f, .56f, -10f);
+        Assert.That(Vector3.Distance(follow.transform.position, entryCameraPosition), Is.LessThan(.001f));
 
         yield return null;
-        Assert.That(follow.transform.position, Is.EqualTo(entryCameraPosition));
+        Assert.That(Vector3.Distance(follow.transform.position, entryCameraPosition), Is.LessThan(.001f));
 
         target.position = new Vector3(1f, -4f, 0f);
         yield return null;
         Assert.That(follow.transform.position.x, Is.EqualTo(1f).Within(.001f));
-        Assert.That(follow.transform.position.y, Is.EqualTo(0f).Within(.001f),
-            "Vertical entry framing must remain held until its own composition line is crossed.");
+        Assert.That(follow.transform.position.y, Is.EqualTo(-3.44f).Within(.001f),
+            "Vertical following must begin at spawn without waiting for an acquisition line.");
 
         target.position = new Vector3(2f, 0f, 0f);
         yield return null;
@@ -30,18 +31,19 @@ public sealed class CameraFollow2DPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator RightAndTopEntriesUseMirroredAcquisitionRules()
+    public IEnumerator RightAndTopSpawnImmediatelyCentersAndContinuesFollowing()
     {
         CameraFollow2D follow = CreateCameraAndTarget(new Vector2(4f, 4f), out Transform target);
-        Vector3 entryCameraPosition = follow.transform.position;
+        Vector3 entryCameraPosition = target.position + new Vector3(0f, .56f, -10f);
+        Assert.That(Vector3.Distance(follow.transform.position, entryCameraPosition), Is.LessThan(.001f));
 
         yield return null;
-        Assert.That(follow.transform.position, Is.EqualTo(entryCameraPosition));
+        Assert.That(Vector3.Distance(follow.transform.position, entryCameraPosition), Is.LessThan(.001f));
 
         target.position = new Vector3(-1f, 4f, 0f);
         yield return null;
         Assert.That(follow.transform.position.x, Is.EqualTo(-1f).Within(.001f));
-        Assert.That(follow.transform.position.y, Is.EqualTo(0f).Within(.001f));
+        Assert.That(follow.transform.position.y, Is.EqualTo(4.56f).Within(.001f));
 
         target.position = new Vector3(-2f, -1f, 0f);
         yield return null;

@@ -7,6 +7,8 @@ public sealed class ParallaxLayer2D : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float cameraFollowFactor = .9f;
     [SerializeField] private bool followHorizontal = true;
     [SerializeField] private bool followVertical;
+    [SerializeField] private bool useSeparateVerticalFactor;
+    [SerializeField, Range(0f, 1f)] private float verticalCameraFollowFactor = .95f;
     [SerializeField] private bool useFixedReferencePose;
     [SerializeField, Tooltip("World-space camera position used when authoring this layer.")]
     private Vector3 referenceCameraPosition;
@@ -19,6 +21,8 @@ public sealed class ParallaxLayer2D : MonoBehaviour
     public float CameraFollowFactor => cameraFollowFactor;
     public bool FollowsHorizontal => followHorizontal;
     public bool FollowsVertical => followVertical;
+    public float VerticalCameraFollowFactor => useSeparateVerticalFactor
+        ? verticalCameraFollowFactor : cameraFollowFactor;
 
     private void Awake()
     {
@@ -39,7 +43,7 @@ public sealed class ParallaxLayer2D : MonoBehaviour
         Vector3 cameraDelta = cameraTransform.position - initialCameraPosition;
         transform.position = initialLayerPosition + new Vector3(
             followHorizontal ? cameraDelta.x * cameraFollowFactor : 0f,
-            followVertical ? cameraDelta.y * cameraFollowFactor : 0f,
+            followVertical ? cameraDelta.y * VerticalCameraFollowFactor : 0f,
             0f);
     }
 
@@ -74,5 +78,6 @@ public sealed class ParallaxLayer2D : MonoBehaviour
     private void OnValidate()
     {
         cameraFollowFactor = Mathf.Clamp01(cameraFollowFactor);
+        verticalCameraFollowFactor = Mathf.Clamp01(verticalCameraFollowFactor);
     }
 }
