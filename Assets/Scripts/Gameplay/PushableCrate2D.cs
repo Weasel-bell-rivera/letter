@@ -107,6 +107,11 @@ public sealed class PushableCrate2D : MonoBehaviour, IRoomResettable, IOrderedRo
             if (supportBody != null && (supportBody.GetComponent<PlayerController2D>() != null ||
                                        supportBody.GetComponent<MirrorCloneController2D>() != null)) continue;
             Vector2 supportVelocity = supportBody != null ? supportBody.GetPointVelocity(hit.point) : Vector2.zero;
+            // MovePosition surfaces may expose zero rigidbody velocity between physics steps.
+            // Use their published motion, as character grounding does, to retain support while sinking.
+            ISurfaceMotionProvider2D provider = hit.collider.GetComponent<ISurfaceMotionProvider2D>();
+            if (provider != null && provider.TryGetSurfaceVelocity(hit.point, hit.normal, out Vector2 motion))
+                supportVelocity = motion;
             if (Mathf.Abs(body.linearVelocity.y - supportVelocity.y) <= .5f) return true;
         }
         return false;

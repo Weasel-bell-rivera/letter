@@ -159,4 +159,77 @@ public sealed class PermanentDoorSaveTests
             UnityEngine.Object.DestroyImmediate(save.gameObject);
         }
     }
+    [Test]
+    public void ReturningSwitchOpensOnlyAtBottomAndClosesBeforeFinishingReturn()
+    {
+        var host = new UnityEngine.GameObject("Returning switch test");
+        host.SetActive(false);
+        var occupantHost = new UnityEngine.GameObject("Occupant test double");
+        var doorHost = new UnityEngine.GameObject("Returning switch door");
+        try
+        {
+            var plate = host.AddComponent<PressurePlate2D>();
+            plate.ConfigureActivationMode(PressurePlate2D.ActivationMode.DescendingHold);
+            var door = doorHost.AddComponent<Door2D>();
+            // Exercise the actual signal through the legacy single-door binding;
+            // occupancy geometry is covered separately by pressure plate tests.
+            plate.Configure(doorHost.GetComponent<UnityEngine.BoxCollider2D>(), null);
+            var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            typeof(PressurePlate2D).GetField("returnDuration", flags).SetValue(plate, 1f);
+            var occupants = (System.Collections.Generic.HashSet<UnityEngine.Rigidbody2D>)
+                typeof(PressurePlate2D).GetField("occupants", flags).GetValue(plate);
+            var body = occupantHost.AddComponent<UnityEngine.Rigidbody2D>();
+            var advance = typeof(PressurePlate2D).GetMethod("AdvanceReturningDescent", flags);
+            occupants.Add(body);
+            advance.Invoke(plate, new object[] { true, .5f });
+            Assert.That(door.IsOpen, Is.False);
+            advance.Invoke(plate, new object[] { true, .5f });
+            Assert.That(door.IsOpen, Is.True);
+            Assert.That(plate.IsLatchedSignal, Is.False);
+            advance.Invoke(plate, new object[] { true, 1f });
+            Assert.That(plate.PressProgress, Is.EqualTo(1f));
+
+            occupants.Clear();
+            // Signal must close even before the next movement step.
+            typeof(PressurePlate2D).GetMethod("RefreshState", flags).Invoke(plate, new object[] { true });
+            Assert.That(door.IsOpen, Is.False);
+            Assert.That(plate.PressProgress, Is.EqualTo(1f));
+            advance.Invoke(plate, new object[] { false, .25f });
+            Assert.That(plate.PressProgress, Is.EqualTo(.75f).Within(.001f));
+            occupants.Add(body);
+            advance.Invoke(plate, new object[] { true, .1f });
+            Assert.That(door.IsOpen, Is.False);
+            advance.Invoke(plate, new object[] { true, .15f });
+            Assert.That(door.IsOpen, Is.True);
+            plate.ResetRoomState();
+            Assert.That(plate.PressProgress, Is.Zero);
+            Assert.That(plate.IsActive, Is.False);
+            Assert.That(door.IsOpen, Is.False);
+            Assert.That(occupants, Is.Empty);
+        }
+        finally
+        {
+            UnityEngine.Object.DestroyImmediate(doorHost);
+            UnityEngine.Object.DestroyImmediate(occupantHost);
+            UnityEngine.Object.DestroyImmediate(host);
+        }
+    }
+
+    [Test]
+    public void ReturningSwitchPrefabUsesTemporaryModeAndMovingSupport()
+    {
+        var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(
+            "Assets/Prefabs/Gameplay/Switches/DescendingHoldSwitch2D.prefab");
+        Assert.That(prefab, Is.Not.Null);
+        var plate = prefab.GetComponent<PressurePlate2D>();
+        Assert.That(plate.Mode, Is.EqualTo(PressurePlate2D.ActivationMode.DescendingHold));
+        var serialized = new UnityEditor.SerializedObject(plate);
+        Assert.That(serialized.FindProperty("permanentSwitchId").stringValue, Is.Empty);
+        Assert.That(serialized.FindProperty("returnDuration").floatValue, Is.EqualTo(1f));
+        Assert.That(serialized.FindProperty("descendingBody").objectReferenceValue,
+            Is.EqualTo(prefab.GetComponent<UnityEngine.Rigidbody2D>()));
+        Assert.That(serialized.FindProperty("standingSurface").objectReferenceValue, Is.Not.Null);
+        Assert.That(prefab.GetComponent<UnityEngine.Rigidbody2D>().bodyType,
+            Is.EqualTo(UnityEngine.RigidbodyType2D.Kinematic));
+    }
 }

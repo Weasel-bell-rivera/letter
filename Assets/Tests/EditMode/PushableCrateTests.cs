@@ -95,7 +95,11 @@ public sealed class PushableCrateTests
         Assert.That(plate.IsActive, Is.True, "A supported crate can press the ordinary switch.");
         host.transform.position += Vector3.right * .3f;
         Physics2D.SyncTransforms();
-        Assert.That(plate.IsActive, Is.False, "Partial overlap must release occupancy.");
+        Assert.That(plate.IsActive, Is.True, "A crate resting partly on the plate still presses it.");
+        host.transform.position += Vector3.right * 2f;
+        Physics2D.SyncTransforms();
+        Assert.That(plate.IsActive, Is.False, "Moving fully off the plate releases occupancy.");
+        host.transform.position -= Vector3.right * 2f;
         host.transform.position -= Vector3.right * .3f;
         Physics2D.SyncTransforms();
         crateObject.GetComponent<Rigidbody2D>().linearVelocity = Vector2.down * 5f;

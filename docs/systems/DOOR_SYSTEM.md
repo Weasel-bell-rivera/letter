@@ -104,7 +104,7 @@
 ## 下沉永久开关（已确定）
 
 - 新增`DescendingLatch`，使用独立可复用`DescendingLatchSwitch2D.prefab`，普通压力板保持持续占用规则。
-- Player、MirrorClone或可推动箱子完整压住时逐渐下压，默认持续踩踏1秒到底；中途全部离开即取消本次进度并回弹，重新踩踏须从头完成。默认回弹0.2秒，参数用于表现调节。
+- Player、MirrorClone完整踩住或可推动箱子底部压住时逐渐下压，默认持续踩踏1秒到底；中途全部离开即取消本次进度并回弹，重新踩踏须从头完成。默认回弹0.2秒，参数用于表现调节。
 - 只有到底才输出激活信号并开门；之后开关保持按下、门一直开启。死亡、手动重置、镜像回收、切房、退出与读档均保留完成状态，只有新存档清除。
 - 每个实例显式配置全局唯一`DoorGroupId`，与双压力板组共用ID命名空间和`latchedDoorGroupIds`存档集合。不得根据名称推断ID；Prefab模板留空，房间实例必须填写。
 - 未到底的进度不保存，重置后恢复弹起。用户已确认下沉石台需要实体碰撞与承载：以Kinematic Rigidbody2D和非Trigger顶面Collider承载角色，整体平移下沉，不压缩台身。通过ISurfaceMotionProvider2D提供世界表面速度，复用移动平台承载规则，不挂接或直接移动Player/MirrorClone。始终为安全DynamicSurface，不允许放镜。
@@ -119,5 +119,14 @@
 
 ## 可推动箱子占用（2026-09-15已确认）
 
-- 显式PushableCrate2D箱子落稳或推入感应区后按完整宽度、底部位置与向上实体支撑判定；采用箱子主Collider，不根据名称、Tag或质量推断。规则与最小回归见`PUSHABLE_CRATE_SYSTEM.md`。
-- Occupancy和DescendingLatch接受箱子，FireballLatch不接受；原角色完整踩踏与永久锁存规则不变。箱子在开关及门之前复位，普通开关重新结算占用，永久结果保留。
+- 显式PushableCrate2D箱子落稳或推入感应区后按底部横向重叠、底部位置与向上实体支撑判定，不要求完整宽度或中心在板内（2026-09-16用户确认）；采用箱子主Collider，不根据名称、Tag或质量推断。规则与最小回归见`PUSHABLE_CRATE_SYSTEM.md`。
+- Occupancy、DescendingLatch和DescendingHold接受箱子，FireballLatch不接受；原角色完整踩踏与永久锁存规则不变。箱子在开关及门之前复位，普通开关重新结算占用，永久结果保留。
+
+## 可回弹下沉开关（2026-09-16已确认）
+
+- 新增独立模式`DescendingHold`与可复用`DescendingHoldSwitch2D.prefab`；不替换永久下沉型。
+- Player、MirrorClone沿用完整踩踏条件；可推动箱子底部部分压住也有效。存在有效占用时石台下沉，压到底才激活并打开普通门；最后一个有效对象离开时立即解除激活并请求关门，石台缓慢回升。门沿用防夹等待。
+- 默认下沉距离0.6 units，完整下降和回升各1秒。回升途中重新踩住，从当前高度继续下沉，到底才再次开门；不会在未到底时保留开门信号。
+- 复用永久型石台的实体承载、Trigger、视觉和安全DynamicSurface配置，所有阶段均不允许放镜。镜像回收或死亡只解除其占用，其他对象仍踩住时保持工作。
+- 状态不写入存档，无需DoorGroupId。手动重置、Player死亡重置、重新进入房间和读档后恢复初始升起、未激活状态。
+- 使用路径：`Assets/Prefabs/Gameplay/Switches/DescendingHoldSwitch2D.prefab`。普通门的`controlSource`引用此开关；不要将其接入永久锁存门控组。安装时为完整升降路径与承载角色留出净空。

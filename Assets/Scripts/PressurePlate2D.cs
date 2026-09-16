@@ -6,7 +6,7 @@ using UnityEngine;
 [DefaultExecutionOrder(-200)]
 public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMotionProvider2D
 {
-    public enum ActivationMode { Occupancy, FireballLatch, DescendingLatch }
+    public enum ActivationMode { Occupancy, FireballLatch, DescendingLatch, DescendingHold }
 
     [SerializeField] private ActivationMode activationMode = ActivationMode.Occupancy;
     [SerializeField] private SpriteRenderer plateRenderer;
@@ -84,7 +84,7 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMo
                 return descentLatched;
             }
             if (ReconcileOccupants()) RefreshState(true);
-            return occupants.Count > 0;
+            return occupants.Count > 0 && (activationMode != ActivationMode.DescendingHold || pressProgress >= 1f);
         }
     }
 
@@ -203,7 +203,20 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMo
             AdvanceDescent(occupants.Count > 0, Time.fixedDeltaTime);
             MoveStandingSurface(false);
         }
+        else if (activationMode == ActivationMode.DescendingHold)
+        {
+            AdvanceReturningDescent(occupants.Count > 0, Time.fixedDeltaTime);
+            MoveStandingSurface(false);
+        }
         if (changed) RefreshState(true);
+    }
+
+    private void AdvanceReturningDescent(bool occupied, float deltaTime)
+    {
+        float duration = occupied ? descentDuration : returnDuration;
+        pressProgress = Mathf.MoveTowards(pressProgress, occupied ? 1f : 0f,
+            deltaTime / Mathf.Max(.01f, duration));
+        RefreshState(true);
     }
 
     private void AdvanceDescent(bool occupied, float deltaTime)
@@ -257,11 +270,13 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMo
         Vector2 plateMin = trigger.offset - trigger.size * .5f;
         Vector2 plateMax = trigger.offset + trigger.size * .5f;
         const float tolerance = .001f;
-        if (min.x < plateMin.x - tolerance || max.x > plateMax.x + tolerance
-            || min.y < plateMin.y - tolerance || min.y > plateMax.y + tolerance)
+        if (min.y < plateMin.y - tolerance || min.y > plateMax.y + tolerance)
             return null;
         if (player == null && clone == null)
-            return crate.HasPressureSupport(transform.up) ? body : null;
+            return max.x > plateMin.x && min.x < plateMax.x && crate.HasPressureSupport(transform.up)
+                ? body : null;
+        if (min.x < plateMin.x - tolerance || max.x > plateMax.x + tolerance)
+            return null;
         Vector2 actorUp = player != null ? Vector2.up : -clone.GravityAxis;
         if (Vector2.Dot(actorUp, transform.up) < .99f) return null;
         return (player != null ? player.IsGroundedNow : clone.IsGroundedNow) ? body : null;
@@ -301,6 +316,7 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMo
         {
             ActivationMode.FireballLatch => fireballLatched,
             ActivationMode.DescendingLatch => descentLatched,
+            ActivationMode.DescendingHold => occupants.Count > 0 && pressProgress >= 1f,
             _ => occupants.Count > 0
         };
         visualPressed = latchedVisual || active;
@@ -315,7 +331,7 @@ public sealed class PressurePlate2D : MonoBehaviour, IRoomResettable, ISurfaceMo
 
     private void Update()
     {
-        if (activationMode == ActivationMode.DescendingLatch)
+        if (activationMode == ActivationMode.DescendingLatch || activationMode == ActivationMode.DescendingHold)
         {
             ApplyPressVisual();
             return;
